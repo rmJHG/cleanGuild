@@ -1,4 +1,5 @@
 import Header from "./_component/Header";
+import RQProvider from "./_component/RQProvider";
 import "./global.css";
 export const metadata = {
   title: "clean-maple",
@@ -9,10 +10,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <header>
-          <Header />
-        </header>
-        <main>{children}</main>
+        <RQProvider>
+          <header>
+            <Header />
+          </header>
+          <main>{children}</main>
+        </RQProvider>
       </body>
     </html>
   );
