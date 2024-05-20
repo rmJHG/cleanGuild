@@ -19,6 +19,19 @@ export const getSearchResult: QueryFunction<Char, [_1: string, _2: string, userN
       "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
     },
   });
+  const getCharPopData = await fetch(
+    `https://open.api.nexon.com/maplestory/v1/character/popularity?ocid=${ocidRes.ocid}`,
+    {
+      headers: {
+        "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
+      },
+    }
+  );
+  const popRes = await getCharPopData.json();
   const charRes = await getCharData.json();
-  return charRes;
+  const data = {
+    popularity: popRes.popularity,
+    ...charRes,
+  };
+  return data;
 };

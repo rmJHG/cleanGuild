@@ -1,4 +1,4 @@
-import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
+import { HydrationBoundary, QueryClient, dehydrate, queryOptions } from "@tanstack/react-query";
 import CharInfo from "../_component/CharInfo";
 import SearchBar from "@/app/_component/SearchBar";
 import { getSearchResult } from "../_lib/getSearchResult";

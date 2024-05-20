@@ -12,7 +12,7 @@ export default function SearchBar() {
 
   return (
     <form onSubmit={searchUser}>
-      <input type="search" name="search" />
+      <input type="search" name="search" required />
     </form>
   );
 }

@@ -1,15 +1,18 @@
-import Menu from "./Menu";
+import classes from "./header.module.css";
+import Navigation from "./Navigation";
 
 export default function Header() {
   return (
-    <div>
-      <div>
-        <h1>Header</h1>
-        <div>Login</div>
+    <div className={classes.headerContainer}>
+      <div className={classes.firstContainer}>
+        <div>
+          <h1>Web Name</h1>
+        </div>
+        <div></div>
       </div>
 
-      <div>
-        <Menu />
+      <div className={classes.MenuContainer}>
+        <Navigation />
       </div>
     </div>
   );

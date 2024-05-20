@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/search/[userName]/page": [
+    "/(beforeLogin)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/search/[userName]/page.js"
+      "static/chunks/app/(beforeLogin)/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -11,10 +11,10 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/(beforeLogin)/page": [
+    "/(beforeLogin)/signin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(beforeLogin)/page.js"
+      "static/chunks/app/(beforeLogin)/signin/page.js"
     ]
   }
 }
