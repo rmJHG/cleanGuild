@@ -2,7 +2,7 @@ import Header from "./_component/Header";
 import RQProvider from "./_component/RQProvider";
 import "./global.css";
 export const metadata = {
-  title: "clean-maple",
+  title: "cleanGuild",
   description: "learn nextjs, reactQuery, zustand and Auth.js ",
 };
 

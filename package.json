@@ -11,6 +11,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.36.0",
     "@tanstack/react-query-devtools": "^5.36.0",
+    "firebase": "^10.12.2",
     "next": "14.2.3",
     "next-auth": "^5.0.0-beta.18",
     "react": "^18",
@@ -24,5 +25,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "typescript": "^5"
+  },
+  "overrides": {
+    "oauth4webapi": "npm:@jacobkim/oauth4webapi@^2.10.4"
   }
 }

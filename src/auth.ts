@@ -29,6 +29,8 @@ export const {
       if (account?.provider === "google") {
         console.log(profile?.email_verified);
       }
+      if (account?.provider === "naver") {
+      }
       return true;
     },
     jwt: async ({ token, user }) => {

@@ -10,7 +10,7 @@ export default function Navigation() {
         <Link href="/community">Com</Link>
       </li>
       <li>
-        <Link href="/report">Report</Link>
+        <Link href="/post">Post</Link>
       </li>
     </ul>
   );
