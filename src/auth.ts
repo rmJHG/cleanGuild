@@ -1,6 +1,5 @@
-import NextAuth, { Account, Profile } from "next-auth";
-import google from "next-auth/providers/google";
-import naver from "next-auth/providers/naver";
+import NextAuth from "next-auth";
+import kakao from "next-auth/providers/kakao";
 
 export const {
   handlers: { GET, POST },
@@ -9,13 +8,9 @@ export const {
   auth,
 } = NextAuth({
   providers: [
-    naver({
-      clientId: process.env.AUTH_NAVER_ID,
-      clientSecret: process.env.AUTH_SECRET,
-    }),
-    google({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    kakao({
+      clientId: process.env.AUTH_KAKAO_ID,
+      clientSecret: process.env.AUTH_KAKAO_SECRET,
     }),
   ],
   pages: {
@@ -26,10 +21,8 @@ export const {
   },
   callbacks: {
     signIn: async ({ account, profile }) => {
-      if (account?.provider === "google") {
+      if (account?.provider === "kakao") {
         console.log(profile?.email_verified);
-      }
-      if (account?.provider === "naver") {
       }
       return true;
     },

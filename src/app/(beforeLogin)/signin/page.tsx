@@ -1,19 +1,11 @@
-import { auth } from "@/auth";
-import { Login } from "../_component/Login";
-import Logout from "../_component/Logout";
+import { signInWithKaKao } from "@/app/_component/authActions";
 
 export default async function Page() {
-  const session = await auth();
-  if (session !== null) {
-    return (
-      <div>
-        <Logout />
-      </div>
-    );
-  }
   return (
     <div>
-      <Login />
+      <form action={signInWithKaKao}>
+        <button type="submit">KAKAO</button>
+      </form>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import classes from "./header.module.css";
 import Navigation from "./Navigation";
+import UserActionBtn from "./UserActionBtn";
 
 export default function Header() {
   return (
@@ -8,7 +9,9 @@ export default function Header() {
         <div>
           <h1>Web Name</h1>
         </div>
-        <div></div>
+        <div>
+          <UserActionBtn />
+        </div>
       </div>
 
       <div className={classes.MenuContainer}>
