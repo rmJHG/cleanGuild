@@ -3,7 +3,7 @@ import RQProvider from "./_component/RQProvider";
 import "./global.css";
 export const metadata = {
   title: "cleanGuild",
-  description: "learn nextjs, reactQuery, zustand and Auth.js ",
+  description: "Learn nextjs, reactQuery, zustand and Auth.js ",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

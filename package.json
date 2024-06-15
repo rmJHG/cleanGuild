@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "oauth4webapi": "npm:@jacobkim/oauth4webapi@^2.10.4"
+  },
   "dependencies": {
     "@tanstack/react-query": "^5.36.0",
     "@tanstack/react-query-devtools": "^5.36.0",
@@ -25,8 +28,5 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "typescript": "^5"
-  },
-  "overrides": {
-    "oauth4webapi": "npm:@jacobkim/oauth4webapi@^2.10.4"
   }
 }
