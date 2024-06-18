@@ -1,12 +1,20 @@
-import { auth } from "@/auth";
-import SearchBar from "./_component/SearchBar";
-import { Session } from "next-auth";
+"use client";
 
-export default async function Page() {
-  const session = (await auth()) as Session;
+import { useUserData } from "@/zustand/userDataState";
+import SearchBar from "./_component/SearchBar";
+
+export default function Page() {
+  const { data } = useUserData();
 
   return (
     <div>
+      <button
+        onClick={() => {
+          console.log(data);
+        }}
+      >
+        alaal
+      </button>
       <SearchBar />
     </div>
   );

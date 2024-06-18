@@ -1,18 +1,12 @@
 import { auth } from "@/auth";
 import { db } from "@/firebase/fireconfig";
+import { UserData } from "@/type/userData";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { Session } from "next-auth";
 import { redirect } from "next/navigation";
-type Data = {
-  id: string;
-  info: {
-    userEmail?: string;
-    userName?: string;
-  };
-};
 
 export default async function SetName() {
-  const data: Data = {
+  const data: UserData = {
     id: "",
     info: {
       userEmail: "",
@@ -20,8 +14,7 @@ export default async function SetName() {
     },
   };
   const session = (await auth()) as Session;
-
-  if (session === null) redirect("/");
+  session === null && redirect("/");
 
   const userEmail = session.user!.email as string;
   const q = query(collection(db, "userData"), where("userEmail", "==", userEmail));
@@ -36,7 +29,6 @@ export default async function SetName() {
       userName: formData.get("userName"),
       server: formData.get("server"),
       userEmail: session.user?.email,
-      userImage: session.user?.image,
     };
     addDoc(collection(db, "userData"), inputData);
     redirect("/");
