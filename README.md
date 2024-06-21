@@ -7,3 +7,5 @@ NEXTJS with typescript
 클라이언트 상태관리 : zustand
 
 로그인 : authjs
+
+db: firebase

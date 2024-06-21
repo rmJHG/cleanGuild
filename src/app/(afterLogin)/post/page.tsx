@@ -1,18 +1,16 @@
-import { db } from "@/firebase/fireconfig";
-import { addDoc, collection } from "firebase/firestore";
+"use client";
+
+import { useUserData } from "@/zustand/userDataState";
+import { postAction } from "./_lib/postAction";
 
 export default function Page() {
-  const postData = async (formData: FormData) => {
-    "use server";
-    const inputData = { userName: formData.get("name") };
-    // await setDoc(doc(db, "hello", "data"), inputData);
-    await addDoc(collection(db, "hello"), inputData);
-  };
-
+  const { data } = useUserData();
   return (
     <div>
-      <form action={postData}>
-        <input type="text" name="name" />
+      <form action={postAction}>
+        <input type="text" name="guildName" />
+        <input type="text" name="server" value={data.info.server} style={{ display: "none" }} readOnly />
+        <input type="text" name="userId" value={data.id} style={{ display: "none" }} readOnly />
         <button type="submit">BTN</button>
       </form>
     </div>

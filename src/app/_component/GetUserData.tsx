@@ -1,16 +1,13 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import { UserData } from "@/type/userData";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebase/fireconfig";
 import { useUserData } from "@/zustand/userDataState";
 
-type Props = {
-  children: ReactNode;
-};
-export default function GetUserData({ children }: Props) {
+export default function GetUserData() {
   const { data: session } = useSession();
   const userEmail = session?.user!.email as string;
   const { setUserData } = useUserData();
@@ -35,5 +32,5 @@ export default function GetUserData({ children }: Props) {
     userEmail && fn();
   }, [session]);
 
-  return <>{children}</>;
+  return <></>;
 }

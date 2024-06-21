@@ -17,12 +17,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <SessionProvider session={session}>
           <RQProvider>
-            <GetUserData>
-              <header>
-                <Header />
-              </header>
-              <main>{children}</main>
-            </GetUserData>
+            <GetUserData />
+            <header>
+              <Header />
+            </header>
+            <main>{children}</main>
           </RQProvider>
         </SessionProvider>
       </body>
