@@ -26,7 +26,6 @@ export default function GetUserData() {
       getData.forEach((e) => {
         (currentUserData.id = e.id), (currentUserData.info = { ...e.data() });
       });
-
       setUserData(currentUserData);
     };
     userEmail && fn();
