@@ -952,7 +952,7 @@ balanced-match@^1.0.0:
 
 bmp-js@^0.1.0:
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/bmp-js/-/bmp-js-0.1.0.tgz#e05a63f796a6c1ff25f4771ec7adadc148c07233"
+  resolved "https://registry.npmjs.org/bmp-js/-/bmp-js-0.1.0.tgz"
   integrity sha512-vHdS19CnY3hwiNdkaqk93DvjVLfbEcI8mys4UjuWrlX1haDmroo8o4xCzh4wD6DGV6HxRCyauwhHRqMTfERtjw==
 
 brace-expansion@^1.1.7:
@@ -1825,7 +1825,7 @@ http-parser-js@>=0.5.1:
 
 idb-keyval@^6.2.0:
   version "6.2.1"
-  resolved "https://registry.yarnpkg.com/idb-keyval/-/idb-keyval-6.2.1.tgz#94516d625346d16f56f3b33855da11bfded2db33"
+  resolved "https://registry.npmjs.org/idb-keyval/-/idb-keyval-6.2.1.tgz"
   integrity sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==
 
 idb@7.1.1:
@@ -1931,7 +1931,7 @@ is-date-object@^1.0.1, is-date-object@^1.0.5:
 
 is-electron@^2.2.2:
   version "2.2.2"
-  resolved "https://registry.yarnpkg.com/is-electron/-/is-electron-2.2.2.tgz#3778902a2044d76de98036f5dc58089ac4d80bb9"
+  resolved "https://registry.npmjs.org/is-electron/-/is-electron-2.2.2.tgz"
   integrity sha512-FO/Rhvz5tuw4MCWkpMzHFKWD2LsfHzIb7i6MdPYZ/KW7AlxawyLkqdy+jPZP1WubqEADE3O4FUENlJHDfQASRg==
 
 is-extglob@^2.1.1:
@@ -2035,7 +2035,7 @@ is-typed-array@^1.1.13:
 
 is-url@^1.2.4:
   version "1.2.4"
-  resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.4.tgz#04a4df46d28c4cff3d73d01ff06abeb318a1aa52"
+  resolved "https://registry.npmjs.org/is-url/-/is-url-1.2.4.tgz"
   integrity sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww==
 
 is-weakmap@^2.0.2:
@@ -2289,15 +2289,15 @@ next@14.2.3:
 
 node-fetch@^2.6.9:
   version "2.7.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
+  resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
 
 oauth4webapi@^2.4.0:
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/oauth4webapi/-/oauth4webapi-2.10.4.tgz#4194b784e0ff995edd64bd90177fd7f25b7fbb17"
-  integrity sha512-DSoj8QoChzOCQlJkRmYxAJCIpnXFW32R0Uq7avyghIeB6iJq0XAblOD7pcq3mx4WEBDwMuKr0Y1qveCBleG2Xw==
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/oauth4webapi/-/oauth4webapi-2.11.1.tgz#8d79e6b0d54ead203094f185a11031f3f9978465"
+  integrity sha512-aNzOnL98bL6izG97zgnZs1PFEyO4WDVRhz2Pd066NPak44w5ESLRCYmJIyey8avSBPOMtBjhF3ZDDm7bIb7UOg==
 
 object-assign@^4.1.1:
   version "4.1.1"
@@ -2379,7 +2379,7 @@ once@^1.3.0:
 
 opencollective-postinstall@^2.0.3:
   version "2.0.3"
-  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
+  resolved "https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz"
   integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
 
 optionator@^0.9.3:
@@ -2566,7 +2566,7 @@ reflect.getprototypeof@^1.0.4:
 
 regenerator-runtime@^0.13.3:
   version "0.13.11"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
 regenerator-runtime@^0.14.0:
@@ -2855,7 +2855,7 @@ tapable@^2.2.0:
 
 tesseract.js-core@^5.1.0:
   version "5.1.0"
-  resolved "https://registry.yarnpkg.com/tesseract.js-core/-/tesseract.js-core-5.1.0.tgz#4e1d0b9133e92748f9866c7fa76469ec85858f1a"
+  resolved "https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-5.1.0.tgz"
   integrity sha512-D4gc5ET1DF/sDayF/eVmHgVGo7nqVC2e3d7uVgVOSAk4NOcmUqvJRTj8etqEmI/2390ZkXCRiDMxTD1RFYyp1g==
 
 tesseract.js@^5.1.0:
@@ -2888,7 +2888,7 @@ to-regex-range@^5.0.1:
 
 tr46@~0.0.3:
   version "0.0.3"
-  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  resolved "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
 
 ts-api-utils@^1.0.1:
@@ -3007,13 +3007,13 @@ use-sync-external-store@1.2.0:
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
 
 wasm-feature-detect@^1.2.11:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/wasm-feature-detect/-/wasm-feature-detect-1.6.1.tgz#21c7c35f9b233d71d2948d4a8b3e2098c452b940"
-  integrity sha512-R1i9ED8UlLu/foILNB1ck9XS63vdtqU/tP1MCugVekETp/ySCrBZRk5I/zI67cI1wlQYeSonNm1PLjDHZDNg6g==
+  version "1.6.2"
+  resolved "https://registry.npmjs.org/wasm-feature-detect/-/wasm-feature-detect-1.6.2.tgz"
+  integrity sha512-4dnaZ+Fq/q+BbMlTIfaNS851i+0zmHzui++NUZdskESRu3xwB6g6x2FnGvBdWtpijqO5yuj1l+EUTJGc4S4DKg==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
-  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  resolved "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
   integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
 
 websocket-driver@>=0.5.1:
@@ -3032,7 +3032,7 @@ websocket-extensions@>=0.1.1:
 
 whatwg-url@^5.0.0:
   version "5.0.0"
-  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  resolved "https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz"
   integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
   dependencies:
     tr46 "~0.0.3"
@@ -3153,7 +3153,7 @@ yocto-queue@^0.1.0:
 
 zlibjs@^0.3.1:
   version "0.3.1"
-  resolved "https://registry.yarnpkg.com/zlibjs/-/zlibjs-0.3.1.tgz#50197edb28a1c42ca659cc8b4e6a9ddd6d444554"
+  resolved "https://registry.npmjs.org/zlibjs/-/zlibjs-0.3.1.tgz"
   integrity sha512-+J9RrgTKOmlxFSDHo0pI1xM6BLVUv+o0ZT9ANtCxGkjIVCCUdx9alUF8Gm+dGLKbkkkidWIHFDZHDMpfITt4+w==
 
 zustand@^4.5.2:

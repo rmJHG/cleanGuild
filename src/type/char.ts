@@ -11,6 +11,6 @@ export type Char = {
   character_guild_name: string;
   character_image: string;
   character_level: number;
-  data: null;
+  date: null;
   world_name: string;
 } | null;

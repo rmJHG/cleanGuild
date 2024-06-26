@@ -3,11 +3,12 @@
 import { FormEvent, useState } from "react";
 import { createWorker } from "tesseract.js";
 import Setting from "./_component/Setting";
+import { Char } from "@/type/char";
 
 export default function Page() {
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [mainChar, setMainChar] = useState("");
+  const [mainChar, setMainChar] = useState<Char>(null);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setImg(file);
@@ -100,9 +101,8 @@ export default function Page() {
         },
       });
       const charRes = await getCharData.json();
-      setMainChar(charRes[0]);
+      setMainChar(charRes);
     }
-
     setIsOpen(true);
   };
 
@@ -110,7 +110,7 @@ export default function Page() {
     <div>
       <form>
         <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} required />
-        <button onClick={fn}>hello</button>
+        <button onClick={fn}>SEARCH</button>
       </form>
       <div>{isOpen && <Setting data={mainChar} />}</div>
     </div>

@@ -12,7 +12,7 @@ export default async function UserProfile() {
           <Logout />
         </li>
         <li>
-          <Link href="user-auth">인증</Link>
+          <Link href="/user-auth">인증</Link>
         </li>
       </ul>
     </div>

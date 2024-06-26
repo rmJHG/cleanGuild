@@ -1,7 +1,7 @@
 import { UserData } from "@/type/userData";
 import { create } from "zustand";
 type Store = {
-  data: UserData;
+  userData: UserData;
   setUserData: (newData: UserData) => void;
   deleteUserData: () => void;
 };
@@ -9,18 +9,21 @@ type Store = {
 const defaultState = {
   id: "",
   info: {
+    handsData: {
+      main_char: "",
+    },
+    server: "",
     userEmail: "",
     userName: "",
-    server: "",
   },
 };
 
 export const useUserData = create<Store>((set) => ({
-  data: defaultState,
+  userData: defaultState,
   setUserData: (newData) => {
-    set({ data: newData });
+    set({ userData: newData });
   },
   deleteUserData: () => {
-    set({ data: defaultState });
+    set({ userData: defaultState });
   },
 }));
