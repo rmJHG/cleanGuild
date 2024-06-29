@@ -5,15 +5,14 @@ import { UserData } from "@/type/userData";
 import { doc, setDoc } from "firebase/firestore";
 
 export default async function postMainCharAction(preState: any, formData: FormData) {
-  const currentMainChar = JSON.parse(formData.get("currentMainCharData") as string);
-  const currentUserData: UserData = JSON.parse(formData.get("currentUserData") as string);
+  const { character_name, world_name } = JSON.parse(formData.get("currentMainCharData") as string);
+  const { id, info }: UserData = JSON.parse(formData.get("currentUserData") as string);
 
   const newUserData = {
-    ...currentUserData,
-    handsData: {
-      main_char: currentMainChar.character_name,
-    },
+    ...info,
+    handsData: { mainChar_name: character_name, world_name: world_name },
   };
-  await setDoc(doc(db, currentUserData.id), newUserData);
+
+  await setDoc(doc(db, "userData", id), newUserData);
   return "done";
 }
