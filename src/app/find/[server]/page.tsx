@@ -1,7 +1,8 @@
 import Data from "@/app/(beforeLogin)/_component/Data";
 import { db } from "@/firebase/fireconfig";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import Guild from "../_component/Guild";
+import ServerList from "../_component/ServerList";
 
 type Props = {
   params: {
@@ -12,19 +13,23 @@ export default async function DataTable({ params }: Props) {
   const { server } = params;
   const decodedServer = decodeURIComponent(server);
   const dataArr: any[] = [];
-  const q = query(collection(db, "guild"), where("server", "==", decodedServer));
+  const q = query(collection(db, "guild", "post", decodedServer));
   const data = await getDocs(q);
 
   data.forEach((e) => {
-    console.log("doc", e.data());
     dataArr.push(e.data());
   });
 
   return (
-    <ul>
-      {dataArr.map((e, i) => {
-        return <Guild key={i} guildName={e.guildName} />;
-      })}
-    </ul>
+    <>
+      <div>
+        <ServerList />
+      </div>
+      <ul>
+        {dataArr.map((e, i) => {
+          return <Guild key={i} guild_name={e.guild_name} user_id={e.user_id} />;
+        })}
+      </ul>
+    </>
   );
 }
