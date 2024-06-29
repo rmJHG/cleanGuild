@@ -4,13 +4,20 @@ import { useUserData } from "@/zustand/userDataState";
 import { postAction } from "./_lib/postAction";
 
 export default function Page() {
-  const { data } = useUserData();
+  const { userData } = useUserData();
+  const { id, info } = userData;
+  console.log(info);
   return (
     <div>
-      <form action={postAction}>
-        <input type="text" name="guildName" />
-        <input type="text" name="server" value={data.info.server} style={{ display: "none" }} readOnly />
-        <input type="text" name="userId" value={data.id} style={{ display: "none" }} readOnly />
+      <form
+        action={async (formData: FormData) => {
+          formData.append("user_id", id);
+          formData.append("server", info.server as string);
+          await postAction(formData);
+        }}
+      >
+        <input type="text" name="guild_name" />
+
         <button type="submit">BTN</button>
       </form>
     </div>

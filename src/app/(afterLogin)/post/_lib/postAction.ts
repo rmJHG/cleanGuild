@@ -1,13 +1,15 @@
 "use server";
 
 import { db } from "@/firebase/fireconfig";
-import { addDoc, collection } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 export const postAction = async (formData: FormData) => {
+  const server = formData.get("server") as string;
   const inputData = {
-    guildName: formData.get("guildName"),
-    server: formData.get("server"),
-    userId: formData.get("userId"),
+    guild_ame: formData.get("guild_name"),
+    userId: formData.get("user_id"),
   };
-  await addDoc(collection(db, "guild"), inputData);
+
+  const ref = doc(collection(db, "guild", "post", server));
+  await setDoc(ref, inputData);
 };

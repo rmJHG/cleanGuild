@@ -1,11 +1,12 @@
-export type MainCharData = {
-  main_char: string;
+export type handsData = {
+  mainChar_name?: string;
+  world_name?: string;
 };
 export type UserInfo = {
   userName?: string | null;
   userEmail?: string;
   server?: string;
-  handsData?: MainCharData;
+  handsData?: handsData;
 };
 
 export type UserData = {

@@ -11,6 +11,7 @@ const defaultState = {
   info: {
     handsData: {
       main_char: "",
+      world_name: "",
     },
     server: "",
     userEmail: "",
