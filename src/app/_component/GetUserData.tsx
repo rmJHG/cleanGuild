@@ -9,7 +9,6 @@ import { useUserData } from "@/zustand/userDataState";
 
 export default function GetUserData() {
   const { data: session } = useSession();
-
   const userEmail = session?.user!.email as string;
   const { setUserData } = useUserData();
 
@@ -19,7 +18,6 @@ export default function GetUserData() {
         id: "",
         info: {
           userEmail: "",
-          userName: "",
           handsData: {
             mainChar_name: "",
             world_name: "",
@@ -38,7 +36,7 @@ export default function GetUserData() {
       setUserData(currentUserData);
     };
     userEmail && fn();
-  }, [session, setUserData]);
+  }, []);
 
   return null;
 }

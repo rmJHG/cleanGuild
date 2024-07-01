@@ -21,8 +21,8 @@ export default async function RootLayout({ children }: Props) {
     <html lang="ko">
       <body>
         <SessionProvider session={session}>
+          {session && <GetUserData />}
           <RQProvider>
-            <GetUserData />
             <header>
               <Header />
             </header>

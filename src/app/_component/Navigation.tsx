@@ -11,13 +11,13 @@ export default function Navigation() {
         <Link href="/">Home</Link>
       </li>
       <li>
-        {userData.info.server !== "" ? (
-          <Link href={`/find/${userData.info.server}`}>길드찾기</Link>
+        {userData.info.handsData?.world_name !== "" ? (
+          <Link href={`/find/${userData.info.handsData?.world_name}`}>길드찾기</Link>
         ) : (
           <Link href="/find">길드찾기</Link>
         )}
       </li>
-      {userData.info.userName && (
+      {userData.info.handsData?.mainChar_name && (
         <li>
           <Link href="/post">길드홍보</Link>
         </li>
