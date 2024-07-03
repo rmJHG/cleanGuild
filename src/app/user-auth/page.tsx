@@ -11,9 +11,8 @@ import { useUserData } from "@/zustand/userDataState";
 export default function Page() {
   // 유저가 없거나 유저데이터에 핸즈데이터가 있을 경우 메인화면으로 보내기
   const session = useSession();
-  !session.data && redirect("/");
   const { userData } = useUserData();
-  userData.info.handsData && redirect("/");
+  !session.data || (userData.info.handsData && redirect("/"));
 
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);

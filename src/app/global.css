@@ -124,5 +124,13 @@ table {
 }
 a {
   text-decoration: none;
-  color: black;
+  color: white;
+}
+p {
+  color: white;
+}
+
+button {
+  border: none;
+  background: none;
 }

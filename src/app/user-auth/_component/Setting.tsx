@@ -14,18 +14,20 @@ export default function Setting({ data }: Props) {
   const session = useSession();
   !session && redirect("/");
 
-  const { character_name, world_name } = data!;
+  const { character_name, world_name, character_image } = data!;
   const route = useRouter();
   const [state, formAction] = useFormState(postMainCharAction, null);
   const { pending } = useFormStatus();
 
   const currentUserData = {
-    handsData: { character_name, world_name },
+    handsData: { character_name, world_name, character_image: character_image },
     userEmail: session.data?.user?.email,
   };
 
   return state === "done" ? (
-    <div>유저정보가 저장되었습니다.</div>
+    <div>
+      <p>유저정보가 저장되었습니다.</p>
+    </div>
   ) : (
     <div>
       <CharComponent data={data} />

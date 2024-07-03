@@ -1,0 +1,9 @@
+.imageWrapeer {
+  margin-left: -50px;
+  margin-top: 3px;
+
+  width: 80px;
+  height: 58px;
+  position: relative;
+  overflow: hidden;
+}
