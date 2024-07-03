@@ -99,7 +99,6 @@ export default function Page() {
     });
     // 중복된 닉네임으로 검색
     if (result.length > 0) {
-      console.log(result);
       const getOcidData = await fetch(`https://open.api.nexon.com/maplestory/v1/id?character_name=${result[0]}`, {
         method: "GET",
         headers: {

@@ -10,12 +10,10 @@ const defaultState = {
   id: "",
   info: {
     handsData: {
-      main_char: "",
+      character_name: "",
       world_name: "",
     },
-    server: "",
     userEmail: "",
-    userName: "",
   },
 };
 

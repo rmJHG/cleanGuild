@@ -1,5 +1,5 @@
 export type handsData = {
-  mainChar_name?: string;
+  character_name?: string;
   world_name?: string;
 };
 export type UserInfo = {
