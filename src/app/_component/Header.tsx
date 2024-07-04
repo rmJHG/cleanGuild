@@ -5,17 +5,15 @@ import UserActionBtn from "./UserActionBtn";
 export default function Header() {
   return (
     <div className={classes.headerContainer}>
-      <div className={classes.firstContainer}>
-        <div>
-          <h1>Web Name</h1>
-        </div>
-        <div>
-          <UserActionBtn />
-        </div>
+      <div>
+        <p>이힝</p>
       </div>
 
-      <div className={classes.MenuContainer}>
+      <div>
         <Navigation />
+      </div>
+      <div>
+        <UserActionBtn />
       </div>
     </div>
   );

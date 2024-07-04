@@ -1,13 +1,28 @@
+import { UserInfo } from "@/type/userData";
+import classes from "./guild.module.css";
 type Props = {
-  guild_name: string;
-  user_id: string;
+  postData: {
+    guildName: string;
+    id: string;
+    info: UserInfo;
+  };
 };
 
-export default function Guild({ guild_name, user_id }: Props) {
+export default function Guild({ postData }: Props) {
+  console.log(postData);
+  const { guildName, id, info } = postData;
+  const { handsData, userEmail } = info;
   return (
-    <li>
-      <div>길드이름 : {guild_name}</div>
-      <div>작성자 : {user_id}</div>
+    <li className={classes.guildPost}>
+      <div className={classes.guildName}>
+        <p>{guildName}</p>
+      </div>
+      <div className={classes.postDate}>
+        <p>게시일 | 2022.02.02</p>
+      </div>
+      <div className={classes.posterInfo}>
+        <p>{handsData.character_name}</p>
+      </div>
     </li>
   );
 }

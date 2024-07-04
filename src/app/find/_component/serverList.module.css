@@ -1,0 +1,15 @@
+.serverContainer {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.serverItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

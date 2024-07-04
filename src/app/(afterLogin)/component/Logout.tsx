@@ -16,7 +16,9 @@ export default function Logout() {
   };
   return (
     <form>
-      <button onClick={Logout}>LOGOUT</button>
+      <button onClick={Logout}>
+        <p>로그아웃</p>
+      </button>
     </form>
   );
 }

@@ -1,9 +1,9 @@
-import Data from "@/app/(beforeLogin)/_component/Data";
 import { db } from "@/firebase/fireconfig";
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import Guild from "../_component/Guild";
 import ServerList from "../_component/ServerList";
-
+import classes from "./page.module.css";
+import Link from "next/link";
 type Props = {
   params: {
     server: string;
@@ -15,21 +15,24 @@ export default async function DataTable({ params }: Props) {
   const dataArr: any[] = [];
   const q = query(collection(db, "guild", "post", decodedServer));
   const data = await getDocs(q);
-
   data.forEach((e) => {
-    dataArr.push(e.data());
+    dataArr.push({ ...e.data(), postId: e.id });
   });
 
   return (
-    <>
+    <div className={classes.container}>
       <div>
         <ServerList />
       </div>
-      <ul>
-        {dataArr.map((e, i) => {
-          return <Guild key={i} guild_name={e.guild_name} user_id={e.user_id} />;
+      <ul className={classes.guildPostList}>
+        {dataArr.map((e) => {
+          return (
+            <Link href={`/find/${server}/${e.postId}`}>
+              <Guild key={e.id} postData={e} />
+            </Link>
+          );
         })}
       </ul>
-    </>
+    </div>
   );
 }

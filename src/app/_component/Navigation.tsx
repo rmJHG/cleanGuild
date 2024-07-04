@@ -1,14 +1,14 @@
 "use client";
 import { useUserData } from "@/zustand/userDataState";
 import Link from "next/link";
-
+import classes from "./navigation.module.css";
 export default function Navigation() {
   const { userData } = useUserData();
 
   return (
-    <ul>
+    <ul className={classes.navigationContainer}>
       <li>
-        <Link href="/">Home</Link>
+        <Link href="/">메인</Link>
       </li>
       <li>
         {userData.info.handsData?.world_name !== "" ? (

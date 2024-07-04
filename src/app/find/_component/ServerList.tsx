@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import classes from "./serverList.module.css";
 export default function ServerList() {
   const serverList = [
     "루나",
@@ -18,9 +18,13 @@ export default function ServerList() {
   ];
 
   return (
-    <ul>
+    <ul className={classes.serverContainer}>
       {serverList.map((e, i) => {
-        return <Link href={`/find/${e}`}>{e}</Link>;
+        return (
+          <li key={i} className={classes.serverItem}>
+            <Link href={`/find/${e}`}>{e}</Link>
+          </li>
+        );
       })}
     </ul>
   );

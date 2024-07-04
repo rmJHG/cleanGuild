@@ -1,20 +1,41 @@
+"use client";
 import Link from "next/link";
 import Logout from "./Logout";
-import { auth } from "@/auth";
+import { useUserData } from "@/zustand/userDataState";
+import { useState } from "react";
+import classes from "./userProfile.module.css";
 
-export default async function UserProfile() {
-  const session = await auth();
-
+export default function UserProfile() {
+  const { userData } = useUserData();
+  const { id, info } = userData;
+  const { handsData } = info;
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <ul>
-        <li>
-          <Logout />
-        </li>
-        <li>
-          <Link href="/user-auth">인증</Link>
-        </li>
-      </ul>
+      {handsData && (
+        <div>
+          <button
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <p>{handsData.character_name}</p>
+          </button>
+        </div>
+      )}
+
+      {isOpen && (
+        <ul className={classes.profileMenu}>
+          <li>
+            <Logout />
+          </li>
+          <li>
+            <Link href="/profile">
+              <p>내 정보</p>
+            </Link>
+          </li>
+        </ul>
+      )}
     </div>
   );
 }

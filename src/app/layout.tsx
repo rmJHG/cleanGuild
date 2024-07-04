@@ -20,15 +20,23 @@ export default async function RootLayout({ children }: Props) {
   const session = (await auth()) as Session;
   return (
     <html lang="ko">
-      <body style={{ backgroundColor: "#353535", display: "flex", flexDirection: "column", height: "100vh" }}>
+      <body
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: "column",
+          height: "100vh",
+          backgroundColor: "#353535",
+        }}
+      >
         <SessionProvider session={session}>
           {session && <GetUserData />}
           <RQProvider>
-            <header style={{ flex: "0.2" }}>
+            <header style={{}}>
               <Header />
             </header>
-            <main style={{ flex: "9" }}>{children}</main>
-            <footer style={{ flex: "0.5" }}>
+            <main style={{ flex: "1" }}>{children}</main>
+            <footer style={{}}>
               <Footer />
             </footer>
           </RQProvider>
