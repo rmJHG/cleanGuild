@@ -5,20 +5,19 @@ import { postAction } from "./_lib/postAction";
 
 export default function Page() {
   const { userData } = useUserData();
-  const { id, info } = userData;
-  console.log(info);
+  console.log(userData);
   return (
     <div>
       <form
         action={async (formData: FormData) => {
-          formData.append("user_id", id);
-          formData.append("server", info.server as string);
+          formData.append("userData", JSON.stringify(userData));
           await postAction(formData);
         }}
       >
         <input type="text" name="guild_name" />
-
-        <button type="submit">BTN</button>
+        <button type="submit">
+          <p>BTN</p>
+        </button>
       </form>
     </div>
   );
