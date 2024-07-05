@@ -27,9 +27,11 @@ export default async function DataTable({ params }: Props) {
       <ul className={classes.guildPostList}>
         {dataArr.map((e) => {
           return (
-            <Link href={`/find/${server}/${e.postId}`}>
-              <Guild key={e.id} postData={e} />
-            </Link>
+            <li key={e.id}>
+              <Link href={`/find/${server}/${e.postId}`}>
+                <Guild data={e} />
+              </Link>
+            </li>
           );
         })}
       </ul>

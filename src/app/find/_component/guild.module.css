@@ -1,4 +1,5 @@
-.guildPost {
+.postContainer {
+  width: 250px;
   border-radius: 5px;
   padding: 5px;
   display: flex;
@@ -6,16 +7,48 @@
   gap: 5px;
   background-color: gray;
 }
-
-.guildName > p {
+.postHeader {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+}
+.postHeader > div > p {
   font-size: 20px;
 }
+.guildConditions {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
 
+.guildConditions > div {
+  border-radius: 6px;
+  padding: 4px;
+}
+.guildConditions > div > p {
+  font-size: 13px;
+}
+.nobleWrapper {
+  background-color: blue;
+}
+.guildType {
+  background-color: orange;
+}
+.suroPoint {
+  background-color: red;
+}
+.limitedLevel {
+  background-color: red;
+}
 .postDate > p {
   font-size: 13px;
 }
-
-.posterInfo {
+.postMain {
+  margin-bottom: 5px;
+}
+.postFooter {
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   padding-top: 5px;
   display: flex;
