@@ -19,7 +19,9 @@ export default function GetUserData() {
         info: {
           userEmail: "",
           handsData: {
-            mainChar_name: "",
+            character_image: "",
+            character_guild_name: "",
+            character_name: "",
             world_name: "",
           },
         },

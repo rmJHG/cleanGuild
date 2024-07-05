@@ -14,13 +14,13 @@ export default function Setting({ data }: Props) {
   const session = useSession();
   !session && redirect("/");
 
-  const { character_name, world_name, character_image } = data!;
+  const { character_name, world_name, character_image, character_guild_name } = data!;
   const route = useRouter();
   const [state, formAction] = useFormState(postMainCharAction, null);
   const { pending } = useFormStatus();
 
   const currentUserData = {
-    handsData: { character_name, world_name, character_image: character_image },
+    handsData: { character_name, world_name, character_image, character_guild_name },
     userEmail: session.data?.user?.email,
   };
 
@@ -43,17 +43,18 @@ export default function Setting({ data }: Props) {
           }}
         >
           <button type="submit" disabled={pending}>
-            YES
+            <p>YES</p>
           </button>
           <button
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               route.push("/user-auth");
               setInterval(() => {
                 window.location.reload();
               }, 100);
             }}
           >
-            NO
+            <p>NO</p>
           </button>
         </form>
       </div>

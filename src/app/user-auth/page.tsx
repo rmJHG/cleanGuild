@@ -12,10 +12,12 @@ export default function Page() {
   // 유저가 없거나 유저데이터에 핸즈데이터가 있을 경우 메인화면으로 보내기
   const session = useSession();
   const { userData } = useUserData();
-  !session.data || (userData.info.handsData && redirect("/"));
+
+  !session.data || (userData.id !== "" && redirect("/"));
 
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [mainChar, setMainChar] = useState<Char>(null);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -24,6 +26,7 @@ export default function Page() {
 
   const fn = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     //현재날짜 구하기
     const dt = new Date();
     const currentMonth: string = dt.getMonth() + 1 < 10 ? `0` + (dt.getMonth() + 1) : "" + dt.getMonth() + 1;
@@ -126,7 +129,15 @@ export default function Page() {
         ) : (
           <form>
             <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} required />
-            <button onClick={fn}>SEARCH</button>
+            {isLoading ? (
+              <div>
+                <p>검색중</p>
+              </div>
+            ) : (
+              <button onClick={fn}>
+                <p>SEARCH</p>
+              </button>
+            )}
           </form>
         )}
       </div>
