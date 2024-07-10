@@ -15,10 +15,8 @@ export default function Logout() {
     router.push("/");
   };
   return (
-    <form>
-      <button onClick={Logout}>
-        <p>로그아웃</p>
-      </button>
-    </form>
+    <button onClick={Logout}>
+      <p>로그아웃</p>
+    </button>
   );
 }
