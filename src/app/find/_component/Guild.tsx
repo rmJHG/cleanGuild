@@ -1,7 +1,7 @@
-import { Post } from "@/type/post";
+import { GuildPostData } from "@/type/guildPostData";
 import classes from "./guild.module.css";
 
-export default function Guild({ data }: Post) {
+export default function Guild({ data }: { data: GuildPostData }) {
   const { postData, publisherData } = data;
   const {
     title,
@@ -18,14 +18,10 @@ export default function Guild({ data }: Post) {
 
   function getTimeDifference() {
     const dateDiffInMinutes = (Date.now() - new Date(postDate).getTime()) / 1000 / 60;
-    if (dateDiffInMinutes < 1) {
-      return "방금 전";
-    } else if (dateDiffInMinutes < 60) {
-      return `${Math.floor(dateDiffInMinutes)}분 전`;
-    } else {
-      const hours = Math.floor(dateDiffInMinutes / 60);
-      return `${hours}시간 전`;
-    }
+    if (Math.floor(dateDiffInMinutes / 1440)) return `${Math.floor(dateDiffInMinutes / 1440)}일 전`;
+    if (60 <= dateDiffInMinutes && dateDiffInMinutes < 1440) return `${Math.floor(dateDiffInMinutes)}시간 전`;
+    if (dateDiffInMinutes < 60) return `${Math.floor(dateDiffInMinutes)}분 전`;
+    return "방금 전";
   }
 
   return (
