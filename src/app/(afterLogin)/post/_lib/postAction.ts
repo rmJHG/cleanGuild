@@ -18,14 +18,15 @@ export const postAction = async (formData: FormData) => {
       guildName: character_guild_name,
       guildType: formData.get("guildType"),
       currentNoblePoint: Number(formData.get("currentNoblePoint")),
-      goalNoblePoint: Number(formData.get("goalNoblePoint")),
       suroPoint: Number(formData.get("suroPoint")),
       limitedLevel: Number(formData.get("limitedLevel")),
       postDate: dt.getTime(),
     },
     publisherData: { ...userData },
   };
+  const coolTimeRef = doc(db, "guild", "postCooltime", world_name, character_guild_name);
 
   const ref = doc(collection(db, "guild", "post", world_name));
+  await setDoc(coolTimeRef, { postCoolTime: Date.now() });
   await setDoc(ref, guildPostData);
 };
