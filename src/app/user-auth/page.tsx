@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useUserData } from "@/zustand/userDataState";
 import classes from "./page.module.css";
+import Loading from "../_component/Loading";
 
 export default function Page() {
   // 유저가 없거나 유저데이터에 핸즈데이터가 있을 경우 메인화면으로 보내기
@@ -122,35 +123,33 @@ export default function Page() {
     }
 
     setIsOpen(true);
+    setIsLoading(false);
   };
 
   return (
     <div className={classes.container}>
-      <div>
-        {isOpen ? (
-          <Setting data={mainChar} />
-        ) : (
-          <div>
-            <div className={classes.fileContainer}>
-              <label htmlFor="file">파일찾기</label>
-              <input placeholder="첨부파일" value={img !== null ? img.name : ""} readOnly />
-
-              <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} rel="prefetch" />
-              <div>
-                {isLoading ? (
-                  <div>
-                    <p>검색중</p>
-                  </div>
-                ) : (
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div>
+          {isOpen ? (
+            <Setting data={mainChar} />
+          ) : (
+            <div>
+              <div className={classes.fileContainer}>
+                <label htmlFor="file">찾기</label>
+                <input placeholder="첨부파일" value={img !== null ? img.name : ""} readOnly />
+                <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} rel="prefetch" />
+                <div>
                   <button onClick={fn}>
                     <p>SEARCH</p>
                   </button>
-                )}
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

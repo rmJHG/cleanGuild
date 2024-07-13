@@ -4,25 +4,30 @@ import Logout from "./Logout";
 import { useUserData } from "@/zustand/userDataState";
 import { useState } from "react";
 import classes from "./userProfile.module.css";
+import { useSession } from "next-auth/react";
 
 export default function UserProfile() {
+  const session = useSession();
   const { userData } = useUserData();
-  const { id, info } = userData;
+  const { info } = userData;
   const { handsData } = info;
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      {handsData && (
-        <div>
-          <button
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          >
-            <p>{handsData.character_name}</p>
-          </button>
-        </div>
-      )}
+      {session.data &&
+        (handsData.character_name ? (
+          <div>
+            <button
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            >
+              <p>{handsData.character_name}</p>
+            </button>
+          </div>
+        ) : (
+          <Logout />
+        ))}
 
       {isOpen && (
         <ul className={classes.profileMenu}>

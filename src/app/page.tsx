@@ -1,13 +1,16 @@
-"use client";
-import { useSession } from "next-auth/react";
+import { auth } from "@/auth";
 import classes from "./main.module.css";
-import { useUserData } from "@/zustand/userDataState";
 import { redirect } from "next/navigation";
+import { Session } from "next-auth";
+import { UserData } from "@/type/userData";
 
-export default function Page() {
-  const session = useSession();
-  const { userData } = useUserData();
-  session.data && userData.id === "" && redirect("/user-auth");
+interface SessionType extends Session {
+  userData?: UserData;
+}
+export default async function Page() {
+  const session: SessionType | null = await auth();
+  console.log(session);
+  session && !session?.userData && redirect("/user-auth");
 
   return (
     <div className={classes.description}>
