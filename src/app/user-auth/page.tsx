@@ -5,14 +5,14 @@ import { createWorker } from "tesseract.js";
 import Setting from "./_component/Setting";
 import { Char } from "@/type/char";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useUserData } from "@/zustand/userDataState";
+import classes from "./page.module.css";
 
 export default function Page() {
   // 유저가 없거나 유저데이터에 핸즈데이터가 있을 경우 메인화면으로 보내기
   const session = useSession();
   const { userData } = useUserData();
-
   !session.data || (userData.id !== "" && redirect("/"));
 
   const [img, setImg] = useState<File | null>(null);
@@ -26,6 +26,9 @@ export default function Page() {
 
   const fn = async (e: FormEvent) => {
     e.preventDefault();
+    if (!img) {
+      return null;
+    }
     setIsLoading(true);
     //현재날짜 구하기
     const dt = new Date();
@@ -122,23 +125,30 @@ export default function Page() {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <div>
         {isOpen ? (
           <Setting data={mainChar} />
         ) : (
-          <form>
-            <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} required />
-            {isLoading ? (
+          <div>
+            <div className={classes.fileContainer}>
+              <label htmlFor="file">파일찾기</label>
+              <input placeholder="첨부파일" value={img !== null ? img.name : ""} readOnly />
+
+              <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} rel="prefetch" />
               <div>
-                <p>검색중</p>
+                {isLoading ? (
+                  <div>
+                    <p>검색중</p>
+                  </div>
+                ) : (
+                  <button onClick={fn}>
+                    <p>SEARCH</p>
+                  </button>
+                )}
               </div>
-            ) : (
-              <button onClick={fn}>
-                <p>SEARCH</p>
-              </button>
-            )}
-          </form>
+            </div>
+          </div>
         )}
       </div>
     </div>
