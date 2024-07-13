@@ -1,0 +1,31 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.container > form {
+  width: 300px;
+}
+.container > form > div {
+  margin-bottom: 10px;
+}
+.titleContainer > div,
+.desContainer > div {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.titleContainer > input {
+  width: 100%;
+}
+
+.desContainer > div {
+  display: flex;
+}
+
+.desContainer > textarea {
+  height: 100px;
+  width: 100%;
+  resize: none;
+}

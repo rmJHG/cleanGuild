@@ -1,11 +1,12 @@
 .postContainer {
+  height: 100%;
   width: 250px;
+  border: 1px solid white;
   border-radius: 5px;
   padding: 5px;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  background-color: gray;
 }
 .postHeader {
   margin-bottom: 5px;

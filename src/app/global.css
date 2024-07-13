@@ -126,7 +126,8 @@ a {
   text-decoration: none;
   color: white;
 }
-p {
+p,
+label {
   color: white;
 }
 
