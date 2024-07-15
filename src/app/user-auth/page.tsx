@@ -5,16 +5,16 @@ import { createWorker } from "tesseract.js";
 import Setting from "./_component/Setting";
 import { Char } from "@/type/char";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import { useUserData } from "@/zustand/userDataState";
+import { redirect } from "next/navigation";
+
 import classes from "./page.module.css";
 import Loading from "../_component/Loading";
 
 export default function Page() {
   // 유저가 없거나 유저데이터에 핸즈데이터가 있을 경우 메인화면으로 보내기
-  const session = useSession();
-  const { userData } = useUserData();
-  !session.data || (userData.id !== "" && redirect("/"));
+  const { data: session } = useSession();
+  !session && redirect("/");
+  session?.user.handsData && redirect("/");
 
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);

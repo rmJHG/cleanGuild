@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
-import google from "next-auth/providers/google";
 import kakao from "next-auth/providers/kakao";
-import naver from "next-auth/providers/naver";
+import { getUserDataDetail } from "./getUserData";
+import { HandsData } from "./type/userData";
 
 export const {
   handlers: { GET, POST },
@@ -14,14 +14,6 @@ export const {
       clientId: process.env.AUTH_KAKAO_ID,
       clientSecret: process.env.AUTH_KAKAO_SECRET,
     }),
-    naver({
-      clientId: process.env.AUTH_NAVER_ID,
-      clientSecret: process.env.AUTH_NAVER_SECRET,
-    }),
-    google({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
-    }),
   ],
   pages: {
     signIn: "/signin",
@@ -33,10 +25,22 @@ export const {
     signIn: async ({ account, profile }) => {
       return true;
     },
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user, session, account }) => {
+      if (account) {
+        const userData = await getUserDataDetail(token.email as string);
+        token.user = {
+          ...userData,
+        };
+      }
+
       return token;
     },
-    session: async ({ session, token }) => {
+    session: async ({ session, token, user }) => {
+      if (token.user) {
+        session.user.handsData = token.user.handsData;
+        session.user.dbId = token.user.id;
+      }
+
       return session;
     },
   },

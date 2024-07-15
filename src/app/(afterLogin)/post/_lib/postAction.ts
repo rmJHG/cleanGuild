@@ -1,13 +1,12 @@
 "use server";
 
 import { db } from "@/firebase/fireconfig";
-import { UserData } from "@/type/userData";
 import { collection, doc, setDoc } from "firebase/firestore";
 
 export const postAction = async (formData: FormData) => {
   const dt = new Date();
 
-  const userData: UserData = JSON.parse(formData.get("userData") as string);
+  const userData = JSON.parse(formData.get("userData") as string);
   const { info } = userData;
   const { world_name } = info.handsData;
   const { character_guild_name } = info.handsData;

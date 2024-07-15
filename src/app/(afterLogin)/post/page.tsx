@@ -1,21 +1,26 @@
 "use client";
 
-import { useUserData } from "@/zustand/userDataState";
 import { useQuery } from "@tanstack/react-query";
 import { getGuildData } from "./_lib/getGuildData";
 import PostForm from "./_component/PostForm";
-export default function Page() {
-  const { userData } = useUserData();
-  const { handsData } = userData.info;
+import { useSession } from "next-auth/react";
 
+export default function Page() {
+  const { data: session } = useSession();
+  if (!session) return null;
+  const { handsData } = session?.user;
+  if (!handsData) return null;
   const { data, isLoading } = useQuery<GuildData>({
-    queryKey: ["guildData", handsData.world_name, handsData.character_guild_name],
+    queryKey: ["guildData", handsData!.world_name, handsData!.character_guild_name],
     queryFn: getGuildData,
     staleTime: 30 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
-    enabled: handsData.character_guild_name !== undefined,
+    enabled: !!session?.user.handsData!.character_guild_name,
   });
 
+  if (data?.error) {
+    return <div>error {data.error.message}</div>;
+  }
   if (data) {
     const currentNoblePoint: number = data!.guild_noblesse_skill.reduce((a, b) => {
       return a + b.skill_level;
@@ -26,4 +31,5 @@ export default function Page() {
       </div>
     );
   }
+  return null;
 }

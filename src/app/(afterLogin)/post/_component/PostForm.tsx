@@ -1,21 +1,23 @@
 "use client";
-import { useUserData } from "@/zustand/userDataState";
+
 import { postAction } from "../_lib/postAction";
 import classes from "./postForm.module.css";
 import { ChangeEvent, useState } from "react";
+
+import { useSession } from "next-auth/react";
 type Props = {
   guildData: GuildData;
 };
 export default function PostForm({ guildData }: Props) {
-  const { userData } = useUserData();
-  const { handsData } = userData.info;
+  const { data: session } = useSession();
+  const { handsData } = session!.user;
+  if (!handsData) return null;
   const [titleLength, setTitleLength] = useState(0);
   const [desLength, setDesLength] = useState(0);
   const guildTypeOption = ["친목", "솔로", "랭킹", "자유", "부캐"];
-  const nobleOptions = Array.from({ length: 60 }, (_, i) => i + 1);
-
   const { guild_name, guild_level, guild_member_count, currentNoblePoint } = guildData;
 
+  const userData = { handsData, userEmail: session?.user?.email };
   const changeTitleLengthHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitleLength(e.target.value.length);
   };

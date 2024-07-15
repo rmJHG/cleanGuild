@@ -2,8 +2,8 @@ import { QueryKey } from "@tanstack/react-query";
 
 export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
   const [_1, world_name, guild_name] = queryKey;
-
-  if (!world_name && guild_name) {
+  console.log(world_name, guild_name);
+  if (world_name && guild_name) {
     const getGuildOcid = await fetch(
       `https://open.api.nexon.com/maplestory/v1/guild/id?guild_name=${guild_name}&world_name=${world_name}`,
       {
@@ -15,6 +15,7 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
     );
     const ocidJson = await getGuildOcid.json();
 
+    console.log(ocidJson);
     const guilData = await fetch(
       `https://open.api.nexon.com/maplestory/v1/guild/basic?oguild_id=${ocidJson.oguild_id}`,
       {
@@ -25,7 +26,6 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
       }
     );
     const dataJson = await guilData.json();
-
     return dataJson;
   }
 };

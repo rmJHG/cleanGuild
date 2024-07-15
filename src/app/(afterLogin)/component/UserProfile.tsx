@@ -1,21 +1,21 @@
 "use client";
 import Link from "next/link";
 import Logout from "./Logout";
-import { useUserData } from "@/zustand/userDataState";
+
 import { useState } from "react";
 import classes from "./userProfile.module.css";
 import { useSession } from "next-auth/react";
 
 export default function UserProfile() {
-  const session = useSession();
-  const { userData } = useUserData();
-  const { info } = userData;
-  const { handsData } = info;
+  const { data: session } = useSession();
+  if (!session) return null;
+  const { handsData } = session.user;
+
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      {session.data &&
-        (handsData.character_name ? (
+      {session &&
+        (handsData ? (
           <div>
             <button
               onClick={() => {

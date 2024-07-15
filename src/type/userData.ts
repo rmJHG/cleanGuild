@@ -4,12 +4,8 @@ export type HandsData = {
   character_image: string;
   character_guild_name: string;
 };
-export type UserInfo = {
-  userEmail: string;
-  handsData: HandsData;
-};
 
 export type UserData = {
   id: string;
-  info: UserInfo;
+  handsData: HandsData;
 };

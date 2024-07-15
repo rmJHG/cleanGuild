@@ -4,7 +4,7 @@ import UserProfile from "../(afterLogin)/component/UserProfile";
 
 export default async function UserActionBtn() {
   const session = await auth();
-  return session === null ? (
+  return !session ? (
     <div>
       <Link href="/signin">Login</Link>
     </div>

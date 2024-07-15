@@ -1,16 +1,10 @@
 import { auth } from "@/auth";
 import classes from "./main.module.css";
 import { redirect } from "next/navigation";
-import { Session } from "next-auth";
-import { UserData } from "@/type/userData";
 
-interface SessionType extends Session {
-  userData?: UserData;
-}
 export default async function Page() {
-  const session: SessionType | null = await auth();
-  console.log(session);
-  session && !session?.userData && redirect("/user-auth");
+  const session = await auth();
+  session && !session.user.handsData && redirect("/user-auth");
 
   return (
     <div className={classes.description}>
