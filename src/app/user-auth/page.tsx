@@ -1,15 +1,17 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { createWorker } from "tesseract.js";
 import Setting from "./_component/Setting";
 import { Char } from "@/type/char";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-
 import classes from "./page.module.css";
 import Loading from "../_component/Loading";
+import getCharData from "./_lib/getCharData";
+import Image from "next/image";
 
+import goodImg from "../../../public/img/goodImg.png";
 export default function Page() {
   // 유저가 없거나 유저데이터에 핸즈데이터가 있을 경우 메인화면으로 보내기
   const { data: session } = useSession();
@@ -19,23 +21,23 @@ export default function Page() {
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [mainChar, setMainChar] = useState<Char>(null);
+  const [mainChar, setMainChar] = useState<Char | null>(null);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     setImg(file);
   };
 
+  useEffect(() => {
+    if (mainChar) {
+      setIsOpen(true);
+      setIsLoading(false);
+    }
+  }, [mainChar]);
   const fn = async (e: FormEvent) => {
     e.preventDefault();
-    if (!img) {
-      return null;
-    }
+    if (!img) return null;
+
     setIsLoading(true);
-    //현재날짜 구하기
-    const dt = new Date();
-    const currentMonth: string = dt.getMonth() + 1 < 10 ? `0` + (dt.getMonth() + 1) : "" + dt.getMonth() + 1;
-    const currentDay = dt.getDay() < 10 ? "0" + dt.getDay() : "" + dt.getDay();
-    const currentDt = dt.getFullYear() + "-" + currentMonth + "-" + currentDay;
 
     //이미지 파일의 텍스트 추출 라이브러리
     const worker = await createWorker(["kor", "eng"]);
@@ -64,39 +66,20 @@ export default function Page() {
     });
 
     const getRandomElements = (array: string[]) => {
-      // Fisher-Yates shuffle algorithm
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
-      // Return the first n elements from the shuffled array
       return array.slice(0, Math.min(array.length, 5));
     };
     const randomArr: string[] = getRandomElements(filteredArray);
-
     const randomResult: any[] = [];
+
     //임의로 5개의 닉네임을 추출해 메인캐릭터 이름들을 검색
     for (const value of randomArr) {
-      const fetchedOcidData = await fetch(`https://open.api.nexon.com/maplestory/v1/id?character_name=${value}`, {
-        method: "GET",
-        headers: {
-          "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
-        },
-      });
-      const ocidJson = await fetchedOcidData.json();
-
-      if (ocidJson.ocid) {
-        const getMainCharData = await fetch(
-          `https://open.api.nexon.com/maplestory/v1/ranking/union?ocid=${ocidJson.ocid}&date=${currentDt}&page=1`,
-          {
-            method: "GET",
-            headers: {
-              "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
-            },
-          }
-        );
-        const mainCharJson = await getMainCharData.json();
-        mainCharJson.ranking.length > 0 && randomResult.push(mainCharJson.ranking[0].character_name);
+      const mainCharData = await getCharData({ dataType: "mainCharInfo", character_name: value });
+      if (mainCharData) {
+        mainCharData.ranking?.length > 0 && randomResult.push(mainCharData?.ranking[0].character_name);
       }
     }
     //검색된 메인캐릭터 이름들 사이에서 중복되는 값 찾기
@@ -105,25 +88,9 @@ export default function Page() {
     });
     // 중복된 닉네임으로 검색
     if (result.length > 0) {
-      const getOcidData = await fetch(`https://open.api.nexon.com/maplestory/v1/id?character_name=${result[0]}`, {
-        method: "GET",
-        headers: {
-          "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
-        },
-      });
-      const ocidRes = await getOcidData.json();
-
-      const getCharData = await fetch(`https://open.api.nexon.com/maplestory/v1/character/basic?ocid=${ocidRes.ocid}`, {
-        headers: {
-          "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
-        },
-      });
-      const charRes = await getCharData.json();
-      setMainChar(charRes);
+      const data = await getCharData({ dataType: "charInfo", character_name: result[0] });
+      setMainChar(data);
     }
-
-    setIsOpen(true);
-    setIsLoading(false);
   };
 
   return (
@@ -131,24 +98,49 @@ export default function Page() {
       {isLoading ? (
         <Loading />
       ) : (
-        <div>
+        <>
           {isOpen ? (
             <Setting data={mainChar} />
           ) : (
-            <div>
-              <div className={classes.fileContainer}>
-                <label htmlFor="file">찾기</label>
-                <input placeholder="첨부파일" value={img !== null ? img.name : ""} readOnly />
-                <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} rel="prefetch" />
-                <div>
-                  <button onClick={fn}>
-                    <p>SEARCH</p>
-                  </button>
-                </div>
+            <div className={classes.fileContainer}>
+              <label htmlFor="file">찾기</label>
+              <input placeholder="첨부파일" value={img !== null ? img.name : ""} readOnly />
+              <input type="file" name="file" id="file" accept="image/*" onChange={changeHandler} rel="prefetch" />
+              <div>
+                <button onClick={fn}>
+                  <p>SEARCH</p>
+                </button>
               </div>
             </div>
           )}
-        </div>
+          <div className={classes.intro}>
+            <p>세부적인 컨텐츠를 이용하기 위해 핸즈 인증이 필요합니다.</p>
+            <p>핸증 인증에 사용되는 핸즈 이미지는 저장되지않으며</p>
+            <p> 메인 캐릭터의 추출만을 위해서 사용됩니다.</p>
+          </div>
+
+          <div className={classes.intro}>
+            <p>* 본인의 것이 아닌 핸즈이미지를 사용하거나 *</p>
+            <p>* 올바르지 않은 이미지를 사용할 경우 *</p>
+            <p>* 문제가 발생할 수 있음 *</p>
+          </div>
+
+          <div className={classes.imgContainer}>
+            <div>
+              <p>올바른 이미지 예시</p>
+              <p>(스마트폰 ui는 상관없음)</p>
+            </div>
+
+            <Image
+              src={goodImg}
+              alt="good"
+              width={200}
+              onContextMenu={(e) => {
+                e.preventDefault();
+              }}
+            />
+          </div>
+        </>
       )}
     </div>
   );

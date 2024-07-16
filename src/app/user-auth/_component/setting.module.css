@@ -24,11 +24,3 @@
 .userCheckContainer > form button:last-child {
   margin-left: 10px;
 }
-
-.infoSavedContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
