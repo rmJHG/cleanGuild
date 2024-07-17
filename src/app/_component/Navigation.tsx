@@ -4,22 +4,31 @@ import { auth } from "@/auth";
 
 export default async function Navigation() {
   const session = await auth();
+  const { handsData } = session!.user;
 
   return (
     <ul className={classes.navigationContainer}>
       <li>
-        <Link href="/">메인</Link>
+        <Link href="/">
+          <p>메인</p>
+        </Link>
       </li>
       <li>
-        {session?.user.handsData ? (
-          <Link href={`/find/${session.user.handsData!.world_name}`}>길드찾기</Link>
+        {handsData?.world_name ? (
+          <Link href={`/find/${handsData?.world_name}`}>
+            <p>길드찾기</p>
+          </Link>
         ) : (
-          <Link href="/find">길드찾기</Link>
+          <Link href="/find">
+            <p>길드찾기</p>
+          </Link>
         )}
       </li>
-      {session?.user.handsData && (
+      {handsData?.character_guild_name && (
         <li>
-          <Link href="/post">길드홍보</Link>
+          <Link href="/post">
+            <p>길드홍보</p>
+          </Link>
         </li>
       )}
     </ul>

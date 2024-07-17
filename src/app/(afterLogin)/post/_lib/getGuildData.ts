@@ -14,8 +14,8 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
       }
     );
     const ocidJson = await getGuildOcid.json();
+    if (ocidJson.error) return null;
 
-    console.log(ocidJson);
     const guilData = await fetch(
       `https://open.api.nexon.com/maplestory/v1/guild/basic?oguild_id=${ocidJson.oguild_id}`,
       {
@@ -26,6 +26,7 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
       }
     );
     const dataJson = await guilData.json();
+    console.log("현재 길드 정보 요청");
     return dataJson;
   }
 };

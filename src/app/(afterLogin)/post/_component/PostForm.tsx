@@ -29,7 +29,6 @@ export default function PostForm({ guildData }: Props) {
     <div className={classes.container}>
       <form
         action={async (formData: FormData) => {
-          formData.append("userData", JSON.stringify(userData));
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
           await postAction(formData);
         }}
@@ -39,7 +38,7 @@ export default function PostForm({ guildData }: Props) {
             <label htmlFor="title">제목</label>
             <p>{titleLength} / 20</p>
           </div>
-          <input type="text" name="title" id="title" maxLength={20} onChange={changeTitleLengthHandler} />
+          <input type="text" name="title" id="title" maxLength={20} onChange={changeTitleLengthHandler} required />
         </div>
 
         <div className={classes.desContainer}>
@@ -47,7 +46,13 @@ export default function PostForm({ guildData }: Props) {
             <label htmlFor="description">설명</label>
             <p>{desLength} / 100</p>
           </div>
-          <textarea name="description" id="description" maxLength={100} onChange={changeDescriptionLengthHandler} />
+          <textarea
+            name="description"
+            id="description"
+            maxLength={100}
+            onChange={changeDescriptionLengthHandler}
+            required
+          />
         </div>
 
         <div>

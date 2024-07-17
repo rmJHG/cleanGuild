@@ -9,3 +9,9 @@
 .headerContainer > div:nth-child(2) {
   width: 40%;
 }
+
+.headerContainer p {
+  font-size: 20px;
+  font-family: "NEXON Lv1 Gothic OTF";
+  font-weight: 12000;
+}

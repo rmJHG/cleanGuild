@@ -1,15 +1,17 @@
 "use server";
 
+import { auth } from "@/auth";
 import { db } from "@/firebase/fireconfig";
+import { HandsData } from "@/type/userData";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { Session } from "next-auth";
 
 export const postAction = async (formData: FormData) => {
   const dt = new Date();
+  const session = (await auth()) as Session;
 
-  const userData = JSON.parse(formData.get("userData") as string);
-  const { info } = userData;
-  const { world_name } = info.handsData;
-  const { character_guild_name } = info.handsData;
+  const { user, expires } = session;
+  const { character_guild_name, world_name } = user.handsData as HandsData;
   const guildPostData = {
     postData: {
       title: formData.get("title"),
@@ -21,7 +23,7 @@ export const postAction = async (formData: FormData) => {
       limitedLevel: Number(formData.get("limitedLevel")),
       postDate: dt.getTime(),
     },
-    publisherData: { ...userData },
+    publisherData: { ...user },
   };
   const coolTimeRef = doc(db, "guild", "postCooltime", world_name, character_guild_name);
 
