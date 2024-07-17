@@ -2,10 +2,16 @@
 import { redirect, useRouter } from "next/navigation";
 import classes from "./page.module.css";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+
 export default function Page() {
   const { data: session } = useSession();
   session && redirect("/");
   const route = useRouter();
+  useEffect(() => {
+    const ref = document.referrer;
+    ref !== "http://localhost:3000/user-auth" && redirect("/");
+  }, []);
 
   return (
     <div className={classes.authFinishContainer}>
