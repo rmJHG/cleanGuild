@@ -14,15 +14,15 @@ export default function Guild({ data }: { data: GuildPostData }) {
     limitedLevel,
     suroPoint,
   } = postData;
-  const { info } = publisherData;
+  const { handsData } = publisherData;
 
-  function getTimeDifference() {
+  const getTimeDifference = () => {
     const dateDiffInMinutes = (Date.now() - new Date(postDate).getTime()) / 1000 / 60;
-    if (Math.floor(dateDiffInMinutes / 1440)) return `${Math.floor(dateDiffInMinutes / 1440)}일 전`;
-    if (60 <= dateDiffInMinutes && dateDiffInMinutes < 1440) return `${Math.floor(dateDiffInMinutes)}시간 전`;
+    if (dateDiffInMinutes < 1) return "방금 전";
     if (dateDiffInMinutes < 60) return `${Math.floor(dateDiffInMinutes)}분 전`;
-    return "방금 전";
-  }
+    if (dateDiffInMinutes < 1440) return `${Math.floor(dateDiffInMinutes / 60)}시간 전`;
+    return `${Math.floor(dateDiffInMinutes / 1440)}일 전`;
+  };
 
   return (
     <div className={classes.postContainer}>
@@ -41,12 +41,12 @@ export default function Guild({ data }: { data: GuildPostData }) {
         </div>
         {suroPoint !== 0 && (
           <div className={classes.suroPoint}>
-            <p>수로 {suroPoint}점</p>
+            <p>수로 {suroPoint}점 ↑</p>
           </div>
         )}
         {limitedLevel !== 0 && (
           <div className={classes.limitedLevel}>
-            <p>LV{limitedLevel}↑↑</p>
+            <p>LV{limitedLevel} ↑</p>
           </div>
         )}
       </div>
@@ -59,7 +59,7 @@ export default function Guild({ data }: { data: GuildPostData }) {
 
       <footer className={classes.postFooter}>
         <div className={classes.pusblisherName}>
-          <p>{info.handsData.character_name}</p>
+          <p>{handsData.character_name}</p>
         </div>
 
         <div className={classes.postDate}>
