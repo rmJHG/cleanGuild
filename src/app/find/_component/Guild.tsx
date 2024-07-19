@@ -24,11 +24,28 @@ export default function Guild({ data }: { data: GuildPostData }) {
     return `${Math.floor(dateDiffInMinutes / 1440)}일 전`;
   };
 
+  const getBackgroudColor = () => {
+    switch (guildType) {
+      case "친목":
+        return "#2f28ff";
+      case "랭킹":
+        return "#ff2828";
+      case "솔로":
+        return "#5a31ff";
+      case "자유":
+        return "#009c29";
+      default:
+        return "#cf9223";
+    }
+  };
   return (
     <div className={classes.postContainer}>
       <header className={classes.postHeader}>
         <div>
           <p>{guildName}</p>
+        </div>
+        <div className={classes.guildType} style={{ backgroundColor: getBackgroudColor() }}>
+          <p>{guildType}</p>
         </div>
       </header>
 
@@ -36,17 +53,15 @@ export default function Guild({ data }: { data: GuildPostData }) {
         <div className={classes.nobleWrapper}>
           <p>{currentNoblePoint}P</p>
         </div>
-        <div className={classes.guildType}>
-          <p> {guildType}</p>
-        </div>
+
         {suroPoint !== 0 && (
           <div className={classes.suroPoint}>
-            <p>수로 {suroPoint}점 ↑</p>
+            <p>수로 {suroPoint}점▴</p>
           </div>
         )}
         {limitedLevel !== 0 && (
           <div className={classes.limitedLevel}>
-            <p>LV{limitedLevel} ↑</p>
+            <p>Lv{limitedLevel}▴</p>
           </div>
         )}
       </div>

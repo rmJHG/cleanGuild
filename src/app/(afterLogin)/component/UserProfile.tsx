@@ -16,16 +16,16 @@ export default function UserProfile() {
     <>
       {session &&
         (handsData ? (
-          <div>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsOpen(!isOpen);
-              }}
-            >
-              <p ref={btnRef}>{handsData.character_name}</p>
-            </button>
-          </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsOpen(!isOpen);
+            }}
+          >
+            <p ref={btnRef} style={{ display: "flex", gap: "5px", alignItems: "center", justifyContent: "center" }}>
+              {handsData.character_name} <span style={{ fontSize: "10px" }}>▽</span>
+            </p>
+          </button>
         ) : (
           <Logout />
         ))}

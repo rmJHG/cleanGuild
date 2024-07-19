@@ -1,7 +1,12 @@
 .navigationContainer {
-  width: 100%;
+  width: 300px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+}
+
+@media (max-width: 500px) {
+  .navigationContainer {
+    width: 200px;
+  }
 }

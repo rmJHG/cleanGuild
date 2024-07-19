@@ -28,9 +28,9 @@ export default function Page() {
     }, 0);
 
     return (
-      <div>
+      <>
         <PostForm guildData={{ ...data, currentNoblePoint }} />
-      </div>
+      </>
     );
   }
   return null;

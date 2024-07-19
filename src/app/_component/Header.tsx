@@ -9,12 +9,9 @@ export default function Header() {
         <p>이힝</p>
       </div>
 
-      <div>
-        <Navigation />
-      </div>
-      <div>
-        <UserActionBtn />
-      </div>
+      <Navigation />
+
+      <UserActionBtn />
     </div>
   );
 }

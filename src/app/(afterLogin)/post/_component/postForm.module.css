@@ -3,13 +3,21 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: stretch;
 }
 .container > form {
-  width: 300px;
+  min-width: 300px;
+  width: 50%;
 }
 .container > form > div {
+  padding: 10px 0;
+  border-bottom: 1px solid white;
   margin-bottom: 10px;
 }
+.container > form > div:last-child {
+  border-bottom: none;
+}
+
 .titleContainer > div,
 .desContainer > div {
   margin-bottom: 5px;
@@ -28,4 +36,40 @@
   height: 100px;
   width: 100%;
   resize: none;
+}
+.guildInfoContainer {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.noblePointContainer {
+  display: flex;
+}
+.userConditionsContainer {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.userConditionsContainer > p:last-child {
+  font-size: 13px;
+}
+.btnContainer {
+  width: 100%;
+}
+.btnContainer button {
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: white;
+}
+.btnContainer button:hover {
+  opacity: 0.5;
+}
+.btnContainer button > p {
+  color: black;
 }

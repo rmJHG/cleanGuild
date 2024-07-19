@@ -5,6 +5,7 @@ import classes from "./postForm.module.css";
 import { ChangeEvent, useState } from "react";
 
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 type Props = {
   guildData: GuildData;
 };
@@ -31,6 +32,7 @@ export default function PostForm({ guildData }: Props) {
         action={async (formData: FormData) => {
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
           await postAction(formData);
+          redirect("/");
         }}
       >
         <div className={classes.titleContainer}>
@@ -55,13 +57,13 @@ export default function PostForm({ guildData }: Props) {
           />
         </div>
 
-        <div>
+        <div className={classes.guildInfoContainer}>
           <div>
             <p>길드정보</p>
           </div>
           <div>
             <p id="guildName">
-              {guild_name} LV{guild_level}
+              {guild_name} Lv{guild_level}
             </p>
           </div>
           <div>
@@ -77,27 +79,31 @@ export default function PostForm({ guildData }: Props) {
             </select>
           </div>
 
-          <div>
-            <label htmlFor="currentNoblePoint">노블포인트</label>
-            <p id="currentNoblePoint">{guildData.currentNoblePoint}</p>
+          <div className={classes.noblePointContainer}>
+            <label htmlFor="currentNoblePoint">노블포인트 </label>
+            <p id="currentNoblePoint">: {guildData.currentNoblePoint}</p>
           </div>
         </div>
 
-        <div>
-          <p>유저 조건</p>
+        <div className={classes.userConditionsContainer}>
+          <div>
+            <p>유저 조건</p>
+          </div>
           <div>
             <label htmlFor="limitedLevel">레벨 제한</label>
-            <input type="number" name="limitedLevel" id="limitedLevel" />
+            <input type="number" name="limitedLevel" id="limitedLevel" max={300} />
           </div>
 
           <div>
             <label htmlFor="suroPoint">수로 점수</label>
-            <input type="number" name="suroPoint" id="suroPoint" />
+            <input type="number" name="suroPoint" id="suroPoint" max={999999} />
+          </div>
+          <div>
             <p> * 제한이 없을 경우 빈칸으로 기재</p>
           </div>
         </div>
 
-        <div>
+        <div className={classes.btnContainer}>
           <button type="submit">
             <p>홍보하기</p>
           </button>

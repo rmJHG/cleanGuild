@@ -3,50 +3,64 @@
   width: 250px;
   border: 1px solid white;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  transition: 0.3s;
+}
+.postContainer:hover {
+  transform: scale(1.05);
 }
 .postHeader {
-  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 10px 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
-.postHeader > div > p {
+.postHeader > div:first-child > p {
   font-size: 20px;
 }
+
+.guildType {
+  border-radius: 6px;
+  padding: 5px;
+}
+.guildType > p {
+  font-size: 13px;
+}
+
 .guildConditions {
-  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
   align-items: center;
 }
-
 .guildConditions > div {
   border-radius: 6px;
-  padding: 4px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .guildConditions > div > p {
-  font-size: 13px;
+  font-size: 12px;
 }
+
 .nobleWrapper {
-  background-color: blue;
+  background-color: #008080;
 }
-.guildType {
-  background-color: orange;
-}
-.suroPoint {
-  background-color: red;
-}
+
+.suroPoint,
 .limitedLevel {
   background-color: red;
 }
+
 .postDate > p {
   font-size: 13px;
 }
 .postMain {
+  height: 50px;
   margin-bottom: 5px;
 }
 .postFooter {
