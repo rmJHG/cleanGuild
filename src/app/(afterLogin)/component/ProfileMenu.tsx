@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Logout from "./Logout";
 import classes from "./profileMenu.module.css";
 import { useSession } from "next-auth/react";
@@ -14,7 +13,7 @@ export default function ProfileMenu({
   btnRef: RefObject<HTMLParagraphElement>;
 }) {
   const { data: session } = useSession();
-  const { user } = session as Session;
+  const user = session!.user;
   const { handsData } = user;
   const wrapperRef = useRef<HTMLDivElement>(null);
 

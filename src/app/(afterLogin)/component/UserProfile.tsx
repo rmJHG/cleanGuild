@@ -7,8 +7,7 @@ import ProfileMenu from "./ProfileMenu";
 
 export default function UserProfile() {
   const { data: session } = useSession();
-  if (!session) return null;
-  const { handsData } = session.user;
+  const { handsData } = session!.user;
 
   const [isOpen, setIsOpen] = useState(false);
   const btnRef = useRef<HTMLParagraphElement>(null);

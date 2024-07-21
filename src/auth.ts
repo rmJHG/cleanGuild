@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import kakao from "next-auth/providers/kakao";
 import { getUserDataDetail } from "./getUserData";
-import { HandsData } from "./type/userData";
 
 export const {
   handlers: { GET, POST },
@@ -44,4 +43,5 @@ export const {
       return session;
     },
   },
+  trustHost: true,
 });

@@ -11,7 +11,8 @@ export default function Page() {
   if (!session) redirect("/");
   const { handsData } = session?.user;
   if (!handsData) redirect("/");
-  const { data, isLoading } = useQuery<GuildData>({
+
+  const { data } = useQuery<GuildData>({
     queryKey: ["guildData", handsData!.world_name, handsData!.character_guild_name],
     queryFn: getGuildData,
     staleTime: 60 * 60 * 1000,

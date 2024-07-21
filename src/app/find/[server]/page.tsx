@@ -14,12 +14,14 @@ type Props = {
 };
 export default function DataTable({ params }: Props) {
   const decodedServer = decodeURIComponent(params.server);
+
   const { data, isLoading } = useQuery<GuildPostData[], Error, GuildPostData[], [string, string]>({
     queryKey: ["guildPost", decodedServer],
     queryFn: getPostData,
     staleTime: 2 * 60 * 1000,
     gcTime: 3 * 60 * 1000,
   });
+
   return (
     <div className={classes.container}>
       <div>
