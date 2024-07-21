@@ -4,4 +4,4 @@ node_modules
 .env
 .next
 
-fireconfig.ts
+test.ts
