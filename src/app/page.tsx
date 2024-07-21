@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 export default async function Page() {
   const session = await auth();
   session && !session.user.handsData && redirect("/user-auth");
-  console.log(process.env);
   return (
     <div className={classes.description}>
       <p>메이플 인 게임 내에서 길드 관련 기능이</p>
