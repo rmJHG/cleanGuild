@@ -10,6 +10,5 @@ export const getPostData = async ({ queryKey }: { queryKey: QueryKey }) => {
   data.forEach((e) => {
     dataArr.push({ ...e.data(), postId: e.id });
   });
-  console.log("데이터 요청");
   return dataArr;
 };

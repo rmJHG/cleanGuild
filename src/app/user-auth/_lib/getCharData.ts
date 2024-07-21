@@ -16,7 +16,6 @@ export default async function getCharData({ dataType, character_name }: { dataTy
       },
     });
     const charJson = await getCharData.json();
-    console.log(charJson, "메인캐릭터의 정보 추출");
     return charJson;
   } else if (dataType === "mainCharInfo") {
     const dt = new Date();

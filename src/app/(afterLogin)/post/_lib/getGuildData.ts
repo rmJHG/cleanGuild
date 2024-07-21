@@ -26,7 +26,6 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
       }
     );
     const dataJson = await guilData.json();
-    console.log("현재 길드 정보 요청");
     return dataJson;
   }
 };
