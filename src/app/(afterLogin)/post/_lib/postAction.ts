@@ -28,6 +28,6 @@ export const postAction = async (formData: FormData) => {
   const coolTimeRef = doc(db, "guild", "postCooltime", world_name, character_guild_name);
 
   const ref = doc(collection(db, "guild", "post", world_name));
-  await setDoc(coolTimeRef, { postCoolTime: Date.now() });
+  await setDoc(coolTimeRef, { postCooltime: Date.now() + 30 * 60 * 1000 });
   await setDoc(ref, guildPostData);
 };

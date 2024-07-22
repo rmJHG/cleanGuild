@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: Props) {
       >
         <SessionProvider session={session}>
           <RQProvider>
-            <header style={{}}>
+            <header style={{ width: "100%" }}>
               <Header />
             </header>
             <main style={{ flex: "1" }}>{children}</main>

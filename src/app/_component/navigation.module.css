@@ -1,12 +1,14 @@
 .navigationContainer {
   width: 300px;
   display: flex;
-  justify-content: space-around;
+  gap: 50px;
+  justify-content: center;
   align-items: center;
 }
 
 @media (max-width: 500px) {
   .navigationContainer {
     width: 200px;
+    gap: 30px;
   }
 }

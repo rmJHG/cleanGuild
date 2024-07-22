@@ -70,3 +70,48 @@
   justify-content: flex-end;
   font-size: 14px;
 }
+
+@media (min-width: 300px) and (max-width: 500px) {
+  .postContainer {
+    width: 180px;
+    padding: 8px;
+    gap: 8px;
+  }
+  .postHeader {
+    padding: 8px 0;
+  }
+  .postHeader > div:first-child > p {
+    font-size: 16px;
+  }
+  .guildType {
+    padding: 4px;
+  }
+  .guildType > p {
+    font-size: 11px;
+  }
+  .guildConditions {
+    height: 32px;
+    margin-bottom: 3px;
+    display: flex;
+    gap: 4px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .guildConditions > div {
+    padding: 4px;
+  }
+  .guildConditions > div > p {
+    font-size: 10px;
+  }
+  .postDate > p {
+    font-size: 11px;
+  }
+  .postMain {
+    height: 40px;
+    margin-bottom: 4px;
+  }
+  .postFooter {
+    padding-top: 4px;
+    font-size: 12px;
+  }
+}

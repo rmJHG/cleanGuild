@@ -6,6 +6,8 @@ import { ChangeEvent, useState } from "react";
 
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import Cooltime from "./Cooltime";
+
 type Props = {
   guildData: GuildData;
 };
@@ -16,7 +18,7 @@ export default function PostForm({ guildData }: Props) {
   const [titleLength, setTitleLength] = useState(0);
   const [desLength, setDesLength] = useState(0);
   const guildTypeOption = ["친목", "솔로", "랭킹", "자유", "부캐"];
-  const { guild_name, guild_level, guild_member_count, currentNoblePoint } = guildData;
+  const { guild_name, guild_level, guild_member_count, currentNoblePoint, postCooltime } = guildData;
 
   const userData = { handsData, userEmail: session?.user?.email };
   const changeTitleLengthHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +68,7 @@ export default function PostForm({ guildData }: Props) {
               {guild_name} Lv{guild_level}
             </p>
           </div>
-          <div>
+          <div className={classes.selectContainer}>
             <label htmlFor="guildType">길드 종류</label>
             <select name="guildType" id="guildType">
               {guildTypeOption.map((e, i) => {
@@ -104,9 +106,7 @@ export default function PostForm({ guildData }: Props) {
         </div>
 
         <div className={classes.btnContainer}>
-          <button type="submit">
-            <p>홍보하기</p>
-          </button>
+          <Cooltime postCooltime={postCooltime} />
         </div>
       </form>
     </div>

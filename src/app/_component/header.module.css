@@ -1,4 +1,5 @@
 .headerContainer {
+  width: 100vw;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 
   padding: 10px;
@@ -6,16 +7,9 @@
   justify-content: space-between;
   align-items: center;
 }
-.headerContainer:first-child {
-  width: 100%;
-  flex: 3;
-}
-.headerContainer:nth-child(2) {
+
+.headerContainer div:nth-child(2) {
   min-width: 50px;
-  flex: 3;
-}
-.headerContainer:last-child {
-  flex: 1;
 }
 
 .headerContainer p {
@@ -23,9 +17,16 @@
   font-family: "NEXON Lv1 Gothic OTF";
   font-weight: 12000;
 }
-
-@media (max-width: 500px) {
+.headerContainer p:hover {
+  opacity: 0.5;
+}
+@media (max-width: 400px) {
   .headerContainer p {
-    font-size: 15px;
+    font-size: 12px;
+  }
+}
+@media (min-width: 400px) and (max-width: 500px) {
+  .headerContainer p {
+    font-size: 14px;
   }
 }

@@ -155,3 +155,11 @@ label,
 a {
   font-family: "NEXON Lv1 Gothic OTF";
 }
+
+input,
+select {
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}

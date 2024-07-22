@@ -23,6 +23,6 @@ type GuildData = {
   }[];
   world_name: string;
   currentNoblePoint?: number;
-
+  postCooltime?: number;
   error?: { name: string; message: string };
 };

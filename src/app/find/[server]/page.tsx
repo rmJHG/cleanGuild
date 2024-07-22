@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { getPostData } from "./_lib/getPostData";
 import { GuildPostData } from "@/type/guildPostData";
+import Loading from "@/app/_component/Loading";
 type Props = {
   params: {
     server: string;
@@ -28,7 +29,7 @@ export default function DataTable({ params }: Props) {
         <ServerList />
       </div>
       {isLoading ? (
-        <div>Loading</div>
+        <Loading />
       ) : (
         <ul className={classes.guildPostList}>
           {data!

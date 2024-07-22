@@ -1,14 +1,8 @@
 .imageWrapeer {
   margin-left: -50px;
   margin-top: 3px;
-
   width: 80px;
   height: 58px;
   position: relative;
   overflow: hidden;
-  transition: 0.2s;
-}
-
-.imageWrapeer:hover {
-  transform: scale(1.5);
 }
