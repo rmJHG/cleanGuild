@@ -6,6 +6,7 @@ export type HandsData = {
 };
 
 export type UserData = {
-  id: string;
+  dbId: string;
   handsData: HandsData;
+  email: string;
 };

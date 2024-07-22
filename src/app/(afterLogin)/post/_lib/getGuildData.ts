@@ -28,10 +28,7 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
       }
     );
     const dataJson = await guilData.json();
-    const q = doc(db, "guild", "postCooltime", world_name as string, guild_name as string);
-    const data = await getDoc(q);
-
-    const cooltime = data.data();
-    return { ...dataJson, ...cooltime };
+    if (dataJson.error) return null;
+    return dataJson;
   }
 };

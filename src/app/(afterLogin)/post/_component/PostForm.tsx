@@ -5,7 +5,7 @@ import classes from "./postForm.module.css";
 import { ChangeEvent, useState } from "react";
 
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Cooltime from "./Cooltime";
 
 type Props = {
@@ -15,12 +15,12 @@ export default function PostForm({ guildData }: Props) {
   const { data: session } = useSession();
   const { handsData } = session!.user;
   if (!handsData) return null;
+  const route = useRouter();
   const [titleLength, setTitleLength] = useState(0);
   const [desLength, setDesLength] = useState(0);
   const guildTypeOption = ["친목", "솔로", "랭킹", "자유", "부캐"];
   const { guild_name, guild_level, guild_member_count, currentNoblePoint, postCooltime } = guildData;
 
-  const userData = { handsData, userEmail: session?.user?.email };
   const changeTitleLengthHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitleLength(e.target.value.length);
   };
@@ -34,7 +34,8 @@ export default function PostForm({ guildData }: Props) {
         action={async (formData: FormData) => {
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
           await postAction(formData);
-          redirect("/");
+          window.location.reload;
+          route.push("/");
         }}
       >
         <div className={classes.titleContainer}>
@@ -106,7 +107,7 @@ export default function PostForm({ guildData }: Props) {
         </div>
 
         <div className={classes.btnContainer}>
-          <Cooltime postCooltime={postCooltime} />
+          {!postCooltime ? <button>홍보하기</button> : <Cooltime postCooltime={postCooltime} />}
         </div>
       </form>
     </div>

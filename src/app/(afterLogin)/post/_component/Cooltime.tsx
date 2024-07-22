@@ -1,40 +1,46 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import classes from "./cooltime.module.css";
-export default function Cooltime({ postCooltime }: { postCooltime: number | undefined }) {
+
+export default function Cooltime({ postCooltime }: { postCooltime: number }) {
   const [cooltimeState, setCooltimeState] = useState("");
-  if (!postCooltime) return <button type="submit">홍보하기</button>;
+  const remainingTime = useRef(Math.floor((postCooltime - Date.now()) / 1000));
+
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
   useEffect(() => {
-    const getCooltime = () => {
-      const currentTime = Date.now();
-      const total = Math.floor((postCooltime - currentTime) / 1000);
-      if (total < 0) {
-        setCooltimeState("홍보하기");
+    const updateCooltime = () => {
+      if (remainingTime.current <= 0) {
+        if (intervalId.current) {
+          clearInterval(intervalId.current);
+        }
         return;
       }
-      const minutes = Math.floor(total / 60);
-      const seconds = total % 60;
+
+      const minutes = Math.floor(remainingTime.current / 60);
+      const seconds = remainingTime.current % 60;
       const formattedMinutes = String(minutes).padStart(2, "0");
       const formattedSeconds = String(seconds).padStart(2, "0");
       setCooltimeState(`${formattedMinutes}:${formattedSeconds}`);
+
+      remainingTime.current -= 1;
     };
-    getCooltime();
-    const intervalId = setInterval(getCooltime, 1000);
-    return () => clearInterval(intervalId);
+
+    updateCooltime();
+    intervalId.current = setInterval(updateCooltime, 1000);
+
+    return () => {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
+    };
   }, [postCooltime]);
 
-  if (cooltimeState === "홍보하기") {
-    return (
-      <button type="submit">
-        <p>홍보하기</p>
-      </button>
-    );
-  } else {
-    return (
-      <button type="submit" disabled className={classes.disableBtn}>
-        {cooltimeState}
-      </button>
-    );
-  }
+  return remainingTime.current > 0 ? (
+    <button disabled className={classes.disableBtn}>
+      {cooltimeState}
+    </button>
+  ) : (
+    <button type="submit">
+      <p>홍보하기</p>
+    </button>
+  );
 }
