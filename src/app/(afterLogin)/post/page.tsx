@@ -11,7 +11,7 @@ import Loading from "@/app/_component/Loading";
 export default function Page() {
   const { data: session } = useSession();
   if (!session) redirect("/");
-  const { handsData } = session?.user;
+  const { handsData } = session.user;
   if (!handsData) redirect("/");
 
   const result = useQueries({
