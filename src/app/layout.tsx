@@ -8,8 +8,8 @@ import { ReactNode } from "react";
 import Footer from "./_component/Footer";
 
 export const metadata = {
-  title: "cleanGuild",
-  description: "Learn nextjs, reactQuery, zustand and Auth.js ",
+  title: "cleanguild",
+  description: "인게임에서 부족한 길드관련 컨텐츠를 보충하는 사이트",
 };
 
 type Props = {
@@ -20,6 +20,13 @@ export default async function RootLayout({ children }: Props) {
   const session = (await auth()) as Session;
   return (
     <html lang="ko">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830932244446631"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body
         style={{
           display: "flex",
