@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Cooltime from "./Cooltime";
-import Select from "./Select";
+import Select from "../../../_component/Select";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

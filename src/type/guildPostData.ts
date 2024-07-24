@@ -6,12 +6,13 @@ export type GuildPostData = {
     title: string;
     currentNoblePoint: number;
     description: string;
-    goalNoblePoint: number;
     guildName: string;
     guildType: string;
     postDate: number;
     limitedLevel: number;
     suroPoint: number;
+    childGuild: boolean;
+    openKakaotalkLink: string;
   };
   publisherData: UserData;
 };

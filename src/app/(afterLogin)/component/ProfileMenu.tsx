@@ -1,7 +1,6 @@
 import Logout from "./Logout";
 import classes from "./profileMenu.module.css";
 import { useSession } from "next-auth/react";
-import { Session } from "next-auth";
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef } from "react";
 import Image from "next/image";
 

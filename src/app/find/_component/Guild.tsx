@@ -3,17 +3,7 @@ import classes from "./guild.module.css";
 
 export default function Guild({ data }: { data: GuildPostData }) {
   const { postData, publisherData } = data;
-  const {
-    title,
-    currentNoblePoint,
-    description,
-    goalNoblePoint,
-    guildName,
-    guildType,
-    postDate,
-    limitedLevel,
-    suroPoint,
-  } = postData;
+  const { title, currentNoblePoint, guildName, guildType, postDate, limitedLevel, suroPoint } = postData;
   const { handsData } = publisherData;
 
   const getTimeDifference = () => {
@@ -76,7 +66,7 @@ export default function Guild({ data }: { data: GuildPostData }) {
         <div className={classes.pusblisherName}>
           <p>{handsData.character_name}</p>
         </div>
-
+        <div className={classes.gap}></div>
         <div className={classes.postDate}>
           <p>{getTimeDifference()}</p>
         </div>

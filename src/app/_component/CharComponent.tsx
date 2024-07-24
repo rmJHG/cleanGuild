@@ -3,8 +3,7 @@ import Image from "next/image";
 import classes from "./charComponent.module.css";
 export default function CharComponent({ data }: { data: Char }) {
   if (!data) return null;
-  const { character_name, character_class, character_gender, character_guild_name, character_image, character_level } =
-    data;
+  const { character_name, character_class, character_guild_name, character_image, character_level } = data;
 
   return (
     <div className={classes.container}>

@@ -71,7 +71,12 @@
   justify-content: flex-end;
   font-size: 14px;
 }
-
+.gap {
+  width: 1px;
+  height: 100%;
+  margin: 0 5px;
+  background-color: #ffffff80;
+}
 @media (max-width: 600px) {
   .postContainer {
     width: 180px;

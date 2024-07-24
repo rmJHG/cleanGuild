@@ -1,5 +1,4 @@
 export default async function getCharData({ dataType, character_name }: { dataType: string; character_name: string }) {
-  console.log(dataType, character_name);
   const getOcidData = await fetch(`https://open.api.nexon.com/maplestory/v1/id?character_name=${character_name}`, {
     method: "GET",
     headers: {

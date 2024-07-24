@@ -2,21 +2,30 @@
 
 import { GuildPostData } from "@/type/guildPostData";
 import classes from "./post.module.css";
-import { useRouter } from "next/navigation";
 import UserImg from "./UserImg";
 import Link from "next/link";
 
 export default function Post({ data }: { data: GuildPostData }) {
   const { publisherData, postData } = data;
   const { email, handsData, dbId } = publisherData;
-  const { title, description, limitedLevel, guildName, guildType, currentNoblePoint, suroPoint, postDate } = postData;
+  const {
+    title,
+    description,
+    limitedLevel,
+    guildName,
+    guildType,
+    currentNoblePoint,
+    suroPoint,
+    postDate,
+    openKakaotalkLink,
+  } = postData;
 
   const getDate = () => {
     const postedDate = new Date(postDate);
     const isoString = postedDate.toISOString();
     return isoString.split("T")[0]; //
   };
-  const route = useRouter();
+
   return (
     <div className={classes.container}>
       <header className={classes.postHeaderContainer}>
@@ -45,7 +54,7 @@ export default function Post({ data }: { data: GuildPostData }) {
             <span>{limitedLevel || "제한없음"}</span>
           </li>
           <li className={classes.guildConditionsInfo}>
-            <span>길드 노블</span> <span>{currentNoblePoint}</span>
+            <span>길드 노블</span> <span>{currentNoblePoint}p</span>
           </li>
           <li className={classes.guildConditionsInfo}>
             <span>수로 점수</span>
@@ -54,7 +63,7 @@ export default function Post({ data }: { data: GuildPostData }) {
           <li className={classes.guildConditionsInfo}>
             <span>오픈 카톡</span>
 
-            <Link href="/">
+            <Link href={openKakaotalkLink}>
               <span>오픈톡</span>
             </Link>
           </li>
