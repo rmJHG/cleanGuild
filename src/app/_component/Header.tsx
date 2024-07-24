@@ -6,15 +6,19 @@ import UserActionBtn from "./UserActionBtn";
 export default function Header() {
   return (
     <div className={classes.headerContainer}>
-      <div className={classes.title}>
-        <Link href="/">
+      <div className={classes.titleWrapper}>
+        <Link href="/" prefetch={false}>
           <p>Cleanguild</p>
         </Link>
       </div>
 
-      <Navigation />
+      <div className={classes.navigationWrapper}>
+        <Navigation />
+      </div>
 
-      <UserActionBtn />
+      <div className={classes.userActionWrapper}>
+        <UserActionBtn />
+      </div>
     </div>
   );
 }

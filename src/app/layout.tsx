@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: Props) {
             <header style={{ width: "100%" }}>
               <Header />
             </header>
-            <main style={{ flex: "1" }}>{children}</main>
+            <main style={{ flex: "1", display: "flex", justifyContent: "center" }}>{children}</main>
             <footer style={{}}>
               <Footer />
             </footer>

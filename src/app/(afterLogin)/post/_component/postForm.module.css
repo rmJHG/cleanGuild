@@ -1,85 +1,86 @@
 .container {
-  height: 100%;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-}
-.container > form {
-  min-width: 300px;
   max-width: 600px;
-  width: 50%;
-}
-.container > form > div {
-  padding: 10px 0;
-  border-bottom: 1px solid #ffffff80;
-  margin-bottom: 10px;
-}
-.container > form > div:last-child {
-  border-bottom: none;
-}
-
-.titleContainer > div,
-.desContainer > div {
-  margin-bottom: 5px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
-.titleContainer > input {
+.container input,
+.container textarea {
+  border-radius: 5px;
+}
+.container form {
   width: 100%;
 }
-
-.desContainer > div {
-  display: flex;
+.container form > section {
+  border-bottom: 3px solid #ffffff80;
+  padding: 20px 0;
+}
+.descriptionContainer {
+  border-bottom: none !important;
+}
+.container form > section > div {
+  margin-bottom: 20px;
+}
+.container form > section > div > h2 {
+  padding-bottom: 2px;
+  font-size: 20px;
+  color: white;
 }
 
-.desContainer > textarea {
-  height: 100px;
-  width: 100%;
-  resize: none;
-}
 .guildInfoContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 20px;
+}
+.guildInfoContainer li {
+  padding: 5px;
   display: flex;
-  gap: 5px;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 15px;
 }
-.selectContainer select {
-  border: 0 none;
-  outline: 0 none;
-  padding: 2px 10px;
-  position: relative;
-  z-index: 3;
-}
-.selectContainer select > option {
-  background: lightcoral;
-  color: #fff;
-  padding: 3px 0;
-  font-size: 16px;
+.guildInfoContainer li > p:first-child {
+  opacity: 0.5;
 }
 
-.noblePointContainer {
-  display: flex;
+.contact input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
 }
-.userConditionsContainer {
+.userConditionsContainer > li {
   display: flex;
-  gap: 5px;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+
+  justify-content: flex-start;
 }
-.userConditionsContainer > p:last-child {
-  font-size: 13px;
+.userConditionsContainer > li:first-child {
+  margin-bottom: 15px;
+}
+.userConditionsContainer input {
+  margin-left: 20px;
+  padding: 5px;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+}
+.descriptionContainer input,
+.descriptionContainer textarea {
+  padding: 5px;
+}
+.descriptionContainer textarea {
+  margin-top: 10px;
+  height: 200px;
 }
 .btnContainer {
   width: 100%;
+  margin-top: 10px;
 }
 .btnContainer button {
   width: 100%;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px 0;
   background-color: white;
 }
 .btnContainer button:hover {

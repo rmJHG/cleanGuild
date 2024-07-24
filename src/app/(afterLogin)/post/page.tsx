@@ -39,7 +39,7 @@ export default function Page() {
   }
   if (data2 === undefined || (postCooltime && undefined)) {
     return <Loading />;
-  } else {
+  } else if (data2.guild_master_name === handsData.character_name) {
     const currentNoblePoint: number = data2!.guild_noblesse_skill.reduce((a, b) => {
       return a + b.skill_level;
     }, 0);
@@ -51,6 +51,12 @@ export default function Page() {
           <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />
         )}
       </>
+    );
+  } else {
+    return (
+      <div>
+        <p>길드마스터만 홍보 가능합니다!</p>
+      </div>
     );
   }
 }

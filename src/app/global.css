@@ -155,11 +155,42 @@ label,
 a {
   font-family: "NEXON Lv1 Gothic OTF";
 }
-
+textarea {
+  resize: none;
+}
+input {
+  border-width: 1;
+}
 input,
 select {
   border-radius: 0;
   appearance: none;
   -webkit-appearance: none;
   -webkit-border-radius: 0;
+}
+input::-ms-clear {
+  display: none;
+}
+/* input type number 에서 화살표 제거 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-out-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+} /* IE에서 Select box 화살표 제거 */
+select:-ms-expand {
+  display: none;
+}
+/*Firefox에서 input number 화살표 없애는 방법*/
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -mox-appearance: none;
+  appearance: none;
+}
+input:focus,
+select:focus,
+textarea :focus {
+  outline: none;
 }

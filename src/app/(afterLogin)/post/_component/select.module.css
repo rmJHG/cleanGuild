@@ -1,0 +1,38 @@
+.container {
+  max-width: 200px;
+  width: 100%;
+
+  position: relative;
+}
+.inputContainer {
+  border-radius: 5px;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inputContainer input {
+  border: none;
+}
+.container ul {
+  width: 100%;
+  padding: 5px;
+  background-color: white;
+  position: absolute;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.container ul > li:hover {
+  background-color: #3636ff90;
+}
+.container ul > li > p {
+  color: black;
+}
+
+.optionContainer {
+  margin-top: 5px;
+  border-radius: 5px;
+}

@@ -20,15 +20,12 @@ export default async function Navigation() {
           </Link>
         )}
       </li>
-      {handsData?.character_guild_name ? (
-        <li>
-          <Link href="/post">
-            <p>길드홍보</p>
-          </Link>
-        </li>
-      ) : (
-        <div></div>
-      )}
+
+      <li>
+        <Link href="/post" prefetch={false}>
+          <p>길드홍보</p>
+        </Link>
+      </li>
     </ul>
   );
 }

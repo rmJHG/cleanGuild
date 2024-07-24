@@ -19,6 +19,7 @@
     "next-auth": "^5.0.0-beta.18",
     "react": "^18",
     "react-dom": "^18",
+    "react-toastify": "^10.0.5",
     "tesseract.js": "^5.1.0",
     "zustand": "^4.5.2"
   },

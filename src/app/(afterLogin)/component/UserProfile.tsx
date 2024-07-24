@@ -30,7 +30,7 @@ export default function UserProfile() {
                 justifyContent: "space-end",
               }}
             >
-              {handsData.character_name} <span style={{ fontSize: "10px" }}>▽</span>
+              {handsData.character_name}
             </p>
           </button>
         ) : (

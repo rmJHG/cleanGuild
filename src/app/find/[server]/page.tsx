@@ -19,15 +19,16 @@ export default function DataTable({ params }: Props) {
   const { data, isLoading } = useQuery<GuildPostData[], Error, GuildPostData[], [string, string]>({
     queryKey: ["guildPost", decodedServer],
     queryFn: getPostData,
-    staleTime: 2 * 60 * 1000,
-    gcTime: 3 * 60 * 1000,
+    staleTime: 0,
+    gcTime: 1 * 60 * 1000,
   });
 
   return (
     <div className={classes.container}>
-      <div>
+      <div className={classes.serverListWrapper}>
         <ServerList />
       </div>
+
       {isLoading ? (
         <Loading />
       ) : (
@@ -39,7 +40,7 @@ export default function DataTable({ params }: Props) {
             .map((e) => {
               return (
                 <li key={e.postId}>
-                  <Link href={`/find/${decodedServer}/${e.postId}`}>
+                  <Link href={`/find/${decodedServer}/${e.postId}`} prefetch={false}>
                     <Guild data={e} />
                   </Link>
                 </li>

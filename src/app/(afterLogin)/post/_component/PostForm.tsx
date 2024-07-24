@@ -2,11 +2,13 @@
 
 import { postAction } from "../_lib/postAction";
 import classes from "./postForm.module.css";
-import { ChangeEvent, useState } from "react";
-
+import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Cooltime from "./Cooltime";
+import Select from "./Select";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
   guildData: GuildData;
@@ -16,100 +18,155 @@ export default function PostForm({ guildData }: Props) {
   const { handsData } = session!.user;
   if (!handsData) return null;
   const route = useRouter();
-  const [titleLength, setTitleLength] = useState(0);
-  const [desLength, setDesLength] = useState(0);
-  const guildTypeOption = ["친목", "솔로", "랭킹", "자유", "부캐"];
+  const [guildType, setGuildType] = useState("");
+  const [childGuild, setChildGuild] = useState("");
+  const [title, setTitle] = useState("");
+  const [des, setDes] = useState("");
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const guildTypeOption = ["친목", "솔로", "랭킹", "자유", "유니온"];
   const { guild_name, guild_level, guild_member_count, currentNoblePoint, postCooltime } = guildData;
 
-  const changeTitleLengthHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitleLength(e.target.value.length);
+  const errorModal = (errorMsg: string) => {
+    toast.error(`${errorMsg}`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
-  const changeDescriptionLengthHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDesLength(e.target.value.length);
-  };
-
   return (
     <div className={classes.container}>
       <form
         action={async (formData: FormData) => {
+          if (!guildType) return errorModal("길드타입을 작성해주세요.");
+          if (!childGuild) return errorModal("부캐 길드 유무를 작성해주세요.");
+          if (!title) return errorModal("제목을 작성해주세요.");
+          if (!des) return errorModal("내용을 작성해주세요.");
+
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
+          formData.append("description", JSON.stringify(textAreaRef.current!.value.replaceAll("\n", "<br/>")));
+          formData.append("childGuild", JSON.stringify(childGuild));
+
           await postAction(formData);
           window.location.reload;
           route.push("/");
         }}
       >
-        <div className={classes.titleContainer}>
+        <section className={classes.guildInfo}>
           <div>
-            <label htmlFor="title">제목</label>
-            <p>{titleLength} / 20</p>
+            <h2>길드 정보</h2>
           </div>
-          <input type="text" name="title" id="title" maxLength={20} onChange={changeTitleLengthHandler} required />
-        </div>
+          <ul className={classes.guildInfoContainer}>
+            <li>
+              <p>길드 이름</p>
+              <p id="guildName">{guild_name}</p>
+            </li>
+            <li>
+              <p>길드 레벨</p>
+              <p>{guild_level}</p>
+            </li>
+            <li>
+              <p>길드 인원</p>
+              <p>{guild_member_count}</p>
+            </li>
 
-        <div className={classes.desContainer}>
+            <li>
+              <p>현재 노블</p>
+              <p id="currentNoblePoint">{guildData.currentNoblePoint}</p>
+            </li>
+            <li>
+              <p>길드 종류</p>
+              <Select
+                optionsArr={guildTypeOption}
+                selectName="guildType"
+                placeholder="길드 종류"
+                setState={setGuildType}
+              />
+            </li>
+            <li>
+              <p>부캐 길드</p>
+              <Select
+                optionsArr={["유", "무"]}
+                selectName="childGuild"
+                placeholder="유 or 무"
+                setState={setChildGuild}
+              />
+            </li>
+          </ul>
+        </section>
+        <section>
           <div>
-            <label htmlFor="description">설명</label>
-            <p>{desLength} / 100</p>
+            <h2>가입자 조건</h2> <p style={{ opacity: "0.5", fontSize: "13px" }}> ( 제한이 없으면 빈칸으로 기재 )</p>
           </div>
-          <textarea
-            name="description"
-            id="description"
-            maxLength={100}
-            onChange={changeDescriptionLengthHandler}
-            required
+          <ul className={classes.userConditionsContainer}>
+            <li>
+              <label htmlFor="limitedLevel">레벨 제한</label>
+              <input type="number" name="limitedLevel" id="limitedLevel" max={300} placeholder="1~300" />
+            </li>
+
+            <li>
+              <label htmlFor="suroPoint">수로 점수</label>
+              <input type="number" name="suroPoint" id="suroPoint" max={999999} placeholder="10만점 이하" />
+            </li>
+          </ul>
+        </section>
+        <section className={classes.contactContainer}>
+          <div>
+            <h2>연락 방법</h2>
+          </div>
+          <div className={classes.contact}>
+            <p>인게임 문의</p>
+            <input
+              type="text"
+              name="managerName"
+              id="managerName"
+              placeholder="관리자 닉네임을 해시태그형식으로 작성해주세요! ex)#백무혁#방구"
+            />
+          </div>
+          <div className={classes.contact}>
+            <p>오픈채팅 링크</p>
+            <input type="text" name="openKakaotalkLink" id="openKakaotalkLink" placeholder="길드 문의방 링크" />
+          </div>
+        </section>
+        <section className={classes.descriptionContainer}>
+          <div>
+            <h2>길드 소개</h2>
+          </div>
+
+          <input
+            type="text"
+            name="title"
+            id="title"
+            maxLength={20}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            placeholder="제목을 입력해주세요!"
           />
-        </div>
 
-        <div className={classes.guildInfoContainer}>
-          <div>
-            <p>길드정보</p>
-          </div>
-          <div>
-            <p id="guildName">
-              {guild_name} Lv{guild_level}
-            </p>
-          </div>
-          <div className={classes.selectContainer}>
-            <label htmlFor="guildType">길드 종류</label>
-            <select name="guildType" id="guildType">
-              {guildTypeOption.map((e, i) => {
-                return (
-                  <option key={i} value={e}>
-                    {e}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-
-          <div className={classes.noblePointContainer}>
-            <label htmlFor="currentNoblePoint">노블포인트 </label>
-            <p id="currentNoblePoint">: {guildData.currentNoblePoint}</p>
-          </div>
-        </div>
-
-        <div className={classes.userConditionsContainer}>
-          <div>
-            <p>유저 조건</p>
-          </div>
-          <div>
-            <label htmlFor="limitedLevel">레벨 제한</label>
-            <input type="number" name="limitedLevel" id="limitedLevel" max={300} />
-          </div>
-
-          <div>
-            <label htmlFor="suroPoint">수로 점수</label>
-            <input type="number" name="suroPoint" id="suroPoint" max={999999} />
-          </div>
-          <div>
-            <p> * 제한이 없을 경우 빈칸으로 기재</p>
-          </div>
-        </div>
+          <textarea
+            ref={textAreaRef}
+            maxLength={500}
+            onChange={(e) => {
+              setDes(e.target.value);
+            }}
+            placeholder="길드를 소개해주세요!"
+          />
+        </section>
 
         <div className={classes.btnContainer}>
           {!postCooltime ? <button>홍보하기</button> : <Cooltime postCooltime={postCooltime} />}
         </div>
+
+        <div></div>
       </form>
+
+      <ToastContainer />
     </div>
   );
 }
