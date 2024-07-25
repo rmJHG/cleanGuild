@@ -1,6 +1,4 @@
-import { db } from "@/firebase/fireconfig";
 import { QueryKey } from "@tanstack/react-query";
-import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 
 export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
   const [_1, world_name, guild_name] = queryKey;

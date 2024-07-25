@@ -12,7 +12,11 @@ export default function Page() {
   const route = useRouter();
   useEffect(() => {
     const ref = document.referrer;
-    if (ref !== "http://cleanguild.kr/user-auth" && ref !== "http://localhost:3000/user-auth") {
+    if (
+      ref !== "http://cleanguild.kr/user-auth" &&
+      ref !== "http://localhost:3000/user-auth" &&
+      ref !== "http://192.168.0.4:3000/user-auth"
+    ) {
       redirect("/");
     }
     setIsLoading(false);

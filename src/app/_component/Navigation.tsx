@@ -5,7 +5,7 @@ import { Session } from "next-auth";
 
 export default async function Navigation() {
   const session = (await auth()) as Session;
-  const handsData = session?.user.handsData || null;
+  const handsData = session?.user?.handsData || null;
 
   return (
     <ul className={classes.navigationContainer}>

@@ -38,6 +38,7 @@ export default function DataTable({ params }: Props) {
 
       return isGuildTypeMatch && isChildGuildMatch && isNoblePointMatch;
     });
+
   return (
     <div className={classes.container}>
       <div className={classes.serverListWrapper}>

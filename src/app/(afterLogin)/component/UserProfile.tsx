@@ -24,10 +24,7 @@ export default function UserProfile() {
             <p
               ref={btnRef}
               style={{
-                display: "flex",
                 gap: "5px",
-                alignItems: "center",
-                justifyContent: "space-end",
               }}
             >
               {handsData.character_name}

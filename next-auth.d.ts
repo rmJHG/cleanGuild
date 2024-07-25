@@ -8,6 +8,7 @@ declare module "next-auth/jwt" {
       id?: string;
       handsData?: HandsData;
       dbId?: string;
+      ocid?: string;
     };
   }
 }
@@ -19,6 +20,7 @@ declare module "next-auth" {
       email: string;
       handsData?: HandsData;
       dbId?: string;
+      ocid?: string;
     } & DefaultSession["user"];
   }
 
@@ -26,5 +28,6 @@ declare module "next-auth" {
     id: string;
     handsData?: HandsData;
     dbId?: string;
+    ocid?: string;
   }
 }

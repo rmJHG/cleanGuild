@@ -13,4 +13,5 @@ export type Char = {
   character_level: number;
   date: null;
   world_name: string;
+  ocid: string;
 } | null;

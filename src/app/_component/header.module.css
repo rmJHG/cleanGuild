@@ -25,9 +25,9 @@
 .headerContainer p {
   font-size: 20px;
   font-family: "NEXON Lv1 Gothic OTF";
-  font-weight: 12000;
 }
-.headerContainer p:hover {
+.headerContainer a:hover,
+.headerContainer button:hover {
   opacity: 0.5;
 }
 

@@ -16,7 +16,7 @@ export default function Setting({ data }: Props) {
   const session = useSession();
   !session && redirect("/");
 
-  const { character_name, world_name, character_image, character_guild_name } = data!;
+  const { character_name, world_name, character_image, character_guild_name, ocid } = data!;
   const route = useRouter();
   const [state, formAction] = useFormState(postMainCharAction, null);
   const { pending } = useFormStatus();
@@ -24,6 +24,7 @@ export default function Setting({ data }: Props) {
   const currentUserData = {
     handsData: { character_name, world_name, character_image, character_guild_name },
     userEmail: session.data?.user?.email,
+    ocid,
   };
 
   return (

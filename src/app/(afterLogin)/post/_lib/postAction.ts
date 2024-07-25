@@ -9,7 +9,6 @@ import { Session } from "next-auth";
 export const postAction = async (formData: FormData) => {
   const dt = new Date();
   const session = (await auth()) as Session;
-  const des = formData.get("description") as string;
   const { user, expires } = session;
   const { character_guild_name, world_name } = user.handsData as HandsData;
 
@@ -29,7 +28,6 @@ export const postAction = async (formData: FormData) => {
     },
     publisherData: { ...user },
   };
-  console.log(formData.get("openKakaotalkLink"));
   const coolTimeRef = doc(db, "guild", "postCooltime", world_name, character_guild_name);
 
   const ref = doc(collection(db, "guild", "post", world_name));

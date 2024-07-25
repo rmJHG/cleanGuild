@@ -7,8 +7,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Cooltime from "./Cooltime";
 import Select from "../../../_component/Select";
-import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Bounce, toast } from "react-toastify";
+import { errorModal } from "@/app/_component/errorModal";
 
 type Props = {
   guildData: GuildData;
@@ -26,19 +26,6 @@ export default function PostForm({ guildData }: Props) {
   const guildTypeOption = ["친목", "솔로", "랭킹", "자유", "유니온"];
   const { guild_name, guild_level, guild_member_count, currentNoblePoint, postCooltime } = guildData;
 
-  const errorModal = (errorMsg: string) => {
-    toast.error(`${errorMsg}`, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
-  };
   return (
     <div className={classes.container}>
       <form
@@ -165,8 +152,6 @@ export default function PostForm({ guildData }: Props) {
 
         <div></div>
       </form>
-
-      <ToastContainer />
     </div>
   );
 }

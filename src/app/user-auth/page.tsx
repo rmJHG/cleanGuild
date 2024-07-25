@@ -88,7 +88,7 @@ export default function Page() {
     });
     // 중복된 닉네임으로 검색
     if (result.length > 0) {
-      const data = await getCharData({ dataType: "charInfo", character_name: result[0] });
+      const data = await getCharData({ dataType: "charData", character_name: result[0] });
       setMainChar(data);
     }
   };

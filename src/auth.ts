@@ -19,9 +19,14 @@ export const {
   },
   session: {
     strategy: "jwt",
+    maxAge: 14 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
   callbacks: {
-    signIn: async ({ account, profile }) => {
+    signIn: async ({ account, profile, user }) => {
+      if (!account || !profile || !user) {
+        return "/auth/error";
+      }
       return true;
     },
     jwt: async ({ token, user, session, account }) => {
@@ -31,13 +36,13 @@ export const {
           ...userData,
         };
       }
-
       return token;
     },
     session: async ({ session, token, user }) => {
       if (token.user) {
         session.user.handsData = token.user.handsData;
         session.user.dbId = token.user.id;
+        session.user.ocid = token.user.ocid;
       }
 
       return session;

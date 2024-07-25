@@ -4,7 +4,6 @@ import classes from "./cooltime.module.css";
 export default function Cooltime({ postCooltime }: { postCooltime: number }) {
   const [cooltimeState, setCooltimeState] = useState("");
   const remainingTime = useRef(Math.floor((postCooltime - Date.now()) / 1000));
-
   const intervalId = useRef<NodeJS.Timeout | null>(null);
   useEffect(() => {
     const updateCooltime = () => {
