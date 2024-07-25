@@ -10,7 +10,6 @@ export default async function getCharData({ dataType, character_name }: { dataTy
       },
     });
     if (!getOcidData.ok) {
-      errorModal(`error`);
       return null;
     }
     const ocidJson = await getOcidData.json();

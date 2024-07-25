@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 import Footer from "./_component/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RemoveConsole from "./removeConsole";
+import RemoveConsole from "./RemoveConsole";
 export const metadata = {
   title: "cleanguild",
   description: "인게임에서 부족한 길드관련 컨텐츠를 보충하는 사이트",
