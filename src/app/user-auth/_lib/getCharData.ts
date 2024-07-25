@@ -47,6 +47,6 @@ export default async function getCharData({ dataType, character_name }: { dataTy
       return mainCharJson;
     }
   } catch (e) {
-    console.log(e, "error");
+    return e;
   }
 }
