@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Loading from "@/app/_component/Loading";
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   session && redirect("/");
   const route = useRouter();
