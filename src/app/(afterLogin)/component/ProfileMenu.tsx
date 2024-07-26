@@ -1,3 +1,5 @@
+"use client";
+
 import Logout from "./Logout";
 import classes from "./profileMenu.module.css";
 import { useSession } from "next-auth/react";

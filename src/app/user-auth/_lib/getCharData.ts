@@ -1,6 +1,3 @@
-import { errorModal } from "@/app/_component/errorModal";
-import { Bounce, toast } from "react-toastify";
-
 export default async function getCharData({ dataType, character_name }: { dataType: string; character_name: string }) {
   try {
     const getOcidData = await fetch(`https://open.api.nexon.com/maplestory/v1/id?character_name=${character_name}`, {
@@ -9,12 +6,8 @@ export default async function getCharData({ dataType, character_name }: { dataTy
         "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
       },
     });
-    if (!getOcidData.ok) {
-      return null;
-    }
-    const ocidJson = await getOcidData.json();
 
-    if (ocidJson.error) return null;
+    const ocidJson = await getOcidData.json();
 
     if (dataType === "charData") {
       const getCharData = await fetch(
@@ -47,6 +40,6 @@ export default async function getCharData({ dataType, character_name }: { dataTy
       return mainCharJson;
     }
   } catch (e) {
-    return e;
+    console.error("error");
   }
 }
