@@ -46,6 +46,13 @@ export default function ProfileMenu({
       <div>
         <Logout />
       </div>
+      <button
+        onClick={() => {
+          console.log("hello console");
+        }}
+      >
+        CLICK
+      </button>
     </div>
   );
 }

@@ -8,7 +8,6 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import classes from "./page.module.css";
 import Loading from "../_component/Loading";
-import getCharData from "./_lib/getCharData";
 import Image from "next/image";
 
 import goodImg from "../../../public/img/goodImg.png";
@@ -51,7 +50,9 @@ export default function Page() {
     const koreanPattern = /[가-힣]{2,}/g;
     const englishPattern = /[a-zA-Z]{4,}/g;
     const specialCharPattern = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
-
+    //현재시간
+    const dt = new Date();
+    const currentDt = dt.toLocaleDateString("en-CA");
     //불필요한 텍스트 제거
     data.forEach((item) => {
       const words = item.split(" ");
@@ -77,9 +78,20 @@ export default function Page() {
 
     //임의로 5개의 닉네임을 추출해 메인캐릭터 이름들을 검색
     for (const value of randomArr) {
-      const mainCharData = await getCharData({ dataType: "mainCharInfo", character_name: value });
-      if (mainCharData) {
-        mainCharData.ranking?.length > 0 && randomResult.push(mainCharData?.ranking[0].character_name);
+      try {
+        const response = await fetch(
+          `/api/nexon/data?character_name=${value}&dataType=mainCharInfo&currentDt=${currentDt}`,
+          {
+            method: "GET",
+          }
+        );
+        const mainCharInfo = await response.json();
+
+        if (mainCharInfo) {
+          mainCharInfo.ranking?.length > 0 && randomResult.push(mainCharInfo?.ranking[0].character_name);
+        }
+      } catch (e) {
+        console.log("랜덤캐릭터 에러", e);
       }
     }
     //검색된 메인캐릭터 이름들 사이에서 중복되는 값 찾기
@@ -88,8 +100,18 @@ export default function Page() {
     });
     // 중복된 닉네임으로 검색
     if (result.length > 0) {
-      const data = await getCharData({ dataType: "charData", character_name: result[0] });
-      setMainChar(data);
+      try {
+        const response = await fetch(
+          `/api/nexon/data?character_name=${result[0]}&dataType=charData&currentDt=${currentDt}`,
+          {
+            method: "GET",
+          }
+        );
+        const data = await response.json();
+        setMainChar(data);
+      } catch (e) {
+        console.error("메인캐릭터 데이터 에러", e);
+      }
     }
   };
 

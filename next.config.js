@@ -1,5 +1,3 @@
-/** @type {import('next').NextConfig} */
-
 const nextConfig = {
   images: {
     domains: ["open.api.nexon.com", "lh3.googleusercontent.com"],
@@ -12,4 +10,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
