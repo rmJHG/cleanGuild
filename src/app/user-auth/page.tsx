@@ -9,8 +9,8 @@ import { redirect } from "next/navigation";
 import classes from "./page.module.css";
 import Loading from "../_component/Loading";
 import Image from "next/image";
-
 import goodImg from "../../../public/img/goodImg.png";
+
 export default function Page() {
   // 유저가 없거나 유저데이터에 핸즈데이터가 있을 경우 메인화면으로 보내기
   const { data: session } = useSession();
@@ -20,6 +20,7 @@ export default function Page() {
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [mainChar, setMainChar] = useState<Char | null>(null);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -147,21 +148,23 @@ export default function Page() {
             <p>* 문제가 발생할 수 있음 *</p>
           </div>
 
-          <div className={classes.imgContainer}>
-            <div>
-              <p>올바른 이미지 예시</p>
-              <p>(스마트폰 ui는 상관없음)</p>
-            </div>
+          {!isOpen && (
+            <div className={classes.imgContainer}>
+              <div>
+                <p>올바른 이미지 예시</p>
+                <p>(스마트폰 ui는 상관없음)</p>
+              </div>
 
-            <Image
-              src={goodImg}
-              alt="good"
-              width={200}
-              onContextMenu={(e) => {
-                e.preventDefault();
-              }}
-            />
-          </div>
+              <Image
+                src={goodImg}
+                alt="good"
+                width={200}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                }}
+              />
+            </div>
+          )}
         </>
       )}
     </div>

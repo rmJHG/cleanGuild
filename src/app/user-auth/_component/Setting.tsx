@@ -5,8 +5,11 @@ import { redirect, useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
 import postMainCharAction from "../_lib/postMainCharAction";
 import { signOut, useSession } from "next-auth/react";
-
 import classes from "./setting.module.css";
+import { successModal } from "@/app/_component/successModal";
+import { errorModal } from "@/app/_component/errorModal";
+import { useEffect } from "react";
+import Loading from "@/app/_component/Loading";
 
 type Props = {
   data: Char;
@@ -16,17 +19,21 @@ export default function Setting({ data }: Props) {
   const session = useSession();
   !session && redirect("/");
 
-  const { character_name, world_name, character_image, character_guild_name, ocid } = data!;
+  const { ocid } = data!;
   const route = useRouter();
   const [state, formAction] = useFormState(postMainCharAction, null);
   const { pending } = useFormStatus();
 
   const currentUserData = {
-    handsData: { character_name, world_name, character_image, character_guild_name },
     userEmail: session.data?.user?.email,
     ocid,
   };
+  useEffect(() => {
+    if (state === "success") successModal("성공적으로 저장됐습니다 다시 로그인 해주세요!");
+    if (state === "error") errorModal("저장에 실패했습니다!");
+  }, [state]);
 
+  useEffect(() => {});
   return (
     <div className={classes.container}>
       <div>
@@ -41,23 +48,31 @@ export default function Setting({ data }: Props) {
           action={async (formData: FormData) => {
             formData.append("currentUserData", JSON.stringify(currentUserData));
             formAction(formData);
-            await signOut({ callbackUrl: "/user-auth/success", redirect: true });
+            setTimeout(async () => {
+              await signOut();
+            }, 3000);
           }}
         >
-          <button type="submit" disabled={pending}>
-            <p>맞아요^-^</p>
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              route.push("/user-auth");
-              setInterval(() => {
-                window.location.reload();
-              }, 100);
-            }}
-          >
-            <p>아니요ㅠ_ㅠ</p>
-          </button>
+          {pending ? (
+            <p>^_^</p>
+          ) : (
+            <>
+              <button type="submit">
+                <p>맞아요^-^</p>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  route.push("/user-auth");
+                  setInterval(() => {
+                    window.location.reload();
+                  }, 100);
+                }}
+              >
+                <p>아니요ㅠ_ㅠ</p>
+              </button>
+            </>
+          )}
         </form>
       </div>
     </div>

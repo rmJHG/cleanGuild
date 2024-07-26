@@ -14,7 +14,8 @@ export default function ProfileMenu({
   btnRef: RefObject<HTMLParagraphElement>;
 }) {
   const { data: session } = useSession();
-  const user = session!.user;
+  if (!session) return null;
+  const user = session.user;
   const { handsData } = user;
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -46,13 +47,6 @@ export default function ProfileMenu({
       <div>
         <Logout />
       </div>
-      <button
-        onClick={() => {
-          console.log("hello console");
-        }}
-      >
-        CLICK
-      </button>
     </div>
   );
 }

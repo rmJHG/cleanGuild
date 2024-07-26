@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import kakao from "next-auth/providers/kakao";
-import { getUserDataDetail } from "./getUserData";
 
 export const {
   handlers: { GET, POST },
@@ -19,7 +18,7 @@ export const {
   },
   session: {
     strategy: "jwt",
-    maxAge: 14 * 24 * 60 * 60,
+    maxAge: 48 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
   callbacks: {
@@ -31,7 +30,11 @@ export const {
     },
     jwt: async ({ token, user, session, account }) => {
       if (account) {
-        const userData = await getUserDataDetail(token.email as string);
+        const fetched = await fetch(`${process.env.NEXTAUTH_URL}/api/user?userEmail=${token.email}`, {
+          method: "GET",
+          cache: "no-cache",
+        });
+        const userData = await fetched.json();
         token.user = {
           ...userData,
         };

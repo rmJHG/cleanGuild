@@ -4,9 +4,11 @@ import Logout from "./Logout";
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import ProfileMenu from "./ProfileMenu";
+import { redirect } from "next/navigation";
 
 export default function UserProfile() {
   const { data: session } = useSession();
+  if (!session) return null;
   const { handsData } = session!.user;
 
   const [isOpen, setIsOpen] = useState(false);

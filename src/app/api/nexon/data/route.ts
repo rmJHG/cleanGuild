@@ -36,11 +36,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
       return NextResponse.json({ ...charJson, ocid: ocidJson.ocid });
     } else if (dataType === "mainCharInfo") {
-      const dt = new Date();
-      const currentMonth: string = dt.getMonth() + 1 < 10 ? `0` + (dt.getMonth() + 1) : "" + dt.getMonth() + 1;
-      const currentDay = dt.getDay() < 10 ? "0" + dt.getDay() : "" + dt.getDay();
-      const currentDt = dt.getFullYear() + "-" + currentMonth + "-" + currentDay;
-
       const getMainCharData = await fetch(
         `https://open.api.nexon.com/maplestory/v1/ranking/union?ocid=${ocidJson.ocid}&date=${currentDt}&page=1`,
         {

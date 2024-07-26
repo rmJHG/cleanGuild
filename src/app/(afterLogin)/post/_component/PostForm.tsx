@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Cooltime from "./Cooltime";
 import Select from "../../../_component/Select";
-import { Bounce, toast } from "react-toastify";
 import { errorModal } from "@/app/_component/errorModal";
 
 type Props = {
@@ -15,7 +14,8 @@ type Props = {
 };
 export default function PostForm({ guildData }: Props) {
   const { data: session } = useSession();
-  const { handsData } = session!.user;
+  if (!session) return null;
+  const { handsData } = session.user;
   if (!handsData) return null;
   const route = useRouter();
   const [guildType, setGuildType] = useState("");
@@ -30,10 +30,7 @@ export default function PostForm({ guildData }: Props) {
     <div className={classes.container}>
       <form
         action={async (formData: FormData) => {
-          if (!guildType) return errorModal("길드타입을 작성해주세요.");
-          if (!childGuild) return errorModal("부캐 길드 유무를 작성해주세요.");
-          if (!title) return errorModal("제목을 작성해주세요.");
-          if (!des) return errorModal("내용을 작성해주세요.");
+          if (!guildType && !childGuild && !title && !des) return errorModal("길드타입을 작성해주세요.");
 
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
           formData.append("description", JSON.stringify(textAreaRef.current!.value.replaceAll("\n", "<br/>")));
