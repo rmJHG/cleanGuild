@@ -10,16 +10,16 @@ export default function Page() {
   const { data: session } = useSession();
   session && redirect("/");
   const route = useRouter();
+  const ref = document.referrer;
   useEffect(() => {
-    const ref = document.referrer;
-    if (
-      ref !== "http://cleanguild.kr/user-auth" &&
-      ref !== "http://localhost:3000/user-auth" &&
-      ref !== "http://192.168.0.4:3000/user-auth"
-    ) {
-      redirect("/");
-    }
-    setIsLoading(false);
+    // if (
+    //   ref !== "http://cleanguild.kr/user-auth" &&
+    //   ref !== "http://localhost:3000/user-auth" &&
+    //   ref !== "http://192.168.0.4:3000/user-auth"
+    // ) {
+    //   route.push("/");
+    // }
+    // setIsLoading(false);
   }, []);
 
   {
@@ -28,6 +28,7 @@ export default function Page() {
     ) : (
       <div className={classes.authFinishContainer}>
         <div>
+          <p>{ref}</p>
           <p>유저 정보가 저장되었습니다 다시 로그인 해주세요!</p>
         </div>
         <div>
