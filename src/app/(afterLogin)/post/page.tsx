@@ -6,7 +6,7 @@ import PostForm from "./_component/PostForm";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import getCooltime from "./_lib/getCooltime";
-import Loading from "@/app/_component/Loading";
+import Loading from "@/app/_components/layout/Loading";
 
 export default function Page() {
   const { data: session } = useSession();
@@ -34,15 +34,15 @@ export default function Page() {
   const data2 = result[0].data as GuildData;
   const postCooltime = result[1].data;
 
-  if (data2?.error) {
-    return <div>error {data2.error.message}</div>;
-  }
-  if (data2 === undefined || (postCooltime && undefined)) {
-    return <Loading />;
-  } else if (data2.guild_master_name === handsData.character_name) {
+  if (data2?.error) return <div>error {data2.error.message}</div>;
+
+  if (data2 === undefined || (postCooltime && undefined)) return <Loading />;
+
+  if (data2.guild_master_name === handsData.character_name) {
     const currentNoblePoint: number = data2!.guild_noblesse_skill.reduce((a, b) => {
       return a + b.skill_level;
     }, 0);
+
     return (
       <>
         {!handsData.character_guild_name ? (
@@ -53,9 +53,13 @@ export default function Page() {
       </>
     );
   } else {
+    const currentNoblePoint: number = data2!.guild_noblesse_skill.reduce((a, b) => {
+      return a + b.skill_level;
+    }, 0);
     return (
       <div>
-        <p>길드마스터만 홍보 가능합니다!</p>
+        {/* <p>길드마스터만 홍보 가능합니다!</p> */}
+        <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />
       </div>
     );
   }

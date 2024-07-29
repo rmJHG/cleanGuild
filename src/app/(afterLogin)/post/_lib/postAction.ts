@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import { db } from "@/firebase/fireconfig";
-import { HandsData } from "@/type/userData";
+import { HandsData } from "@/types/userData";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { Session } from "next-auth";
 

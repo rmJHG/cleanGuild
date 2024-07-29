@@ -1,11 +1,11 @@
 import { SessionProvider } from "next-auth/react";
-import Header from "./_component/Header";
-import RQProvider from "./_component/RQProvider";
-import "./global.css";
+import Header from "./_components/layout/Header";
+import RQProvider from "./_components/RQProvider";
+import "./_styles/global.css";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
 import { ReactNode } from "react";
-import Footer from "./_component/Footer";
+import Footer from "./_components/layout/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,23 +28,16 @@ export default async function RootLayout({ children }: Props) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830932244446631"
           crossOrigin="anonymous"
         ></script>
+        <meta name="format-detection" content="telephone=no" />
       </head>
-      <body
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100dvw",
-          height: "100dvh",
-          backgroundColor: "#353535",
-        }}
-      >
+      <body>
         <SessionProvider session={session}>
           <RQProvider>
-            <header style={{ width: "100%" }}>
+            <header>
               <Header />
             </header>
-            <main style={{ flex: "1", display: "flex", justifyContent: "center" }}>{children}</main>
-            <footer style={{}}>
+            <main>{children}</main>
+            <footer>
               <Footer />
             </footer>
           </RQProvider>

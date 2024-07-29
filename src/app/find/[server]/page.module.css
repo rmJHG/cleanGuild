@@ -19,9 +19,12 @@
 .optionContainer > div > div {
   border-radius: 50px;
 }
+
 .optionContainer div {
-  width: 100px;
+  max-width: 150px;
+  width: 100%;
 }
+
 .guildPostList {
   max-width: 900px;
   width: 100%;
@@ -31,4 +34,9 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
+}
+@media (max-width: 600px) {
+  .optionContainer p {
+    font-size: 9px;
+  }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { GuildPostData } from "@/type/guildPostData";
+import { GuildPostData } from "@/types/guildPostData";
 import classes from "./post.module.css";
 import UserImg from "./UserImg";
 import Link from "next/link";

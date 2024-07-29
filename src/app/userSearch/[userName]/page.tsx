@@ -1,5 +1,5 @@
+import SearchBar from "@/app/_components/SearchUserBar";
 import CharInfo from "../_component/CharInfo";
-import SearchBar from "@/app/_component/SearchBar";
 
 type Props = {
   params: { userName: string };

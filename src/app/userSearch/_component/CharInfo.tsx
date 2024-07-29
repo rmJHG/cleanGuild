@@ -1,9 +1,9 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Char } from "@/type/char";
+import { Char } from "@/types/char";
 import { getSearchResult } from "../_lib/getSearchResult";
-import CharComponent from "@/app/_component/CharComponent";
+import CharComponent from "@/app/_components/CharComponent";
 type Props = {
   userName: string;
 };

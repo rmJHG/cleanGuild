@@ -1,4 +1,4 @@
-import { GuildPostData } from "@/type/guildPostData";
+import { GuildPostData } from "@/types/guildPostData";
 import classes from "./guild.module.css";
 
 export default function Guild({ data }: { data: GuildPostData }) {

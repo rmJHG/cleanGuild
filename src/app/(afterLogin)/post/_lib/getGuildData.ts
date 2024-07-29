@@ -2,14 +2,14 @@ import { QueryKey } from "@tanstack/react-query";
 
 export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
   const [_1, world_name, guild_name] = queryKey;
-
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string;
   if (world_name && guild_name) {
     const getGuildOcid = await fetch(
       `https://open.api.nexon.com/maplestory/v1/guild/id?guild_name=${guild_name}&world_name=${world_name}`,
       {
         method: "GET",
         headers: {
-          "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
+          "x-nxopen-api-key": API_KEY,
         },
       }
     );
@@ -21,7 +21,7 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
       {
         method: "GET",
         headers: {
-          "x-nxopen-api-key": process.env.NEXT_PUBLIC_API_KEY as string,
+          "x-nxopen-api-key": API_KEY,
         },
       }
     );

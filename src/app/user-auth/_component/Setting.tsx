@@ -1,15 +1,14 @@
 "use client";
-import CharComponent from "@/app/_component/CharComponent";
-import { Char } from "@/type/char";
+import CharComponent from "@/app/_components/CharComponent";
+import { Char } from "@/types/char";
 import { redirect, useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
 import postMainCharAction from "../_lib/postMainCharAction";
 import { signOut, useSession } from "next-auth/react";
 import classes from "./setting.module.css";
-import { successModal } from "@/app/_component/successModal";
-import { errorModal } from "@/app/_component/errorModal";
+import { successModal } from "@/app/_lib/successModal";
+import { errorModal } from "@/app/_lib/errorModal";
 import { useEffect } from "react";
-import Loading from "@/app/_component/Loading";
 
 type Props = {
   data: Char;

@@ -1,7 +1,7 @@
-import { signInWithKaKao } from "@/app/_component/authActions";
+import { signInWithKaKao } from "@/app/_components/authActions";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import classes from "./page.module.css";
+import classes from "../../_styles/beforeLogin/page.module.css";
 export default async function Page() {
   const session = await auth();
   return !session ? (

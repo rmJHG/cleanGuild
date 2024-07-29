@@ -1,7 +1,7 @@
 import { db } from "@/firebase/fireconfig";
 import { doc, getDoc } from "firebase/firestore";
 import Post from "./_component/Post";
-import { GuildPostData } from "@/type/guildPostData";
+import { GuildPostData } from "@/types/guildPostData";
 
 type Props = {
   params: {

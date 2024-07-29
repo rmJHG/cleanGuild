@@ -6,8 +6,8 @@ import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Cooltime from "./Cooltime";
-import Select from "../../../_component/Select";
-import { errorModal } from "@/app/_component/errorModal";
+import Select from "../../../_components/Select";
+import { errorModal } from "@/app/_lib/errorModal";
 
 type Props = {
   guildData: GuildData;

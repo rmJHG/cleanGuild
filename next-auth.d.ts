@@ -1,4 +1,4 @@
-import { HandsData } from "@/type/userData";
+import { HandsData } from "@/types/userData";
 import NextAuth, { DefaultSession, DefaultUser, JWT } from "next-auth";
 import { DefaultJWT } from "next-auth/jwt";
 

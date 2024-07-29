@@ -6,11 +6,11 @@ import classes from "./page.module.css";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { getPostData } from "./_lib/getPostData";
-import { GuildPostData } from "@/type/guildPostData";
-import Loading from "@/app/_component/Loading";
+import { GuildPostData } from "@/types/guildPostData";
+import Loading from "@/app/_components/layout/Loading";
 
 import { useState } from "react";
-import Select from "@/app/_component/Select";
+import Select from "@/app/_components/Select";
 type Props = {
   params: {
     server: string;
@@ -21,12 +21,14 @@ export default function DataTable({ params }: Props) {
   const [guildType, setGuildType] = useState("");
   const [childGuild, setChildGuild] = useState("");
   const [noblePoint, setNoblePoint] = useState("");
+  const [suroPoint, setSuroPoint] = useState("");
   const { data } = useQuery<GuildPostData[], Error, GuildPostData[], [string, string]>({
     queryKey: ["guildPost", decodedServer],
     queryFn: getPostData,
     staleTime: 0,
     gcTime: 1 * 60 * 1000,
   });
+
   const filteredData =
     data &&
     data.filter((e) => {
@@ -36,7 +38,17 @@ export default function DataTable({ params }: Props) {
       const noblePointValue = e.postData.currentNoblePoint ? `${e.postData.currentNoblePoint}p` : "";
       const isNoblePointMatch = !noblePoint || noblePoint === "전체" || noblePoint === noblePointValue;
 
-      return isGuildTypeMatch && isChildGuildMatch && isNoblePointMatch;
+      const suroPointValue = e.postData.suroPoint;
+      const isSuroPointMatch =
+        !suroPoint ||
+        suroPoint === "전체" ||
+        (suroPoint === "1000 이하" && suroPointValue <= 1000) ||
+        (suroPoint === "1000~3000" && suroPointValue > 1000 && suroPointValue <= 3000) ||
+        (suroPoint === "3000~5000" && suroPointValue > 3000 && suroPointValue <= 5000) ||
+        (suroPoint === "5000~10000" && suroPointValue > 5000 && suroPointValue <= 10000) ||
+        (suroPoint === "10000 이상" && suroPointValue > 10000);
+
+      return isGuildTypeMatch && isChildGuildMatch && isNoblePointMatch && isSuroPointMatch;
     });
 
   return (
@@ -64,6 +76,12 @@ export default function DataTable({ params }: Props) {
           selectName="noblePoint"
           setState={setNoblePoint}
           placeholder="노블포인트"
+        />
+        <Select
+          optionsArr={["전체", "1000 이하", "1000~3000", "3000~5000", "5000~10000", "10000 이상"]}
+          selectName="suroPoint"
+          setState={setSuroPoint}
+          placeholder="수로점수"
         />
       </div>
       {!filteredData ? (

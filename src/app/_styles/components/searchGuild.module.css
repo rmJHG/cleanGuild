@@ -1,0 +1,36 @@
+.container {
+  max-width: 900px;
+  width: 80%;
+  min-width: 300px;
+  max-height: 45px;
+  height: 100%;
+
+  border: 1px solid white;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container form {
+  width: 100%;
+  height: 40px;
+  display: flex;
+}
+
+.container input {
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  background-color: #353535;
+}
+
+.container button {
+  width: 50px;
+  padding: 5px;
+}

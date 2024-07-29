@@ -1,4 +1,4 @@
-import { Char } from "@/type/char";
+import { Char } from "@/types/char";
 import { QueryFunction } from "@tanstack/react-query";
 
 export const getSearchResult: QueryFunction<Char, [_1: string, _2: string, userName: string]> = async ({

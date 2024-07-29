@@ -194,3 +194,25 @@ select:focus,
 textarea :focus {
   outline: none;
 }
+
+body {
+  width: 100dvw;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  background-color: #353535;
+}
+
+main {
+  min-height: calc(100dvh - 105px);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  main {
+    min-width: 100%;
+  }
+}

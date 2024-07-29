@@ -1,13 +1,12 @@
 import Link from "next/link";
-import classes from "./navigation.module.css";
+import classes from "../_styles/components/navigation.module.css";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
-import { redirect } from "next/navigation";
 
 export default async function Navigation() {
   const session = (await auth()) as Session;
-  if (!session) return null;
-  const handsData = session.user.handsData;
+
+  const handsData = session?.user.handsData || null;
 
   return (
     <ul className={classes.navigationContainer}>

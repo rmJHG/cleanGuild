@@ -1,7 +1,7 @@
 import Link from "next/link";
-import classes from "./header.module.css";
-import Navigation from "./Navigation";
-import UserActionBtn from "./UserActionBtn";
+import classes from "../../_styles/components/header.module.css";
+import Navigation from "../Navigation";
+import UserActionBtn from "../UserActionBtn";
 
 export default function Header() {
   return (

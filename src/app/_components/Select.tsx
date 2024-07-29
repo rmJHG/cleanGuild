@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import classes from "./select.module.css";
+import classes from "../_styles/components/select.module.css";
 
 type Props = {
   optionsArr: string[];

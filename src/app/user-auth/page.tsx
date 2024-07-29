@@ -3,11 +3,11 @@
 import { FormEvent, useEffect, useState } from "react";
 import { createWorker } from "tesseract.js";
 import Setting from "./_component/Setting";
-import { Char } from "@/type/char";
+import { Char } from "@/types/char";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import classes from "./page.module.css";
-import Loading from "../_component/Loading";
+import Loading from "../_components/layout/Loading";
 import Image from "next/image";
 import goodImg from "../../../public/img/goodImg.png";
 
