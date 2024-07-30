@@ -4,10 +4,13 @@ import { GuildPostData } from "@/types/guildPostData";
 import classes from "./styles/post.module.css";
 import UserImg from "./UserImg";
 import Link from "next/link";
+import { successModal } from "@/app/_lib/successModal";
+import { errorModal } from "@/app/_lib/errorModal";
 
 export default function Post({ data }: { data: GuildPostData }) {
   const { publisherData, postData } = data;
   const { email, handsData, dbId } = publisherData;
+
   const {
     title,
     description,
@@ -18,12 +21,25 @@ export default function Post({ data }: { data: GuildPostData }) {
     suroPoint,
     postDate,
     openKakaotalkLink,
+    managerName,
+    childGuild,
+    guildLevel,
+    guildMemberCount,
   } = postData;
 
   const getDate = () => {
     const postedDate = new Date(postDate);
     const isoString = postedDate.toISOString();
     return isoString.split("T")[0]; //
+  };
+
+  const textCopy = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      successModal("닉네임이 복사됐습니다.", 1000);
+    } catch (error) {
+      errorModal("복사에 실패했습니다.");
+    }
   };
 
   return (
@@ -42,19 +58,31 @@ export default function Post({ data }: { data: GuildPostData }) {
 
       <section className={classes.guildConditionsWrapper}>
         <div className={classes.guildName}>
-          <h2>{guildName}</h2>
+          <h2>
+            <span> Lv{guildLevel}</span>
+            <span>{guildName}</span>
+          </h2>
         </div>
         <ul className={classes.guildConditionsGrid}>
           <li className={classes.guildConditionsInfo}>
-            <span>길드 타입</span> <span>{guildType}</span>
+            <span>길드 타입</span>
+            <span>{guildType}</span>
           </li>
-
+          <li className={classes.guildConditionsInfo}>
+            <span>길드원 수</span>
+            <span>{guildMemberCount}</span>
+          </li>
+          <li className={classes.guildConditionsInfo}>
+            <span>부캐 길드</span>
+            <span>{childGuild ? "있음" : "없음"}</span>
+          </li>{" "}
+          <li className={classes.guildConditionsInfo}>
+            <span>길드 노블</span>
+            <span>{currentNoblePoint}p</span>
+          </li>
           <li className={classes.guildConditionsInfo}>
             <span>레벨 제한</span>
             <span>{limitedLevel || "제한없음"}</span>
-          </li>
-          <li className={classes.guildConditionsInfo}>
-            <span>길드 노블</span> <span>{currentNoblePoint}p</span>
           </li>
           <li className={classes.guildConditionsInfo}>
             <span>수로 점수</span>
@@ -62,11 +90,33 @@ export default function Post({ data }: { data: GuildPostData }) {
           </li>
           <li className={classes.guildConditionsInfo}>
             <span>오픈 카톡</span>
-
-            <Link href={openKakaotalkLink}>
-              <span>오픈톡</span>
-            </Link>
+            {openKakaotalkLink ? (
+              <Link href={openKakaotalkLink} target="_blank">
+                <span>오픈톡</span>
+              </Link>
+            ) : (
+              <span>없음</span>
+            )}
           </li>
+          {managerName && (
+            <li className={classes.guildConditionsInfo}>
+              <span>인게임 문의</span>
+              <div className={classes.managerNameContainer}>
+                {managerName.map((e) => {
+                  return (
+                    <p
+                      key={e}
+                      onClick={() => {
+                        textCopy(e);
+                      }}
+                    >
+                      {e}
+                    </p>
+                  );
+                })}
+              </div>
+            </li>
+          )}
         </ul>
       </section>
       <section className={classes.desWrapper}>

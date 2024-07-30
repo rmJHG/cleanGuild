@@ -28,7 +28,7 @@ export default function Setting({ data }: Props) {
     ocid,
   };
   useEffect(() => {
-    if (state === "success") successModal("성공적으로 저장됐습니다 다시 로그인 해주세요!");
+    if (state === "success") successModal("성공적으로 저장됐습니다 다시 로그인 해주세요!", 2000);
     if (state === "error") errorModal("저장에 실패했습니다!");
   }, [state]);
 

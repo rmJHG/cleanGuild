@@ -32,20 +32,24 @@ export default function PostForm({ guildData }: Props) {
         action={async (formData: FormData) => {
           const inputLevel = formData.get("limitedLevel");
           const level = Number(inputLevel);
+          const openKakaotalkLink = formData.get("openKakaotalkLink");
+          const managerName = formData.get("managerName");
           if (!guildType) return errorModal("길드타입을 작성해주세요.");
           if (!des) return errorModal("소개를 입력해주세요.");
           if (!title) return errorModal("제목을 입력해주세요.");
           if (!childGuild) return errorModal("부캐 길드 유무를 골라주세요.");
-          if (!inputLevel) return errorModal("레벨을 입력해주세요.");
           if (level > 300) return errorModal("레벨은 300 이하여야 합니다.");
+          if (!managerName && !openKakaotalkLink) return errorModal("문의 수단이 최소 하나는 있어야 합니다.");
 
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
           formData.append("description", JSON.stringify(textAreaRef.current!.value.replaceAll("\n", "<br/>")));
           formData.append("childGuild", JSON.stringify(childGuild));
+          formData.append("guild_level", JSON.stringify(guild_level));
+          formData.append("guild_member_count", JSON.stringify(guild_member_count));
 
           await postAction(formData);
-          window.location.reload;
-          route.push("/");
+          // window.location.reload;
+          // route.push("/");
         }}
       >
         <section className={classes.guildInfo}>
@@ -108,7 +112,7 @@ export default function PostForm({ guildData }: Props) {
         </section>
         <section className={classes.contactContainer}>
           <div>
-            <h2>연락 방법</h2>
+            <h2>연락 방법 ( 최소 하나 필수 )</h2>
           </div>
           <div className={classes.contact}>
             <p>인게임 문의</p>
@@ -116,7 +120,7 @@ export default function PostForm({ guildData }: Props) {
               type="text"
               name="managerName"
               id="managerName"
-              placeholder="관리자 닉네임을 해시태그형식으로 작성해주세요! ex)#백무혁#방구"
+              placeholder="관리자 닉네임을 해시태그형식으로 작성해주세요! ex) #길마#관리자1#관리자2"
             />
           </div>
           <div className={classes.contact}>
@@ -137,7 +141,7 @@ export default function PostForm({ guildData }: Props) {
             onChange={(e) => {
               setTitle(e.target.value);
             }}
-            placeholder="제목을 입력해주세요!"
+            placeholder="제목을 입력해주세요 !"
           />
 
           <textarea
@@ -151,8 +155,9 @@ export default function PostForm({ guildData }: Props) {
         </section>
 
         <div className={classes.btnContainer}>
-          {!postCooltime ? <button>홍보하기</button> : <Cooltime postCooltime={postCooltime} />}
+          {!postCooltime ? <button type="submit">홍보하기</button> : <Cooltime postCooltime={postCooltime} />}
         </div>
+        <button type="submit">홍보하기</button>
       </form>
     </div>
   );

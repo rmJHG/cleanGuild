@@ -13,6 +13,9 @@ export type GuildPostData = {
     suroPoint: number;
     childGuild: boolean;
     openKakaotalkLink: string;
+    managerName: string[];
+    guildLevel: number;
+    guildMemberCount: number;
   };
   publisherData: UserData;
 };

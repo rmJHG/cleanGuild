@@ -11,6 +11,10 @@ export const postAction = async (formData: FormData) => {
   const session = (await auth()) as Session;
   const { user, expires } = session;
   const { character_guild_name, world_name } = user.handsData as HandsData;
+  const managerName = formData.get("managerName") as string;
+  const nameFilter = managerName.split("#").filter((e) => {
+    return e.length !== 0;
+  });
 
   const guildPostData = {
     postData: {
@@ -23,8 +27,10 @@ export const postAction = async (formData: FormData) => {
       limitedLevel: Number(formData.get("limitedLevel")),
       postDate: dt.getTime(),
       childGuild: formData.get("childGuild") === "무",
-      managerName: formData.get("managerName"),
+      managerName: nameFilter,
       openKakaotalkLink: formData.get("openKakaotalkLink"),
+      guildLevel: Number(formData.get("guild_level")),
+      guildMemberCount: Number(formData.get("guild_member_count")),
     },
     publisherData: { ...user },
   };
