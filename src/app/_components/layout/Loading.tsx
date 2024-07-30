@@ -1,4 +1,4 @@
-import classes from "../../_styles/components/loading.module.css";
+import classes from "./styles/loading.module.css";
 export default function Loading() {
   return (
     <div className={classes.loading}>

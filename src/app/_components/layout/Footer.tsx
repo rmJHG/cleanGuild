@@ -1,5 +1,5 @@
 import CharacterImage from "../../(afterLogin)/component/CharacterImage";
-import classes from "../../_styles/components/footer.module.css";
+import classes from "./styles/footer.module.css";
 export default function Footer() {
   return (
     <div className={classes.footerWrapper}>

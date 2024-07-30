@@ -5,15 +5,22 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
   gap: 10px;
 }
 .serverItem {
+  height: 100%;
+  border-radius: 5px;
+  padding: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+.serverItem a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
 .serverContainer a:hover {
   opacity: 0.5;
 }

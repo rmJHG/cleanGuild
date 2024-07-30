@@ -24,7 +24,6 @@ export default function RQProvider({ children }: Props) {
   return (
     <QueryClientProvider client={client}>
       <ReactQueryDevtools initialIsOpen={process.env.NEXT_PUBLIC_DEVMODE === "true"} />
-
       {children}
     </QueryClientProvider>
   );

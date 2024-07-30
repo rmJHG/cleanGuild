@@ -1,14 +1,14 @@
 "use client";
 
 import { postAction } from "../_lib/postAction";
-import classes from "./postForm.module.css";
+
 import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Cooltime from "./Cooltime";
 import Select from "../../../_components/Select";
 import { errorModal } from "@/app/_lib/errorModal";
-
+import classes from "../styles/postForm.module.css";
 type Props = {
   guildData: GuildData;
 };
@@ -30,7 +30,14 @@ export default function PostForm({ guildData }: Props) {
     <div className={classes.container}>
       <form
         action={async (formData: FormData) => {
-          if (!guildType && !childGuild && !title && !des) return errorModal("길드타입을 작성해주세요.");
+          const inputLevel = formData.get("limitedLevel");
+          const level = Number(inputLevel);
+          if (!guildType) return errorModal("길드타입을 작성해주세요.");
+          if (!des) return errorModal("소개를 입력해주세요.");
+          if (!title) return errorModal("제목을 입력해주세요.");
+          if (!childGuild) return errorModal("부캐 길드 유무를 골라주세요.");
+          if (!inputLevel) return errorModal("레벨을 입력해주세요.");
+          if (level > 300) return errorModal("레벨은 300 이하여야 합니다.");
 
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
           formData.append("description", JSON.stringify(textAreaRef.current!.value.replaceAll("\n", "<br/>")));
@@ -90,12 +97,12 @@ export default function PostForm({ guildData }: Props) {
           <ul className={classes.userConditionsContainer}>
             <li>
               <label htmlFor="limitedLevel">레벨 제한</label>
-              <input type="number" name="limitedLevel" id="limitedLevel" max={300} placeholder="1~300" />
+              <input type="number" name="limitedLevel" id="limitedLevel" placeholder="1~300" />
             </li>
 
             <li>
               <label htmlFor="suroPoint">수로 점수</label>
-              <input type="number" name="suroPoint" id="suroPoint" max={999999} placeholder="10만점 이하" />
+              <input type="number" name="suroPoint" id="suroPoint" placeholder="10만점 이하" />
             </li>
           </ul>
         </section>
@@ -146,8 +153,6 @@ export default function PostForm({ guildData }: Props) {
         <div className={classes.btnContainer}>
           {!postCooltime ? <button>홍보하기</button> : <Cooltime postCooltime={postCooltime} />}
         </div>
-
-        <div></div>
       </form>
     </div>
   );

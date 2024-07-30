@@ -54,7 +54,7 @@ export default function DataTable({ params }: Props) {
   return (
     <div className={classes.container}>
       <div className={classes.serverListWrapper}>
-        <ServerList />
+        <ServerList clicked={decodedServer as string} />
       </div>
 
       <div className={classes.optionContainer}>

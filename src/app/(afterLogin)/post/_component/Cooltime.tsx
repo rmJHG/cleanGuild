@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import classes from "./cooltime.module.css";
+import classes from "../styles/cooltime.module.css";
 
 export default function Cooltime({ postCooltime }: { postCooltime: number }) {
   const [cooltimeState, setCooltimeState] = useState("");

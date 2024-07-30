@@ -10,7 +10,8 @@ import red from "../../public/img/world/red.png";
 import union from "../../public/img/world/union.png";
 import zenis from "../../public/img/world/zenis.png";
 import reboot from "../../public/img/world/reboot.png";
-
+import burning from "../../public/img/world/burning.png";
+import enosis from "../../public/img/world/enosis.png";
 export const serverList = [
   [luna, "루나"],
   [scania, "스카니아"],
@@ -23,5 +24,10 @@ export const serverList = [
   [union, "유니온"],
   [nova, "노바"],
   [arcane, "아케인"],
+  [enosis, "이노시스"],
   [reboot, "리부트"],
+  [reboot, "리부트2"],
+  [burning, "버닝"],
+  [burning, "버닝2"],
+  [burning, "버닝3"],
 ];

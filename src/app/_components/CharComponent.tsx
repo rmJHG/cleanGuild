@@ -1,6 +1,6 @@
 import { Char } from "@/types/char";
 import Image from "next/image";
-import classes from "../_styles/components/charComponent.module.css";
+import classes from "./styles/charComponent.module.css";
 export default function CharComponent({ data }: { data: Char }) {
   if (!data) return null;
   const { character_name, character_class, character_guild_name, character_image, character_level } = data;

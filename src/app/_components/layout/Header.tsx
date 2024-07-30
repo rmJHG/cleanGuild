@@ -1,5 +1,5 @@
 import Link from "next/link";
-import classes from "../../_styles/components/header.module.css";
+import classes from "./styles/header.module.css";
 import Navigation from "../Navigation";
 import UserActionBtn from "../UserActionBtn";
 

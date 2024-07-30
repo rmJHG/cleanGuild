@@ -1,5 +1,5 @@
 import Link from "next/link";
-import classes from "../_styles/components/navigation.module.css";
+import classes from "./styles/navigation.module.css";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
 

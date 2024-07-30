@@ -1,10 +1,10 @@
 "use client";
 
 import Logout from "./Logout";
-import classes from "./profileMenu.module.css";
 import { useSession } from "next-auth/react";
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef } from "react";
 import Image from "next/image";
+import classes from "./styles/profileMenu.module.css";
 
 export default function ProfileMenu({
   setIsOpen,

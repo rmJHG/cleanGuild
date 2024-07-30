@@ -1,28 +1,27 @@
 import Link from "next/link";
-import classes from "./serverList.module.css";
-export default function ServerList() {
-  const serverList = [
-    "루나",
-    "스카니아",
-    "베라",
-    "크로아",
-    "엘리시움",
-    "제니스",
-    "레드",
-    "오로라",
-    "유니온",
-    "이노시스",
-    "아케인",
-    "노바",
-    "리부트",
-  ];
+import classes from "./styles/serverList.module.css";
+import { serverList } from "@/app/serverList";
+import Image from "next/image";
 
+type Props = {
+  clicked?: string;
+};
+
+export default function ServerList({ clicked }: Props) {
   return (
     <ul className={classes.serverContainer}>
       {serverList.map((e, i) => {
+        const world_name = e[1] as string;
         return (
-          <li key={i} className={classes.serverItem}>
-            <Link href={`/find/${e}`}>{e}</Link>
+          <li
+            key={world_name + i}
+            className={classes.serverItem}
+            style={{ backgroundColor: world_name === clicked ? "#ffffff7f" : "transparent" }}
+          >
+            <Link href={`/find/${world_name}`}>
+              <Image src={e[0]} alt={world_name + "find"} />
+              <span>{world_name}</span>
+            </Link>
           </li>
         );
       })}

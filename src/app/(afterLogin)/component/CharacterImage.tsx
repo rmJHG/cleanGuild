@@ -1,5 +1,5 @@
 import Image from "next/image";
-import classes from "./CharacterImage.module.css";
+import classes from "./styles/CharacterImage.module.css";
 import { auth } from "@/auth";
 
 export default async function CharacterImage() {

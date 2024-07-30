@@ -1,5 +1,5 @@
 import Image from "next/image";
-import classes from "./userImg.module.css";
+import classes from "./styles/userImg.module.css";
 export default function UserImg({ imgLink }: { imgLink: string }) {
   return (
     <div className={classes.imgWrapper}>

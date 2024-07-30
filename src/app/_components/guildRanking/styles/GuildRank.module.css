@@ -1,0 +1,70 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.serverListContainer {
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 5px 5px 0 0;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.serverListContainer > div {
+  border-radius: 5px 5px 0 0;
+  border-bottom: 1px solid white;
+  padding: 10px;
+  background-color: #777474;
+}
+.serverListContainer > ul {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.serverListContainer > ul > li {
+  border-radius: 5px;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.serverListContainer > ul > li > span {
+  margin-left: 3px;
+}
+.rankingTypeContainter {
+  width: 100%;
+  border: 1px solid white;
+
+  display: flex;
+  flex-direction: column;
+}
+.rankingTypeContainter > div {
+  border-bottom: 1px solid white;
+  padding: 10px;
+  background-color: #777474;
+}
+.rankingTypeContainter > ul {
+  padding: 10px;
+  display: flex;
+
+  align-items: center;
+}
+.rankingTypeContainter > ul > li {
+  border-radius: 5px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rankingTypeContainter > ul > li > span {
+  margin-left: 3px;
+}
