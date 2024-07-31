@@ -28,7 +28,7 @@ export default function GuildRank() {
                 style={{ backgroundColor: worldName === world_name ? "#ffffff7f" : "transparent" }}
               >
                 <Image src={img} alt={world_name + "main"} />
-                <span className={classes.worldName} style={{ color: rankingType === String(i) ? "#333333" : "white" }}>
+                <span className={classes.worldName} style={{ color: world_name === worldName ? "#333333" : "white" }}>
                   {world_name}
                 </span>
               </li>

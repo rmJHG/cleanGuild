@@ -1,7 +1,7 @@
 "use client";
 
 import { useQueries } from "@tanstack/react-query";
-import { getGuildData } from "./_lib/getGuildData";
+import { getGuildData } from "../../_lib/getGuildData";
 import PostForm from "./_component/PostForm";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";

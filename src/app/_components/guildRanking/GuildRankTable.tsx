@@ -6,6 +6,7 @@ import Loading from "../layout/Loading";
 import classes from "./styles/GuildRankingTable.module.css";
 import { GuildRanking } from "@/types/guildRanking";
 import { useState } from "react";
+import Link from "next/link";
 type Props = {
   ranking_type: string;
   world_name: string;
@@ -22,6 +23,7 @@ export default function GuildRankTable({ ranking_type, world_name }: Props) {
   });
   const currentItems = data && data.ranking.slice(currentPage, currentPage + 20);
 
+  console.log(data);
   return (
     <>
       <div className={classes.tableWrapper}>
@@ -41,7 +43,9 @@ export default function GuildRankTable({ ranking_type, world_name }: Props) {
                   return (
                     <tr className={classes.guild} key={e.ranking + e.guild_name}>
                       <td>{e.ranking}</td>
-                      <td>{e.guild_name}</td>
+                      <td className={classes.guildNameCell}>
+                        <Link href={`/guild/${world_name}/${e.guild_name}`}>{e.guild_name}</Link>
+                      </td>
                       <td>{e.guild_point.toLocaleString()}</td>
                     </tr>
                   );

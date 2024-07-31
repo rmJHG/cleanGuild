@@ -1,0 +1,31 @@
+.container {
+  width: 200px;
+  height: 100px;
+  border: 1px solid #ffffffa5;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+.container:hover {
+  transform: scale(1.1);
+}
+.guildInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.guildName {
+  font-family: "yg-jalnan";
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.levelSpan {
+  font-size: 13px;
+}

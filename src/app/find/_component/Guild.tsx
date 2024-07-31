@@ -17,11 +17,11 @@ export default function Guild({ data }: { data: GuildPostData }) {
   const getBackgroudColor = () => {
     switch (guildType) {
       case "친목":
-        return "#2f28ff";
+        return "#4a44ff";
       case "랭킹":
         return "#ff2828";
       case "솔로":
-        return "#5a31ff";
+        return "#482db4";
       case "자유":
         return "#009c29";
       default:
@@ -30,14 +30,14 @@ export default function Guild({ data }: { data: GuildPostData }) {
   };
   return (
     <div className={classes.postContainer}>
-      <header className={classes.postHeader}>
+      <div className={classes.postHeader}>
         <div>
           <p>{guildName}</p>
         </div>
         <div className={classes.guildType} style={{ backgroundColor: getBackgroudColor() }}>
           <p>{guildType}</p>
         </div>
-      </header>
+      </div>
 
       <div className={classes.guildConditions}>
         <div className={classes.nobleWrapper}>
@@ -62,7 +62,7 @@ export default function Guild({ data }: { data: GuildPostData }) {
         </div>
       </div>
 
-      <footer className={classes.postFooter}>
+      <div className={classes.postFooter}>
         <div className={classes.pusblisherName}>
           <p>{handsData.character_name}</p>
         </div>
@@ -70,7 +70,7 @@ export default function Guild({ data }: { data: GuildPostData }) {
         <div className={classes.postDate}>
           <p>{getTimeDifference()}</p>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,9 @@ import getGuildRank from "@/app/_lib/getGuildRank";
 import { GuildRanking } from "@/types/guildRanking";
 import { useQuery } from "@tanstack/react-query";
 import classes from "./page.module.css";
-import SearchedGuild from "../_components/SearchedGuild";
+import SearchedGuild from "./_components/SearchedGuild";
+import GuildSearchBar from "@/app/_components/GuildSearchBar";
+
 type Props = {
   params: {
     guildName: string;
@@ -22,11 +24,23 @@ export default function Page({ params }: Props) {
   });
 
   return data ? (
-    <div className={classes.container}>
-      {data.ranking.map((e, i) => {
-        return <SearchedGuild key={e.guild_name + e.world_name} data={e} />;
-      })}
-    </div>
+    data.ranking.length < 1 ? (
+      <div className={classes.noResult}>
+        <GuildSearchBar />
+        <div>
+          <p>결과가 없습니다!</p>
+        </div>
+      </div>
+    ) : (
+      <div className={classes.container}>
+        <GuildSearchBar />
+        <div>
+          {data.ranking.map((e, i) => {
+            return <SearchedGuild key={e.guild_name + e.world_name} data={e} />;
+          })}
+        </div>
+      </div>
+    )
   ) : (
     <Loading />
   );

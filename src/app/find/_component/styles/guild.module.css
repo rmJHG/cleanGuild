@@ -79,11 +79,12 @@
 }
 @media (max-width: 600px) {
   .postContainer {
-    width: 180px;
+    width: 100%;
     padding: 8px;
     gap: 8px;
   }
   .postHeader {
+    width: 100%;
     padding: 8px 0;
   }
   .postHeader > div:first-child > p {

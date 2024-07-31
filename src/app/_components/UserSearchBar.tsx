@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { FormEventHandler } from "react";
 
-export default function SearchBar() {
+export default function UserSearchBar() {
   const route = useRouter();
 
   const searchUser: FormEventHandler<HTMLFormElement> = (e) => {

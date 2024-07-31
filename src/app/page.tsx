@@ -1,8 +1,9 @@
 import { auth } from "@/auth";
 import classes from "./_styles/main.module.css";
 import { redirect } from "next/navigation";
-import SearchGuildBar from "./_components/SearchGuildBar";
+
 import GuildRank from "./_components/guildRanking/GuildRank";
+import GuildSearchBar from "./_components/GuildSearchBar";
 
 export default async function Page() {
   const session = await auth();
@@ -11,7 +12,7 @@ export default async function Page() {
   return (
     <div className={classes.container}>
       <div>
-        <SearchGuildBar />
+        <GuildSearchBar />
       </div>
       <div>
         <GuildRank />

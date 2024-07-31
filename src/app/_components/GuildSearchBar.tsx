@@ -1,15 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { FormEventHandler } from "react";
-import classes from "./styles/searchGuild.module.css";
+import classes from "./styles/searchGuildBar.module.css";
 import { errorModal } from "../_lib/errorModal";
-export default function SearchGuildBar() {
+
+export default function GuildSearchBar() {
   const route = useRouter();
 
   const searchGuild: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (!e.currentTarget.guildName.value) return errorModal("길드명을 입력해주세요!");
-    route.push(`/search/${e.currentTarget.guildName.value}`);
+    route.push(`/search/guild/${e.currentTarget.guildName.value}`);
   };
 
   return (

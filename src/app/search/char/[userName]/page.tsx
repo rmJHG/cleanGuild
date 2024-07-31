@@ -1,5 +1,5 @@
-import SearchBar from "@/app/_components/SearchUserBar";
 import CharInfo from "../_component/CharInfo";
+import UserSearchBar from "@/app/_components/UserSearchBar";
 
 type Props = {
   params: { userName: string };
@@ -10,7 +10,7 @@ export default async function Page({ params }: Props) {
   return (
     <div>
       <div>
-        <SearchBar />
+        <UserSearchBar />
       </div>
       <div>
         <CharInfo userName={userName} />

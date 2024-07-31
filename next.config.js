@@ -8,6 +8,14 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  async rewrites() {
+    return [
+      {
+        source: "/fetchData",
+        destination: "/api/nexon/data",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

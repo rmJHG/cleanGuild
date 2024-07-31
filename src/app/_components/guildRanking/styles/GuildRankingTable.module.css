@@ -7,7 +7,8 @@
 }
 .tableWrapper th,
 .tableWrapper td {
-  padding: 5px;
+  padding: 7px;
+  font-family: "NEXON Lv1 Gothic OTF";
 }
 
 .rankingTable {
@@ -50,6 +51,11 @@
   padding: 5px 10px;
   background-color: white;
 }
-
+.guildNameCell a {
+  font-family: "NEXON Lv1 Gothic OTF";
+}
+.guildNameCell:hover {
+  text-decoration: underline;
+}
 @media (max-width: 600px) {
 }

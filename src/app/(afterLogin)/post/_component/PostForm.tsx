@@ -48,8 +48,8 @@ export default function PostForm({ guildData }: Props) {
           formData.append("guild_member_count", JSON.stringify(guild_member_count));
 
           await postAction(formData);
-          // window.location.reload;
-          // route.push("/");
+          window.location.reload;
+          route.push("/");
         }}
       >
         <section className={classes.guildInfo}>

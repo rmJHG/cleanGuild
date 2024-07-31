@@ -81,7 +81,7 @@ export default function Page() {
     for (const value of randomArr) {
       try {
         const response = await fetch(
-          `/api/nexon/data?character_name=${value}&dataType=mainCharInfo&currentDt=${currentDt}`,
+          `/fetchData?character_name=${value}&dataType=mainCharInfo&currentDt=${currentDt}`,
           {
             method: "GET",
           }
@@ -103,7 +103,7 @@ export default function Page() {
     if (result.length > 0) {
       try {
         const response = await fetch(
-          `/api/nexon/data?character_name=${result[0]}&dataType=charData&currentDt=${currentDt}`,
+          `/fetchData?character_name=${result[0]}&dataType=charData&currentDt=${currentDt}`,
           {
             method: "GET",
           }

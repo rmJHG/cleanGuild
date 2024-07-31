@@ -40,4 +40,10 @@
   .optionContainer p {
     font-size: 9px;
   }
+  .guildPostList {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding: 20px;
+  }
 }
