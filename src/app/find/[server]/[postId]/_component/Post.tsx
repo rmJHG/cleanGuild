@@ -6,11 +6,16 @@ import UserImg from "./UserImg";
 import Link from "next/link";
 import { successModal } from "@/app/_lib/successModal";
 import { errorModal } from "@/app/_lib/errorModal";
+import { serverList } from "@/app/serverList";
+import Image from "next/image";
 
 export default function Post({ data }: { data: GuildPostData }) {
   const { publisherData, postData } = data;
   const { email, handsData, dbId } = publisherData;
-
+  const [[world_icon, _1]] = serverList.filter((e) => {
+    return e[1] === publisherData.handsData.world_name;
+  });
+  console.log(world_icon);
   const {
     title,
     description,
@@ -48,6 +53,7 @@ export default function Post({ data }: { data: GuildPostData }) {
         <div className={classes.titleWrapeer}>
           <h1>{title}</h1>
         </div>
+
         <div className={classes.publisherInfo}>
           <UserImg imgLink={handsData.character_image} />
           <span className={classes.publisherName}>{handsData.character_name}</span>
@@ -56,14 +62,20 @@ export default function Post({ data }: { data: GuildPostData }) {
         </div>
       </header>
 
-      <section className={classes.guildConditionsWrapper}>
+      <section className={classes.guildConditionsContainer}>
         <div className={classes.guildName}>
           <h2>
+            <span className={classes.worldIcon}>
+              <Image src={world_icon} alt="world_icon" width={20} height={20} />
+            </span>
             <span> Lv{guildLevel}</span>
             <span>{guildName}</span>
           </h2>
+          <Link href={`/guild/${handsData.world_name}/${guildName}`} target="_blank" className={classes.guildInfoLink}>
+            <span> 정보보기 </span>
+          </Link>
         </div>
-        <ul className={classes.guildConditionsGrid}>
+        <ul className={classes.guildConditionsListBox}>
           <li className={classes.guildConditionsInfo}>
             <span>길드 타입</span>
             <span>{guildType}</span>

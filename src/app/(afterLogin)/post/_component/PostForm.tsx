@@ -26,6 +26,10 @@ export default function PostForm({ guildData }: Props) {
   const guildTypeOption = ["친목", "솔로", "랭킹", "자유", "유니온"];
   const { guild_name, guild_level, guild_member_count, currentNoblePoint, postCooltime } = guildData;
 
+  function isValidKakaoURL(string: string) {
+    const pattern = new RegExp("^https:\\/\\/open\\.kakao\\.com\\/o\\/.+", "i");
+    return !!pattern.test(string);
+  }
   return (
     <div className={classes.container}>
       <form
@@ -40,6 +44,8 @@ export default function PostForm({ guildData }: Props) {
           if (!childGuild) return errorModal("부캐 길드 유무를 골라주세요.");
           if (level > 300) return errorModal("레벨은 300 이하여야 합니다.");
           if (!managerName && !openKakaotalkLink) return errorModal("문의 수단이 최소 하나는 있어야 합니다.");
+          if (openKakaotalkLink && !isValidKakaoURL(openKakaotalkLink as string))
+            errorModal("올바른 오픈채팅 링크가 아닙니다.");
 
           formData.append("currentNoblePoint", JSON.stringify(currentNoblePoint));
           formData.append("description", JSON.stringify(textAreaRef.current!.value.replaceAll("\n", "<br/>")));
