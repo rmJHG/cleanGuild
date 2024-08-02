@@ -31,7 +31,7 @@ export default function ProfileMenu({
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [wrapperRef, setIsOpen]);
+  }, [btnRef, wrapperRef, setIsOpen]);
 
   return (
     <div className={classes.profileMenu} ref={wrapperRef}>

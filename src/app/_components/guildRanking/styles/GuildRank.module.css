@@ -7,7 +7,9 @@
   gap: 10px;
   color: white;
 }
-
+.container li:hover {
+  cursor: pointer;
+}
 .serverListContainer {
   width: 100%;
   border: 1px solid white;
