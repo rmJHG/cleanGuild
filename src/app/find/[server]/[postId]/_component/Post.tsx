@@ -26,7 +26,7 @@ export default function Post({ data }: { data: GuildPostData }) {
     suroPoint,
     postDate,
     openKakaotalkLink,
-    managerName,
+    managerNameArr,
     childGuild,
     guildLevel,
     guildMemberCount,
@@ -110,11 +110,11 @@ export default function Post({ data }: { data: GuildPostData }) {
               <span>없음</span>
             )}
           </li>
-          {managerName && (
+          {managerNameArr && (
             <li className={classes.guildConditionsInfo}>
               <span>인게임 문의</span>
               <div className={classes.managerNameContainer}>
-                {managerName.map((e) => {
+                {managerNameArr.map((e) => {
                   return (
                     <p
                       key={e}
@@ -133,7 +133,7 @@ export default function Post({ data }: { data: GuildPostData }) {
       </section>
       <section className={classes.desWrapper}>
         <div>
-          <pre>{description.replaceAll("<br/>", "\n").replaceAll(`"`, "")}</pre>
+          <pre style={{ whiteSpace: "pre-wrap" }}>{description.replaceAll("<br/>", "\n")}</pre>
         </div>
       </section>
     </div>

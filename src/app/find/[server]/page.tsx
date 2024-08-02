@@ -84,25 +84,27 @@ export default function DataTable({ params }: Props) {
           placeholder="수로점수"
         />
       </div>
-      {!filteredData ? (
-        <Loading />
-      ) : (
-        <ul className={classes.guildPostList}>
-          {filteredData!
-            .sort((a, b) => {
-              return b.postData.postDate - a.postData.postDate;
-            })
-            .map((e) => {
-              return (
-                <li key={e.postId}>
-                  <Link href={`/find/${decodedServer}/${e.postId}`} prefetch={false}>
-                    <Guild data={e} />
-                  </Link>
-                </li>
-              );
-            })}
-        </ul>
-      )}
+      <div style={{ minHeight: "100%" }}>
+        {!filteredData ? (
+          <Loading />
+        ) : (
+          <ul className={classes.guildPostList}>
+            {filteredData!
+              .sort((a, b) => {
+                return b.postData.postDate - a.postData.postDate;
+              })
+              .map((e) => {
+                return (
+                  <li key={e.postId}>
+                    <Link href={`/find/${decodedServer}/${e.postId}`} prefetch={false}>
+                      <Guild data={e} />
+                    </Link>
+                  </li>
+                );
+              })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

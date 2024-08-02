@@ -37,29 +37,27 @@ export default function Page() {
   if (data2?.error) return <div>error {data2.error.message}</div>;
 
   if (data2 === undefined || (postCooltime && undefined)) return <Loading />;
+  const currentNoblePoint: number = data2!.guild_noblesse_skill.reduce((a, b) => {
+    return a + b.skill_level;
+  }, 0);
 
   if (data2.guild_master_name === handsData.character_name) {
-    const currentNoblePoint: number = data2!.guild_noblesse_skill.reduce((a, b) => {
-      return a + b.skill_level;
-    }, 0);
-
     return (
       <>
         {!handsData.character_guild_name ? (
-          <div>길드가 없으신 것 같네요! 구해보는건 어떨까요?</div>
+          <div style={{ minHeight: "100%", display: "flex", alignItems: "center" }}>
+            <p>길드가 없으신 것 같네요! 구해보는건 어떨까요?</p>
+          </div>
         ) : (
           <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />
         )}
       </>
     );
   } else {
-    const currentNoblePoint: number = data2!.guild_noblesse_skill.reduce((a, b) => {
-      return a + b.skill_level;
-    }, 0);
     return (
-      <div>
-        {/* <p>길드마스터만 홍보 가능합니다!</p> */}
-        <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />
+      <div style={{ minHeight: "100%", display: "flex", alignItems: "center" }}>
+        <p>길드마스터만 홍보 가능합니다!</p>
+        {/* <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} /> */}
       </div>
     );
   }
