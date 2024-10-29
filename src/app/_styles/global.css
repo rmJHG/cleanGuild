@@ -239,3 +239,26 @@ main,
 footer {
   min-width: 200px;
 }
+@media (max-height: 700px) {
+  span,
+  p,
+  a {
+    font-size: 11px !important;
+  }
+  th,
+  td {
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 900px) and (min-height: 701px) {
+  span,
+  p,
+  a {
+    font-size: 13px !important;
+  }
+  th,
+  td {
+    font-size: 13px !important;
+  }
+}

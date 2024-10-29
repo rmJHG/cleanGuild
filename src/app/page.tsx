@@ -8,7 +8,6 @@ import GuildSearchBar from "./_components/GuildSearchBar";
 export default async function Page() {
   const session = await auth();
   session && !session.user.handsData && redirect("/user-auth");
-
   return (
     <div className={classes.container}>
       <div>

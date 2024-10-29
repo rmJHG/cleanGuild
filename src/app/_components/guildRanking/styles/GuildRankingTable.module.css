@@ -1,6 +1,5 @@
 .tableWrapper {
   width: 100%;
-  min-height: 653px;
   height: 100%;
   border: 1px solid white;
   overflow-y: auto;
@@ -13,7 +12,6 @@
 
 .rankingTable {
   width: 100%;
-  min-height: 569px;
   height: 100%;
   border-collapse: collapse;
   text-align: center;
@@ -57,5 +55,5 @@
 .guildNameCell:hover {
   text-decoration: underline;
 }
-@media (max-width: 600px) {
+@media (max-width: 900px) {
 }
