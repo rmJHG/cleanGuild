@@ -26,6 +26,7 @@ export const getGuildData = async ({ queryKey }: { queryKey: QueryKey }) => {
       }
     );
     const dataJson = await guilData.json();
+    console.log(dataJson);
     if (dataJson.error) return null;
     return dataJson;
   }

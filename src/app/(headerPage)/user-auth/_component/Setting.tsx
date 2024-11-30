@@ -9,27 +9,35 @@ import classes from "./setting.module.css";
 import { successModal } from "@/app/_lib/successModal";
 import { errorModal } from "@/app/_lib/errorModal";
 import { useEffect } from "react";
+import { Session } from "next-auth";
 
 type Props = {
   data: Char;
+  img: File;
 };
 
-export default function Setting({ data }: Props) {
-  const session = useSession();
-  !session && redirect("/");
-
-  const { ocid } = data!;
+export default function Setting({ data, img }: Props) {
   const route = useRouter();
   const [state, formAction] = useFormState(postMainCharAction, null);
   const { pending } = useFormStatus();
 
-  const currentUserData = {
-    userEmail: session.data?.user?.email,
-    ocid,
-  };
   useEffect(() => {
-    if (state === "success") successModal("성공적으로 저장됐습니다 다시 로그인 해주세요!", 2000);
-    if (state === "error") errorModal("저장에 실패했습니다!");
+    console.log(state);
+    if (state?.status === 200) {
+      successModal("성공적으로 저장됐습니다 다시 로그인 해주세요!", 2000);
+      setTimeout(async () => {
+        await signOut();
+      }, 3000);
+    }
+    if (state?.status === 400) {
+      errorModal("저장에 실패했습니다!");
+    }
+    if (state?.status === 401) {
+      errorModal("토큰이 만료되었습니다!");
+    }
+    if (state?.status === 500) {
+      errorModal("서버 오류가 발생했습니다!");
+    }
   }, [state]);
 
   useEffect(() => {});
@@ -43,13 +51,12 @@ export default function Setting({ data }: Props) {
         <div>
           <p>본인의 메인캐릭터가 맞으신가요? 신중하게 선택해주세요.</p>
         </div>
+        <button onClick={() => console.log(state)}>status</button>
         <form
-          action={async (formData: FormData) => {
-            formData.append("currentUserData", JSON.stringify(currentUserData));
+          action={(formData) => {
+            formData.append("image", img);
+            formData.append("ocid", data!.ocid);
             formAction(formData);
-            setTimeout(async () => {
-              await signOut();
-            }, 3000);
           }}
         >
           {pending ? (

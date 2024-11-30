@@ -4,15 +4,24 @@ import { useQueries } from "@tanstack/react-query";
 import { getGuildData } from "../../_lib/getGuildData";
 import PostForm from "./_component/PostForm";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import getCooltime from "./_lib/getCooltime";
 import Loading from "@/app/_components/layout/Loading";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function Page() {
   const { data: session } = useSession();
-  if (!session) redirect("/");
+  if (!session) redirect("/signin");
   const { handsData } = session.user;
-  if (!handsData) redirect("/");
+
+  if (!handsData?.character_guild_name) {
+    return (
+      <div style={{ minHeight: "100%", display: "flex", alignItems: "center" }}>
+        <p>길드가 없으신 것 같네요! 구해보는건 어떨까요?</p>
+        <Link href="/find">길드 구해보기</Link>
+      </div>
+    );
+  }
 
   const result = useQueries({
     queries: [
@@ -42,22 +51,11 @@ export default function Page() {
   }, 0);
 
   if (data2.guild_master_name === handsData.character_name) {
-    return (
-      <>
-        {!handsData.character_guild_name ? (
-          <div style={{ minHeight: "100%", display: "flex", alignItems: "center" }}>
-            <p>길드가 없으신 것 같네요! 구해보는건 어떨까요?</p>
-          </div>
-        ) : (
-          <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />
-        )}
-      </>
-    );
+    return <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />;
   } else {
     return (
       <div style={{ minHeight: "100%", display: "flex", alignItems: "center" }}>
         <p>길드마스터만 홍보 가능합니다!</p>
-        {/* <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} /> */}
       </div>
     );
   }

@@ -9,6 +9,7 @@ declare module "next-auth/jwt" {
       handsData?: HandsData;
       dbId?: string;
       ocid?: string;
+      isVerified: boolean;
     };
   }
 }
@@ -21,6 +22,7 @@ declare module "next-auth" {
       handsData?: HandsData;
       dbId?: string;
       ocid?: string;
+      isVerified: boolean;
     } & DefaultSession["user"];
   }
 
@@ -29,5 +31,9 @@ declare module "next-auth" {
     handsData?: HandsData;
     dbId?: string;
     ocid?: string;
+    accessToken: string;
+    refreshToken?: string;
+    loginType: string;
+    isVerified: boolean;
   }
 }

@@ -1,19 +1,20 @@
 "use client";
 
 import Logout from "./Logout";
-import { useSession } from "next-auth/react";
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef } from "react";
 import Image from "next/image";
 import classes from "./styles/profileMenu.module.css";
+import { Session } from "next-auth";
 
 export default function ProfileMenu({
   setIsOpen,
   btnRef,
+  session,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   btnRef: RefObject<HTMLParagraphElement>;
+  session: Session;
 }) {
-  const { data: session } = useSession();
   if (!session) return null;
   const user = session.user;
   const { handsData } = user;
@@ -23,6 +24,8 @@ export default function ProfileMenu({
     const handleClickOutside = (event: MouseEvent) => {
       if (btnRef.current?.contains(event.target as Node)) return null;
       if (event.target == btnRef.current) {
+        setIsOpen(false);
+        return;
       }
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
         setIsOpen(false);

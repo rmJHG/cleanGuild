@@ -9,4 +9,7 @@ export type UserData = {
   dbId: string;
   handsData: HandsData;
   email: string;
+  token: string;
+  accessToken: string;
+  isVerified: boolean;
 };

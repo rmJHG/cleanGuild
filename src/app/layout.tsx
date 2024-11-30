@@ -33,13 +33,7 @@ export default async function RootLayout({ children }: Props) {
       <body>
         <SessionProvider session={session}>
           <RQProvider>
-            <header>
-              <Header />
-            </header>
-            <main>{children}</main>
-            <footer>
-              <Footer />
-            </footer>
+            <div style={{ display: "flex", flexDirection: "column" }}>{children}</div>
           </RQProvider>
         </SessionProvider>
         <ToastContainer />

@@ -1,4 +1,4 @@
-import CharacterImage from "../../(afterLogin)/component/CharacterImage";
+import CharacterImage from "../CharacterImage";
 import classes from "./styles/footer.module.css";
 export default function Footer() {
   return (
