@@ -237,7 +237,7 @@ main {
 header,
 main,
 footer {
-  min-width: 200px;
+  min-width: 300px;
 }
 @media (max-height: 700px) {
   span,
