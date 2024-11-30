@@ -8,7 +8,6 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import Link from "next/link";
 import { useFormState } from "react-dom";
-import { successModal } from "@/app/_lib/successModal";
 
 export default function Page() {
   const { data: session, update } = useSession();
@@ -48,7 +47,9 @@ export default function Page() {
       </div>
       <div className={classes.accountLinksContainer}>
         <p>아직 회원이 아니신가요?</p>
-        <Link href="/signup">회원가입</Link>
+        <Link href="/signup">
+          <p>회원가입</p>
+        </Link>
       </div>
       <div className={classes.kakaoLoginContainer}>
         <form action={signInWithKaKao}>

@@ -20,7 +20,7 @@ export default function ServerList({ clicked }: Props) {
           >
             <Link href={`/find/${world_name}`}>
               <Image src={e[0]} alt={world_name + "find"} />
-              <span>{world_name}</span>
+              <p>{world_name}</p>
             </Link>
           </li>
         );

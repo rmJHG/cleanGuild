@@ -13,20 +13,13 @@ export default function SearchedGuild({ data }: Props) {
   });
 
   return (
-    <Link href={`/guild/${world_name}/${guild_name}`}>
-      <div className={classes.container}>
+    <li className={classes.container}>
+      <Link href={`/guild/${world_name}/${guild_name}`}>
         <div className={classes.guildInfo}>
           <Image src={icon} alt={world_name} />
-
           <span className={classes.guildName}>{guild_name}</span>
-          <span className={classes.levelSpan}>(Lv.{guild_level})</span>
         </div>
-        <div className={classes.guildRanking}>
-          <div>
-            {world_name}랭킹 {ranking} 등
-          </div>
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </li>
   );
 }

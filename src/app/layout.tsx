@@ -1,11 +1,9 @@
 import { SessionProvider } from "next-auth/react";
-import Header from "./_components/layout/Header";
 import RQProvider from "./_components/RQProvider";
 import "./_styles/global.css";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
 import { ReactNode } from "react";
-import Footer from "./_components/layout/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

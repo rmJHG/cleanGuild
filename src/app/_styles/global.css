@@ -155,6 +155,9 @@ table {
 a {
   text-decoration: none;
   color: white;
+  -webkit-tap-highlight-color: transparent;
+  color: inherit;
+  -webkit-text-fill-color: inherit;
 }
 p,
 label {
@@ -164,6 +167,9 @@ label {
 button {
   border: none;
   background: none;
+  -webkit-tap-highlight-color: transparent;
+  color: inherit;
+  -webkit-text-fill-color: inherit;
 }
 button:hover {
   cursor: pointer;

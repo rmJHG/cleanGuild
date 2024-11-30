@@ -14,4 +14,7 @@ export type Char = {
   date: null;
   world_name: string;
   ocid: string;
+  popularity?: number;
+  character_date_create: string;
+  character_exp_rate: number;
 } | null;

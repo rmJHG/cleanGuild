@@ -5,7 +5,6 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: ["@acme/ui"],
-    runtime: "nodejs",
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",

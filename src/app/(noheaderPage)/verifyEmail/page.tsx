@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import classes from "./page.module.css";
 
-import { errorModal } from "../_lib/errorModal";
+import { errorModal } from "../../_lib/errorModal";
 import { useSession, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 

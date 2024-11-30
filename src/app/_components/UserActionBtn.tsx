@@ -8,7 +8,9 @@ export default async function UserActionBtn() {
 
   return !session ? (
     <div>
-      <Link href="/signin">Login</Link>
+      <Link href="/signin">
+        <p>로그인</p>
+      </Link>
     </div>
   ) : (
     <div>

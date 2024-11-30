@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 
 export default function Page() {
   const { data: session } = useSession();
+  console.log(session);
   if (!session) redirect("/signin");
   const { handsData } = session.user;
 

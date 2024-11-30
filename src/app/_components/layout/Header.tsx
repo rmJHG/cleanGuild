@@ -7,18 +7,20 @@ import { auth } from "@/auth";
 export default async function Header() {
   return (
     <div className={classes.headerContainer}>
-      <div className={classes.titleWrapper}>
-        <Link href="/" prefetch={false}>
-          <p>CLEANGUILD</p>
-        </Link>
-      </div>
+      <div className={classes.innerContainer}>
+        <div className={classes.titleWrapper}>
+          <Link href="/" prefetch={false}>
+            <p>CLEANGUILD</p>
+          </Link>
+        </div>
 
-      <div className={classes.navigationWrapper}>
-        <Navigation />
-      </div>
+        <div className={classes.navigationWrapper}>
+          <Navigation />
+        </div>
 
-      <div className={classes.userActionWrapper}>
-        <UserActionBtn />
+        <div className={classes.userActionWrapper}>
+          <UserActionBtn />
+        </div>
       </div>
     </div>
   );
