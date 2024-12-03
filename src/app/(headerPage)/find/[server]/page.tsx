@@ -84,12 +84,22 @@ export default function DataTable({ params }: Props) {
           placeholder="수로점수"
         />
       </div>
-      <div style={{ minHeight: "100%" }}>
+      <div
+        style={{
+          minHeight: "100%",
+          display: "flex",
+          alignContent: "center",
+          justifyContent: "center",
+          flex: "100 100 100%",
+        }}
+      >
         {!filteredData ? (
           <Loading />
+        ) : filteredData.length < 1 ? (
+          <p>홍보게시글이 없습니다.</p>
         ) : (
           <ul className={classes.guildPostList}>
-            {filteredData!
+            {filteredData
               .sort((a, b) => {
                 return b.postData.postDate - a.postData.postDate;
               })

@@ -13,7 +13,7 @@ export default function GuildRank() {
   return (
     <div className={classes.container}>
       <div className={classes.serverListContainer}>
-        <div className={classes.rankTableHeader}>
+        <div className={classes.rankTableHeader} style={{ borderBottom: !isWorldListOpen ? "none" : undefined }}>
           <p>월드목록</p>
           <button
             onClick={() => {
@@ -47,7 +47,7 @@ export default function GuildRank() {
         )}
       </div>
       <div className={classes.rankingTypeContainter}>
-        <div className={classes.rankTableHeader}>
+        <div className={classes.rankTableHeader} style={{ borderBottom: !isRankingTypeListOpen ? "none" : undefined }}>
           <p>랭킹 종류</p>
           <button
             onClick={() => {

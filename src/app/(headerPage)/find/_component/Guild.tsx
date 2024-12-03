@@ -31,7 +31,7 @@ export default function Guild({ data }: { data: GuildPostData }) {
   return (
     <div className={classes.postContainer}>
       <div className={classes.postHeader}>
-        <div>
+        <div className={classes.guildName}>
           <p>{guildName}</p>
         </div>
         <div className={classes.guildType} style={{ backgroundColor: getBackgroudColor() }}>

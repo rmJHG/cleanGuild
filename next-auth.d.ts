@@ -10,6 +10,9 @@ declare module "next-auth/jwt" {
       dbId?: string;
       ocid?: string;
       isVerified: boolean;
+      loginType: string;
+      accessToken: string;
+      refreshToken?: string;
     };
   }
 }
@@ -23,6 +26,9 @@ declare module "next-auth" {
       dbId?: string;
       ocid?: string;
       isVerified: boolean;
+      loginType: string;
+      accessToken: string;
+      refreshToken?: string;
     } & DefaultSession["user"];
   }
 

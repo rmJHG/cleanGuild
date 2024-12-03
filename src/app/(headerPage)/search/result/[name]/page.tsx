@@ -57,13 +57,14 @@ export default function Page({ params }: { params: { name: string } }) {
       </div>
 
       <div className={classes.searchResultContainer}>
-        <section className={classes.charContainer}>
+        <section className={classes.charContainer} aria-label="캐릭터 검색 결과">
           <h3>
             <b>{decodeURI(name)}</b> 캐릭터 검색결과
           </h3>
           <div>
             <p>최근 접속기록이 없거나 생성된지 하루가 지나지않은 캐릭터는 검색이 불가능합니다.</p>
           </div>
+
           <SearchedChar data={charData || null} />
         </section>
 
@@ -86,7 +87,9 @@ export default function Page({ params }: { params: { name: string } }) {
               </div>
             )
           ) : (
-            <Loading />
+            <div>
+              <Loading />
+            </div>
           )}
         </section>
       </div>

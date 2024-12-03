@@ -10,6 +10,7 @@ import classes from "./page.module.css";
 import Loading from "../../_components/layout/Loading";
 import Image from "next/image";
 import goodImg from "../../../../public/img/goodImg.png";
+import { errorModal } from "@/app/_lib/errorModal";
 
 export default function Page() {
   const { data: session } = useSession();
@@ -43,14 +44,15 @@ export default function Page() {
         body: formData,
       });
       const json = await res.json();
-      if (res.ok) {
+      if (res.ok && json.result.length > 0) {
         setMainChar(json.result[0]);
         setIsLoading(false);
         setIsOpen(true);
         console.log(json);
       } else {
         setIsLoading(false);
-        throw new Error("이미지 분석 실패");
+        errorModal(`${json.error} : ${json.message}`);
+        throw json.error;
       }
     } catch (error) {
       setIsLoading(false);

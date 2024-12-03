@@ -44,6 +44,11 @@ export default function Page() {
   const data2 = result[0].data as GuildData;
   const postCooltime = result[1].data;
 
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignContent: "center", flex: "1" }}>
+      <PostForm guildData={{ ...data2, currentNoblePoint: 45, postCooltime: postCooltime }} />
+    </div>
+  );
   if (data2?.error) return <div>error {data2.error.message}</div>;
 
   if (data2 === undefined || (postCooltime && undefined)) return <Loading />;
@@ -55,7 +60,7 @@ export default function Page() {
     return <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />;
   } else {
     return (
-      <div style={{ minHeight: "100%", display: "flex", alignItems: "center" }}>
+      <div style={{ minHeight: "100%", display: "flex", alignContent: "center", justifyContent: "center", flex: "1" }}>
         <p>길드마스터만 홍보 가능합니다!</p>
       </div>
     );

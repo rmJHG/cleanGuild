@@ -184,6 +184,7 @@ label,
 a,
 span {
   font-family: "GmarketSansMedium";
+  align-self: center;
 }
 textarea {
   resize: none;

@@ -13,13 +13,17 @@ export default function SearchedGuild({ data }: Props) {
   });
 
   return (
-    <li className={classes.container}>
-      <Link href={`/guild/${world_name}/${guild_name}`}>
-        <div className={classes.guildInfo}>
-          <Image src={icon} alt={world_name} />
-          <span className={classes.guildName}>{guild_name}</span>
+    <Link href={`/guild/${world_name}/${guild_name}`}>
+      <li className={classes.container}>
+        <div className={classes.guildInfoContainer}>
+          <div className={classes.worldInfo}>
+            <Image src={icon} alt={world_name} />
+            <span>{world_name}</span>
+          </div>
+
+          <p className={classes.guildName}>{guild_name}</p>
         </div>
-      </Link>
-    </li>
+      </li>
+    </Link>
   );
 }
