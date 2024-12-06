@@ -74,7 +74,7 @@ export default function Page({ params }: { params: { name: string } }) {
           </h3>
           {guildsData ? (
             guildsData.ranking.length < 1 ? (
-              <div>
+              <div className={classes.noResult}>
                 <p>결과가 없습니다!</p>
               </div>
             ) : (

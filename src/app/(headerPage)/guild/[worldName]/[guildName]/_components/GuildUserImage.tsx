@@ -29,6 +29,7 @@ export default function GuildUserImage({ guild_member_name, transformScaleX }: P
           width={80}
           height={80}
           style={{ transform: `scaleX(${transformScaleX})` }}
+          priority
         />
       </div>
     );

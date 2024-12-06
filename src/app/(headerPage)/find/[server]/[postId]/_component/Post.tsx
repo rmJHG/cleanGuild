@@ -12,7 +12,7 @@ import Image from "next/image";
 export default function Post({ data }: { data: GuildPostData }) {
   console.log(data);
   const { publisherData, postData, _id } = data;
-  const { handsData } = publisherData;
+  const { email, handsData } = publisherData;
   const [[world_icon, _1]] = serverList.filter((e) => {
     return e[1] === publisherData.handsData.world_name;
   });

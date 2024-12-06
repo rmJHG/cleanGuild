@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import NoHeader from "../_components/layout/NoHeader";
-import Footer from "../_components/layout/Footer";
+import { ReactNode } from 'react';
+import NoHeader from '../_components/layout/NoHeader';
+import Footer from '../_components/layout/Footer';
 export default function NoHeaderLayout({ children }: { children: ReactNode }) {
   return (
     <div>
@@ -8,7 +8,14 @@ export default function NoHeaderLayout({ children }: { children: ReactNode }) {
         <NoHeader />
       </header>
       <main>{children}</main>
-      <footer>
+      <footer
+        style={{
+          marginTop: 'auto',
+          backgroundColor: 'black',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         <Footer />
       </footer>
     </div>

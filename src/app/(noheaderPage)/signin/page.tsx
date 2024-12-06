@@ -14,6 +14,7 @@ export default function Page() {
   const router = useRouter();
   const [state, formAction] = useFormState<{ message: string }, FormData>(signInWithCredential, { message: "" });
 
+  
   useEffect(() => {
     console.log(state.message, "state");
     if (state.message === "/authLoading") {

@@ -7,6 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: 1;
 }
 
 .searchResultContainer {
@@ -17,6 +18,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  flex: 1;
 }
 .searchResultContainer > section {
   border: 1px solid rgb(154, 154, 154);
@@ -47,15 +49,17 @@
   min-height: 100px;
 }
 
-.charContainer,
-.guildsContainer {
+.charContainer {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .guildsContainer {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
+  flex: 1;
 }
 .guildsContainer > div {
   height: 100%;
@@ -65,8 +69,22 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
 }
-
-@media (max-width: 768px) {
+.guildsList > a {
+  width: 100%;
+}
+.noResult {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+@media (max-width: 700px) {
+  .guildsList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 500px) {
   .guildsList {
     display: flex;
     flex-direction: column;
