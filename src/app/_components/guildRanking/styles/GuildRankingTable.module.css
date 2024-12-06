@@ -49,6 +49,10 @@
   padding: 5px 10px;
   background-color: white;
 }
+.btnContainer button > span {
+  color: black;
+}
+
 .guildNameCell a {
   font-family: "NEXON Lv1 Gothic OTF";
 }

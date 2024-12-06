@@ -1,38 +1,57 @@
-"use server";
+'use server';
 
-import { auth } from "@/auth";
-import { db } from "@/firebase/fireconfig";
-import { HandsData } from "@/types/userData";
-import { collection, doc, setDoc } from "firebase/firestore";
-import { Session } from "next-auth";
+import { auth } from '@/auth';
+import { HandsData } from '@/types/userData';
 
-export const postAction = async (formData: FormData) => {
+export const postAction = async (previousState: any, formData: FormData) => {
   const dt = new Date();
-  const session = (await auth()) as Session;
-  const { user, expires } = session;
-  const { character_guild_name, world_name } = user.handsData as HandsData;
+  const session = await auth();
+  if (!session) {
+    return '인증 정보가 없습니다.';
+  }
+  const { user } = session;
+  const { character_guild_name } = user.handsData as HandsData;
+  console.log('formData', formData);
 
   const guildPostData = {
     postData: {
-      title: formData.get("title"),
-      description: JSON.parse(formData.get("description") as string),
+      title: formData.get('title'),
+      description: formData.get('description'),
       guildName: character_guild_name,
-      guildType: formData.get("guildType"),
-      currentNoblePoint: Number(formData.get("currentNoblePoint")),
-      suroPoint: Number(formData.get("suroPoint")),
-      limitedLevel: Number(formData.get("limitedLevel")),
+      guildType: formData.get('guildType'),
+      currentNoblePoint: Number(formData.get('currentNoblePoint')),
+      suroPoint: Number(formData.get('suroPoint')),
+      limitedLevel: Number(formData.get('limitedLevel')),
       postDate: dt.getTime(),
-      childGuild: formData.get("childGuild") === "무",
-      managerNameArr: JSON.parse(formData.get("managerNameArr") as string),
-      openKakaotalkLink: formData.get("openKakaotalkLink"),
-      guildLevel: Number(formData.get("guild_level")),
-      guildMemberCount: Number(formData.get("guild_member_count")),
+      childGuild: formData.get('childGuild') === '무',
+      managerNameArr: JSON.parse(formData.get('managerNameArr') as string),
+      openKakaotalkLink: formData.get('openKakaotalkLink'),
+      guildLevel: Number(formData.get('guild_level')),
+      guildMemberCount: Number(formData.get('guild_member_count')),
     },
     publisherData: { ...user },
   };
-  const coolTimeRef = doc(db, "guild", "postCooltime", world_name, character_guild_name);
 
-  const ref = doc(collection(db, "guild", "post", world_name));
-  await setDoc(coolTimeRef, { postCooltime: Date.now() + 30 * 60 * 1000 });
-  await setDoc(ref, guildPostData);
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/guild/${user.loginType}/postGuildRecruitments`,
+      {
+        method: 'POST',
+        body: JSON.stringify(guildPostData),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    );
+    const data = await res.json();
+    console.log('data', data);
+    if (res.ok) {
+      return '성공';
+    } else {
+      return `실패_${Date.now()}`;
+    }
+  } catch (error) {
+    return `실패_${Date.now()}`;
+  }
 };

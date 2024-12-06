@@ -8,18 +8,20 @@ interface CustomError extends Error {
 }
 export default async function postMainCharAction(preState: any, formData: FormData) {
   const session = await auth();
+  if (!session?.user) {
+    throw new Error("인증 정보가 없습니다.");
+  }
   try {
     const accessToken = session?.user.accessToken;
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/${session?.user.loginType}/saveHandsImage`,
-      {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+
+    const { loginType } = session.user;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/${loginType}/saveHandsImage`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/${session?.user.loginType}/saveHandsImage`);
     if (!res.ok) {
       const errorData = await res.json();

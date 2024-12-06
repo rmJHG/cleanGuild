@@ -1,11 +1,8 @@
-import { Char } from "@/types/char";
-import { QueryFunction } from "@tanstack/react-query";
+import { QueryKey } from "@tanstack/react-query";
 
-export const getSearchResult: QueryFunction<Char, [_1: string, _2: string, userName: string]> = async ({
-  queryKey,
-}) => {
-  const [_1, _2, userName] = queryKey;
-
+export default async function getCharData({ queryKey }: { queryKey: QueryKey }) {
+  const [_1, userName] = queryKey;
+  console.log(userName, "charName");
   const getOcidData = await fetch(`https://open.api.nexon.com/maplestory/v1/id?character_name=${userName}`, {
     method: "GET",
     headers: {
@@ -34,4 +31,4 @@ export const getSearchResult: QueryFunction<Char, [_1: string, _2: string, userN
     ...charRes,
   };
   return data;
-};
+}

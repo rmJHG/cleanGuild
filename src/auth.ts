@@ -3,6 +3,7 @@ import credentials from "next-auth/providers/credentials";
 import kakao from "next-auth/providers/kakao";
 import { HandsData } from "./types/userData";
 import isTokenExpired from "./app/_lib/isTokenExpired";
+import { cookies } from "next/headers";
 
 export const {
   handlers: { GET, POST },
@@ -34,9 +35,26 @@ export const {
             headers: {
               "Content-Type": "application/json",
             },
+
             body: JSON.stringify({ email, password }),
           });
+
           const res = await fetchedData.json();
+          const setCookieHeader = fetchedData.headers.get("set-cookie");
+          if (setCookieHeader) {
+            const refreshToken = setCookieHeader.split(";")[0].split("=")[1];
+            if (refreshToken) {
+              cookies().set({
+                name: "refreshToken",
+                value: refreshToken,
+                httpOnly: true,
+                path: "/",
+                sameSite: "lax",
+                secure: process.env.NODE_ENV === "production",
+              });
+            }
+          }
+
           if (!fetchedData.ok) {
             throw new Error(res.message || "로그인 요청이 실패했습니다");
           }
@@ -105,7 +123,40 @@ export const {
     jwt: async ({ token, user, session, account, profile }) => {
       try {
         console.log("jwt 실행");
+        console.log("현재 토큰 상태:", {
+          accessToken: token.accessToken,
+          isExpired: token.accessToken ? isTokenExpired(token.accessToken as string) : null,
+        });
+        if (account?.type === "credentials") {
+          if (token.accessToken && isTokenExpired(token.accessToken as string)) {
+            console.log("토큰 갱신 시작");
+            console.log(cookies().get("refreshToken")?.value, "refreshToken");
+            try {
+              const response = await fetch(`http://localhost:8080/api/v1/user/local/refreshToken`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Cookie: `refreshToken=${cookies().get("refreshToken")?.value || ""}`,
+                },
+                credentials: "include",
+              });
 
+              const json = await response.json();
+              if (!json.success) {
+                throw new Error("토큰 갱신 실패");
+              }
+              if (response.ok) {
+                console.log("토큰 갱신 성공");
+                const newTokens = await response.json();
+                token.accessToken = newTokens.accessToken;
+                token.refreshToken = newTokens.refreshToken;
+              }
+            } catch (error) {
+              console.error("토큰 갱신 실패", error);
+              throw new Error("토큰 갱신 실패");
+            }
+          }
+        }
         // 최초 로그인시 또는 토큰 갱신이 필요한 경우
         if (
           account?.type === "oauth" &&
@@ -127,31 +178,13 @@ export const {
         if (account?.type === "credentials" && user) {
           token.accessToken = user.accessToken;
           token.refreshToken = user.refreshToken;
-          token.loginType = "credentials";
+          token.loginType = "local";
           token.email = user.email;
           token.ocid = user.ocid;
           token.isVerified = user.isVerified;
 
           //토큰이 만료됐을 경우 재발급
-          if (token.accessToken && isTokenExpired(token.accessToken as string)) {
-            const response = await fetch(`http://localhost:8080/api/v1/user/local/refresh`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token.refreshToken}`,
-              },
-            });
 
-            if (response.ok) {
-              const newTokens = await response.json();
-              token.accessToken = newTokens.accessToken;
-              token.refreshToken = newTokens.refreshToken;
-            } else {
-              // 리프레시 토큰도 만료된 경우
-              console.error("토큰 갱신 실패", response.statusText);
-              throw new Error("토큰 갱신 실패");
-            }
-          }
           if (token.ocid) {
             const getCharData = await fetch(`${process.env.NEXT_PUBLIC_FETCH_URL}/api/user`, {
               method: "POST",

@@ -7,7 +7,7 @@
   align-items: center;
   gap: 15px;
 }
-.container > div {
+.container > li {
   width: 150px;
   height: 200px;
   border-radius: 5px;

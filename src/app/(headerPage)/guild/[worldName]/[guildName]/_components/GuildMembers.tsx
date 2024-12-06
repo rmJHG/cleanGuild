@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import classes from "./guildMember.module.css";
-import getCharData from "../_lib/getCharData";
+
 import { Char } from "@/types/char";
 import Image from "next/image";
+import getCharData from "@/app/_lib/getCharData";
 type Props = {
   memberArr: string[];
   master: string;
@@ -17,11 +18,11 @@ export default function GuildMembers({ memberArr, master }: Props) {
 
   console.log(masterData);
   return (
-    <div className={classes.container}>
+    <ul className={classes.container}>
       {masterData && (
-        <div>
+        <li>
           <div>
-            <Image src={masterData.character_image} alt="guildMaster" width={100} height={100} />
+            <Image src={masterData.character_image} alt="guildMaster" width={100} height={100} priority />
           </div>
           <div>
             <div>
@@ -32,18 +33,18 @@ export default function GuildMembers({ memberArr, master }: Props) {
               <span>{masterData.character_class}</span>
             </div>
           </div>
-        </div>
+        </li>
       )}
       {memberArr.map((e) => {
         return (
-          <div key={e}>
+          <li key={e}>
             <div>추가 예정</div>
             <div>
               <span>{e}</span>
             </div>
-          </div>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }

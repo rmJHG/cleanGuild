@@ -1,7 +1,8 @@
 import { UserData } from "./userData";
 
 export type GuildPostData = {
-  postId: string;
+  _id?: string;
+  postId?: string;
   postData: {
     title: string;
     currentNoblePoint: number;

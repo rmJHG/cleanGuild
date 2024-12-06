@@ -13,7 +13,7 @@
   width: 100%;
 }
 .titleContainer {
-  padding-top: 120px;
+  padding-top: 100px;
 }
 .titleContainer > h1 {
   text-align: center;
@@ -55,9 +55,6 @@
   gap: 10px;
 }
 
-.accountLinksContainer a {
-  font-size: 10px;
-}
 .kakaoLoginContainer > form {
   height: 50px;
   display: flex;

@@ -9,13 +9,13 @@ export default function UserProfileButton({ session, characterName }: { session:
   const btnRef = useRef<HTMLParagraphElement>(null);
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
       <button onClick={() => setIsOpen(!isOpen)}>
         <p ref={btnRef} style={{ gap: "5px" }}>
           {characterName}
         </p>
       </button>
       {isOpen && <ProfileMenu setIsOpen={setIsOpen} btnRef={btnRef} session={session} />}
-    </>
+    </div>
   );
 }

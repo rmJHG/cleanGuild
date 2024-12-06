@@ -46,7 +46,7 @@ export default function GuildRankTable({ ranking_type, world_name }: Props) {
   useEffect(() => {
     setCurrentPage(0); // 또는 필요한 경우 현재 페이지를 조정
   }, [itemsPerPage]);
-  console.log(data);
+
   return (
     <>
       <div className={classes.tableWrapper}>

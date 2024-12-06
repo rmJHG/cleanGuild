@@ -1,8 +1,11 @@
 .container {
   max-width: 600px;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 .container input,
 .container textarea {
@@ -131,4 +134,10 @@
 }
 .btnContainer button > p {
   color: black;
+}
+
+@media (max-width: 650px) {
+  .container {
+    padding: 5px 10px;
+  }
 }

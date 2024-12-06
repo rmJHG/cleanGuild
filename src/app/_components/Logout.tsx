@@ -8,6 +8,11 @@ export default function Logout() {
   const { data: session } = useSession();
   return (
     <button
+      style={{
+        border: "1px solid white",
+        borderRadius: "1rem",
+        padding: "3px 10px",
+      }}
       onClick={async () => {
         try {
           if (session?.user.loginType === "kakao") {
