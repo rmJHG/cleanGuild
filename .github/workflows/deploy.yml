@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
-          ssh -i private_key -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
+          ssh -i private_key -o -p 2020 StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
             cd /home/jhg990508/cleanGuild  # 애플리케이션 경로로 변경
             git pull origin main
             npm install
