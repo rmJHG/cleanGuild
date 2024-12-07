@@ -74,21 +74,21 @@ jobs:
             fi
 
             # 환경 변수 설정
-            cat > .env.local << EOL
-AUTH_SECRET="${{ secrets.AUTH_SECRET }}"
-AUTH_KAKAO_ID="${{ secrets.AUTH_KAKAO_ID }}"
-AUTH_KAKAO_SECRET="${{ secrets.AUTH_KAKAO_SECRET }}"
-AUTH_KAKAO_STATE="${{ secrets.AUTH_KAKAO_STATE }}"
-AUTH_KAKAO_LOGOUT_REDIRECT_URI="${{ secrets.AUTH_KAKAO_LOGOUT_REDIRECT_URI }}"
-NEXT_PUBLIC_API_KEY="${{ secrets.NEXT_PUBLIC_API_KEY }}"
-NEXTAUTH_URL="${{ secrets.NEXTAUTH_URL }}"
-NEXT_PUBLIC_FETCH_URL="${{ secrets.NEXT_PUBLIC_FETCH_URL }}"
-NEXT_PUBLIC_BACKEND_URL="${{ secrets.NEXT_PUBLIC_BACKEND_URL }}"
-NEXT_PUBLIC_MONGODB_URI="${{ secrets.NEXT_PUBLIC_MONGODB_URI }}"
-NEXT_PUBLIC_AUTH_KAKAO_ID="${{ secrets.NEXT_PUBLIC_AUTH_KAKAO_ID }}"
-NEXT_PUBLIC_AUTH_KAKAO_SECRET="${{ secrets.NEXT_PUBLIC_AUTH_KAKAO_SECRET }}"
-NEXT_PUBLIC_AUTH_KAKAO_STATE="${{ secrets.NEXT_PUBLIC_AUTH_KAKAO_STATE }}"
-EOL
+            cat > .env.local << 'EOL'
+              AUTH_SECRET=${{ secrets.AUTH_SECRET }}
+              AUTH_KAKAO_ID=${{ secrets.AUTH_KAKAO_ID }}
+              AUTH_KAKAO_SECRET=${{ secrets.AUTH_KAKAO_SECRET }}
+              AUTH_KAKAO_STATE=${{ secrets.AUTH_KAKAO_STATE }}
+              AUTH_KAKAO_LOGOUT_REDIRECT_URI=${{ secrets.AUTH_KAKAO_LOGOUT_REDIRECT_URI }}
+              NEXT_PUBLIC_API_KEY=${{ secrets.NEXT_PUBLIC_API_KEY }}
+              NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
+              NEXT_PUBLIC_FETCH_URL=${{ secrets.NEXT_PUBLIC_FETCH_URL }}
+              NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+              NEXT_PUBLIC_MONGODB_URI=${{ secrets.NEXT_PUBLIC_MONGODB_URI }}
+              NEXT_PUBLIC_AUTH_KAKAO_ID=${{ secrets.NEXT_PUBLIC_AUTH_KAKAO_ID }}
+              NEXT_PUBLIC_AUTH_KAKAO_SECRET=${{ secrets.NEXT_PUBLIC_AUTH_KAKAO_SECRET }}
+              NEXT_PUBLIC_AUTH_KAKAO_STATE=${{ secrets.NEXT_PUBLIC_AUTH_KAKAO_STATE }}
+            EOL
 
             # PM2 재시작 및 상태 확인
             if ! pm2 restart cleanguild; then
