@@ -12,10 +12,10 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      // {
-      //   source: "/fetchData",
-      //   destination: "/api/nexon/data",
-      // },
+      {
+        source: '/fetchData',
+        destination: '/api/char',
+      },
     ];
   },
 };
