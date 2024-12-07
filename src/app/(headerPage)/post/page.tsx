@@ -4,7 +4,6 @@ import { useQueries } from '@tanstack/react-query';
 import { getGuildData } from '../../_lib/getGuildData';
 import PostForm from './_component/PostForm';
 import { useSession } from 'next-auth/react';
-
 import Loading from '@/app/_components/layout/Loading';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
