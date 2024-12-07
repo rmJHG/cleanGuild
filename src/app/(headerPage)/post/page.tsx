@@ -4,10 +4,11 @@ import { useQueries } from '@tanstack/react-query';
 import { getGuildData } from '../../_lib/getGuildData';
 import PostForm from './_component/PostForm';
 import { useSession } from 'next-auth/react';
-import getCooltime from './_lib/getCooltime';
+
 import Loading from '@/app/_components/layout/Loading';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import getCooltime from '@/app/_lib/getCooltime';
 
 export default function Page() {
   const { data: session } = useSession();
@@ -24,42 +25,43 @@ export default function Page() {
     );
   }
 
-  const result = useQueries({
+  const queries = useQueries({
     queries: [
       {
         queryKey: ['guildData', handsData!.world_name, handsData!.character_guild_name],
         queryFn: getGuildData,
-        staleTime: 60 * 60 * 1000,
-        gcTime: 60 * 60 * 1000,
-        enabled: !!session?.user.handsData!.character_guild_name,
+        staleTime: 1 * 60 * 1000,
+        gcTime: 3 * 60 * 1000,
       },
       {
-        queryKey: ['cooltime', handsData!.world_name, handsData!.character_guild_name],
+        queryKey: ['postCooltime', handsData!.world_name, handsData!.character_guild_name],
         queryFn: getCooltime,
-        gcTime: 0,
+        staleTime: 1 * 60 * 1000,
+        gcTime: 3 * 60 * 1000,
       },
     ],
   });
+  console.log(queries[0].data, 'queries[0].data');
+  console.log(queries[1].data, 'queries[1].data');
+  const guildData = queries[0].data as GuildData;
+  const postCooltime = queries[1].data as number;
 
-  const data2 = result[0].data as GuildData;
-  const postCooltime = result[1].data;
+  if (guildData?.error) return <div>error {guildData.error.message}</div>;
 
-  // return (
-  //   <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flex: '1' }}>
-  //     <PostForm guildData={{ ...data2, currentNoblePoint: 45, postCooltime: postCooltime }} />
-  //   </div>
-  // );
-  if (data2?.error) return <div>error {data2.error.message}</div>;
-
-  if (data2 === undefined || (postCooltime && undefined)) return <Loading />;
-  const currentNoblePoint: number = data2!.guild_noblesse_skill.reduce((a, b) => {
+  if (guildData === undefined || (postCooltime && undefined)) return <Loading />;
+  const currentNoblePoint: number = guildData!.guild_noblesse_skill.reduce((a, b) => {
     return a + b.skill_level;
   }, 0);
 
-  if (data2.guild_master_name === handsData.character_name) {
+  // return (
+  //   <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flex: '1' }}>
+  //     <PostForm guildData={{ ...guildData, currentNoblePoint, postCooltime: postCooltime }} />;
+  //   </div>
+  // );
+  if (guildData.guild_master_name === handsData.character_name) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flex: '1' }}>
-        <PostForm guildData={{ ...data2, currentNoblePoint, postCooltime: postCooltime }} />;
+        <PostForm guildData={{ ...guildData, currentNoblePoint, postCooltime: postCooltime }} />;
       </div>
     );
   } else {
@@ -77,4 +79,5 @@ export default function Page() {
       </div>
     );
   }
+  return <div>hello</div>;
 }
