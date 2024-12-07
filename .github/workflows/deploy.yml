@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # 원하는 Node.js 버전으로 변경
+          node-version: '22.11' # 원하는 Node.js 버전으로 변경
 
       - name: Install dependencies
         run: npm install
