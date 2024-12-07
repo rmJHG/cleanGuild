@@ -44,11 +44,11 @@ export default function Page() {
   const data2 = result[0].data as GuildData;
   const postCooltime = result[1].data;
 
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flex: '1' }}>
-      <PostForm guildData={{ ...data2, currentNoblePoint: 45, postCooltime: postCooltime }} />
-    </div>
-  );
+  // return (
+  //   <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', flex: '1' }}>
+  //     <PostForm guildData={{ ...data2, currentNoblePoint: 45, postCooltime: postCooltime }} />
+  //   </div>
+  // );
   if (data2?.error) return <div>error {data2.error.message}</div>;
 
   if (data2 === undefined || (postCooltime && undefined)) return <Loading />;

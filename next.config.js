@@ -1,13 +1,14 @@
 const nextConfig = {
   reactStrictMode: false,
+
   images: {
-    domains: ["open.api.nexon.com", "lh3.googleusercontent.com"],
+    domains: ['open.api.nexon.com', 'lh3.googleusercontent.com'],
   },
   experimental: {
-    serverComponentsExternalPackages: ["@acme/ui"],
+    serverComponentsExternalPackages: ['@acme/ui'],
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
+    removeConsole: process.env.NODE_ENV === 'production',
   },
   async rewrites() {
     return [
