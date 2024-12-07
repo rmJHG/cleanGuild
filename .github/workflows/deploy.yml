@@ -1,61 +1,41 @@
-name: Deploy to cloudtype
+name: CI/CD Pipeline
+
 on:
   push:
     branches:
-      - main
+      - main # main 브랜치에 푸시될 때마다 실행
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: Connect deploy key
-        uses: cloudtype-github-actions/connect@v1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          ghtoken: ${{ secrets.GHP_TOKEN }}
-      - name: Deploy
-        uses: cloudtype-github-actions/deploy@v1
-        with:
-          token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: rmjhg/cleanguild
-          stage: main
-          yaml: |
-            name: localhost
-            app: next.js
-            options:
-              nodeversion: "20"
-              buildtype: standalone
-              install: npm i
-              build: npm run build
-              env:
-                - name: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-                  secret: NEXT_PUBLIC_FIRBASE_AUTH_DOMAIN
-                - name: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-                  secret: NEXT_PUBLIC_FIRBASE_PROJECT_ID
-                - name: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-                  secret: NEXT_PUBLIC_FIRBASE_STORAGE_BUCKET
-                - name: NEXT_PUBLIC_FIREBASE_AUTH_SECRET
-                  secret: NEXT_PUBLIC_FIRBASE_AUTH_SECRET
-                - name: NEXT_PUBLIC_FIREBASE_API_KEY
-                  secret: NEXT_PUBLIC_FIRBASE_API_KEY
-                - name: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-                  secret: NEXT_PUBLIC_FIRBASE_MESSAGING_SENDER_ID
-                - name: NEXT_PUBLIC_FIREBASE_APP_ID
-                  secret: NEXT_PUBLIC_FIRBASE_APP_ID
-                - name: AUTH_SECRET
-                  secret: AUTH_SECRET
-                - name: AUTH_KAKAO_ID
-                  secret: AUTH_KAKAO_ID
-                - name: AUTH_KAKAO_SECRET
-                  secret: AUTH_KAKAO_SECRET
-                - name: NEXT_PUBLIC_API_KEY
-                  secret: NEXT_PUBLIC_API_KEY
-                - name: NEXTAUTH_URL
-                  value: http://cleanguild.kr
-              buildenv: []
-            context:
-              git:
-                url: git@github.com:${{ github.repository }}.git
-                ref: ${{ github.ref }}
-              preset: next.js
+          node-version: '14' # 원하는 Node.js 버전으로 변경
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the application
+        run: npm run build # 빌드 스크립트에 맞게 수정
+
+      - name: Deploy to server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # 비밀 키 설정
+          SERVER_IP: ${{ secrets.SERVER_IP }} # 서버 IP 설정
+          USERNAME: ${{ secrets.USERNAME }} # 사용자 이름 설정
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          ssh -i private_key -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
+            cd /home/jhg990508/cleanGuild  # 애플리케이션 경로로 변경
+            git pull origin main
+            npm install
+            npm run build
+            pm2 restart nextjs-app  # PM2로 재시작할 애플리케이션 이름
+          EOF
