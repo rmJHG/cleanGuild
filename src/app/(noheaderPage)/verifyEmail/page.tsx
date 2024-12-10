@@ -5,6 +5,7 @@ import classes from './page.module.css';
 import { errorModal } from '@/app/_lib/errorModal';
 import { useSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import Loading from '@/app/_components/layout/Loading';
 
 function page({ searchParams }: { searchParams: { welcome: string } }) {
   const { data: session } = useSession();
@@ -12,12 +13,12 @@ function page({ searchParams }: { searchParams: { welcome: string } }) {
   const [verificationStatus, setVerificationStatus] = useState('');
 
   useEffect(() => {
-    if (!welcome) return;
+    // if (!welcome) redirect('/');
     async function verifyEmail() {
       if (!welcome) return;
       try {
         const response = await fetch(
-          `http://localhost:8080/api/v1/user/verifyEmail?welcome=${welcome}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/verifyEmail?welcome=${welcome}`
         );
         const json = await response.json();
         console.log(json);
@@ -34,12 +35,20 @@ function page({ searchParams }: { searchParams: { welcome: string } }) {
         }
       } catch (error) {
         console.error(error);
-        errorModal('이메일 검증에 실패했습니다. 다시 시도해주세요.');
+        errorModal('이메일 인증에 실패했습니다. 다시 시도해주세요.');
       }
     }
     verifyEmail();
   }, []);
-  return <div className={classes.container}>{verificationStatus}</div>;
+  return verificationStatus ? (
+    <div className={classes.container}>
+      <p>{verificationStatus}</p>
+    </div>
+  ) : (
+    <div>
+      <Loading />
+    </div>
+  );
 }
 
 export default page;

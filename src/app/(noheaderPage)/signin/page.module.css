@@ -20,7 +20,7 @@
   font-size: 30px;
   font-weight: 600;
   color: whitesmoke;
-  font-family: "NEXON Lv1 Gothic OTF";
+  font-family: 'NEXON Lv1 Gothic OTF';
 }
 .credentialsContainer {
   padding: 50px 0;
@@ -47,7 +47,7 @@
   color: whitesmoke;
   font-size: 16px;
   font-weight: 600;
-  font-family: "NEXON Lv1 Gothic OTF";
+  font-family: 'NEXON Lv1 Gothic OTF';
 }
 .accountLinksContainer {
   display: flex;
@@ -57,11 +57,18 @@
 
 .kakaoLoginContainer > form {
   height: 50px;
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   background-color: #fee500;
 }
-
+.kakaoLoginContainer > form > button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 .kakaoLoginContainer > form > button > p {
   font-size: 20px;
   font-weight: 600;

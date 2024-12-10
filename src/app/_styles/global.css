@@ -1,30 +1,35 @@
 @font-face {
-  font-family: "NEXON Lv1 Gothic OTF";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff") format("woff");
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "GmarketSansMedium";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "SBAggroB";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff") format("woff");
+  font-family: 'SBAggroB';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "yg-jalnan";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff") format("woff");
+  font-family: 'yg-jalnan';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Pretendard-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
   font-weight: 400;
   font-style: normal;
 }
@@ -145,7 +150,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -183,7 +188,7 @@ p,
 label,
 a,
 span {
-  font-family: "GmarketSansMedium";
+  font-family: 'GmarketSansMedium';
   align-self: center;
 }
 textarea {
@@ -203,8 +208,8 @@ input::-ms-clear {
   display: none;
 }
 /* input type number 에서 화살표 제거 */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-out-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-out-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -214,8 +219,8 @@ select:-ms-expand {
 }
 /*Firefox에서 input number 화살표 없애는 방법*/
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   -mox-appearance: none;
   appearance: none;
@@ -246,26 +251,11 @@ main,
 footer {
   min-width: 300px;
 }
-@media (max-height: 700px) {
-  span,
-  p,
-  a {
-    font-size: 11px !important;
-  }
-  th,
-  td {
-    font-size: 11px !important;
-  }
-}
 
-@media (max-width: 900px) and (min-height: 701px) {
-  span,
-  p,
-  a {
-    font-size: 13px !important;
-  }
-  th,
-  td {
-    font-size: 13px !important;
-  }
+span,
+p,
+a,
+th,
+td {
+  font-size: 13px;
 }

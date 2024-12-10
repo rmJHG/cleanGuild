@@ -1,0 +1,126 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+.header {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.header > h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  color: white;
+}
+.header > p {
+  font-size: clamp(1rem, 2vw, 1rem);
+  font-weight: 400;
+  align-self: flex-start;
+}
+.infoContainer {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.infoContainer p {
+  font-size: clamp(1rem, 2vw, 1rem);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+.infoContainer span {
+  margin: 0 5px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+}
+.infoContainer p > div {
+  width: 100px;
+  margin: 0 5px;
+}
+
+.guildConditionsInfo {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.5s;
+  z-index: 100 !important;
+}
+.guildConditionsInfo > div {
+  width: 100px;
+  margin: 0 5px;
+  display: flex;
+}
+
+.guildConditionsInfo > div > ul > li > p {
+  animation: none;
+  opacity: 1;
+}
+.guildConditionsInfo > p {
+  align-self: flex-end;
+}
+.infoContainer p:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.infoContainer p:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.infoContainer p:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.infoContainer p:nth-child(4) {
+  animation-delay: 0.7s;
+}
+
+.infoContainer p:nth-child(5) {
+  animation-delay: 0.9s;
+}
+
+.btnContainer {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnContainer button {
+  max-width: 800px;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 2525px;
+  border: none;
+  background-color: #f5f5f5;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

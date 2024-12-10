@@ -38,9 +38,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 3px;
 }
+
 .serverListContainer > ul > li > span {
-  margin-left: 3px;
+  line-height: 12px;
+  font-size: 12px;
 }
 .rankingTypeContainter {
   width: 100%;
@@ -62,9 +65,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 3px;
 }
 .rankingTypeContainter > ul > li > span {
-  margin-left: 3px;
+  font-size: 12px;
+  line-height: 12px;
 }
 .rankTableHeader {
   border-bottom: 1px solid white;
@@ -76,4 +81,8 @@
 }
 .rankTableHeader > p {
   text-align: center;
+}
+.serverListContainer > ul > li:hover,
+.rankingTypeContainter > ul > li:hover {
+  opacity: 0.5;
 }

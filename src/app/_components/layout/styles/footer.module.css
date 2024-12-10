@@ -16,3 +16,7 @@
   right: 0;
   bottom: 0;
 }
+
+.footerWrapper span {
+  font-family: 'SBAggroB';
+}

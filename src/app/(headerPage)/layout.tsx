@@ -8,7 +8,7 @@ export default function NoHeaderLayout({ children }: { children: ReactNode }) {
       <header>
         <Header />
       </header>
-      <main style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <main style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: '1' }}>
         {children}
       </main>
       <footer

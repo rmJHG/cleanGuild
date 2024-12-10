@@ -1,7 +1,7 @@
-import Link from "next/link";
-import classes from "./styles/serverList.module.css";
-import { serverList } from "@/app/serverList";
-import Image from "next/image";
+import Link from 'next/link';
+import classes from './styles/serverList.module.css';
+import { serverList } from '@/app/serverList';
+import Image from 'next/image';
 
 type Props = {
   clicked?: string;
@@ -16,10 +16,10 @@ export default function ServerList({ clicked }: Props) {
           <li
             key={world_name + i}
             className={classes.serverItem}
-            style={{ backgroundColor: world_name === clicked ? "#ffffff7f" : "transparent" }}
+            style={{ backgroundColor: world_name === clicked ? '#ffffff7f' : 'transparent' }}
           >
             <Link href={`/find/${world_name}`}>
-              <Image src={e[0]} alt={world_name + "find"} />
+              <Image src={e[0]} alt={world_name + 'find'} width={14} height={14} />
               <p>{world_name}</p>
             </Link>
           </li>

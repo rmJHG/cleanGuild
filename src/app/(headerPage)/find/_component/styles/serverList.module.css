@@ -22,6 +22,10 @@
   align-items: center;
   gap: 3px;
 }
+.serverItem a > p {
+  font-size: 14px;
+  line-height: 14px;
+}
 .serverContainer a:hover {
   opacity: 0.5;
 }

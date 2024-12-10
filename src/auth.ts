@@ -133,10 +133,10 @@ export const {
           accessToken: token.accessToken,
           isExpired: token.accessToken ? isTokenExpired(token.accessToken as string) : null,
         });
-        if (account?.type === 'credentials') {
+        if (token.loginType === 'local') {
           if (token.accessToken && isTokenExpired(token.accessToken as string)) {
             console.log('토큰 갱신 시작');
-            console.log(cookies().get('refreshToken')?.value, 'refreshToken');
+
             try {
               const response = await fetch(
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/refreshToken`,
@@ -218,7 +218,7 @@ export const {
         return token;
       } catch (error) {
         console.error('에러 발생:', error);
-        throw new Error('토큰 갱신 실패');
+        throw new Error('토큰 설정 실패');
       }
     },
     session: async ({ session, token, user }) => {
