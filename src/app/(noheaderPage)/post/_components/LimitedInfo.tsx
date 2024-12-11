@@ -15,6 +15,10 @@ export default function LimitedInfo({
   const handleSelectChange = (value: string) => {
     setPostState({ guildContents: value });
   };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+    const value = e.target.value;
+    setPostState({ [key]: value === '' ? null : Number(value) });
+  };
   return (
     <div className={classes.container}>
       <header className={classes.header}>
@@ -31,11 +35,8 @@ export default function LimitedInfo({
               min={1}
               max={300}
               maxLength={3}
-              value={limitedLevel}
-              onChange={(e) => {
-                const value = e.target.value;
-                setPostState({ limitedLevel: value });
-              }}
+              value={limitedLevel !== null ? limitedLevel : ''}
+              onChange={(e) => handleInputChange(e, 'limitedLevel')}
             />
             <span>이상</span>
           </section>
@@ -58,11 +59,8 @@ export default function LimitedInfo({
                   placeholder="최소 점수"
                   min="0"
                   max="999999"
-                  value={limitedSuroPoint}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setPostState({ limitedSuroPoint: value });
-                  }}
+                  value={limitedSuroPoint !== null ? limitedSuroPoint : ''}
+                  onChange={(e) => handleInputChange(e, 'limitedSuroPoint')}
                 />
               </section>
               <section>
@@ -72,11 +70,8 @@ export default function LimitedInfo({
                   placeholder="최소 점수"
                   min="0"
                   max="1000"
-                  value={limitedFlagPoint}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setPostState({ limitedFlagPoint: value });
-                  }}
+                  value={limitedFlagPoint !== null ? limitedFlagPoint : ''}
+                  onChange={(e) => handleInputChange(e, 'limitedFlagPoint')}
                 />
               </section>
             </>

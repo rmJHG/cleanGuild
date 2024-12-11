@@ -1,4 +1,4 @@
-import { UserData } from "./userData";
+import { UserData } from './userData';
 
 export type GuildPostData = {
   _id?: string;
@@ -11,12 +11,14 @@ export type GuildPostData = {
     guildType: string;
     postDate: number;
     limitedLevel: number;
-    suroPoint: number;
+    limitedSuroPoint: number;
+    limitedFlagPoint: number;
     childGuild: boolean;
     openKakaotalkLink: string;
     managerNameArr: string[];
     guildLevel: number;
     guildMemberCount: number;
+    discordLink: string;
   };
   publisherData: UserData;
 };

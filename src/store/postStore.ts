@@ -5,9 +5,9 @@ type State = {
   descreiption: string;
   guildType: string;
   guildContents: string;
-  limitedLevel: string;
-  limitedSuroPoint: string;
-  limitedFlagPoint: string;
+  limitedLevel: number | null;
+  limitedSuroPoint: number | null;
+  limitedFlagPoint: number | null;
   openKakaotalkLink: string;
   discordLink: string;
   managerNameArr: string[];
@@ -20,9 +20,9 @@ export const postStore = create<State & Action>((set) => ({
   descreiption: '',
   guildType: '',
   guildContents: '제한없음',
-  limitedLevel: '',
-  limitedSuroPoint: '',
-  limitedFlagPoint: '',
+  limitedLevel: null,
+  limitedSuroPoint: null,
+  limitedFlagPoint: null,
   openKakaotalkLink: '',
   discordLink: '',
   managerNameArr: [],

@@ -73,8 +73,15 @@
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   padding-top: 5px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-size: 14px;
+}
+.contactContainer {
+  display: flex;
+  gap: 5px;
+}
+.publisherInfoContainer {
+  display: flex;
 }
 .gap {
   width: 1px;

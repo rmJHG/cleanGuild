@@ -12,27 +12,64 @@
   width: 100%;
 }
 .optionContainer {
-  max-width: 900px;
   width: 100%;
   padding: 10px 5px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
 }
-.optionContainer > div > div {
-  border-radius: 50px;
+.filterContainer {
+  position: relative;
+  padding: 5px 20px;
+}
+.conditionContainer {
+  position: absolute;
+  top: 100%;
+  background-color: #282a2c;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 30;
 }
 
-.optionContainer div {
-  max-width: 150px;
+.conditionContainer button {
+  padding: 10px 20px;
+  border: 1px solid gray;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: white;
+  font-family: 'GmarketSansMedium';
+}
+
+.conditions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.conditions > div {
+  display: grid;
+  grid-template-columns: repeat(2, 5fr);
+  gap: 5px;
+}
+.btnContainer {
+  padding: 0 5px;
+  display: flex;
+  gap: 10px;
+}
+.btnContainer button {
   width: 100%;
+  padding: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-
 .guildPostList {
   max-width: 900px;
   width: 100%;
   height: 100%;
-  padding: 20px 5px 5px 5px;
+  min-height: 500px;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
@@ -42,15 +79,16 @@
   width: 100%;
 }
 @media (max-width: 600px) {
+  .optionContainer {
+    padding: 10px 0 0 0;
+  }
+
   .guildPostList {
     display: flex !important;
     flex-direction: column;
   }
 }
 @media (max-width: 880px) {
-  .optionContainer p {
-    font-size: 9px;
-  }
   .guildPostList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
