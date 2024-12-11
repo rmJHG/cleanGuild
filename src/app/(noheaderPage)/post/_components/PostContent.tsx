@@ -11,11 +11,12 @@ import Underline from '@tiptap/extension-underline';
 import DOMPurify from 'dompurify';
 import { errorModal } from '@/app/_lib/errorModal';
 import { successModal } from '@/app/_lib/successModal';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: GuildData }) {
   const { data: session } = useSession();
   const { user } = session!;
+  const route = useRouter();
   console.log(session);
   const {
     currentNoblePoint,
@@ -98,11 +99,10 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
       const data = await res.json();
 
       if (res.ok) {
-        redirect('/');
-      } else {
-        return errorModal(`${data.error} : ${data.message}`);
+        route.push('/');
       }
     } catch (error) {
+      console.log(error);
       return errorModal('글 작성에 실패했습니다.');
     }
   };

@@ -1,8 +1,7 @@
-import Link from "next/link";
-import classes from "./styles/header.module.css";
-import Navigation from "../Navigation";
-import UserActionBtn from "../UserActionBtn";
-import { auth } from "@/auth";
+import Link from 'next/link';
+import classes from './styles/header.module.css';
+import Navigation from '../Navigation';
+import UserActionBtn from '../UserActionBtn';
 
 export default async function Header() {
   return (

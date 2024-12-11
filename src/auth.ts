@@ -5,6 +5,7 @@ import { HandsData } from './types/userData';
 import isTokenExpired from './app/_lib/isTokenExpired';
 import { cookies } from 'next/headers';
 
+let isRefreshingToken = false;
 export const {
   handlers: { GET, POST },
   signIn,
@@ -43,12 +44,19 @@ export const {
           );
 
           const res = await fetchedData.json();
+
+          if (!fetchedData.ok) {
+            throw new Error(res.message || '로그인 요청이 실패했습니다');
+          }
+          if (!res.profile) {
+            throw new Error('유저 프로필을 찾을 수 없습니다');
+          }
           const setCookieHeader = fetchedData.headers.get('set-cookie');
           if (setCookieHeader) {
             const refreshToken = setCookieHeader.split(';')[0].split('=')[1];
             if (refreshToken) {
               cookies().set({
-                name: 'refreshToken',
+                name: '_Loya',
                 value: refreshToken,
                 httpOnly: true,
                 path: '/',
@@ -56,13 +64,6 @@ export const {
                 secure: process.env.NODE_ENV === 'production',
               });
             }
-          }
-
-          if (!fetchedData.ok) {
-            throw new Error(res.message || '로그인 요청이 실패했습니다');
-          }
-          if (!res.profile) {
-            throw new Error('유저 프로필을 찾을 수 없습니다');
           }
 
           const user = res.profile;
@@ -126,64 +127,18 @@ export const {
       }
       return true;
     },
-    jwt: async ({ token, user, session, account, profile }) => {
-      try {
-        console.log('jwt 실행');
-        console.log('현재 토큰 상태:', {
-          accessToken: token.accessToken,
-          isExpired: token.accessToken ? isTokenExpired(token.accessToken as string) : null,
-        });
-        if (token.loginType === 'local') {
-          if (token.accessToken && isTokenExpired(token.accessToken as string)) {
-            console.log('토큰 갱신 시작');
-
-            try {
-              const response = await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/refreshToken`,
-                {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    Cookie: `refreshToken=${cookies().get('refreshToken')?.value || ''}`,
-                  },
-                  credentials: 'include',
-                }
-              );
-
-              const json = await response.json();
-              if (!json.success) {
-                throw new Error('토큰 갱신 실패');
-              }
-              if (response.ok) {
-                console.log('토큰 갱신 성공');
-                const newTokens = await response.json();
-                token.accessToken = newTokens.accessToken;
-                token.refreshToken = newTokens.refreshToken;
-              }
-            } catch (error) {
-              console.error('토큰 갱신 실패', error);
-              throw new Error('토큰 갱신 실패');
-            }
-          }
-        }
-        // 최초 로그인시 또는 토큰 갱신이 필요한 경우
-        if (
-          account?.type === 'oauth' &&
-          (!token.updatedAt || Date.now() > (token.updatedAt as number) + 1 * 60 * 60 * 1000)
-        ) {
-          if (user) {
-            token.id = user.id;
-            token.email = user.email;
-          }
-        }
-
+    jwt: async ({ token, user, account }) => {
+      //최초 로그인 시
+      if (account) {
+        // Oauth 최초로그인
         if (account?.type === 'oauth' && user) {
           token.accessToken = account.access_token;
           token.refreshToken = account.refresh_token;
           token.loginType = 'kakao';
+          return token;
         }
 
-        //일반 로그인
+        // 로컬 최초로그인
         if (account?.type === 'credentials' && user) {
           token.accessToken = user.accessToken;
           token.refreshToken = user.refreshToken;
@@ -192,8 +147,7 @@ export const {
           token.ocid = user.ocid;
           token.isVerified = user.isVerified;
 
-          //토큰이 만료됐을 경우 재발급
-
+          // 사용자 데이터 가져오기
           if (token.ocid) {
             const getCharData = await fetch(`${process.env.NEXT_PUBLIC_FETCH_URL}/api/user`, {
               method: 'POST',
@@ -215,11 +169,50 @@ export const {
           }
           return token;
         }
-        return token;
-      } catch (error) {
-        console.error('에러 발생:', error);
-        throw new Error('토큰 설정 실패');
       }
+      if (token.loginType === 'local') {
+        console.log('jwt 실행');
+
+        // 토큰 갱신 로직
+        if (token.accessToken && isTokenExpired(token.accessToken as string)) {
+          console.log('현재 토큰 : ', token.accessToken);
+          console.log('현재 토큰 상태:', isTokenExpired(token.accessToken as string));
+          if (isRefreshingToken) {
+            return token; // 이전 갱신 요청이 끝날 때까지 대기
+          }
+          console.log('토큰 갱신 시작');
+          isRefreshingToken = true; // 갱신 시작
+
+          try {
+            const response = await fetch(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/refreshToken`,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Cookie: `_Loya=${cookies().get('_Loya')?.value || ''}`,
+                },
+                credentials: 'include',
+              }
+            );
+
+            const json = await response.json();
+            console.log(json, 'json');
+            if (response.ok) {
+              console.log('토큰 갱신 성공');
+              token.accessToken = json.accessToken;
+            }
+            return token;
+          } catch (error) {
+            console.error('토큰 갱신 실패', error);
+            throw new Error('토큰 갱신 실패');
+          } finally {
+            isRefreshingToken = false; // 갱신 완료
+          }
+        }
+        return token;
+      }
+      return token;
     },
     session: async ({ session, token, user }) => {
       try {
