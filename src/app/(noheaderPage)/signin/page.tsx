@@ -3,7 +3,6 @@
 import signInWithCredential, { signInWithKaKao } from '@/app/_components/authActions';
 import { useRouter } from 'next/navigation';
 import classes from './page.module.css';
-import { errorModal } from '@/app/_lib/errorModal';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useFormState } from 'react-dom';
@@ -11,12 +10,15 @@ import KakaoSVG from '../../../../public/kakao.svg';
 
 export default function Page() {
   const router = useRouter();
-  const [state, formAction] = useFormState<{ message: string }, FormData>(signInWithCredential, {
-    message: '',
-  });
+  const [state, formAction] = useFormState<{ message: string; email?: string }, FormData>(
+    signInWithCredential,
+    {
+      message: '',
+    }
+  );
 
   useEffect(() => {
-    console.log(state.message, 'state');
+    console.log(state, 'state');
     if (state.message === '/authLoading') {
       (async () => {
         try {
@@ -28,11 +30,6 @@ export default function Page() {
         }
       })();
     }
-
-    if (state.message !== '/authLoading' && state.message !== undefined && state.message !== '') {
-      console.log(state.message, 'state.message');
-      errorModal(state.message || '서버 오류가 발생했습니다');
-    }
   }, [state]);
   return (
     <div className={classes.signInContainer}>
@@ -40,6 +37,17 @@ export default function Page() {
         <h1>CLEANGUILD</h1>
       </div>
       <div className={classes.credentialsContainer}>
+        {state.message === '이메일 인증을 완료해주세요.' && (
+          <span>
+            이메일 인증을 완료해주세요
+            <button style={{ textDecoration: 'underline' }}>
+              <p>인증메일 재전송</p>
+            </button>
+          </span>
+        )}
+        {state.message === 'fetch failed' && <span>서버 에러</span>}
+        {state.message !== '/authLoading' && state.message && <span>{state.message}</span>}
+
         <form action={formAction}>
           <input type="email" name="email" placeholder="이메일" autoComplete="off" />
           <input type="password" name="password" placeholder="비밀번호" />

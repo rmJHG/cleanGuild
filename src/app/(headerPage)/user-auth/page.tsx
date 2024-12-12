@@ -15,11 +15,11 @@ import { errorModal } from '@/app/_lib/errorModal';
 export default function Page() {
   const { data: session } = useSession();
   session?.user.handsData && redirect('/');
+  console.log(session);
 
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [mainChar, setMainChar] = useState<Char | null>(null);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -114,9 +114,9 @@ export default function Page() {
   };
   return (
     <div className={classes.container}>
-      <div>
+      <header>
         <h1>핸즈 인증</h1>
-      </div>
+      </header>
       <div className={classes.intro}>
         <p>* 타인의 핸즈이미지를 사용하거나 *</p>
         <p>* 올바르지 않은 이미지를 사용할 경우 *</p>
