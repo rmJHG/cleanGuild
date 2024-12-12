@@ -35,7 +35,8 @@
 }
 
 .headerContainer p {
-  font-size: 16px;
+  font-size: 14px;
+  white-space: nowrap;
 }
 .headerContainer a:hover,
 .headerContainer button:hover {

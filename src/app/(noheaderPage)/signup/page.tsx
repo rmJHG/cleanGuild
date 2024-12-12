@@ -1,39 +1,52 @@
-"use client";
+'use client';
 
-import { toast } from "react-toastify";
+import classes from './page.module.css';
+import { useFormState } from 'react-dom';
+import postSignUpAction from './_lib/postSignupAction';
+import { useEffect } from 'react';
+import { errorModal } from '@/app/_lib/errorModal';
+import { successModal } from '@/app/_lib/successModal';
+import { useRouter } from 'next/navigation';
 
-function page() {
-  const postSignUpAction = async (formData: FormData) => {
-    console.log(formData);
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData.get("email"),
-          password: formData.get("password"),
-        }),
-      });
-      const json = await res.json();
-      if (json.message === "이미 존재하는 이메일입니다.") {
-        toast.error(json.message);
-      }
-    } catch (error) {
-      console.error(error);
+export default function Page() {
+  const route = useRouter();
+  const [state, formAction] = useFormState<{ message?: string; result?: string }, FormData>(
+    postSignUpAction,
+    {
+      message: '',
     }
-  };
+  );
+
+  useEffect(() => {
+    console.log(state, 'state');
+    if (state.result) {
+      successModal('회원가입이 완료되었습니다. 이메일 인증을 해주세요.', 3000);
+      route.push('/');
+    } else if (state.message) {
+      errorModal(state.message || '서버 오류가 발생했습니다');
+    }
+  }, [state]);
 
   return (
-    <div>
-      <form action={postSignUpAction}>
-        <input type="email" name="email" />
-        <input type="password" name="password" />
-        <button>회원가입</button>
-      </form>
+    <div className={classes.signInContainer}>
+      <div className={classes.titleContainer}>
+        <h1>CLEANGUILD</h1>
+      </div>
+      <div className={classes.credentialsContainer}>
+        <form action={formAction}>
+          <input type="email" name="email" placeholder="이메일" autoComplete="off" />
+
+          <input type="password" name="password" maxLength={16} placeholder="비밀번호" />
+          <p>패스워드는 8~16자, 영문과 숫자만 입력이 가능합니다.</p>
+          <input
+            type="password"
+            name="passwordDoubleCheck"
+            maxLength={16}
+            placeholder="비밀번호 확인"
+          />
+          <button>회원가입</button>
+        </form>
+      </div>
     </div>
   );
 }
-
-export default page;

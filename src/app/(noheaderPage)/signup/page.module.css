@@ -26,16 +26,7 @@
   padding: 50px 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-.credentialsContainer > span {
-  width: 100%;
-  padding: 5px 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  background-color: rgb(132, 42, 42);
+  gap: 20px;
 }
 .credentialsContainer > form {
   display: flex;
@@ -57,29 +48,4 @@
   font-size: 16px;
   font-weight: 600;
   font-family: 'NEXON Lv1 Gothic OTF';
-}
-.accountLinksContainer {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.kakaoLoginContainer > form {
-  height: 50px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  background-color: #fee500;
-}
-.kakaoLoginContainer > form > button {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-.kakaoLoginContainer > form > button > p {
-  font-size: 20px;
-  font-weight: 600;
-  color: black;
 }

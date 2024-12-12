@@ -176,7 +176,6 @@ export const {
         // 토큰 갱신 로직
         if (token.accessToken && isTokenExpired(token.accessToken as string)) {
           // console.log('현재 토큰 : ', token.accessToken);
-          console.log('현재 토큰 상태:', isTokenExpired(token.accessToken as string));
           if (isRefreshingToken) {
             return token; // 이전 갱신 요청이 끝날 때까지 대기
           }
@@ -228,7 +227,6 @@ export const {
           handsData: token.handsData as HandsData,
           isVerified: token.isVerified as boolean,
         };
-        console.log('로그인완료');
         return session;
       } catch (error) {
         console.error('에러 발생:', error);
