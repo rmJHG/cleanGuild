@@ -12,25 +12,24 @@ import DOMPurify from 'dompurify';
 import { errorModal } from '@/app/_lib/errorModal';
 import { successModal } from '@/app/_lib/successModal';
 import { useRouter } from 'next/navigation';
+import customFetch from '@/app/_lib/customFetch';
 
 function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: GuildData }) {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const { user } = session!;
   const route = useRouter();
   console.log(session);
   const {
     currentNoblePoint,
     guild_level: guildLevel,
-    guild_master_name,
     guild_member_count: guildMemberCount,
     guild_name: guildName,
-    world_name,
   } = guildData;
 
   const {
     guildType,
     guildContents,
-    descreiption,
+    description,
     title,
     limitedFlagPoint,
     limitedLevel,
@@ -44,26 +43,11 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
   const onPost = async () => {
     if (!title) return errorModal('제목을 입력해주세요.');
     if (editor.getHTML() === '<p></p>') return errorModal('내용을 입력해주세요.');
-    const decodedContent = editor
-      .getHTML()
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&amp;/g, '&')
-      .replace(/&quot;/g, '"')
-      .replace(/&apos;/g, "'");
-
-    let sanitizedContent = DOMPurify.sanitize(decodedContent, {
-      ALLOWED_TAGS: ['p', 'b', 'i', 'u', 'strong', 'img'],
-      ALLOWED_ATTR: ['src'],
-      FORBID_TAGS: ['script', 'style', 'iframe', 'object', 'svg'],
-      FORBID_ATTR: ['onclick', 'onmouseover', 'onerror'],
-      KEEP_CONTENT: true,
-    });
 
     const inputData = {
       postData: {
         title,
-        description: sanitizedContent,
+        description,
         guildName,
         guildType,
         guildContents,
@@ -85,25 +69,20 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
       },
     };
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/guild/${user.loginType}/postGuildRecruitments`,
-        {
-          method: 'POST',
-          body: JSON.stringify(inputData),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-        }
-      );
-      const data = await res.json();
+      const res = await customFetch({
+        url: `/api/v1/guild/${user.loginType}/postGuildRecruitments`,
+        method: 'POST',
+        token: session?.user.accessToken as string,
+        body: JSON.stringify(inputData),
+        update,
+      });
 
-      if (res.ok) {
+      if (res.message === '저장 완료') {
         route.push('/');
       }
     } catch (error) {
       console.log(error);
-      return errorModal('글 작성에 실패했습니다.');
+      return errorModal('서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
     }
   };
 
@@ -118,9 +97,27 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
       }),
       Underline,
     ],
-    content: '',
+    content: description || '',
     editable: true,
     immediatelyRender: true,
+    onUpdate: ({ editor }) => {
+      const decodedContent = editor
+        .getHTML()
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&apos;/g, "'");
+
+      let sanitizedContent = DOMPurify.sanitize(decodedContent, {
+        ALLOWED_TAGS: ['p', 'b', 'i', 'u', 'strong', 'img', 'em'],
+        ALLOWED_ATTR: ['style', 'src'],
+        FORBID_TAGS: ['script', 'iframe', 'object', 'svg'],
+        FORBID_ATTR: ['onclick', 'onmouseover', 'onerror'],
+        KEEP_CONTENT: true,
+      });
+      setPostState({ description: sanitizedContent });
+    },
   });
 
   return (
@@ -133,6 +130,8 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
         <section className={classes.titleSection}>
           <span>제목</span>
           <input
+            maxLength={50}
+            defaultValue={title}
             onChange={(e) => {
               setPostState({ title: e.target.value });
             }}

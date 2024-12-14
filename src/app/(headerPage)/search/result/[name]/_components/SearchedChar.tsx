@@ -1,10 +1,16 @@
-import { Char } from "@/types/char";
-import Image from "next/image";
-import classes from "./styles/searchedChar.module.css";
-import { serverList } from "@/app/serverList";
+import { Char } from '@/types/char';
+import Image from 'next/image';
+import classes from './styles/searchedChar.module.css';
+import { serverList } from '@/app/serverList';
+import Loading from '@/app/_components/layout/Loading';
 
 export default function SearchedChar({ data }: { data: Char | null }) {
-  if (!data) return null;
+  if (!data)
+    return (
+      <div className={classes.container}>
+        <Loading />
+      </div>
+    );
   if (data.error)
     return (
       <div className={classes.error}>
@@ -30,11 +36,18 @@ export default function SearchedChar({ data }: { data: Char | null }) {
   return (
     <div className={classes.container}>
       <div>
-        <Image src={character_image} alt="userMainCharacterImage" width={100} height={100} priority />
+        <Image
+          src={character_image}
+          alt="userMainCharacterImage"
+          width={100}
+          height={100}
+          priority
+        />
       </div>
       <div className={classes.charInfo}>
         <p>
-          {icon && <Image src={icon} alt={world_name} width={10} height={10} priority />} {character_name}
+          {icon && <Image src={icon} alt={world_name} width={10} height={10} priority />}{' '}
+          {character_name}
         </p>
         <p>
           Lv.{character_level}({character_exp_rate}%)
@@ -42,7 +55,7 @@ export default function SearchedChar({ data }: { data: Char | null }) {
         <p>{character_class}</p>
         <p>인기도 : {popularity}</p>
         <p>생성일 : {character_date_create.slice(0, 10)}</p>
-        <p>길드 : {character_guild_name || "없음"}</p>
+        <p>길드 : {character_guild_name || '없음'}</p>
       </div>
     </div>
   );

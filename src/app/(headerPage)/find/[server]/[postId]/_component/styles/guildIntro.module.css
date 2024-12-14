@@ -1,0 +1,29 @@
+.guildIntro p {
+  margin-bottom: 5px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: white;
+}
+
+.guildIntro strong {
+  font-weight: bold !important;
+}
+
+.guildIntro em {
+  font-style: italic;
+}
+.guildIntro u {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+.guildIntro s {
+  text-decoration: line-through;
+}
+.guildIntro .align-left {
+  text-align: left;
+}
+.guildIntro .align-center {
+  text-align: center;
+}

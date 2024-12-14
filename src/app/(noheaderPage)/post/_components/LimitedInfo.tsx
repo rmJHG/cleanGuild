@@ -41,9 +41,9 @@ export default function LimitedInfo({
             <span>이상</span>
           </section>
           <section className={classes.selectSection}>
-            <span>길드 컨텐츠 제한</span>
+            <span>수로 플래그</span>
             <Select
-              optionsArr={['제한없음', '수로 or 플래그', '수로플래그 필수']}
+              optionsArr={['제한없음', '택1', '둘다 필수']}
               selectName={'길드 컨텐츠'}
               placeholder={'길드 컨텐츠'}
               setState={handleSelectChange}

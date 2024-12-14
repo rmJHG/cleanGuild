@@ -11,6 +11,7 @@ export const {
   signIn,
   signOut,
   auth,
+  unstable_update,
 } = NextAuth({
   providers: [
     kakao({
@@ -127,7 +128,13 @@ export const {
       }
       return true;
     },
-    jwt: async ({ token, user, account }) => {
+    jwt: async ({ token, user, account, trigger, session }) => {
+      if (trigger === 'update') {
+        console.log('update 실행');
+        const { accessToken } = session;
+        token.accessToken = accessToken;
+        return token;
+      }
       //최초 로그인 시
       if (account) {
         // Oauth 최초로그인
@@ -174,41 +181,41 @@ export const {
         console.log('jwt 실행');
 
         // 토큰 갱신 로직
-        if (token.accessToken && isTokenExpired(token.accessToken as string)) {
-          // console.log('현재 토큰 : ', token.accessToken);
-          if (isRefreshingToken) {
-            return token; // 이전 갱신 요청이 끝날 때까지 대기
-          }
-          console.log('토큰 갱신 시작');
-          isRefreshingToken = true; // 갱신 시작
+        // if (token.accessToken && isTokenExpired(token.accessToken as string)) {
+        //   // console.log('현재 토큰 : ', token.accessToken);
+        //   if (isRefreshingToken) {
+        //     return token; // 이전 갱신 요청이 끝날 때까지 대기
+        //   }
+        //   console.log('토큰 갱신 시작');
+        //   isRefreshingToken = true; // 갱신 시작
 
-          try {
-            const response = await fetch(
-              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/refreshToken`,
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  Cookie: `_Loya=${cookies().get('_Loya')?.value || ''}`,
-                },
-                credentials: 'include',
-              }
-            );
+        //   try {
+        //     const response = await fetch(
+        //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/refreshToken`,
+        //       {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json',
+        //           Cookie: `_Loya=${cookies().get('_Loya')?.value || ''}`,
+        //         },
+        //         credentials: 'include',
+        //       }
+        //     );
 
-            const json = await response.json();
-            console.log(json, 'json');
-            if (response.ok) {
-              console.log('토큰 갱신 성공');
-              token.accessToken = json.accessToken;
-            }
-            return token;
-          } catch (error) {
-            console.error('토큰 갱신 실패', error);
-            throw new Error('토큰 갱신 실패');
-          } finally {
-            isRefreshingToken = false; // 갱신 완료
-          }
-        }
+        //     const json = await response.json();
+        //     console.log(json, 'json');
+        //     if (response.ok) {
+        //       console.log('토큰 갱신 성공');
+        //       token.accessToken = json.accessToken;
+        //     }
+        //     return token;
+        //   } catch (error) {
+        //     console.error('토큰 갱신 실패', error);
+        //     throw new Error('토큰 갱신 실패');
+        //   } finally {
+        //     isRefreshingToken = false; // 갱신 완료
+        //   }
+        // }
         return token;
       }
       return token;
