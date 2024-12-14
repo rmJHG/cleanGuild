@@ -7,3 +7,5 @@ node_modules
 test.ts
 download.env
 test
+
+yarn.lock
