@@ -25,6 +25,8 @@ jobs:
         run: npm run build # 빌드 스크립트에 맞게 수정
 
       - name: Add SSH host key
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }} # 서버 IP 설정
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -p 2020 $SERVER_IP >> ~/.ssh/known_hosts
