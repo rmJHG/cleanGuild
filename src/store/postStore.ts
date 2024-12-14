@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 type State = {
   title: string;
-  descreiption: string;
+  description: string;
   guildType: string;
   guildContents: string;
   limitedLevel: number | null;
@@ -17,7 +17,7 @@ type Action = {
 };
 export const postStore = create<State & Action>((set) => ({
   title: '',
-  descreiption: '',
+  description: '',
   guildType: '',
   guildContents: '제한없음',
   limitedLevel: null,

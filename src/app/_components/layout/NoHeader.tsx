@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import classes from './styles/header.module.css';
 
 export default async function Header() {

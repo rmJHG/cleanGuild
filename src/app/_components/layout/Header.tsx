@@ -9,7 +9,7 @@ export default async function Header() {
       <div className={classes.innerContainer}>
         <div className={classes.titleWrapper}>
           <Link href="/" prefetch={false}>
-            <p>CLEANGUILD</p>
+            <p>GREMIO</p>
           </Link>
         </div>
 

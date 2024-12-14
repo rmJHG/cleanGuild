@@ -9,6 +9,7 @@ export type GuildPostData = {
     description: string;
     guildName: string;
     guildType: string;
+    guildContents: string;
     postDate: number;
     limitedLevel: number;
     limitedSuroPoint: number;

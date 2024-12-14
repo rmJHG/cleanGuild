@@ -1,142 +1,104 @@
-"use client";
+'use client';
 
-import { GuildPostData } from "@/types/guildPostData";
-import classes from "./styles/post.module.css";
-import UserImg from "./UserImg";
-import Link from "next/link";
-import { successModal } from "@/app/_lib/successModal";
-import { errorModal } from "@/app/_lib/errorModal";
-import { serverList } from "@/app/serverList";
-import Image from "next/image";
-
+import { GuildPostData } from '@/types/guildPostData';
+import classes from './styles/post.module.css';
+import Link from 'next/link';
+import { CiLink } from 'react-icons/ci';
+import PostHeader from './PostHeader';
+import ContactModal from './ContactModal';
+import Condition from './Condition';
+import GuildIntro from './GuildIntro';
 export default function Post({ data }: { data: GuildPostData }) {
   console.log(data);
+
   const { publisherData, postData, _id } = data;
   const { email, handsData } = publisherData;
-  const [[world_icon, _1]] = serverList.filter((e) => {
-    return e[1] === publisherData.handsData.world_name;
-  });
-  console.log(world_icon);
   const {
     title,
     description,
     limitedLevel,
     guildName,
     guildType,
+    guildContents,
     currentNoblePoint,
-    suroPoint,
     postDate,
     openKakaotalkLink,
+    discordLink,
     managerNameArr,
     childGuild,
     guildLevel,
     guildMemberCount,
+    limitedFlagPoint,
+    limitedSuroPoint,
   } = postData;
 
+  console.log(postData);
+
+  const ingameManager = [publisherData.handsData.character_name, 'test', ...managerNameArr];
   const getDate = () => {
     const postedDate = new Date(postDate);
     const isoString = postedDate.toISOString();
-    return isoString.split("T")[0]; //
-  };
-
-  const textCopy = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      successModal("닉네임이 복사됐습니다.", 1000);
-    } catch (error) {
-      errorModal("복사에 실패했습니다.");
-    }
+    return isoString.split('T')[0]; //
   };
 
   return (
     <div className={classes.container}>
-      <header className={classes.postHeaderContainer}>
-        <div className={classes.titleWrapeer}>
-          <h1>{title}</h1>
-        </div>
+      <PostHeader handsData={handsData} title={title} date={getDate} />
 
-        <div className={classes.publisherInfo}>
-          <UserImg imgLink={handsData.character_image} />
-          <span className={classes.publisherName}>{handsData.character_name}</span>
-          <div className={classes.separate}></div>
-          <p>{getDate()}</p>
-        </div>
-      </header>
-
-      <section className={classes.guildConditionsContainer}>
-        <div className={classes.guildName}>
-          <h2>
-            <span className={classes.worldIcon}>
-              <Image src={world_icon} alt="world_icon" width={20} height={20} />
-            </span>
-            <span> Lv{guildLevel}</span>
-            <span>{guildName}</span>
-          </h2>
-          <Link href={`/guild/${handsData.world_name}/${guildName}`} target="_blank" className={classes.guildInfoLink}>
-            <span> 정보보기 </span>
-          </Link>
-        </div>
-        <ul className={classes.guildConditionsListBox}>
-          <li className={classes.guildConditionsInfo}>
+      <div className={classes.guildInfoContainer}>
+        <h2>길드 정보</h2>
+        <ul className={classes.guildInfo}>
+          <li>
+            <span>길드 이름</span>
+            <Link href={`/guild/${handsData.world_name}/${guildName}`} target="_blank">
+              {guildName}
+              <CiLink />
+            </Link>
+          </li>
+          <li>
+            <span>길드 레벨</span>
+            <span>{guildLevel}</span>
+          </li>
+          <li>
             <span>길드 타입</span>
             <span>{guildType}</span>
           </li>
-          <li className={classes.guildConditionsInfo}>
+          <li>
             <span>길드원 수</span>
             <span>{guildMemberCount}</span>
           </li>
-          <li className={classes.guildConditionsInfo}>
+          <li>
             <span>부캐 길드</span>
-            <span>{childGuild ? "있음" : "없음"}</span>
-          </li>{" "}
-          <li className={classes.guildConditionsInfo}>
+            <span>{childGuild ? '있음' : '없음'}</span>
+          </li>
+          <li>
             <span>길드 노블</span>
             <span>{currentNoblePoint}p</span>
           </li>
-          <li className={classes.guildConditionsInfo}>
-            <span>레벨 제한</span>
-            <span>{limitedLevel || "제한없음"}</span>
-          </li>
-          <li className={classes.guildConditionsInfo}>
-            <span>수로 점수</span>
-            <span>{suroPoint || "제한없음"}</span>
-          </li>
-          <li className={classes.guildConditionsInfo}>
-            <span>오픈 카톡</span>
-            {openKakaotalkLink ? (
-              <Link href={openKakaotalkLink} target="_blank">
-                <span>오픈톡</span>
-              </Link>
-            ) : (
-              <span>없음</span>
-            )}
-          </li>
-          {managerNameArr && (
-            <li className={classes.guildConditionsInfo}>
-              <span>인게임 문의</span>
-              <div className={classes.managerNameContainer}>
-                {managerNameArr.map((e) => {
-                  return (
-                    <p
-                      key={e}
-                      onClick={() => {
-                        textCopy(e);
-                      }}
-                    >
-                      {e}
-                    </p>
-                  );
-                })}
-              </div>
-            </li>
-          )}
         </ul>
-      </section>
-      <section className={classes.desWrapper}>
-        <div>
-          <pre style={{ whiteSpace: "pre-wrap" }}>{description.replaceAll("<br/>", "\n")}</pre>
+      </div>
+      <div className={classes.conditionContainer}>
+        <h2>가입자 제한</h2>
+        <div className={classes.conditionList}>
+          <Condition condition="" value={limitedLevel} />
+          <Condition condition="guildContents" value={guildContents} />
+          <Condition condition="suroPoint" value={limitedSuroPoint} />
+          <Condition condition="flagPoint" value={limitedFlagPoint} />
         </div>
-      </section>
+      </div>
+
+      <div className={classes.guildIntroContainer}>
+        <h2>길드 소개</h2>
+        <div className={classes.guildIntro}>
+          <GuildIntro description={description} />
+        </div>
+      </div>
+      <div className={classes.fixedContainer}>
+        <div className={classes.btnWrapper}>
+          <button>지원하기</button>
+        </div>
+      </div>
+      <ContactModal ingameManager={ingameManager} />
     </div>
   );
 }

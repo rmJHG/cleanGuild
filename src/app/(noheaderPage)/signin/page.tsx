@@ -37,7 +37,7 @@ export default function Page() {
         <h1>CLEANGUILD</h1>
       </div>
       <div className={classes.credentialsContainer}>
-        {state.message === '이메일 인증을 완료해주세요.' && (
+        {state.message && state.message === '이메일 인증을 완료해주세요.' && (
           <span>
             이메일 인증을 완료해주세요
             <button style={{ textDecoration: 'underline' }}>
@@ -45,8 +45,8 @@ export default function Page() {
             </button>
           </span>
         )}
-        {state.message === 'fetch failed' && <span>서버 에러</span>}
-        {state.message !== '/authLoading' && state.message && <span>{state.message}</span>}
+        {state.message && state.message === 'fetch failed' && <span>서버 에러</span>}
+        {state.message && state.message !== '/authLoading' && <span>{state.message}</span>}
 
         <form action={formAction}>
           <input type="email" name="email" placeholder="이메일" autoComplete="off" />

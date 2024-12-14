@@ -33,9 +33,7 @@ export default async function RootLayout({ children }: Props) {
         <SessionProvider session={session}>
           <RQProvider>
             <UseTokenRefresh />
-            <div
-              style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', flex: '1' }}>
               {children}
             </div>
           </RQProvider>

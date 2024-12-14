@@ -2,7 +2,6 @@ import { auth } from '@/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const middleware = async (request: NextRequest) => {
-  const session = await auth();
   const pathname = request.nextUrl.pathname;
   console.log('pathname', pathname);
   // if (pathname.startsWith('/_next')) {
@@ -11,6 +10,7 @@ export const middleware = async (request: NextRequest) => {
   if (pathname.startsWith('/_next') || pathname.startsWith('/api')) {
     return NextResponse.next();
   }
+  const session = await auth();
   if (session) {
     if (pathname.startsWith('/signin') || pathname.startsWith('/signup')) {
       return NextResponse.redirect(new URL('/', request.url));

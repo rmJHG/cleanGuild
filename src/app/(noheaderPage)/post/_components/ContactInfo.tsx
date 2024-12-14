@@ -70,6 +70,7 @@ export default function ContactInfo({
           <input
             type="text"
             placeholder="초대링크"
+            defaultValue={openKakaotalkLink}
             onChange={(e) => {
               setPostState({ openKakaotalkLink: e.target.value });
             }}
@@ -80,6 +81,7 @@ export default function ContactInfo({
           <input
             type="text"
             placeholder="초대링크"
+            defaultValue={discordLink}
             onChange={(e) => {
               setPostState({ discordLink: e.target.value });
             }}
