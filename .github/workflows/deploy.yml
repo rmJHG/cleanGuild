@@ -26,6 +26,7 @@ jobs:
 
       - name: Add SSH host key
         run: |
+          mkdir -p ~/.ssh
           ssh-keyscan -p 2020 $SERVER_IP >> ~/.ssh/known_hosts
 
       - name: Deploy to server
