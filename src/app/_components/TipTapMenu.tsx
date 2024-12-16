@@ -17,14 +17,18 @@ export default function TipTapMenu({ editor }: { editor: Editor | null }) {
       try {
         const formData = new FormData();
         formData.append('image', file);
-        const res = await fetch(`${process.env.NEXT_PUBLIC_STATIC_URL}/api/v1/upload`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/upload`, {
           method: 'POST',
           body: formData,
         });
         const data = await res.json();
 
         if (data.url) {
-          editor.chain().focus().setImage({ src: data.url }).run();
+          editor
+            .chain()
+            .focus()
+            .setImage({ src: `${process.env.NEXT_PUBLIC_STATIC_URL}${data.url}` })
+            .run();
         }
       } catch (error) {
         errorModal('이미지 업로드에 실패했습니다.');
