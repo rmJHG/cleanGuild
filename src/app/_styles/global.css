@@ -290,3 +290,15 @@ td {
   --border-color: #444444; /* 테두리 색: 어두운 회색 */
   --font-color: #ffffff; /* 폰트 색: 흰색 */
 }
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  pointer-events: none;
+}

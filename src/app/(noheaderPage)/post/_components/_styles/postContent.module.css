@@ -149,6 +149,8 @@
 
 .image {
   max-width: 100%;
-  width: auto;
-  height: auto;
+
+  pointer-events: none;
+  overflow-clip-margin: content-box;
+  overflow: clip;
 }

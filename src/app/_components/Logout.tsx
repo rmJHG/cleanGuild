@@ -27,7 +27,7 @@ export default function Logout() {
           }
 
           // 서버 로그아웃 API 호출
-          await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/logout`, {
+          await fetch(`/api/auth/logout`, {
             method: 'POST',
             credentials: 'include',
           });

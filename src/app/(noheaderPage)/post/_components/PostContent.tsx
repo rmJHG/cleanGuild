@@ -71,27 +71,27 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
       },
     };
     console.log(description);
-    // try {
-    //   const res = await customFetch({
-    //     url: `/api/v1/guild/${user.loginType}/postGuildRecruitments`,
-    //     method: 'POST',
-    //     loginType: user.loginType,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       loginType: user.loginType,
-    //     },
-    //     token: session?.user.accessToken as string,
-    //     body: JSON.stringify(inputData),
-    //     update,
-    //   });
+    try {
+      const res = await customFetch({
+        url: `/api/v1/guild/${user.loginType}/postGuildRecruitments`,
+        method: 'POST',
+        loginType: user.loginType,
+        headers: {
+          'Content-Type': 'application/json',
+          loginType: user.loginType,
+        },
+        token: session?.user.accessToken as string,
+        body: JSON.stringify(inputData),
+        update,
+      });
 
-    //   if (res.message === '저장 완료') {
-    //     route.push('/');
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   return errorModal('서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
-    // }
+      if (res.message === '저장 완료') {
+        route.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+      return errorModal('서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    }
   };
 
   const editor = useEditor({
@@ -104,8 +104,9 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
         types: ['heading', 'paragraph'],
       }),
       Underline,
+
       Image.configure({
-        inline: true,
+        inline: false,
         allowBase64: true,
       }).extend({
         addAttributes() {
@@ -113,6 +114,9 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
             ...this.parent?.(),
             class: {
               default: classes.image,
+            },
+            contenteditable: {
+              default: false,
             },
           };
         },
