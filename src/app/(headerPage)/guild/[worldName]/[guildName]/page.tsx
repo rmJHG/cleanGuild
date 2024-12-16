@@ -1,13 +1,13 @@
-"use client";
-import { getGuildData } from "@/app/_lib/getGuildData";
-import { useQuery } from "@tanstack/react-query";
-import classes from "./page.module.css";
-import Loading from "@/app/_components/layout/Loading";
+'use client';
+import { getGuildData } from '@/app/_lib/getGuildData';
+import { useQuery } from '@tanstack/react-query';
+import classes from './page.module.css';
+import Loading from '@/app/_components/layout/Loading';
 
-import GuildUserImage from "./_components/GuildUserImage";
-import GuildMembers from "./_components/GuildMembers";
-import { serverList } from "@/app/serverList";
-import Image from "next/image";
+import GuildUserImage from './_components/GuildUserImage';
+import GuildMembers from './_components/GuildMembers';
+import { serverList } from '@/app/serverList';
+import Image from 'next/image';
 type Props = {
   params: {
     guildName: string;
@@ -18,7 +18,7 @@ export default function Page({ params }: Props) {
   const { guildName, worldName } = params;
   const decodedWorldName = decodeURIComponent(worldName);
   const { data } = useQuery<GuildData, Error, GuildData>({
-    queryKey: ["guildData", worldName, guildName],
+    queryKey: ['guildData', worldName, guildName],
     queryFn: getGuildData,
     staleTime: 60 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
@@ -46,7 +46,14 @@ export default function Page({ params }: Props) {
   }
   if (!data) return <Loading />;
 
-  const { guild_master_name, guild_member_count, guild_name, guild_noblesse_skill, guild_point, guild_member } = data;
+  const {
+    guild_master_name,
+    guild_member_count,
+    guild_name,
+    guild_noblesse_skill,
+    guild_point,
+    guild_member,
+  } = data;
   const currentNoblePoint: number = guild_noblesse_skill.reduce((a, b) => {
     return a + b.skill_level;
   }, 0);
@@ -60,7 +67,6 @@ export default function Page({ params }: Props) {
     <div className={classes.container}>
       <div className={classes.guildHeaderContainer}>
         <div className={classes.guildNameWrapper}>
-          <Image src={world_icon} alt={`${worldName}icon`} width={20} height={20} />
           <h2>{guild_name}</h2>
         </div>
         <div className={classes.charContainer}>

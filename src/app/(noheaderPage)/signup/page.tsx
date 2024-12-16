@@ -30,7 +30,7 @@ export default function Page() {
   return (
     <div className={classes.signInContainer}>
       <div className={classes.titleContainer}>
-        <h1>CLEANGUILD</h1>
+        <h1>MAPLE GREMIO</h1>
       </div>
       <div className={classes.credentialsContainer}>
         <form action={formAction}>

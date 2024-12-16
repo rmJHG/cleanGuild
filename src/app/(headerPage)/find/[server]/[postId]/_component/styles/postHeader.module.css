@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: var(--font-color);
 }
 
 .titleWrapeer > h1 {
   font-size: 30px;
   line-height: 35px;
   font-weight: 700;
-  color: white;
 }
 
 .publisherInfo {
@@ -23,7 +23,6 @@
 .publisherName {
   font-size: 20px;
   font-weight: 700;
-  color: white;
 }
 
 @media (max-width: 600px) {

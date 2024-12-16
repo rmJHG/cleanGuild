@@ -11,11 +11,11 @@
   width: 150px;
   height: 200px;
   border-radius: 5px;
-  border: 1px solid rgba(245, 245, 245, 0.435);
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
-  background-color: #ffffff80;
+  background-color: var(--background-color);
 }

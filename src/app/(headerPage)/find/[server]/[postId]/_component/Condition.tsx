@@ -53,7 +53,15 @@ export default function Condition({
   return (
     <div>
       <span>레벨 제한</span>
-      <span>{<>{value} 이상</> || '제한없음'}</span>
+      <span>
+        {!value ? (
+          '제한없음'
+        ) : (
+          <>
+            {value}점 {<FaCaretUp />}
+          </>
+        )}
+      </span>
     </div>
   );
 }

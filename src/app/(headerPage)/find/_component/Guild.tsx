@@ -48,23 +48,23 @@ export default function Guild({ data }: { data: GuildPostData }) {
           <p>{guildName}</p>
         </div>
         <div className={classes.guildType} style={{ backgroundColor: getBackgroudColor() }}>
-          <p>{guildType}</p>
+          <span>{guildType}</span>
         </div>
       </div>
 
       <div className={classes.guildConditions}>
         <div className={classes.nobleWrapper}>
-          <p>{currentNoblePoint}P</p>
+          <span>{currentNoblePoint}P</span>
         </div>
 
         {limitedSuroPoint > 0 && (
           <div className={classes.suroPoint}>
-            <p>수로 {limitedSuroPoint}점▴</p>
+            <span>수로 {limitedSuroPoint}점▴</span>
           </div>
         )}
         {limitedLevel > 0 && (
           <div className={classes.limitedLevel}>
-            <p>Lv{limitedLevel}▴</p>
+            <span>Lv{limitedLevel}▴</span>
           </div>
         )}
       </div>

@@ -6,12 +6,20 @@
   flex-direction: column;
   align-items: center;
 }
-.container > div:first-child {
-  width: 100%;
 
-  display: flex;
-  justify-content: center;
-}
 .container > div:last-child {
   padding: 20px;
+}
+
+.topContainer {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 700px) {
+  .topContainer {
+    flex-direction: column;
+  }
 }

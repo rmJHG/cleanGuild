@@ -75,8 +75,6 @@ export default function ContactInfo({
               setPostState({ openKakaotalkLink: e.target.value });
             }}
           />
-        </section>
-        <section>
           <p>디스코드 초대 링크(선택)</p>
           <input
             type="text"
@@ -87,6 +85,7 @@ export default function ContactInfo({
             }}
           />
         </section>
+
         <section>
           <div className={classes.addCharNameHeaderContainer}>
             <div>

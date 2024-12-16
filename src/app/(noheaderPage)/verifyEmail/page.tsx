@@ -1,8 +1,8 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import classes from './page.module.css';
 import Loading from '@/app/_components/layout/Loading';
-import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 function page({ searchParams }: { searchParams: { welcome: string } }) {
   const route = useRouter();
@@ -11,7 +11,7 @@ function page({ searchParams }: { searchParams: { welcome: string } }) {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    if (!welcome) redirect('/');
+    // if (!welcome) redirect('/');
     async function verifyEmail() {
       try {
         const response = await fetch(

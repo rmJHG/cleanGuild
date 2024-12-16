@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  border: 1px solid #ffffffa5;
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 5px;
   display: flex;
@@ -10,7 +10,7 @@
   gap: 10px;
 }
 .container:hover {
-  border: 1px solid #ffffff;
+  border: 1px solid var(--font-color);
 }
 
 .guildInfoContainer {
@@ -27,15 +27,18 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
-  background-color: rgb(167, 167, 167);
+  background-color: var(--header-color);
 }
 .worldInfo > span {
   line-height: 14px;
+
+  color: white;
 }
 .guildName {
   font-weight: 800;
   font-size: 16px;
   text-align: center;
+  color: var(--font-color);
 }
 
 .levelSpan {

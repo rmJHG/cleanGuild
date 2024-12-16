@@ -1,6 +1,7 @@
 .signInContainer {
   min-width: 300px;
-  max-width: 500px;
+  max-width: 900px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -10,6 +11,7 @@
 .titleContainer,
 .credentialsContainer,
 .kakaoLoginContainer {
+  max-width: 400px;
   width: 100%;
 }
 .titleContainer {
@@ -19,7 +21,7 @@
   text-align: center;
   font-size: 30px;
   font-weight: 600;
-  color: whitesmoke;
+  color: var(--font-color);
   font-family: 'NEXON Lv1 Gothic OTF';
 }
 .credentialsContainer {
@@ -45,9 +47,14 @@
 
 .credentialsContainer > form > input {
   height: 50px;
+
   width: 100%;
+  border: 1px solid var(--border-color);
   padding: 0 10px;
   font-size: 16px;
+}
+.credentialsContainer > form > input:focus {
+  border: 1px solid var(--font-color);
 }
 .credentialsContainer > form > button {
   height: 50px;
@@ -63,7 +70,13 @@
   justify-content: center;
   gap: 10px;
 }
-
+.accountLinksContainer > a {
+  color: var(--font-color);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .kakaoLoginContainer > form {
   height: 50px;
   border-radius: 12px;

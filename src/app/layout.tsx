@@ -6,10 +6,9 @@ import { Session } from 'next-auth';
 import { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import UseTokenRefresh from './_lib/UseTokenRefresh';
 
 export const metadata = {
-  title: 'cleanguild',
+  title: 'MAPLE-GREMIO',
   description: '인게임에서 부족한 길드홍보 컨텐츠를 보충하는 사이트',
 };
 
@@ -32,7 +31,6 @@ export default async function RootLayout({ children }: Props) {
       <body>
         <SessionProvider session={session}>
           <RQProvider>
-            <UseTokenRefresh />
             <div style={{ display: 'flex', flexDirection: 'column', width: '100%', flex: '1' }}>
               {children}
             </div>

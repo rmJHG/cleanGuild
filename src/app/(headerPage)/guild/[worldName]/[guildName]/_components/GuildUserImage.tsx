@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Loading from "@/app/_components/layout/Loading";
-import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
+import Loading from '@/app/_components/layout/Loading';
+import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 
-import classes from "./guildUserImage.module.css";
-import { Char } from "@/types/char";
-import getCharData from "@/app/_lib/getCharData";
+import classes from './guildUserImage.module.css';
+import { Char } from '@/types/char';
+import getCharData from '@/app/_lib/getCharData';
 
 type Props = {
   guild_member_name: string;
@@ -14,7 +14,7 @@ type Props = {
 };
 export default function GuildUserImage({ guild_member_name, transformScaleX }: Props) {
   const { data: charData } = useQuery<Char, Error, Char, [_1: string, userName: string]>({
-    queryKey: ["char", guild_member_name],
+    queryKey: ['char', guild_member_name],
     queryFn: getCharData,
     staleTime: 1 * 60 * 1000,
     gcTime: 3 * 60 * 1000,

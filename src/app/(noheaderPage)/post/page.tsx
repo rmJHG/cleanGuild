@@ -9,14 +9,15 @@ import getCooltime from '@/app/_lib/getCooltime';
 import Render from './_components/Render';
 import { getGuildData } from '@/app/_lib/getGuildData';
 import { useRouter } from 'next/navigation';
-
+import classes from './page.module.css';
 export default function Page() {
   const { data: session } = useSession();
+  if (!session) return <Loading />;
   const { handsData } = session!.user;
   const route = useRouter();
   if (!handsData?.character_guild_name) {
     return (
-      <div style={{ minHeight: '100%', display: 'flex', alignItems: 'center' }}>
+      <div className={classes.noGuild}>
         <p>길드가 없으신 것 같네요! 구해보는건 어떨까요?</p>
         <Link href="/find">길드 구해보기</Link>
       </div>
@@ -37,30 +38,20 @@ export default function Page() {
 
   if (guildData?.error) return <div>error {guildData.error.message}</div>;
   if (!guildData) return <Loading />;
-  if (guildData.guild_master_name !== handsData.character_name)
-    return (
-      <div
-        style={{
-          minHeight: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignContent: 'center',
-          justifyContent: 'center',
-          gap: '20px',
-          flex: '1',
-        }}
-      >
-        <p>길드마스터만 홍보 가능합니다!</p>
-        <button
-          style={{ color: 'white', fontSize: '1.5rem' }}
-          onClick={() => {
-            route.back();
-          }}
-        >
-          뒤로가기
-        </button>
-      </div>
-    );
+  // if (guildData.guild_master_name !== handsData.character_name)
+  //   return (
+  //     <div className={classes.onlyGuildMaster}>
+  //       <p>길드마스터만 홍보 가능합니다!</p>
+  //       <button
+  //         style={{ fontSize: '1.5rem' }}
+  //         onClick={() => {
+  //           route.back();
+  //         }}
+  //       >
+  //         뒤로가기
+  //       </button>
+  //     </div>
+  //   );
 
   const postCooltime = data;
   const currentTimestamp = new Date().getTime();

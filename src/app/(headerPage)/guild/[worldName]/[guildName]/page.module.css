@@ -7,24 +7,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 .container span,
 .guildNameWrapper h2 {
-  font-family: Pretendard-Regular;
+  font-family: 'Nexon Lv1 Gothic OTF';
 }
 
 .guildHeaderContainer {
   width: 100%;
   min-height: 200px;
   height: 100%;
-  border-radius: 5px;
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: #ffffffda;
+  background-color: var(--table-color);
 }
 
 .charContainer {
@@ -47,9 +46,12 @@
 .guildInfoContainer {
   width: 100%;
   height: 100%;
-  border-radius: 5px;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
   display: flex;
-  background-color: #ffffffda;
+
+  color: white;
+  background-color: var(--header-color);
 }
 .guildInfo {
   height: 50px;
@@ -60,14 +62,19 @@
   align-items: center;
   gap: 5px;
 }
+.guildInfo > div:first-child > span {
+  opacity: 0.7;
+}
+.guildInfo > div:last-child > span {
+  font-weight: 700;
+}
 .guildInfoGap {
   width: 1px;
   max-height: 100%;
-  background-color: #ffffffda;
+  background-color: var(--background-color);
 }
 .guildMemberWrapper {
-  border-radius: 5px;
+  border: 1px solid var(--border-color);
   padding: 20px 10px;
-
-  background-color: #ffffffda;
+  background-color: var(--table-color);
 }

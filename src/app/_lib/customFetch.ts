@@ -1,13 +1,17 @@
 export default async function customFetch({
   url,
   method,
+  loginType,
+  headers,
   body,
   token,
   update,
 }: {
   url: string;
   method: string;
-  body?: any;
+  loginType: string;
+  headers?: HeadersInit;
+  body?: BodyInit;
   token: string;
   update?: any;
 }) {
@@ -17,8 +21,8 @@ export default async function customFetch({
       method,
       body,
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // 액세스 토큰 추가
+        Authorization: `Bearer ${token}`,
+        ...headers,
       },
       credentials: 'include',
     });
@@ -27,14 +31,18 @@ export default async function customFetch({
     console.log(resJson);
 
     // 만약 토큰 만료 오류가 발생했다면
-    if (resJson.message === '토큰이 만료되었습니다.') {
+    if (
+      resJson.message === '토큰이 만료되었습니다.' ||
+      resJson.message === '카카오 리프레쉬 토큰이 만료되었습니다.'
+    ) {
       // 리프레시 토큰으로 새로운 액세스 토큰을 요청
       const refresh = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/refreshToken`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/${loginType}/refreshToken`,
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            ...headers,
           },
           credentials: 'include',
         }
@@ -52,8 +60,8 @@ export default async function customFetch({
           method,
           body,
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${refreshJson.accessToken}`, // 새 액세스 토큰 추가
+            Authorization: `Bearer ${refreshJson.accessToken}`,
+            ...headers,
           },
           credentials: 'include',
         });

@@ -11,7 +11,6 @@ export default function PostHeader({
   title: string;
   date: () => string;
 }) {
-  console.log(date);
   return (
     <header className={classes.postHeaderContainer}>
       <div className={classes.titleWrapeer}>
@@ -21,7 +20,7 @@ export default function PostHeader({
       <div className={classes.publisherInfo}>
         <UserImg imgLink={handsData.character_image} />
         <span className={classes.publisherName}>{handsData.character_name}</span>
-        <p>{date()}</p>
+        <p className={classes.date}>{date()}</p>
       </div>
     </header>
   );

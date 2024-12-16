@@ -15,11 +15,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.header > h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 600;
-  color: white;
-}
+
 .header > p {
   font-size: clamp(1rem, 2vw, 1rem);
   font-weight: 400;
@@ -34,12 +30,12 @@
   justify-content: center;
   align-items: center;
   gap: 25px;
-  color: white;
+  color: var(--font-color);
 }
 .infoContainer > section {
   width: 100%;
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   gap: 5px;
 }
 .infoContainer > section input {
@@ -48,7 +44,7 @@
   border-radius: 5px;
   padding: 10px 15px;
   font-size: 16px;
-  color: white;
+  color: var(--font-color);
   background: none;
 }
 
@@ -59,7 +55,7 @@
   gap: 20px;
 }
 .addCharBtnContainer {
-  border: 1px solid gray;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -74,8 +70,8 @@
 .addCharBtnContainer button {
   height: 100%;
   padding: 5px 20px;
-  border-left: 1px solid gray;
-  color: white;
+  border-left: 1px solid var(--border-color);
+  color: var(--font-color);
   cursor: pointer;
   font-size: 20px;
 }
@@ -97,12 +93,12 @@
   padding: 10px 20px;
   border-radius: 2525px;
   border: none;
-  background-color: #f5f5f5;
+  background-color: var(--header-color);
+  color: white;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 }
 .btnContainer button:first-child {
-  background-color: black;
-  color: white;
+  background-color: gray;
 }

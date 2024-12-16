@@ -1,43 +1,26 @@
-.loading {
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.loader {
+  width: 40px;
+  height: 40px;
+  --c: no-repeat linear-gradient(var(--header-color) 0 0);
+  background: var(--c), var(--c), var(--c), var(--c);
+  background-size: 21px 21px;
+  animation: l5 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
 }
-
-.loading > div {
-  width: 10px;
-  height: 10px;
-  margin: 2px;
-  border-radius: 50%;
-  background-color: white;
-  animation: moveUp 1s infinite;
-}
-
-.loading > div:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.loading > div:nth-child(2) {
-  animation-delay: 0.25s;
-}
-
-.loading > div:nth-child(3) {
-  animation-delay: 0.5s;
-}
-
-.loading > div:nth-child(4) {
-  animation-delay: 0.75s;
-}
-
-@keyframes moveUp {
-  0%,
-  20%,
-  100% {
-    transform: translateY(0);
+@keyframes l5 {
+  0% {
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
   }
-  10% {
-    transform: translateY(-5px);
+  33% {
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    width: 60px;
+    height: 60px;
+  }
+  66% {
+    background-position: 100% 0, 100% 100%, 0 100%, 0 0;
+    width: 60px;
+    height: 60px;
+  }
+  100% {
+    background-position: 100% 0, 100% 100%, 0 100%, 0 0;
   }
 }

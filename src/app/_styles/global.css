@@ -2,9 +2,26 @@
   font-family: 'NEXON Lv1 Gothic OTF';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff')
     format('woff');
-  font-weight: normal;
+  font-weight: 400; /* Regular */
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF-Bold.woff')
+    format('woff');
+  font-weight: 700; /* Bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF-Light.woff')
+    format('woff');
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'GmarketSansMedium';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
@@ -156,14 +173,8 @@ table {
 }
 a {
   text-decoration: none;
-  color: white;
   -webkit-tap-highlight-color: transparent;
-  color: inherit;
   -webkit-text-fill-color: inherit;
-}
-p,
-label {
-  color: white;
 }
 
 button {
@@ -233,7 +244,7 @@ body {
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #353535;
+  background-color: black;
 }
 main {
   min-height: calc(100dvh - 100px);
@@ -241,16 +252,41 @@ main {
   display: flex;
   justify-content: center;
 }
+main > div {
+  background-color: var(--background-color);
+}
 header,
 main,
 footer {
   min-width: 300px;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 span,
 p,
 a,
 th,
 td {
   font-size: 13px;
+}
+
+:root {
+  --header-color: #525fe4;
+  --background-color: #f8f8f0;
+  --text-color: #000000;
+  --border-color: #979797;
+  --font-color: #000000;
+  --table-color: #dcdcdc;
+  --selected-color: rgb(61, 61, 61);
+}
+[data-theme='dark'] {
+  --header-color: #0000000;
+  --background-color: #000000; /* 배경색: 검은색 */
+  --text-color: #ffffff; /* 텍스트 색: 흰색 */
+  --border-color: #444444; /* 테두리 색: 어두운 회색 */
+  --font-color: #ffffff; /* 폰트 색: 흰색 */
 }

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
-import getGuildRank from "../../_lib/getGuildRank";
-import Loading from "../layout/Loading";
-import classes from "./styles/GuildRankingTable.module.css";
-import { GuildRanking } from "@/types/guildRanking";
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useQuery } from '@tanstack/react-query';
+import getGuildRank from '../../_lib/getGuildRank';
+import Loading from '../layout/Loading';
+import classes from './styles/GuildRankingTable.module.css';
+import { GuildRanking } from '@/types/guildRanking';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 type Props = {
   ranking_type: string;
   world_name: string;
@@ -17,11 +17,12 @@ export default function GuildRankTable({ ranking_type, world_name }: Props) {
   const [screenHeight, setScreenHeight] = useState(0);
   const itemsPerPage = screenHeight > 950 ? 20 : 10;
   const { data } = useQuery<GuildRanking, Error, GuildRanking>({
-    queryKey: ["guildRank", ranking_type, world_name, ""],
+    queryKey: ['guildRank', ranking_type, world_name, ''],
     queryFn: getGuildRank,
     staleTime: 60 * 60 * 1000,
     gcTime: 2 * 60 * 60 * 1000,
   });
+  console.log(data);
   const currentItems = data && data.ranking.slice(currentPage, currentPage + itemsPerPage);
 
   useEffect(() => {
@@ -34,11 +35,11 @@ export default function GuildRankTable({ ranking_type, world_name }: Props) {
     updateHeight();
 
     // 리사이즈 이벤트 리스너 추가
-    window.addEventListener("resize", updateHeight);
+    window.addEventListener('resize', updateHeight);
 
     // 컴포넌트 언마운트 시 리스너 제거
     return () => {
-      window.removeEventListener("resize", updateHeight);
+      window.removeEventListener('resize', updateHeight);
     };
   }, []);
 
@@ -50,42 +51,47 @@ export default function GuildRankTable({ ranking_type, world_name }: Props) {
   return (
     <>
       <div className={classes.tableWrapper}>
-        <table className={classes.rankingTable}>
-          {data ? (
-            <>
-              <thead>
-                <tr>
-                  <th>순위</th>
-                  <th>길드명</th>
-                  <th>점수</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {currentItems!.map((e) => {
-                  return (
-                    <tr className={classes.guild} key={e.ranking + e.guild_name}>
-                      <td>{e.ranking}</td>
-                      <td className={classes.guildNameCell}>
-                        <Link href={`/guild/${world_name}/${e.guild_name}`}>{e.guild_name}</Link>
-                      </td>
-                      <td>{e.guild_point.toLocaleString()}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </>
-          ) : (
-            <tbody>
+        {data ? (
+          <table className={classes.rankingTable}>
+            <thead>
               <tr>
-                <td>
-                  <Loading />
-                </td>
+                <th>순위</th>
+                <th>길드명</th>
+                <th>점수</th>
               </tr>
+            </thead>
+
+            <tbody>
+              {currentItems!.map((e) => {
+                return (
+                  <tr className={classes.guild} key={e.ranking + e.guild_name}>
+                    <td style={{ fontWeight: '700', fontSize: '14px' }}>{e.ranking}</td>
+                    <td className={classes.guildNameCell}>
+                      <Link href={`/guild/${world_name}/${e.guild_name}`}>{e.guild_name}</Link>
+                    </td>
+                    <td style={{ fontWeight: '700', fontSize: '16px' }}>
+                      {e.guild_point.toLocaleString()}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
-          )}
-        </table>
+          </table>
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              height: '330px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Loading />
+          </div>
+        )}
       </div>
+
       <div className={classes.btnContainer}>
         {currentPage > 0 ? (
           <button

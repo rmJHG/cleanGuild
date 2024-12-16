@@ -1,22 +1,28 @@
 .postContainer {
   height: 280px;
   width: 280px;
-  border: 1px solid #ffffff80;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--table-color);
+}
+.postContainer p {
+  color: var(--font-color);
+}
+.postContainer span {
+  color: white;
 }
 .postContainer:hover {
-  border: 1px solid #ffffff;
+  border: 1px solid black;
 }
 .postContainer > div {
   width: 100%;
   padding: 10px;
 }
 .postHeader {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
 }
@@ -87,7 +93,7 @@
   width: 1px;
   height: 100%;
   margin: 0 5px;
-  background-color: #ffffff80;
+  background-color: black;
 }
 @media (max-width: 600px) {
   .postContainer {

@@ -9,7 +9,8 @@ import { getPostData } from './_lib/getPostData';
 import { GuildPostData } from '@/types/guildPostData';
 import Loading from '@/app/_components/layout/Loading';
 import { useEffect, useRef, useState } from 'react';
-import { FaFilter } from 'react-icons/fa';
+
+import { CiFilter } from 'react-icons/ci';
 
 type Props = {
   params: {
@@ -127,9 +128,9 @@ export default function DataTable({ params }: Props) {
       <div className={classes.optionContainer}>
         <div className={classes.filterContainer}>
           <div ref={buttonRef}>
-            <FaFilter
-              color="white"
-              size={20}
+            <CiFilter
+              color="black"
+              size={23}
               onClick={() => {
                 setIsOpen(!isOpen);
               }}
@@ -214,14 +215,14 @@ export default function DataTable({ params }: Props) {
               handleSortOrderClick(true);
             }}
           >
-            <p style={{ color: sortOrder ? 'white' : 'gray' }}> 최신 순</p>
+            <p style={{ color: sortOrder ? 'black' : '#b4b4b4' }}> 최신 순</p>
           </button>
           <button
             onClick={() => {
               handleSortOrderClick(false);
             }}
           >
-            <p style={{ color: !sortOrder ? 'white' : 'gray' }}>오래된 순</p>
+            <p style={{ color: !sortOrder ? 'black' : '#b4b4b4' }}>오래된 순</p>
           </button>
         </div>
       </div>

@@ -13,7 +13,11 @@ export default function Page() {
         alignItems: 'center',
       }}
     >
-      <div style={{}}>
+      <div
+        style={{
+          backgroundColor: 'var(--header-color)',
+        }}
+      >
         <ServerList />
       </div>
       <div

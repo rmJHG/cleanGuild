@@ -40,5 +40,5 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/((?!find).*)'], // `/find`를 제외한 모든 경로
+  matcher: ['/((?!find).*)', '/((?!test).*)'], // `/find`를 제외한 모든 경로
 };

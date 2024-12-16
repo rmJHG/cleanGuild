@@ -8,6 +8,7 @@ import TipTapMenu from '@/app/_components/TipTapMenu';
 import PlaceHolder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import Underline from '@tiptap/extension-underline';
+import Image from '@tiptap/extension-image';
 import DOMPurify from 'dompurify';
 import { errorModal } from '@/app/_lib/errorModal';
 import { successModal } from '@/app/_lib/successModal';
@@ -42,6 +43,7 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
 
   const onPost = async () => {
     if (!title) return errorModal('제목을 입력해주세요.');
+    if (!editor) return null;
     if (editor.getHTML() === '<p></p>') return errorModal('내용을 입력해주세요.');
 
     const inputData = {
@@ -68,22 +70,28 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
         },
       },
     };
-    try {
-      const res = await customFetch({
-        url: `/api/v1/guild/${user.loginType}/postGuildRecruitments`,
-        method: 'POST',
-        token: session?.user.accessToken as string,
-        body: JSON.stringify(inputData),
-        update,
-      });
+    console.log(description);
+    // try {
+    //   const res = await customFetch({
+    //     url: `/api/v1/guild/${user.loginType}/postGuildRecruitments`,
+    //     method: 'POST',
+    //     loginType: user.loginType,
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       loginType: user.loginType,
+    //     },
+    //     token: session?.user.accessToken as string,
+    //     body: JSON.stringify(inputData),
+    //     update,
+    //   });
 
-      if (res.message === '저장 완료') {
-        route.push('/');
-      }
-    } catch (error) {
-      console.log(error);
-      return errorModal('서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
-    }
+    //   if (res.message === '저장 완료') {
+    //     route.push('/');
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    //   return errorModal('서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    // }
   };
 
   const editor = useEditor({
@@ -96,10 +104,24 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
         types: ['heading', 'paragraph'],
       }),
       Underline,
+      Image.configure({
+        inline: true,
+        allowBase64: true,
+      }).extend({
+        addAttributes() {
+          return {
+            ...this.parent?.(),
+            class: {
+              default: classes.image,
+            },
+          };
+        },
+      }),
     ],
     content: description || '',
     editable: true,
-    immediatelyRender: true,
+
+    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       const decodedContent = editor
         .getHTML()

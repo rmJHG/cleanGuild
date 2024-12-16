@@ -13,9 +13,7 @@ import goodImg from '../../../../public/img/goodImg.png';
 import { errorModal } from '@/app/_lib/errorModal';
 
 export default function Page() {
-  const { data: session } = useSession();
-  session?.user.handsData && redirect('/');
-  console.log(session);
+
 
   const [img, setImg] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -128,7 +126,7 @@ export default function Page() {
         </div>
       ) : (
         <>
-          {isOpen ? <Setting data={mainChar} img={img as File} /> : renderFileInput()}
+          {isOpen ? <Setting data={mainChar} img={img as File}/> : renderFileInput()}
 
           {!isOpen && (
             <>

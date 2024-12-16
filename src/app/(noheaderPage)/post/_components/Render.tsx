@@ -8,7 +8,7 @@ import classes from './_styles/render.module.css';
 type Step = 1 | 2 | 3 | 4;
 
 export default function Render({ guildData }: { guildData: GuildData }) {
-  const [pageState, setPageState] = useState<Step>(1);
+  const [pageState, setPageState] = useState<Step>(4);
 
   console.log(guildData, 'guildData');
 

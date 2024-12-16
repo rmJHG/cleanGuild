@@ -15,11 +15,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.header > h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 600;
-  color: white;
-}
+
 .header > p {
   font-size: clamp(1rem, 2vw, 1rem);
   font-weight: 400;
@@ -47,6 +43,7 @@
   margin: 0 5px;
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 600;
+  color: var(--header-color);
 }
 .infoContainer p > div {
   width: 100px;
@@ -54,6 +51,7 @@
 }
 
 .guildConditionsInfo {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -66,7 +64,6 @@
 .guildConditionsInfo > div {
   width: 100px;
   margin: 0 5px;
-  display: flex;
 }
 
 .guildConditionsInfo > div > ul > li > p {
@@ -109,7 +106,8 @@
   padding: 10px 20px;
   border-radius: 2525px;
   border: none;
-  background-color: #f5f5f5;
+  background-color: var(--header-color);
+  color: white;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;

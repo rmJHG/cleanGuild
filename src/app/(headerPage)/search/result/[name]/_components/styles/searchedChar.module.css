@@ -19,7 +19,32 @@
 }
 
 .charInfo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.charInfo > p {
+  text-align: start;
+  align-self: flex-start;
+}
+
+.charName {
+  display: flex;
+  font-size: 20px;
+  line-height: 20px;
+}
+.charName > img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+@media (max-width: 700px) {
+  .charInfo {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    align-items: flex-start;
+    font-size: 13px !important;
+  }
 }

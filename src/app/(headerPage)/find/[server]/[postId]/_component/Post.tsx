@@ -8,6 +8,7 @@ import PostHeader from './PostHeader';
 import ContactModal from './ContactModal';
 import Condition from './Condition';
 import GuildIntro from './GuildIntro';
+
 export default function Post({ data }: { data: GuildPostData }) {
   console.log(data);
 
@@ -93,12 +94,12 @@ export default function Post({ data }: { data: GuildPostData }) {
           <GuildIntro description={description} />
         </div>
       </div>
-      <div className={classes.fixedContainer}>
-        <div className={classes.btnWrapper}>
-          <button>지원하기</button>
-        </div>
-      </div>
-      <ContactModal ingameManager={ingameManager} />
+
+      <ContactModal
+        ingameManager={ingameManager}
+        openKakaotalkLink={openKakaotalkLink}
+        discordLink={discordLink}
+      />
     </div>
   );
 }

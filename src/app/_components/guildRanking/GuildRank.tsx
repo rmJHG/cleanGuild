@@ -13,10 +13,7 @@ export default function GuildRank() {
   return (
     <div className={classes.container}>
       <div className={classes.serverListContainer}>
-        <div
-          className={classes.rankTableHeader}
-          style={{ borderBottom: !isWorldListOpen ? 'none' : undefined }}
-        >
+        <div className={classes.rankTableHeader}>
           <p>월드목록</p>
           <button
             onClick={() => {
@@ -38,13 +35,15 @@ export default function GuildRank() {
                     setWorldName(world_name);
                   }}
                   style={{
-                    backgroundColor: worldName === world_name ? '#ffffff7f' : 'transparent',
+                    border: world_name === worldName ? '1px solid transparent' : '1px solid gray',
+                    backgroundColor:
+                      worldName === world_name ? 'var(--selected-color)' : 'transparent',
                   }}
                 >
                   <Image src={img} alt={world_name + 'main'} height={12} width={12} />
                   <span
                     className={classes.worldName}
-                    style={{ color: world_name === worldName ? '#d0d0d0' : 'white' }}
+                    style={{ color: world_name === worldName ? 'white' : 'black' }}
                   >
                     {world_name}
                   </span>
@@ -55,10 +54,7 @@ export default function GuildRank() {
         )}
       </div>
       <div className={classes.rankingTypeContainter}>
-        <div
-          className={classes.rankTableHeader}
-          style={{ borderBottom: !isRankingTypeListOpen ? 'none' : undefined }}
-        >
+        <div className={classes.rankTableHeader}>
           <p>랭킹 종류</p>
           <button
             onClick={() => {
@@ -78,12 +74,12 @@ export default function GuildRank() {
                     setRankingType(`${i}`);
                   }}
                   style={{
-                    backgroundColor: rankingType === String(i) ? '#ffffff7f' : 'transparent',
+                    border: rankingType === String(i) ? '1px solid transparent' : '1px solid gray',
+                    backgroundColor:
+                      rankingType === String(i) ? 'var(--selected-color)' : 'transparent',
                   }}
                 >
-                  <span style={{ color: rankingType === String(i) ? '#d0d0d0' : 'white' }}>
-                    {e}
-                  </span>
+                  <span style={{ color: rankingType === String(i) ? 'white' : 'black' }}>{e}</span>
                 </li>
               );
             })}

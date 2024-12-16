@@ -2,10 +2,8 @@ import NextAuth from 'next-auth';
 import credentials from 'next-auth/providers/credentials';
 import kakao from 'next-auth/providers/kakao';
 import { HandsData } from './types/userData';
-import isTokenExpired from './app/_lib/isTokenExpired';
 import { cookies } from 'next/headers';
 
-let isRefreshingToken = false;
 export const {
   handlers: { GET, POST },
   signIn,
@@ -95,7 +93,7 @@ export const {
       return '/authLoading';
     },
     signIn: async ({ account, profile, user }) => {
-      console.log(account?.provider, 'account');
+      console.log(account?.provider, 'account provider');
       if (account?.provider === 'credentials') {
         //일반 로그인의 경우 유저 정보가 이미 있음
         return true;
@@ -117,9 +115,22 @@ export const {
           if (!fetchedData.ok) {
             throw new Error('카카오 로그인 실패');
           }
-
+          console.log('account refreshToken', account.refresh_token);
+          if (account.refresh_token) {
+            cookies().set({
+              name: '_Loya',
+              value: account.refresh_token as string,
+              httpOnly: true,
+              path: '/',
+              sameSite: 'lax',
+              secure: process.env.NODE_ENV === 'production',
+            });
+          }
           const responseData = await fetchedData.json();
-          console.log('fetchedData', responseData);
+
+          user.ocid = responseData.result.ocid;
+          user.isVerified = responseData.result.isVerified;
+
           return true;
         } catch (error) {
           console.error('에러 발생:', error);
@@ -129,7 +140,9 @@ export const {
       return true;
     },
     jwt: async ({ token, user, account, trigger, session }) => {
-      if (trigger === 'update') {
+      console.log('jwt 실행');
+      // 로컬 토큰 갱신 로직
+      if (trigger === 'update' && session) {
         console.log('update 실행');
         const { accessToken } = session;
         token.accessToken = accessToken;
@@ -139,10 +152,13 @@ export const {
       if (account) {
         // Oauth 최초로그인
         if (account?.type === 'oauth' && user) {
+          console.log(account, user, 'kakaoLogin');
           token.accessToken = account.access_token;
           token.refreshToken = account.refresh_token;
           token.loginType = 'kakao';
-          return token;
+
+          token.ocid = user.ocid;
+          token.isVerified = user.isVerified;
         }
 
         // 로컬 최초로그인
@@ -155,72 +171,32 @@ export const {
           token.isVerified = user.isVerified;
 
           // 사용자 데이터 가져오기
-          if (token.ocid) {
-            const getCharData = await fetch(`${process.env.NEXT_PUBLIC_FETCH_URL}/api/user`, {
-              method: 'POST',
-              body: JSON.stringify({ ocid: token.ocid }),
-            });
-            if (getCharData.ok) {
-              const { character_name, character_image, character_guild_name, world_name } =
-                await getCharData.json();
+        }
 
-              const handsData = {
-                character_name,
-                character_image,
-                character_guild_name,
-                world_name,
-              };
+        if (token.ocid) {
+          const getCharData = await fetch(`${process.env.NEXT_PUBLIC_FETCH_URL}/api/user`, {
+            method: 'POST',
+            body: JSON.stringify({ ocid: token.ocid }),
+          });
+          if (getCharData.ok) {
+            const { character_name, character_image, character_guild_name, world_name } =
+              await getCharData.json();
 
-              token.handsData = handsData;
-            }
+            const handsData = {
+              character_name,
+              character_image,
+              character_guild_name,
+              world_name,
+            };
+
+            token.handsData = handsData;
           }
-          return token;
         }
       }
-      if (token.loginType === 'local') {
-        console.log('jwt 실행');
 
-        // 토큰 갱신 로직
-        // if (token.accessToken && isTokenExpired(token.accessToken as string)) {
-        //   // console.log('현재 토큰 : ', token.accessToken);
-        //   if (isRefreshingToken) {
-        //     return token; // 이전 갱신 요청이 끝날 때까지 대기
-        //   }
-        //   console.log('토큰 갱신 시작');
-        //   isRefreshingToken = true; // 갱신 시작
-
-        //   try {
-        //     const response = await fetch(
-        //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/refreshToken`,
-        //       {
-        //         method: 'POST',
-        //         headers: {
-        //           'Content-Type': 'application/json',
-        //           Cookie: `_Loya=${cookies().get('_Loya')?.value || ''}`,
-        //         },
-        //         credentials: 'include',
-        //       }
-        //     );
-
-        //     const json = await response.json();
-        //     console.log(json, 'json');
-        //     if (response.ok) {
-        //       console.log('토큰 갱신 성공');
-        //       token.accessToken = json.accessToken;
-        //     }
-        //     return token;
-        //   } catch (error) {
-        //     console.error('토큰 갱신 실패', error);
-        //     throw new Error('토큰 갱신 실패');
-        //   } finally {
-        //     isRefreshingToken = false; // 갱신 완료
-        //   }
-        // }
-        return token;
-      }
       return token;
     },
-    session: async ({ session, token, user }) => {
+    session: async ({ session, token, user, trigger }) => {
       try {
         console.log('session 실행');
 
