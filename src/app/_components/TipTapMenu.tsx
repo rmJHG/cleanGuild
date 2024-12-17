@@ -80,8 +80,11 @@ export default function TipTapMenu({ editor }: { editor: Editor | null }) {
           aria-label={label}
         />
       ))}
-      <label htmlFor="image-upload" style={{ cursor: 'pointer' }}>
-        <CiImageOn size={20} style={{ color: '#adadad' }} />
+      <label
+        htmlFor="image-upload"
+        style={{ cursor: 'pointer', lineHeight: '20px', display: 'flex', justifyContent: 'center' }}
+      >
+        <CiImageOn size={20} style={{ color: 'black' }} />
       </label>
       <input
         id="image-upload"

@@ -35,10 +35,13 @@
   z-index: 30;
   color: white;
 }
-
+.conditionContainer button:first-child {
+  background-color: rgb(149, 52, 52);
+}
 .conditionContainer button {
+  border-radius: 5px;
   padding: 10px 20px;
-  border: 1px solid gray;
+
   white-space: nowrap;
   text-overflow: ellipsis;
   font-family: 'GmarketSansMedium';

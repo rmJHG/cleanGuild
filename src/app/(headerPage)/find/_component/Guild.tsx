@@ -2,7 +2,7 @@ import { GuildPostData } from '@/types/guildPostData';
 import classes from './styles/guild.module.css';
 import { FaDiscord } from 'react-icons/fa';
 import { RiKakaoTalkFill } from 'react-icons/ri';
-
+import { SiKakaotalk } from 'react-icons/si';
 export default function Guild({ data }: { data: GuildPostData }) {
   const { postData, publisherData } = data;
   const {
@@ -78,7 +78,14 @@ export default function Guild({ data }: { data: GuildPostData }) {
       <div className={classes.postFooter}>
         <div className={classes.contactContainer}>
           <FaDiscord color={discordLink ? '#5865F2' : 'gray'} width={25} height={15} />
-          <RiKakaoTalkFill color={openKakaotalkLink ? '#FEE500' : 'gray'} />
+          {openKakaotalkLink ? (
+            <SiKakaotalk
+              color={openKakaotalkLink ? '#f9e000' : 'gray'}
+              style={{ backgroundColor: 'rgb(53, 29, 28)' }}
+            />
+          ) : (
+            <RiKakaoTalkFill color={'gray'} style={{ backgroundColor: 'none' }} />
+          )}
         </div>
         <div className={classes.publisherInfoContainer}>
           <div className={classes.pusblisherName}>

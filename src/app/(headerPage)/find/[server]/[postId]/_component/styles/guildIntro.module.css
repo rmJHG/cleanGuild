@@ -27,3 +27,7 @@
 .guildIntro .align-center {
   text-align: center;
 }
+.guildIntroImage {
+  max-width: 100%;
+  width: auto;
+}

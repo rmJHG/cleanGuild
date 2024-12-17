@@ -35,14 +35,7 @@ export default function SearchedChar({ data }: { data: Char | null }) {
   console.log(data);
   return (
     <div className={classes.container}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-      >
+      <div className={classes.charImage}>
         <Image
           src={character_image}
           alt="userMainCharacterImage"
@@ -50,14 +43,16 @@ export default function SearchedChar({ data }: { data: Char | null }) {
           height={150}
           priority
         />
-        <p>birth : {character_date_create.slice(0, 10)}</p>
+        <p className={classes.birth}>birth : {character_date_create.slice(0, 10)}</p>
       </div>
       <div className={classes.charInfo}>
         <p className={classes.charName}>
           {icon && <Image src={icon} alt={world_name} width={15} height={15} priority />}
           {character_name}
         </p>
-        <p>Lv {character_level}</p>
+        <p>
+          Lv {character_level} ({character_exp_rate}%)
+        </p>
         <p>{character_class}</p>
         <p>인기도 {popularity}</p>
         <p>길드 {character_guild_name || '없음'}</p>

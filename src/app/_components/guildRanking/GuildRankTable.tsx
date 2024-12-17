@@ -69,9 +69,7 @@ export default function GuildRankTable({ ranking_type, world_name }: Props) {
                     <td className={classes.guildNameCell}>
                       <Link href={`/guild/${world_name}/${e.guild_name}`}>{e.guild_name}</Link>
                     </td>
-                    <td style={{ fontWeight: '700', fontSize: '16px' }}>
-                      {e.guild_point.toLocaleString()}
-                    </td>
+                    <td>{e.guild_point.toLocaleString()}</td>
                   </tr>
                 );
               })}

@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  border-radius: 15px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,14 +26,12 @@
 .firstContainer {
   width: 100%;
   padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+
+  grid-template-columns: 1fr 2fr;
   background-color: orange;
 }
-.firstContainer div {
-  flex: 1;
-}
+
 .anotherRankingContainer {
   width: 100%;
   padding: 5px 0;
@@ -46,13 +44,11 @@
 .anotherRankingContainer > div {
   width: 100%;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+
+  grid-template-columns: 1fr 2fr;
 }
-.anotherRankingContainer > div > div {
-  flex: 1;
-}
+
 .firstContainer span,
 .anotherRankingContainer span {
   padding: 0 10px;
@@ -63,7 +59,13 @@
 .guildInfo {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
   gap: 3px;
+}
+.guildInfo > p {
+  align-self: flex-start;
 }
 .guildName {
   display: flex;

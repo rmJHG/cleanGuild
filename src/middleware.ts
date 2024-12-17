@@ -18,6 +18,7 @@ export const middleware = async (request: NextRequest) => {
 
     if (
       !session.user.handsData &&
+      pathname !== '/' &&
       !pathname.startsWith('/user-auth') &&
       !pathname.startsWith('/_next') &&
       !pathname.startsWith('/signout')
@@ -40,5 +41,7 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/((?!find).*)', '/((?!test).*)'], // `/find`를 제외한 모든 경로
+  matcher: [
+    '/((?!find|test|guild|search).*)', // find, test, guild, search를 제외한 모든 경로
+  ],
 };

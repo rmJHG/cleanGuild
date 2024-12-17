@@ -96,3 +96,9 @@
   font-weight: 600;
   color: black;
 }
+
+@media (max-width: 768px) {
+  .signInContainer {
+    padding: 10px 15px;
+  }
+}

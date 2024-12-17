@@ -1,6 +1,6 @@
 .postHeaderContainer {
   width: 100%;
-  padding: 50px 10px 10px 10px;
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -27,7 +27,7 @@
 
 @media (max-width: 600px) {
   .postHeaderContainer {
-    padding: 20px 10px 10px 10px;
+    padding-top: 20px;
   }
   .titleWrapeer > h1 {
     font-size: 20px;

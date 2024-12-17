@@ -38,20 +38,20 @@ export default function Page() {
 
   if (guildData?.error) return <div>error {guildData.error.message}</div>;
   if (!guildData) return <Loading />;
-  // if (guildData.guild_master_name !== handsData.character_name)
-  //   return (
-  //     <div className={classes.onlyGuildMaster}>
-  //       <p>길드마스터만 홍보 가능합니다!</p>
-  //       <button
-  //         style={{ fontSize: '1.5rem' }}
-  //         onClick={() => {
-  //           route.back();
-  //         }}
-  //       >
-  //         뒤로가기
-  //       </button>
-  //     </div>
-  //   );
+  if (guildData.guild_master_name !== handsData.character_name)
+    return (
+      <div className={classes.onlyGuildMaster}>
+        <p>길드마스터만 홍보 가능합니다!</p>
+        <button
+          style={{ fontSize: '1.5rem' }}
+          onClick={() => {
+            route.back();
+          }}
+        >
+          뒤로가기
+        </button>
+      </div>
+    );
 
   const postCooltime = data;
   const currentTimestamp = new Date().getTime();
@@ -65,6 +65,8 @@ export default function Page() {
     return (
       <div
         style={{
+          width: '100%',
+          maxWidth: '900px',
           minHeight: '100%',
           display: 'flex',
           alignContent: 'center',
