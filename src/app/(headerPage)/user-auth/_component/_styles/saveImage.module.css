@@ -1,0 +1,105 @@
+.container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.charInfoContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.charInfo {
+  border-radius: 5px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  background-color: var(--header-color);
+  position: relative;
+}
+.charInfoText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+}
+.charInfoText > h3 {
+  line-height: 25px;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  gap: 5px;
+  white-space: nowrap;
+}
+.charInfoText > p {
+  align-self: flex-start;
+}
+
+.selectCharCotainer {
+  flex: 1;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.selectChar {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow: auto;
+}
+.selectChar img {
+  width: 100%;
+  height: 100%;
+}
+.selectMsg {
+  position: absolute;
+  top: 7px;
+}
+.btnContainer {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.btnContainer button {
+  max-width: 800px;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 2525px;
+  border: none;
+  background-color: var(--header-color);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnContainer button:hover {
+  opacity: 0.7;
+}
+.btnContainer button:last-child {
+  background-color: gray;
+}
+
+.saveSelectedChar:hover {
+  opacity: 1 !important;
+}

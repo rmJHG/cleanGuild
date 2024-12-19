@@ -1,0 +1,67 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkListContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.checkListContainer h2 {
+  font-size: 25px;
+  font-weight: 700;
+  display: flex;
+  gap: 5px;
+  line-height: 30px;
+}
+.checkListContainer > div {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.checkListContainer > div > ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.checkListContainer > div > ul > li {
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+}
+
+.btnContainer {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.btnContainer button {
+  max-width: 800px;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 2525px;
+  border: none;
+  background-color: var(--header-color);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -3,6 +3,7 @@ export type Char = {
     message: string;
     name: string;
   };
+  access_flag: string;
   character_name: string;
   character_class: string;
   character_class_level: string;
@@ -16,5 +17,6 @@ export type Char = {
   ocid: string;
   popularity?: number;
   character_date_create: string;
-  character_exp_rate: number;
+  character_exp_rate: string;
+  liberation_quest_clear_flag: string;
 } | null;

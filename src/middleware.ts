@@ -7,7 +7,11 @@ export const middleware = async (request: NextRequest) => {
   // if (pathname.startsWith('/_next')) {
   //   return NextResponse.next();
   // }
-  if (pathname.startsWith('/_next') || pathname.startsWith('/api')) {
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/authLoading')
+  ) {
     return NextResponse.next();
   }
   const session = await auth();

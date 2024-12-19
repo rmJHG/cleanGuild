@@ -53,21 +53,24 @@ export default async function customFetch({
 
       // 새로 발급받은 액세스 토큰이 있다면 업데이트
       if (refreshJson.accessToken) {
-        await update({ accessToken: refreshJson.accessToken });
+        const newAccessToken = refreshJson.accessToken; // 새 토큰을 변수에 저장
+
         console.log('토큰 갱신 완료');
+        console.log(newAccessToken);
         // 새 토큰을 사용하여 원래의 요청을 다시 보내기
         const retryRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`, {
           method,
           body,
           headers: {
-            Authorization: `Bearer ${refreshJson.accessToken}`,
             ...headers,
+            Authorization: `Bearer ${newAccessToken}`,
           },
           credentials: 'include',
         });
 
         const retryJson = await retryRes.json();
         console.log(retryJson);
+        await update({ accessToken: newAccessToken }); // 상태를 업데이트
         return retryJson;
       }
     }
