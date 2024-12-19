@@ -9,3 +9,5 @@ download.env
 test
 
 yarn.lock
+
+.DS_Store

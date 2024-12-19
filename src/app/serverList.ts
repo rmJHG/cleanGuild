@@ -12,6 +12,8 @@ import zenis from '../../public/img/world/zenis.png';
 import reboot from '../../public/img/world/reboot.png';
 import burning from '../../public/img/world/burning.png';
 import enosis from '../../public/img/world/enosis.png';
+import eos from '../../public/img/world/eos.png';
+import helios from '../../public/img/world/helios.png';
 
 export const serverList = [
   [luna, '루나'],
@@ -26,8 +28,10 @@ export const serverList = [
   [nova, '노바'],
   [arcane, '아케인'],
   [enosis, '이노시스'],
-  [reboot, '리부트'],
-  [reboot, '리부트2'],
+  [eos, '에오스'],
+  [helios, '헬리오스'],
+  // [reboot, '리부트'],
+  // [reboot, '리부트2'],
   [burning, '버닝'],
   [burning, '버닝2'],
   [burning, '버닝3'],
@@ -48,5 +52,7 @@ export const serverListTest = {
   이노시스: enosis,
   리부트: reboot,
   버닝: burning,
+  에오스: eos,
+  헬리오스: helios,
 };
 export type ServerName = keyof typeof serverListTest;
