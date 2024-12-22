@@ -1,7 +1,7 @@
-import Link from "next/link";
-import classes from "./styles/navigation.module.css";
-import { auth } from "@/auth";
-import { Session } from "next-auth";
+import Link from 'next/link';
+import classes from './styles/navigation.module.css';
+import { auth } from '@/auth';
+import { Session } from 'next-auth';
 
 export default async function Navigation() {
   const session = (await auth()) as Session;

@@ -1,8 +1,5 @@
 export type Char = {
-  error?: {
-    message: string;
-    name: string;
-  };
+  error?: string;
   access_flag: string;
   character_name: string;
   character_class: string;

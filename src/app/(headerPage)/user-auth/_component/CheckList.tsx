@@ -2,6 +2,8 @@ import { MdDoNotDisturbAlt } from 'react-icons/md';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { FaQuestion } from 'react-icons/fa';
 import { CiWarning } from 'react-icons/ci';
+import { RiErrorWarningLine } from 'react-icons/ri';
+
 import classes from './_styles/checkList.module.css';
 export default function CheckList({ onNext }: { onNext: () => void }) {
   return (
@@ -19,11 +21,7 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
             </li>
             <li>
               <FaRegCheckCircle color="var(--header-color)" />
-              길드 홍보 도배를 방지하기 위해 사용됩니다.
-            </li>
-            <li>
-              <FaRegCheckCircle color="var(--header-color)" />
-              인증 중 발생한 문제는 아래 이메일로 연락주세요.
+              중복가입을 방지하기 위해 사용됩니다.
             </li>
           </ul>
         </div>
@@ -45,6 +43,10 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
             <li>
               <MdDoNotDisturbAlt color="#ce2323" />
               전체 월드가 아닌 본인 월드를 캡쳐해서 사용해주세요.
+            </li>
+            <li>
+              <RiErrorWarningLine color="#ff5900" />
+              인증 중 발생한 문제는 아래 이메일로 연락주세요.
             </li>
           </ul>
         </div>

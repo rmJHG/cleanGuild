@@ -1,7 +1,7 @@
 import { Char } from '@/types/char';
 import Image from 'next/image';
 import classes from './styles/searchedChar.module.css';
-import { serverList } from '@/app/serverList';
+import { ServerName, totalServerList } from '@/app/serverList';
 import Loading from '@/app/_components/layout/Loading';
 
 export default function SearchedChar({ data }: { data: Char | null }) {
@@ -29,9 +29,7 @@ export default function SearchedChar({ data }: { data: Char | null }) {
     character_exp_rate,
   } = data;
 
-  const [[icon, _1]] = serverList.filter((f) => {
-    return f[1] === world_name;
-  });
+  const world_icon = totalServerList[world_name as ServerName];
   console.log(data);
   return (
     <div className={classes.container}>
@@ -47,7 +45,9 @@ export default function SearchedChar({ data }: { data: Char | null }) {
       </div>
       <div className={classes.charInfo}>
         <p className={classes.charName}>
-          {icon && <Image src={icon} alt={world_name} width={15} height={15} priority />}
+          {world_icon && (
+            <Image src={world_icon} alt={world_name} width={15} height={15} priority />
+          )}
           {character_name}
         </p>
         <p>

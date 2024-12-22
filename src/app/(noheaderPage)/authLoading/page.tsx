@@ -10,7 +10,7 @@ export default function Page() {
   const { data: session, status, update } = useSession();
   console.log(session, status);
   const router = useRouter();
-
+  console.log('로그인 세션 정리중');
   useEffect(() => {
     if (status === 'authenticated') {
       router.push('/');

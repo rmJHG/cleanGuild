@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import classes from './styles/header.module.css';
 import Navigation from '../Navigation';
-import UserActionBtn from '../UserActionBtn';
+import UserActionBtn from '../menu/UserActionBtn';
 
 export default async function Header() {
   return (

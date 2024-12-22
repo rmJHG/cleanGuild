@@ -1,5 +1,5 @@
 'use client';
-import { serverListTest, ServerName } from '@/app/serverList';
+import { ServerName, totalServerList } from '@/app/serverList';
 import classes from './styles/topContainer.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,7 +28,7 @@ export default function TopContainer({
   const [a, b, c, d, e] = data.ranking.slice(0, 5);
 
   const getServerImage = (worldName: ServerName) => {
-    return serverListTest[worldName]; // 기본 이미지 처리
+    return totalServerList[worldName]; // 기본 이미지 처리
   };
 
   const renderGuildInfo = (guild: any, size = 16) => {

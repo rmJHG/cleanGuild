@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import classes from './styles/serverList.module.css';
-import { serverList } from '@/app/serverList';
+import { mainServerList } from '@/app/serverList';
 import Image from 'next/image';
 
 type Props = {
@@ -10,21 +10,18 @@ type Props = {
 export default function ServerList({ clicked }: Props) {
   return (
     <ul className={classes.serverContainer}>
-      {serverList.map((e, i) => {
-        const world_name = e[1] as string;
-        return (
-          <li
-            key={world_name + i}
-            className={classes.serverItem}
-            style={{ backgroundColor: world_name === clicked ? '#ffffff7f' : 'transparent' }}
-          >
-            <Link href={`/find/${world_name}`}>
-              <Image src={e[0]} alt={world_name + 'find'} width={14} height={14} />
-              <p>{world_name}</p>
-            </Link>
-          </li>
-        );
-      })}
+      {Object.entries(mainServerList).map(([worldName, imageUrl], index) => (
+        <li
+          key={worldName + index}
+          className={classes.serverItem}
+          style={{ backgroundColor: worldName === clicked ? '#ffffff7f' : 'transparent' }}
+        >
+          <Link href={`/find/${worldName}`}>
+            <Image src={imageUrl} alt={`${worldName} find`} width={14} height={14} />
+            <p>{worldName}</p>
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }

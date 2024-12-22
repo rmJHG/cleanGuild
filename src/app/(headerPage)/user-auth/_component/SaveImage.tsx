@@ -2,7 +2,7 @@ import { Char } from '@/types/char';
 
 import Image from 'next/image';
 import classes from './_styles/saveImage.module.css';
-import { serverListTest, ServerName } from '@/app/serverList';
+import { ServerName, totalServerList } from '@/app/serverList';
 import customFetch from '@/app/_lib/customFetch';
 import { successModal } from '@/app/_lib/successModal';
 import Logout from '@/app/_components/Logout';
@@ -42,8 +42,9 @@ export default function SaveImage({
   };
 
   const getServerImage = (worldName: ServerName) => {
-    return serverListTest[worldName]; // 기본 이미지 처리
+    return totalServerList[worldName]; // 기본 이미지 처리
   };
+
   const normalSave = async () => {
     const formData = new FormData();
     formData.append('image', img as File);
@@ -60,15 +61,12 @@ export default function SaveImage({
         token: user.accessToken,
         update,
       });
-      console.log(res);
-      if (
-        res.result.status === 200 &&
-        res.result.message === '핸즈 이미지 업로드가 완료되었습니다.'
-      ) {
+      console.log(res.message);
+      if (res.success) {
         successModal('저장됐습니다 다시 로그인해주세요.', 2000);
         Logout();
       } else {
-        errorModal(res.result.message);
+        errorModal(res.message);
       }
     } catch (error) {
       console.error(error);

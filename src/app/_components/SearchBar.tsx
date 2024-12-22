@@ -9,8 +9,8 @@ export default function SearchBar() {
 
   const searchGuild: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    if (!e.currentTarget.guildName.value) return errorModal('길드명을 입력해주세요!');
-    route.push(`/search/result/${e.currentTarget.guildName.value}`);
+    if (!e.currentTarget.searchText.value) return errorModal('검색어를 입력해주세요!');
+    route.push(`/search/result/${e.currentTarget.searchText.value}`);
   };
 
   return (
@@ -18,7 +18,7 @@ export default function SearchBar() {
       <form onSubmit={searchGuild}>
         <input
           type="text"
-          name="guildName"
+          name="searchText"
           placeholder="길드 또는 캐릭터 검색하기"
           autoComplete="off"
         />

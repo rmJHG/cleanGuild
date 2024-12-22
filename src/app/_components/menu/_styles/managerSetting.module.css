@@ -1,0 +1,107 @@
+.modal {
+  width: 100%;
+  height: 100%;
+}
+.modal p {
+  align-self: flex-start;
+}
+.backBtn {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.backBtn > p {
+  font-size: 16px;
+  line-height: 20px;
+  align-self: center !important;
+}
+.managerListContainer {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.managerList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+.managerList > li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.imgWrapper {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.currentManagerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+.deleteBtn {
+  border: 1px solid var(--border-color);
+  padding: 3px 5px;
+  border-radius: 1515px;
+}
+.addManager {
+  width: 100%;
+
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.addManager > form {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.addManager > form > input {
+  width: 100%;
+  height: 30px;
+  border: none;
+  padding: 5px 10px;
+  background: none;
+  color: white;
+}
+
+.addManager > form > button {
+  padding: 5px 10px;
+}
+.error {
+  color: red;
+  font-size: 12px;
+  line-height: 12px;
+}
+.resultContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.charInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}

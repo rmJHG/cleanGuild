@@ -29,12 +29,6 @@ export default function Page() {
     staleTime: 5 * 60 * 1000,
     gcTime: 5 * 60 * 1000,
   });
-  const { data } = useQuery({
-    queryKey: ['postCooltime', handsData!.world_name, handsData!.character_guild_name],
-    queryFn: getCooltime,
-    staleTime: 1 * 60 * 1000,
-    gcTime: 3 * 60 * 1000,
-  });
 
   if (guildData?.error) return <div>error {guildData.error.message}</div>;
   if (!guildData) return <Loading />;
@@ -52,8 +46,14 @@ export default function Page() {
         </button>
       </div>
     );
+  const { data: latestPostTime } = useQuery({
+    queryKey: ['postCooltime', handsData!.world_name, handsData!.character_guild_name],
+    queryFn: getCooltime,
+    staleTime: 1 * 60 * 1000,
+    gcTime: 3 * 60 * 1000,
+  });
 
-  const postCooltime = data;
+  const postCooltime = latestPostTime;
   const currentTimestamp = new Date().getTime();
   if (!postCooltime) return <Loading />;
 

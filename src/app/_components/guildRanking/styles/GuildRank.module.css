@@ -17,7 +17,9 @@
   justify-content: center;
   flex-wrap: wrap;
 }
-
+.serverListContainer > div:first-child {
+  border-radius: 5px 5px 0 0;
+}
 .serverListContainer > ul {
   padding: 10px;
   display: flex;

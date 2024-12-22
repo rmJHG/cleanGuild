@@ -40,13 +40,16 @@ export default function Page() {
         {state.message && state.message === '이메일 인증을 완료해주세요.' && (
           <span>
             이메일 인증을 완료해주세요
-            <button style={{ textDecoration: 'underline' }}>
+            <button style={{ textDecoration: 'underline', textUnderlineOffset: '0.2rem' }}>
               <p>인증메일 재전송</p>
             </button>
           </span>
         )}
         {state.message && state.message === 'fetch failed' && <span>서버 에러</span>}
-        {state.message && state.message !== '/authLoading' && <span>{state.message}</span>}
+        {state.message &&
+          state.message !== '/authLoading' &&
+          state.message !== 'fetch failed' &&
+          state.message !== '이메일 인증을 완료해주세요.' && <span>{state.message}</span>}
 
         <form action={formAction}>
           <input type="email" name="email" placeholder="이메일" autoComplete="off" />

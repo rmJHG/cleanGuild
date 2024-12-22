@@ -6,7 +6,7 @@ import Loading from '@/app/_components/layout/Loading';
 
 import GuildUserImage from './_components/GuildUserImage';
 import GuildMembers from './_components/GuildMembers';
-import { serverList } from '@/app/serverList';
+
 import Image from 'next/image';
 type Props = {
   params: {
@@ -22,10 +22,6 @@ export default function Page({ params }: Props) {
     queryFn: getGuildData,
     staleTime: 60 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
-  });
-
-  const [[world_icon, _1]] = serverList.filter((e) => {
-    return e[1] === decodedWorldName;
   });
 
   function getRandomMembers(arr: string[]) {

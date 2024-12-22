@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import GuildRankTable from './GuildRankTable';
-import { serverList } from '../../serverList';
+import { totalServerList } from '../../serverList';
 import Image from 'next/image';
 import classes from './styles/GuildRank.module.css';
 export default function GuildRank() {
@@ -25,31 +25,27 @@ export default function GuildRank() {
         </div>
         {isWorldListOpen && (
           <ul>
-            {serverList.map((e, i) => {
-              const img = e[0];
-              const world_name = e[1] as string;
-              return (
-                <li
-                  key={world_name + i}
-                  onClick={() => {
-                    setWorldName(world_name);
-                  }}
-                  style={{
-                    border: world_name === worldName ? '1px solid transparent' : '1px solid gray',
-                    backgroundColor:
-                      worldName === world_name ? 'var(--selected-color)' : 'transparent',
-                  }}
+            {Object.entries(totalServerList).map(([world_name, img], i) => (
+              <li
+                key={world_name + i}
+                onClick={() => {
+                  setWorldName(world_name);
+                }}
+                style={{
+                  border: world_name === worldName ? '1px solid transparent' : '1px solid gray',
+                  backgroundColor:
+                    worldName === world_name ? 'var(--selected-color)' : 'transparent',
+                }}
+              >
+                <Image src={img} alt={`${world_name} main`} height={12} width={12} />
+                <span
+                  className={classes.worldName}
+                  style={{ color: world_name === worldName ? 'white' : 'black' }}
                 >
-                  <Image src={img} alt={world_name + 'main'} height={12} width={12} />
-                  <span
-                    className={classes.worldName}
-                    style={{ color: world_name === worldName ? 'white' : 'black' }}
-                  >
-                    {world_name}
-                  </span>
-                </li>
-              );
-            })}
+                  {world_name}
+                </span>
+              </li>
+            ))}
           </ul>
         )}
       </div>
