@@ -230,10 +230,7 @@ export default function DataTable({ params }: Props) {
         style={{
           height: '100%',
           minHeight: '700px',
-          display: 'flex',
-          alignContent: 'center',
-          justifyContent: 'center',
-          flex: '100 100 100%',
+          margin: '0 auto',
         }}
       >
         {!sortedData ? (

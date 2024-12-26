@@ -34,9 +34,16 @@
 }
 .infoContainer > section {
   width: 100%;
+}
+.infoContainer > section:first-child {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   gap: 5px;
+}
+.infoContainer > section:last-child {
+  display: grid;
+  grid-template-columns: repeat(1, 2fr);
+  gap: 20px;
 }
 .infoContainer > section input {
   width: 100%;
@@ -60,7 +67,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
   flex: 1;
 }
 .addCharBtnContainer input {
@@ -68,15 +74,29 @@
   border-radius: 0;
 }
 .addCharBtnContainer button {
-  height: 100%;
-  padding: 5px 20px;
-  border-left: 1px solid var(--border-color);
+  padding: 10px 10px;
   color: var(--font-color);
   cursor: pointer;
-  font-size: 20px;
+  display: flex;
 }
 .resultContainer {
+  min-height: 100px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.charNameContainer {
+  height: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.charNameContainer span {
+  font-size: 16px;
+  line-height: 20px;
 }
 .btnContainer {
   width: 100%;

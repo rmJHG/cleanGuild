@@ -12,8 +12,9 @@ import { CiViewList } from 'react-icons/ci';
 
 import { useQuery } from '@tanstack/react-query';
 import { getGuildData } from '../../_lib/getGuildData';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import ManagerSetting from './ManagerSetting';
+import getGuildManager from '@/app/_lib/getGuildManager';
 
 export default function ProfileMenu({
   setIsOpen,
@@ -24,16 +25,22 @@ export default function ProfileMenu({
   btnRef: RefObject<HTMLParagraphElement>;
   session: Session;
 }) {
-  if (!session) return null;
-  const user = session.user;
-  const { handsData } = user;
+  const { update } = useSession();
+  const user = session!.user;
+  const { handsData } = session!.user;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const world_icon = totalServerList[handsData!.world_name as ServerName];
-  const { data: guildData } = useQuery({
+  const { data: guildData, isLoading: guildDataLoading } = useQuery({
     queryKey: ['guildData', handsData!.world_name, handsData!.character_guild_name],
     queryFn: getGuildData,
     staleTime: 5 * 60 * 1000,
     gcTime: 5 * 60 * 1000,
+  });
+  const { data: managerData, isLoading: managerDataLoading } = useQuery({
+    queryKey: ['guildManager', handsData!.world_name, handsData!.character_guild_name],
+    queryFn: ({ queryKey }) => getGuildManager({ queryKey }, { session, update }),
+    gcTime: 5 * 60 * 1000,
+    staleTime: 5 * 60 * 1000,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
@@ -51,8 +58,6 @@ export default function ProfileMenu({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [btnRef, wrapperRef, setIsOpen]);
-
-  console.log(guildData);
 
   const logout = async () => {
     try {
@@ -88,6 +93,8 @@ export default function ProfileMenu({
     setIsModalOpen(false);
   };
 
+  console.log(managerData);
+  console.log('guildData', guildData);
   return (
     <div className={classes.profileMenu} ref={wrapperRef}>
       {!isModalOpen && (
@@ -110,6 +117,18 @@ export default function ProfileMenu({
             </div>
           </div>
           <div className={classes.menuContainer}>
+            {!guildDataLoading &&
+              (managerData?.guildManagers.some((itme: any) => itme.ocid === user.ocid) ||
+                guildData.guild_master_name === handsData?.character_name) && (
+                <div>
+                  <CiViewList color="white" /> <p>내가 게시한 글 목록</p>
+                </div>
+              )}
+            {!managerDataLoading && handsData!.character_name === guildData?.guild_master_name && (
+              <div onClick={settingManager}>
+                <CiSettings color="white" /> <p>길드 관리자 설정</p>
+              </div>
+            )}
             <div>
               <CiViewList color="white" /> <p>내가 게시한 글 목록</p>
             </div>
@@ -124,6 +143,7 @@ export default function ProfileMenu({
       )}
       {isModalOpen && (
         <ManagerSetting
+          session={session}
           closeModal={closeModal}
           guild_name={handsData!.character_guild_name}
           world_name={handsData!.world_name}

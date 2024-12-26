@@ -22,6 +22,7 @@ export default async function customFetch({
       body,
       headers: {
         Authorization: `Bearer ${token}`,
+        loginType,
         ...headers,
       },
       credentials: 'include',
@@ -42,6 +43,7 @@ export default async function customFetch({
           method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
+            loginType,
             ...headers,
           },
           credentials: 'include',
@@ -56,18 +58,19 @@ export default async function customFetch({
         const newAccessToken = refreshJson.accessToken; // 새 토큰을 변수에 저장
 
         console.log('토큰 갱신 완료');
-        console.log(newAccessToken);
+
         // 새 토큰을 사용하여 원래의 요청을 다시 보내기
         const retryRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`, {
           method,
           body,
           headers: {
             ...headers,
+            loginType,
             Authorization: `Bearer ${newAccessToken}`,
           },
           credentials: 'include',
         });
-
+        console.log('새로운 요청 성공');
         const retryJson = await retryRes.json();
         console.log(retryJson);
         await update({ accessToken: newAccessToken }); // 상태를 업데이트

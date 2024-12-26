@@ -47,6 +47,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const data = {
       popularity: popRes.popularity,
       ...charRes,
+      ocid: ocidRes.ocid,
     };
     return NextResponse.json(data);
   } catch (e) {

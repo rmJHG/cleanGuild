@@ -3,6 +3,8 @@ import classes from './_styles/contactInfo.module.css';
 import { errorModal } from '@/app/_lib/errorModal';
 import { useState } from 'react';
 
+import { CiSquarePlus } from 'react-icons/ci';
+import { MdDelete } from 'react-icons/md';
 export default function ContactInfo({
   onNext,
   onPrev,
@@ -38,9 +40,7 @@ export default function ContactInfo({
     if (!newManagerName) {
       return errorModal('캐릭터명을 입력해주세요.');
     }
-    if (newManagerName === guildMasterName) {
-      return errorModal('본인은 추가할 수 없습니다');
-    }
+
     if (!guildMember.includes(newManagerName)) {
       return errorModal('길드원이 아닌 캐릭터명은 추가할 수 없습니다.');
     }
@@ -58,6 +58,7 @@ export default function ContactInfo({
       return errorModal('올바른 디스코드 링크를 입력해주세요.');
     onNext();
   };
+
   return (
     <div className={classes.container}>
       <header className={classes.header}>
@@ -85,7 +86,6 @@ export default function ContactInfo({
             }}
           />
         </section>
-
         <section>
           <div className={classes.addCharNameHeaderContainer}>
             <div>
@@ -112,7 +112,7 @@ export default function ContactInfo({
                   handleAddManager();
                 }}
               >
-                +
+                <CiSquarePlus size={18} />
               </button>
             </div>
           </div>
@@ -121,11 +121,12 @@ export default function ContactInfo({
               <div key={i} className={classes.charNameContainer}>
                 <span>{name}</span>
                 <button
+                  style={{ display: 'flex' }}
                   onClick={() =>
                     setPostState({ managerNameArr: managerNameArr.filter((_, j) => i !== j) })
                   }
                 >
-                  x
+                  <MdDelete color="red" size={18} />
                 </button>
               </div>
             ))}

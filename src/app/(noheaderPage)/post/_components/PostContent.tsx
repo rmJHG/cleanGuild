@@ -86,6 +86,7 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
       });
 
       if (res.message === '저장 완료') {
+        successModal('홍보글이 등록되었습니다.', 1000);
         route.push('/');
       }
     } catch (error) {

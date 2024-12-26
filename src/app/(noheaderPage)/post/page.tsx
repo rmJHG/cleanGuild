@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { QueryKey, useQueries } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import Loading from '@/app/_components/layout/Loading';
 import Link from 'next/link';
@@ -10,8 +10,10 @@ import Render from './_components/Render';
 import { getGuildData } from '@/app/_lib/getGuildData';
 import { useRouter } from 'next/navigation';
 import classes from './page.module.css';
+import getGuildManager from '@/app/_lib/getGuildManager';
+
 export default function Page() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   if (!session) return <Loading />;
   const { handsData } = session!.user;
   const route = useRouter();
@@ -23,19 +25,45 @@ export default function Page() {
       </div>
     );
   }
-  const { data: guildData } = useQuery({
-    queryKey: ['guildData', handsData!.world_name, handsData!.character_guild_name],
-    queryFn: getGuildData,
-    staleTime: 5 * 60 * 1000,
-    gcTime: 5 * 60 * 1000,
+  const queries = useQueries({
+    queries: [
+      {
+        queryKey: ['guildData', handsData.world_name, handsData.character_guild_name],
+        queryFn: getGuildData,
+        staleTime: 5 * 60 * 1000,
+        gcTime: 5 * 60 * 1000,
+      },
+      {
+        queryKey: ['guildManager', handsData.world_name, handsData.character_guild_name],
+        queryFn: ({ queryKey }: { queryKey: QueryKey }) =>
+          getGuildManager({ queryKey }, { session, update }),
+        staleTime: 5 * 60 * 1000,
+        gcTime: 5 * 60 * 1000,
+      },
+      {
+        queryKey: ['postCooltime', handsData.world_name, handsData.character_guild_name],
+        queryFn: getCooltime,
+        staleTime: 1 * 60 * 1000,
+        gcTime: 3 * 60 * 1000,
+      },
+    ],
   });
+  const isLoading = queries.some((query) => query.isLoading);
 
-  if (guildData?.error) return <div>error {guildData.error.message}</div>;
-  if (!guildData) return <Loading />;
-  if (guildData.guild_master_name !== handsData.character_name)
+  if (isLoading) {
+    return <Loading />;
+  }
+  const guildData = queries[0].data;
+  const guildManager = queries[1].data;
+  const latestPostTime = queries[2].data;
+
+  if (
+    guildData.guild_master_name !== handsData.character_name &&
+    !guildManager?.guildManagers.find((item: any) => item === session.user.ocid)
+  )
     return (
       <div className={classes.onlyGuildMaster}>
-        <p>길드마스터만 홍보 가능합니다!</p>
+        <p>길드마스터 또는 관리자만 홍보 가능합니다!</p>
         <button
           style={{ fontSize: '1.5rem' }}
           onClick={() => {
@@ -46,12 +74,6 @@ export default function Page() {
         </button>
       </div>
     );
-  const { data: latestPostTime } = useQuery({
-    queryKey: ['postCooltime', handsData!.world_name, handsData!.character_guild_name],
-    queryFn: getCooltime,
-    staleTime: 1 * 60 * 1000,
-    gcTime: 3 * 60 * 1000,
-  });
 
   const postCooltime = latestPostTime;
   const currentTimestamp = new Date().getTime();

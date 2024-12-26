@@ -11,12 +11,12 @@ export default function Condition({
     return (
       <div>
         <span>플래그 점수</span>
-        <span>
+        <span style={{ display: 'flex', alignItems: 'center' }}>
           {!value ? (
             '제한없음'
           ) : (
             <>
-              {value}점 {<FaCaretUp />}
+              {value}점 {<FaCaretUp color="red" />}
             </>
           )}
         </span>
@@ -38,12 +38,12 @@ export default function Condition({
       <div>
         <span>수로 점수</span>
 
-        <span>
+        <span style={{ display: 'flex', alignItems: 'center' }}>
           {!value ? (
             '제한없음'
           ) : (
             <>
-              {value}점 {<FaCaretUp />}
+              {value}점 {<FaCaretUp color="red" />}
             </>
           )}
         </span>
@@ -53,12 +53,12 @@ export default function Condition({
   return (
     <div>
       <span>레벨 제한</span>
-      <span>
+      <span style={{ display: 'flex', alignItems: 'center' }}>
         {!value ? (
           '제한없음'
         ) : (
           <>
-            {value}점 {<FaCaretUp />}
+            Lv{value} {<FaCaretUp color="red" />}
           </>
         )}
       </span>

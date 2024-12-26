@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
-  title: 'MAPLE-GREMIO',
+  title: 'GREMIO',
   description: '인게임에서 부족한 길드홍보 컨텐츠를 보충하는 사이트',
 };
 

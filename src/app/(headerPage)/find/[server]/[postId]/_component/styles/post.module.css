@@ -69,7 +69,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.conditionList > div :first-child {
+.conditionList > div > span:first-child {
   opacity: 0.5;
 }
 .conditionList > div:nth-child(2) {

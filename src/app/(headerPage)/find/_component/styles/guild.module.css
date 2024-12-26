@@ -1,6 +1,6 @@
 .postContainer {
-  height: 280px;
   width: 280px;
+  height: 280px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   display: flex;
