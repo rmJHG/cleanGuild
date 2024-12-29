@@ -67,11 +67,29 @@
 }
 
 @media (max-width: 700px) {
+  .charImage img {
+    width: 140px;
+    height: 140px;
+  }
   .charInfo {
     display: flex;
     flex-direction: column;
     justify-self: flex-start;
     align-items: flex-start;
     font-size: 13px !important;
+  }
+
+  .charInfo p {
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .charName {
+    font-size: 16px !important;
+    line-height: 16px !important;
+  }
+  .charName > img {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
   }
 }

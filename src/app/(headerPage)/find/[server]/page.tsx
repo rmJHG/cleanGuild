@@ -10,7 +10,7 @@ import { GuildPostData } from '@/types/guildPostData';
 import Loading from '@/app/_components/layout/Loading';
 import { useEffect, useRef, useState } from 'react';
 
-import { CiFilter } from 'react-icons/ci';
+import { MdFilterAlt } from 'react-icons/md';
 
 type Props = {
   params: {
@@ -128,8 +128,8 @@ export default function DataTable({ params }: Props) {
       <div className={classes.optionContainer}>
         <div className={classes.filterContainer}>
           <div ref={buttonRef}>
-            <CiFilter
-              color="black"
+            <MdFilterAlt
+              color={isOpen ? 'rgb(180,180,180)' : 'black'}
               size={23}
               onClick={() => {
                 setIsOpen(!isOpen);

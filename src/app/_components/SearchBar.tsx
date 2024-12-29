@@ -21,6 +21,7 @@ export default function SearchBar() {
           name="searchText"
           placeholder="길드 또는 캐릭터 검색하기"
           autoComplete="off"
+          maxLength={20}
         />
         <button type="submit" name="searchBtn">
           <svg

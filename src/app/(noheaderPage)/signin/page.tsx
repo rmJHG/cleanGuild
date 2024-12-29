@@ -43,6 +43,9 @@ export default function Page() {
   useEffect(() => {
     if (params.get('error')) {
       errorModal(params.get('error') as string);
+      const url = new URL(window.location.href);
+      url.searchParams.delete('error');
+      window.history.replaceState({}, '', url.toString());
     }
   }, [params]);
   return (
