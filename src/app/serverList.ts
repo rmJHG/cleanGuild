@@ -37,6 +37,7 @@ export const totalServerList = {
   챌린저스: chal,
   챌린저스2: chal,
   챌린저스3: chal,
+  챌린저스4: chal,
 };
 export type ServerName = keyof typeof totalServerList;
 

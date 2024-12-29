@@ -93,8 +93,7 @@ export default function ProfileMenu({
     setIsModalOpen(false);
   };
 
-  console.log(managerData);
-  console.log('guildData', guildData);
+  console.log(managerData, 'managerData');
   return (
     <div className={classes.profileMenu} ref={wrapperRef}>
       {!isModalOpen && (
@@ -118,7 +117,7 @@ export default function ProfileMenu({
           </div>
           <div className={classes.menuContainer}>
             {!guildDataLoading &&
-              (managerData?.guildManagers.some((itme: any) => itme.ocid === user.ocid) ||
+              (managerData?.some((item: string) => item === user.ocid) ||
                 guildData.guild_master_name === handsData?.character_name) && (
                 <div>
                   <CiViewList color="white" /> <p>내가 게시한 글 목록</p>
@@ -129,12 +128,12 @@ export default function ProfileMenu({
                 <CiSettings color="white" /> <p>길드 관리자 설정</p>
               </div>
             )}
-            <div>
-              <CiViewList color="white" /> <p>내가 게시한 글 목록</p>
+            {/* <div>
+              <CiViewList color="white" /> <p>내가 게시한 글 목록 test</p>
             </div>
             <div onClick={settingManager}>
-              <CiSettings color="white" /> <p>길드 관리자 설정</p>
-            </div>
+              <CiSettings color="white" /> <p>길드 관리자 설정 test</p>
+            </div> */}
             <div onClick={logout}>
               <IoIosLogOut color="white" /> <p>로그아웃</p>
             </div>

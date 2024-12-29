@@ -10,7 +10,7 @@ export default function NotFound() {
         flex: '1',
       }}
     >
-      404 NOT FOUND
+      <p style={{ color: 'white' }}>404 NOT FOUND</p>
     </div>
   );
 }

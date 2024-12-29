@@ -64,14 +64,11 @@ export default function ManagerSetting({
       errorModal('길드에 가입된 캐릭터만 추가할 수 있습니다.');
       return;
     }
-    if (
-      data &&
-      data.guildManagers.find((item: any) => item.character_name === charData.character_name)
-    ) {
+    if (data && data.find((item: any) => item.character_name === charData.character_name)) {
       errorModal('이미 추가된 캐릭터입니다.');
       return;
     }
-    if (data) {
+    try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/guild/updateGuildManager`,
         {
@@ -82,7 +79,7 @@ export default function ManagerSetting({
           body: JSON.stringify({
             world_name,
             guild_name,
-            guildManagers: [...data.guildManagers, charData.ocid],
+            guildManagers: [...data, charData.ocid],
           }),
         }
       );
@@ -91,26 +88,8 @@ export default function ManagerSetting({
       await refetch();
       setIsSearch(false);
       setCharName('');
-    } else {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/guild/postGuildManager`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            world_name,
-            guild_name,
-            guildManagers: [charData.ocid],
-          }),
-        }
-      );
-      const json = await response.json();
-      console.log(json);
-      await refetch();
-      setIsSearch(false);
-      setCharName('');
+    } catch (error) {
+      console.error(error);
     }
   };
   const deleteManager = async (ocid: string) => {
@@ -139,8 +118,9 @@ export default function ManagerSetting({
   if (charData) {
     console.log(charData);
   }
+  console.log(data);
   const managerData = useQueries({
-    queries: data.guildManagers.map((ocid: string) => ({
+    queries: data.map((ocid: string) => ({
       queryKey: ['charForOcid', ocid],
       queryFn: ({ queryKey }: { queryKey: QueryKey }) => getCharDataForOcid({ queryKey }, { ocid }),
       gcTime: 5 * 60 * 1000,
@@ -243,7 +223,7 @@ export default function ManagerSetting({
             <NormalLoading />
           </div>
         ) : (
-          (!data || data.guildManagers.length < 5) && (
+          (!data || data.length < 4) && (
             <div>
               <div className={classes.addManager}>
                 <form onSubmit={searchChar}>

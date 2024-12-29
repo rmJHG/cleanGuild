@@ -3,6 +3,7 @@ import credentials from 'next-auth/providers/credentials';
 import kakao from 'next-auth/providers/kakao';
 import { HandsData } from './types/userData';
 import { cookies } from 'next/headers';
+import { errorModal } from './app/_lib/errorModal';
 
 export const {
   handlers: { GET, POST },
@@ -90,6 +91,10 @@ export const {
       if (url.includes('signOut')) {
         return '/';
       }
+      if (url.includes('signin?error')) {
+        return url;
+      }
+      console.log(url, baseUrl, 'redirect');
       return '/authLoading';
     },
     signIn: async ({ account, profile, user }) => {
@@ -112,11 +117,22 @@ export const {
             }
           );
 
+          console.log(fetchedData, 'fetchedData');
+
+          const responseData = await fetchedData.json();
+          console.log(responseData, 'result');
           if (!fetchedData.ok) {
-            throw new Error('카카오 로그인 실패');
+            await fetch('https://kapi.kakao.com/v1/user/unlink', {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${account.access_token}`,
+              },
+            });
+
+            return `/signin?error=${encodeURIComponent(responseData.message)}`;
           }
-          console.log('account refreshToken', account.refresh_token);
-          if (account.refresh_token) {
+
+          if (responseData.message === '로그인 성공') {
             cookies().set({
               name: '_Loya',
               value: account.refresh_token as string,
@@ -125,19 +141,22 @@ export const {
               sameSite: 'lax',
               secure: process.env.NODE_ENV === 'production',
             });
+            user.ocid = responseData.result.ocid;
+            user.isVerified = responseData.result.isVerified;
+
+            return true;
           }
-          const responseData = await fetchedData.json();
-
-          user.ocid = responseData.result.ocid;
-          user.isVerified = responseData.result.isVerified;
-
-          return true;
-        } catch (error) {
-          console.error('에러 발생:', error);
-          throw new Error('카카오 로그인 에러');
+        } catch (error: any) {
+          await fetch('https://kapi.kakao.com/v1/user/unlink', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${account.access_token}`,
+            },
+          });
+          return `/signin?error=${encodeURIComponent(error.message)}`;
         }
       }
-      return true;
+      return false;
     },
     jwt: async ({ token, user, account, trigger, session }) => {
       console.log('jwt 실행');

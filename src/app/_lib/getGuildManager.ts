@@ -18,6 +18,9 @@ export default async function getGuildManager(
     });
     console.log(response);
 
+    if (response.message === '길드 매니저를 찾을 수 없습니다.') {
+      return null;
+    }
     return response;
   } catch (error) {
     console.error(error);

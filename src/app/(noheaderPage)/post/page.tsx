@@ -1,6 +1,6 @@
 'use client';
 
-import { QueryKey, useQueries } from '@tanstack/react-query';
+import { QueryKey, useQueries, useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import Loading from '@/app/_components/layout/Loading';
 import Link from 'next/link';
@@ -40,14 +40,15 @@ export default function Page() {
         staleTime: 5 * 60 * 1000,
         gcTime: 5 * 60 * 1000,
       },
-      {
-        queryKey: ['postCooltime', handsData.world_name, handsData.character_guild_name],
-        queryFn: getCooltime,
-        staleTime: 1 * 60 * 1000,
-        gcTime: 3 * 60 * 1000,
-      },
     ],
   });
+  const { data: latestPostTime } = useQuery({
+    queryKey: ['postCooltime', handsData.world_name, handsData.character_guild_name],
+    queryFn: getCooltime,
+    staleTime: 1 * 60 * 1000,
+    gcTime: 3 * 60 * 1000,
+  });
+
   const isLoading = queries.some((query) => query.isLoading);
 
   if (isLoading) {
@@ -55,11 +56,11 @@ export default function Page() {
   }
   const guildData = queries[0].data;
   const guildManager = queries[1].data;
-  const latestPostTime = queries[2].data;
 
+  console.log(latestPostTime);
   if (
     guildData.guild_master_name !== handsData.character_name &&
-    !guildManager?.guildManagers.find((item: any) => item === session.user.ocid)
+    !guildManager.find((item: any) => item === session.user.ocid)
   )
     return (
       <div className={classes.onlyGuildMaster}>
