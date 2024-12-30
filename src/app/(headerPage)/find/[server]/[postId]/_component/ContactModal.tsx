@@ -47,35 +47,35 @@ export default function ContactModal({
                 <span>SNS</span>
               </div>
               <div>
-                <div>
-                  {discordLink ? (
+                {discordLink ? (
+                  <div>
                     <Link href={discordLink as string} target="_blank">
                       <FaDiscord size={25} color="#5865f2" />
                       <span>디스코드</span> <CiLink size={25} />
                     </Link>
-                  ) : (
-                    <div className={classes.disabledLink}>
-                      <FaDiscord size={25} color="gray" />
-                      <span>디스코드</span> <CiLink size={25} />
-                    </div>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div className={classes.disabledLink}>
+                    <FaDiscord size={25} color="gray" />
+                    <span>디스코드</span> <CiLink size={25} />
+                  </div>
+                )}
 
-                <div>
-                  {openKakaotalkLink ? (
+                {openKakaotalkLink ? (
+                  <div>
                     <Link href={openKakaotalkLink as string} target="_blank">
                       <RiKakaoTalkFill size={25} color={openKakaotalkLink ? '#FEE500' : 'gray'} />
                       <span>오픈채팅</span>
                       <CiLink size={25} />
                     </Link>
-                  ) : (
-                    <div className={classes.disabledLink}>
-                      <RiKakaoTalkFill size={25} color="gray" />
-                      <span>오픈채팅</span>
-                      <CiLink size={25} />
-                    </div>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div className={classes.disabledLink}>
+                    <RiKakaoTalkFill size={25} color="gray" />
+                    <span>오픈채팅</span>
+                    <CiLink size={25} />
+                  </div>
+                )}
               </div>
             </div>
 

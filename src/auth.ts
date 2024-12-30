@@ -100,13 +100,12 @@ export const {
     signIn: async ({ account, profile, user }) => {
       console.log(account?.provider, 'account provider');
       if (account?.provider === 'credentials') {
-        //일반 로그인의 경우 유저 정보가 이미 있음
         return true;
       }
 
       if (account?.provider === 'kakao') {
         try {
-          const fetchedData = await fetch(
+          const fetchekakaoUserdData = await fetch(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/kakao/signin`,
             {
               method: 'POST',
@@ -117,11 +116,11 @@ export const {
             }
           );
 
-          console.log(fetchedData, 'fetchedData');
+          console.log(fetchekakaoUserdData, 'fetchekakaoUserdData');
 
-          const responseData = await fetchedData.json();
+          const responseData = await fetchekakaoUserdData.json();
           console.log(responseData, 'result');
-          if (!fetchedData.ok) {
+          if (!fetchekakaoUserdData.ok) {
             await fetch('https://kapi.kakao.com/v1/user/unlink', {
               method: 'POST',
               headers: {
@@ -132,7 +131,7 @@ export const {
             return `/signin?error=${encodeURIComponent(responseData.message)}`;
           }
 
-          if (responseData.message === '로그인 성공') {
+          if (fetchekakaoUserdData.ok) {
             cookies().set({
               name: '_Loya',
               value: account.refresh_token as string,

@@ -34,6 +34,9 @@ export default function ContactInfo({
     if (managerNameArr.length >= 5) {
       return errorModal('인게임 문의는 최대 5명까지 추가할 수 있습니다.');
     }
+    if (managerName === guildMasterName) {
+      return errorModal('길드마스터는 추가할 수 없습니다.');
+    }
 
     const newManagerName = managerName.trim();
     setManagerName('');
@@ -90,7 +93,7 @@ export default function ContactInfo({
           <div className={classes.addCharNameHeaderContainer}>
             <div>
               <p>인게임 문의</p>
-              <p>(본인을 제외한 최대 5명)</p>
+              <p>(길마를 제외한 최대 4명)</p>
             </div>
             <div className={classes.addCharBtnContainer}>
               <input

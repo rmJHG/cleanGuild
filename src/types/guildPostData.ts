@@ -1,8 +1,7 @@
 import { UserData } from './userData';
 
 export type GuildPostData = {
-  _id?: string;
-  postId?: string;
+  _id: string;
   postData: {
     title: string;
     currentNoblePoint: number;
@@ -22,4 +21,9 @@ export type GuildPostData = {
     discordLink: string;
   };
   publisherData: UserData;
+};
+
+export type GuildPostDataList = {
+  recruitments: GuildPostData[];
+  totalPages: number;
 };

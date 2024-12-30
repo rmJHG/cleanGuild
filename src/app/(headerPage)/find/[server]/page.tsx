@@ -6,11 +6,12 @@ import classes from './page.module.css';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { getPostData } from './_lib/getPostData';
-import { GuildPostData } from '@/types/guildPostData';
+import { GuildPostData, GuildPostDataList } from '@/types/guildPostData';
 import Loading from '@/app/_components/layout/Loading';
 import { useEffect, useRef, useState } from 'react';
 
 import { MdFilterAlt } from 'react-icons/md';
+import Pagination from '../_component/Pagenation';
 
 type Props = {
   params: {
@@ -30,6 +31,7 @@ const limitedSuroPointList = [
 ];
 export default function DataTable({ params }: Props) {
   const decodedServer = decodeURIComponent(params.server);
+  const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [guildType, setGuildType] = useState('전체');
   const [childGuild, setChildGuild] = useState('전체');
@@ -74,16 +76,18 @@ export default function DataTable({ params }: Props) {
     };
   }, [modalRef, buttonRef]);
 
-  const { data } = useQuery<GuildPostData[], Error, GuildPostData[], [string, string]>({
-    queryKey: ['guildPost', decodedServer],
-    queryFn: getPostData,
-    staleTime: 0,
-    gcTime: 1 * 60 * 1000,
-  });
+  const { data, refetch } = useQuery<GuildPostDataList, Error, GuildPostDataList, [string, string]>(
+    {
+      queryKey: ['guildPost', decodedServer],
+      queryFn: ({ queryKey }) => getPostData({ queryKey }, { page }),
+      staleTime: 0,
+      gcTime: 1 * 60 * 1000,
+    }
+  );
 
   const filteredData =
     data &&
-    data.filter((e) => {
+    data.recruitments.filter((e) => {
       const isGuildTypeMatch =
         !guildType || guildType === '전체' || e.postData.guildType === guildType;
       const isChildGuildMatch =
@@ -119,6 +123,16 @@ export default function DataTable({ params }: Props) {
       return a.postData.postDate - b.postData.postDate;
     }
   });
+
+  const handlePage = async (page: number) => {
+    setPage(page);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [page]);
+
+  console.log(data);
   return (
     <div className={classes.container}>
       <div className={classes.serverListWrapper}>
@@ -228,9 +242,12 @@ export default function DataTable({ params }: Props) {
       </div>
       <div
         style={{
-          height: '100%',
-          minHeight: '700px',
+          flex: '1',
           margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         {!sortedData ? (
@@ -238,17 +255,24 @@ export default function DataTable({ params }: Props) {
         ) : sortedData.length < 1 ? (
           <p>홍보게시글이 없습니다.</p>
         ) : (
-          <ul className={classes.guildPostList}>
-            {sortedData.map((e) => {
-              return (
-                <li key={e.postId}>
-                  <Link href={`/find/${decodedServer}/${e.postId}`} prefetch={false}>
-                    <Guild data={e} />
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <>
+            <ul className={classes.guildPostList}>
+              {sortedData.map((e) => {
+                return (
+                  <li key={e._id}>
+                    <Link href={`/find/${decodedServer}/${e._id}`} prefetch={false}>
+                      <Guild data={e} />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <Pagination
+              currentPage={page}
+              totalPages={data!.totalPages}
+              onPageChange={handlePage}
+            />
+          </>
         )}
       </div>
     </div>
