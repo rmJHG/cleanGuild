@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className={classes.footerWrapper}>
       <p>
-        CONTACT : <span>maplegremio@gmail.com</span>
+        CONTACT : <span>service@maplegremio.com</span>
       </p>
       <p>
         Data based on <span style={{ fontFamily: 'SBAggroB' }}>NEXON OPEN API</span>
