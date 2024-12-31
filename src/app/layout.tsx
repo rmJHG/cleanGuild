@@ -42,6 +42,11 @@ export default async function RootLayout({ children }: Props) {
           </RQProvider>
         </SessionProvider>
         <ToastContainer />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830932244446631"
+          crossOrigin="anonymous"
+        ></script>
       </body>
     </html>
   );
