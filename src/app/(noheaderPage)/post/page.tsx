@@ -45,8 +45,8 @@ export default function Page() {
   const { data: latestPostTime } = useQuery({
     queryKey: ['postCooltime', handsData.world_name, handsData.character_guild_name],
     queryFn: getCooltime,
-    staleTime: 1 * 60 * 1000,
-    gcTime: 3 * 60 * 1000,
+    staleTime: 0,
+    gcTime: 0,
   });
 
   const isLoading = queries.some((query) => query.isLoading);

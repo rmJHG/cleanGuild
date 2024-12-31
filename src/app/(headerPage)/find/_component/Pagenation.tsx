@@ -28,6 +28,9 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
           </li>
         );
       }
+      if (totalPages <= 1) {
+        return null;
+      }
       if (totalPages > 4) {
         pageButtons.push(<span key="dots-end">...</span>);
         pageButtons.push(
