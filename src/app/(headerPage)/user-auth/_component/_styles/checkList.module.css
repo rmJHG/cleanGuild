@@ -65,3 +65,18 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .checkListContainer h2 {
+    font-size: 20px;
+  }
+  .checkListContainer > div {
+    gap: 20px;
+  }
+  .checkListContainer > div > ul {
+    gap: 10px;
+  }
+  .checkListContainer > div > ul > li {
+    gap: 5px;
+  }
+}

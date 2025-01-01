@@ -3,11 +3,12 @@
 import signInWithCredential, { signInWithKaKao } from '@/app/_components/authActions';
 import { useRouter, useSearchParams } from 'next/navigation';
 import classes from './page.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useFormState } from 'react-dom';
 import KakaoSVG from '../../../../public/kakao.svg';
 import { errorModal } from '@/app/_lib/errorModal';
+import { successModal } from '@/app/_lib/successModal';
 
 type LocalLoginState = {
   message: string;
@@ -15,6 +16,7 @@ type LocalLoginState = {
 };
 
 export default function Page() {
+  const [email, setEmail] = useState('');
   const router = useRouter();
   const params = useSearchParams();
   console.log(params.get('error'));
@@ -38,6 +40,9 @@ export default function Page() {
         }
       })();
     }
+    if (localLoginState.email) {
+      setEmail(localLoginState.email);
+    }
   }, [localLoginState]);
 
   useEffect(() => {
@@ -57,7 +62,30 @@ export default function Page() {
         {localLoginState.message && localLoginState.message === '이메일 인증을 완료해주세요.' && (
           <span>
             이메일 인증을 완료해주세요
-            <button style={{ textDecoration: 'underline', textUnderlineOffset: '0.2rem' }}>
+            <button
+              style={{ textDecoration: 'underline', textUnderlineOffset: '0.2rem' }}
+              onClick={async () => {
+                try {
+                  const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/resentEmailVerificationCode`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        email,
+                      }),
+                    }
+                  );
+                  const json = await res.json();
+                  successModal('인증메일을 재전송했습니다.', 1000);
+                  console.log(json);
+                } catch (error) {
+                  console.error(error);
+                }
+              }}
+            >
               <p>인증메일 재전송</p>
             </button>
           </span>

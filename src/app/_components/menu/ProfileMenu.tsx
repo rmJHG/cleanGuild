@@ -15,6 +15,7 @@ import { getGuildData } from '../../_lib/getGuildData';
 import { signOut, useSession } from 'next-auth/react';
 import ManagerSetting from './ManagerSetting';
 import getGuildManager from '@/app/_lib/getGuildManager';
+import HistoryList from './HistoryList';
 
 export default function ProfileMenu({
   setIsOpen,
@@ -42,7 +43,8 @@ export default function ProfileMenu({
     gcTime: 5 * 60 * 1000,
     staleTime: 5 * 60 * 1000,
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isManagerSettingOpen, setIsManagerSettingOpen] = useState(false);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (btnRef.current?.contains(event.target as Node)) return null;
@@ -86,17 +88,21 @@ export default function ProfileMenu({
       console.error('로그아웃 중 오류 발생:', error);
     }
   };
-  const settingManager = () => {
-    setIsModalOpen(true);
+  const openSettingManager = () => {
+    setIsManagerSettingOpen(true);
   };
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsManagerSettingOpen(false);
+    setIsHistoryOpen(false);
   };
 
-  console.log(managerData, 'managerData');
+  const openHistory = () => {
+    setIsHistoryOpen(true);
+  };
+
   return (
     <div className={classes.profileMenu} ref={wrapperRef}>
-      {!isModalOpen && (
+      {!isManagerSettingOpen && !isHistoryOpen && (
         <>
           <div className={classes.profileContainer}>
             <div className={classes.imgWrapper}>
@@ -119,12 +125,12 @@ export default function ProfileMenu({
             {!guildDataLoading &&
               (managerData?.some((item: string) => item === user.ocid) ||
                 guildData.guild_master_name === handsData?.character_name) && (
-                <div>
+                <div onClick={openHistory}>
                   <CiViewList color="white" /> <p>내가 게시한 글 목록</p>
                 </div>
               )}
             {!managerDataLoading && handsData!.character_name === guildData?.guild_master_name && (
-              <div onClick={settingManager}>
+              <div onClick={openSettingManager}>
                 <CiSettings color="white" /> <p>길드 관리자 설정</p>
               </div>
             )}
@@ -140,7 +146,7 @@ export default function ProfileMenu({
           </div>
         </>
       )}
-      {isModalOpen && (
+      {isManagerSettingOpen && (
         <ManagerSetting
           session={session}
           closeModal={closeModal}
@@ -148,6 +154,8 @@ export default function ProfileMenu({
           world_name={handsData!.world_name}
         />
       )}
+
+      {isHistoryOpen && <HistoryList session={session} closeModal={closeModal} update={update} />}
     </div>
   );
 }

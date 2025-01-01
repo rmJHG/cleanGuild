@@ -2,9 +2,10 @@ import { MdDoNotDisturbAlt } from 'react-icons/md';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { FaQuestion } from 'react-icons/fa';
 import { CiWarning } from 'react-icons/ci';
-import { RiErrorWarningLine } from 'react-icons/ri';
+import { IoIosWarning } from 'react-icons/io';
 
 import classes from './_styles/checkList.module.css';
+
 export default function CheckList({ onNext }: { onNext: () => void }) {
   return (
     <div className={classes.container}>
@@ -16,12 +17,12 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
           </h2>
           <ul>
             <li>
-              <FaRegCheckCircle color="var(--header-color)" /> 메인 캐릭터 정보를 저장하기 위해
-              사용됩니다.
+              <FaRegCheckCircle color="var(--header-color)" />
+              <p>메인 캐릭터 정보를 저장하기 위해 사용됩니다.</p>
             </li>
             <li>
               <FaRegCheckCircle color="var(--header-color)" />
-              중복가입을 방지하기 위해 사용됩니다.
+              <p>중복가입을 방지하기 위해 사용됩니다.</p>
             </li>
           </ul>
         </div>
@@ -38,15 +39,15 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
 
             <li>
               <MdDoNotDisturbAlt color="#ce2323" />
-              흐리거나 모자이크가 된 이미지는 곤란해요.
+              <p>흐리거나 모자이크가 된 이미지는 곤란해요.</p>
             </li>
             <li>
               <MdDoNotDisturbAlt color="#ce2323" />
-              전체 월드가 아닌 본인 월드를 캡쳐해서 사용해주세요.
+              <p>전체 월드가 아닌 본인 월드를 캡쳐해서 사용해주세요.</p>
             </li>
             <li>
-              <RiErrorWarningLine color="#ff5900" />
-              인증 중 발생한 문제는 아래 이메일로 연락주세요.
+              <IoIosWarning color="#dcbe00" />
+              <p>인증 중 발생한 문제는 아래 이메일로 연락주세요.</p>
             </li>
           </ul>
         </div>

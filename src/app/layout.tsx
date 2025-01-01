@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   title: 'GREMIO',
-  description: '인게임에서 부족한 길드홍보 컨텐츠를 보충하는 사이트',
+  description: '메이플스토리 길드홍보 커뮤니티',
 };
 
 type Props = {
