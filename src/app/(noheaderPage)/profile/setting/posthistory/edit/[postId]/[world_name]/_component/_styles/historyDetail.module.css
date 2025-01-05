@@ -1,0 +1,316 @@
+.container {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.container span {
+  align-self: flex-start;
+  opacity: 0.7;
+}
+.container > div {
+  width: 100%;
+}
+.headerContainer {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header {
+  display: flex;
+  align-items: flex-end;
+
+  gap: 20px;
+}
+.header h2 {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+
+  color: var(--font-color);
+}
+.headerBtnWrapper > button {
+  border-radius: 533px;
+  padding: 5px 15px;
+  font-size: 20px;
+  background-color: var(--header-color);
+  color: white;
+}
+.titleContainer {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.titleContainer:hover,
+.descriptionContainer:hover,
+.limitedContainer:hover,
+.guildManagerContainer:hover,
+.linkContainer:hover,
+.limitedLevelContainer:hover {
+  border: 1px solid var(--font-color);
+}
+
+.titleContainer > input {
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.inputLengthText {
+  font-size: 11px;
+  opacity: 0.7;
+  align-self: flex-end;
+}
+.descriptionContainer {
+  height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionContainer > span {
+  padding: 10px;
+}
+.descriptionContainer > div:nth-child(2) {
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 5px;
+}
+.descriptionContainer > div:last-child {
+  width: 100%;
+  min-height: 300px;
+  height: 100%;
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.descriptionContainer > div:last-child :focus {
+  outline: none;
+  border: none;
+}
+.descriptionContainer > div:last-child p {
+  margin-bottom: 5px;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--font-color);
+}
+.descriptionContainer > div:last-child strong {
+  font-weight: 700 !important;
+}
+
+.descriptionContainer > div:last-child em {
+  font-style: italic !important;
+}
+
+.descriptionContainer > div:last-child u {
+  text-decoration: underline !important;
+  text-decoration-skip-ink: none !important;
+}
+
+.descriptionContainer > div:last-child s {
+  text-decoration: line-through !important;
+}
+
+.descriptionContainer > div:last-child .align-left {
+  text-align: left !important;
+}
+
+.descriptionContainer > div:last-child .align-center {
+  text-align: center !important;
+}
+.guildContentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.guildContentsContainer > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.guildTypeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.guildTypeContainer input {
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.guildTypeContainer > div > div {
+  border: 1px solid var(--border-color);
+  background: none;
+}
+.guildTypeContainer > div > ul {
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+}
+.guildTypeContainer ul {
+  background: none;
+}
+.limitedLevelContainer {
+  max-width: 200px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.limitedLevelContainer input {
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.limitedContainer {
+  max-width: 300px;
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.limitedContainer > input {
+  max-width: 300px;
+  border: none;
+
+  background: none;
+}
+
+.contactContainer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contactHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: flex-start;
+  gap: 10px;
+}
+.contactHeader h3 {
+  font-size: 1.1rem;
+  color: var(--font-color);
+}
+.contactHeader > p {
+  opacity: 0.7;
+}
+.contactContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+}
+.left {
+  grid-area: left;
+}
+.right {
+  grid-area: right;
+}
+.linkContainer {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.linkContainer input {
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.guildManagerContainer {
+  max-width: 300px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.addInputContainer {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 50rem;
+  padding: 5px 10px;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.managerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.managerHeader span:last-child {
+  font-size: 11px;
+  opacity: 0.7;
+}
+.guildManagerContainer > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.addInputContainer input {
+  width: 100%;
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.managerName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.managerName span {
+  width: 100%;
+  font-size: 15px;
+  line-height: 20px;
+}
+.guildManagerContainer ul {
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.focused {
+  border: 1px solid var(--font-color);
+}
+.image {
+  max-width: 100%;
+
+  pointer-events: none;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+@media (max-width: 700px) {
+  .contactContent {
+    display: flex;
+    flex-direction: column;
+  }
+  .guildManagerContainer {
+    max-width: 100%;
+  }
+}

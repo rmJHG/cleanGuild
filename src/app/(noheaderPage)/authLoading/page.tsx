@@ -30,5 +30,18 @@ export default function Page() {
       }
     }
   }, [status, router]);
-  return <Loading />;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        width: '100%',
+        maxWidth: '900px',
+      }}
+    >
+      <Loading />
+    </div>
+  );
 }

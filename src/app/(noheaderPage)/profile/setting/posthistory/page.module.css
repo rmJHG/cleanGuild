@@ -1,0 +1,61 @@
+.container {
+  width: 100%;
+  height: 100%;
+  max-height: 100dvh;
+}
+.historyContainer {
+  width: 100%;
+  max-height: calc(100% - 24px);
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.historyContainer > ul {
+  padding: 0 10px;
+}
+.historyHeader {
+  border-bottom: 1px solid var(--border-color);
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.historyWorldList {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.selectWorldBtn {
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  padding: 3px 5px;
+  display: flex;
+  gap: 2px;
+}
+.selectWorldBtn > p {
+  font-size: 14px;
+  line-height: 16px;
+}
+.historyPostList {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.historyPostList::-webkit-scrollbar {
+  width: 8px;
+}
+.historyPostList::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.historyPostList::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

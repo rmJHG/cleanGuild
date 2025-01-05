@@ -1,0 +1,42 @@
+.historyItem {
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #d6d6d6;
+}
+.historyContainer {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+.historyContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.historyContent > p:last-child {
+  text-wrap: nowrap;
+}
+.historyTitle {
+  width: 100%;
+  text-wrap: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.historyBtnContainer {
+  width: 100%;
+  display: flex;
+
+  gap: 15px;
+}

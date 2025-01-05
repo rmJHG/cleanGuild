@@ -8,14 +8,14 @@ import { ServerName, totalServerList } from '../../serverList';
 
 import { IoIosLogOut } from 'react-icons/io';
 import { CiSettings } from 'react-icons/ci';
-import { CiViewList } from 'react-icons/ci';
 
 import { useQuery } from '@tanstack/react-query';
 import { getGuildData } from '../../_lib/getGuildData';
 import { signOut, useSession } from 'next-auth/react';
 import ManagerSetting from './ManagerSetting';
 import getGuildManager from '@/app/_lib/getGuildManager';
-import HistoryList from './HistoryList';
+
+import { useRouter } from 'next/navigation';
 
 export default function ProfileMenu({
   setIsOpen,
@@ -27,6 +27,7 @@ export default function ProfileMenu({
   session: Session;
 }) {
   const { update } = useSession();
+  const route = useRouter();
   const user = session!.user;
   const { handsData } = session!.user;
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -96,10 +97,6 @@ export default function ProfileMenu({
     setIsHistoryOpen(false);
   };
 
-  const openHistory = () => {
-    setIsHistoryOpen(true);
-  };
-
   return (
     <div className={classes.profileMenu} ref={wrapperRef}>
       {!isManagerSettingOpen && !isHistoryOpen && (
@@ -125,8 +122,12 @@ export default function ProfileMenu({
             {!guildDataLoading &&
               (managerData?.some((item: string) => item === user.ocid) ||
                 guildData.guild_master_name === handsData?.character_name) && (
-                <div onClick={openHistory}>
-                  <CiViewList color="white" /> <p>내가 게시한 글 목록</p>
+                <div
+                  onClick={() => {
+                    route.push('/profile/setting/posthistory');
+                  }}
+                >
+                  <CiSettings color="white" /> <p>내가 게시한 글 관리</p>
                 </div>
               )}
             {!managerDataLoading && handsData!.character_name === guildData?.guild_master_name && (
@@ -137,9 +138,11 @@ export default function ProfileMenu({
             {/* <div>
               <CiViewList color="white" /> <p>내가 게시한 글 목록 test</p>
             </div>
-            <div onClick={settingManager}>
+            <div onClick={openSettingManager}>
               <CiSettings color="white" /> <p>길드 관리자 설정 test</p>
             </div> */}
+          </div>
+          <div className={classes.menuContainer}>
             <div onClick={logout}>
               <IoIosLogOut color="white" /> <p>로그아웃</p>
             </div>
@@ -154,8 +157,6 @@ export default function ProfileMenu({
           world_name={handsData!.world_name}
         />
       )}
-
-      {isHistoryOpen && <HistoryList session={session} closeModal={closeModal} update={update} />}
     </div>
   );
 }

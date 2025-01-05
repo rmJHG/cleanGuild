@@ -7,6 +7,8 @@ type Props = {
     postId: string;
   };
 };
+export const revalidate = 0;
+
 export default async function Page({ params }: Props) {
   const { server, postId } = params;
   const decodedServer = decodeURIComponent(server);
@@ -16,15 +18,16 @@ export default async function Page({ params }: Props) {
     {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json', // 헤더 추가
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         world_name: decodedServer,
         _id: postId,
       }),
+      cache: 'no-cache',
     }
   );
   const data: GuildPostData = await res.json();
-  console.log(data);
+
   return <Post data={data} />;
 }
