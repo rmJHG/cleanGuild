@@ -108,7 +108,6 @@
 }
 
 .ingameManagerListContainer button {
-  line-height: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,7 +116,10 @@
   border-radius: 25px;
   padding: 5px 10px;
 }
-
+.ingameManagerListContainer button > p {
+  font-size: 12px;
+  line-height: 14px;
+}
 .discordLinkBtn:hover,
 .kakaotalkLinkBtn:hover,
 .ingameManagerListContainer button:hover {

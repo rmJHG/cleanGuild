@@ -5,8 +5,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'NEXON Lv1 Gothic OTF';
-  overflow: hidden;
   background-color: var(--table-color);
 }
 .container h3 {
@@ -15,7 +13,7 @@
   display: flex;
   justify-content: center;
   color: white;
-  font-weight: 700;
+  font-weight: 500;
   background-color: var(--header-color);
 }
 .score {
@@ -80,7 +78,6 @@
 
   font-size: 15px;
   font-family: none;
-  font-weight: 600;
   color: var(--font-color);
 }
 

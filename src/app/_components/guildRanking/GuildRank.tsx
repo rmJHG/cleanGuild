@@ -20,7 +20,7 @@ export default function GuildRank() {
               setIsWorldListOpen(!isWorldListOpen);
             }}
           >
-            {isWorldListOpen ? '목록 닫기' : '목록 열기'}
+            <p>{isWorldListOpen ? '목록 닫기' : '목록 열기'}</p>
           </button>
         </div>
         {isWorldListOpen && (
@@ -57,7 +57,7 @@ export default function GuildRank() {
               setIsRankingTypeListOpen(!isRankingTypeListOpen);
             }}
           >
-            {isRankingTypeListOpen ? '목록 닫기' : '목록 열기'}
+            <p>{isRankingTypeListOpen ? '목록 닫기' : '목록 열기'}</p>
           </button>
         </div>
         {isRankingTypeListOpen && (

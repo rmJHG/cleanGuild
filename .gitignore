@@ -8,8 +8,6 @@ test.ts
 download.env
 test
 
-yarn.lock
-
 .DS_Store
 
 ads.txt

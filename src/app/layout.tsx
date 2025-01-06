@@ -1,12 +1,13 @@
 import { SessionProvider } from 'next-auth/react';
 import RQProvider from './_components/RQProvider';
-import './_styles/global.css';
 import { auth } from '@/auth';
 import { Session } from 'next-auth';
 import { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import './_styles/global.css';
+import './_styles/font.css';
 export const metadata = {
   title: 'GREMIO',
   description: '메이플스토리 길드홍보 커뮤니티',

@@ -92,7 +92,7 @@ export default function ContactModal({
                         textCopy(e);
                       }}
                     >
-                      {e}
+                      <p>{e}</p>
                       <FaRegCopy size={14} />
                     </button>
                   );

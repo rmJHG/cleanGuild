@@ -4,9 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
   console.log('pathname', pathname);
-  // if (pathname.startsWith('/_next')) {
-  //   return NextResponse.next();
-  // }
+
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -15,6 +13,7 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.next();
   }
   const session = await auth();
+  console.log(session, 'session');
   if (session) {
     if (pathname.startsWith('/signin') || pathname.startsWith('/signup')) {
       return NextResponse.redirect(new URL('/', request.url));
