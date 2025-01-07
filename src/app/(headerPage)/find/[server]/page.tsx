@@ -240,16 +240,7 @@ export default function DataTable({ params }: Props) {
           </button>
         </div>
       </div>
-      <div
-        style={{
-          flex: '1',
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div className={classes.guildPostListContainer}>
         {!sortedData ? (
           <Loading />
         ) : sortedData.length < 1 ? (

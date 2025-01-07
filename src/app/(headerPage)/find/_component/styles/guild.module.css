@@ -22,7 +22,7 @@
   padding: 10px;
 }
 .postHeader {
-  border-bottom: 1px solid var(--text-color);
+  border-bottom: 0.5px solid var(--text-color);
   display: flex;
   justify-content: space-between;
 }
@@ -75,9 +75,11 @@
   margin-bottom: 5px;
 }
 .postMain p {
+  font-size: 16px;
+  font-weight: 500;
 }
 .postFooter {
-  border-top: 1px solid var(--text-color);
+  border-top: 0.5px solid var(--text-color);
   padding-top: 5px;
   display: flex;
   justify-content: space-between;

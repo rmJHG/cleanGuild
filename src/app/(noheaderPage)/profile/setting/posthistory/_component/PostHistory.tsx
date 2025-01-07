@@ -59,25 +59,33 @@ export default function PostHistory({
   };
 
   return (
-    <li className={classes.historyItem}>
-      <div
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-        className={classes.historyContainer}
-      >
+    <li
+      className={classes.historyItem}
+      onClick={() => {
+        setIsOpen(!isOpen);
+      }}
+    >
+      <div className={classes.historyContainer}>
         <div className={classes.historyContent}>
           <p className={classes.historyTitle}>{history.postData.title}</p>
           <p>{getTimeDifference(history.postData.postDate)}</p>
         </div>
-        <FaAngleDown />
+        <FaAngleDown className={`${classes.angleDown} ${isOpen ? classes.open : ''}`} />
       </div>
 
       {isOpen && (
         <div className={classes.historyBtnContainer}>
-          <button onClick={() => handlePostHistoryClick(history._id)}>이동</button>
           <button
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePostHistoryClick(history._id);
+            }}
+          >
+            이동
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
               route.push(`/profile/setting/posthistory/edit/${history._id}/${selectedServer}`);
             }}
           >

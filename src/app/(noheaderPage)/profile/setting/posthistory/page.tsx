@@ -40,7 +40,7 @@ export default function HistoryList() {
   return (
     <div className={classes.container}>
       <div className={classes.historyHeader}>
-        <p>홍보한 지 7일이 지난 글은 삭제됩니다.</p>
+        <p>홍보한 지 7일 이내의 글만 확인할 수 있습니다.</p>
       </div>
       <div className={classes.historyContainer}>
         <ul className={classes.historyWorldList}>
@@ -52,7 +52,11 @@ export default function HistoryList() {
                 className={classes.selectWorldBtn}
                 style={{
                   backgroundColor:
-                    selectedServer === world_name ? 'var(--border-color)' : 'transparent',
+                    selectedServer === world_name ? 'var(--header-color)' : 'transparent',
+                  border:
+                    selectedServer === world_name
+                      ? '1px solid var(--header-color)'
+                      : '1px solid var(--border-color)',
                 }}
               >
                 <Image
@@ -61,7 +65,13 @@ export default function HistoryList() {
                   width={16}
                   height={16}
                 />
-                <p>{world_name}</p>
+                <p
+                  style={{
+                    color: selectedServer === world_name ? 'white' : 'var(--text-color)',
+                  }}
+                >
+                  {world_name}
+                </p>
               </li>
             ))}
         </ul>

@@ -1,14 +1,16 @@
 .historyItem {
   width: 100%;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 8px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   background-color: #d6d6d6;
 }
+
 .historyContainer {
   width: 100%;
   display: flex;
@@ -36,7 +38,24 @@
 
 .historyBtnContainer {
   width: 100%;
+  max-width: 330px;
   display: flex;
-
   gap: 15px;
+}
+
+.historyBtnContainer button {
+  width: 50%;
+  max-width: 100px;
+  border-radius: 5px;
+  padding: 10px 0;
+  color: white;
+  font-weight: 600;
+  background-color: var(--header-color);
+}
+.angleDown {
+  transition: transform 0.3s ease;
+}
+
+.angleDown.open {
+  transform: rotate(180deg);
 }

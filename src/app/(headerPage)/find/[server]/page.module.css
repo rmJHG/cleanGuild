@@ -68,6 +68,15 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.guildPostListContainer {
+  flex: 1;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .guildPostList {
   width: 900px;
   height: 100%;
@@ -88,6 +97,10 @@
 @media (max-width: 600px) {
   .optionContainer {
     padding: 10px 0 0 0;
+  }
+  .guildPostListContainer {
+    width: 100%;
+    margin: 0;
   }
   .guildPostList {
     width: 100%;
