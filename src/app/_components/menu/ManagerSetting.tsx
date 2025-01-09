@@ -8,13 +8,14 @@ import getGuildManager from '@/app/_lib/getGuildManager';
 import Image from 'next/image';
 import Loading from '../layout/Loading';
 import { FormEventHandler, useEffect, useState } from 'react';
-import getCharData from '@/app/_lib/getCharData';
+
 import { Char } from '@/types/char';
 import { errorModal } from '@/app/_lib/errorModal';
 import { useSession } from 'next-auth/react';
 import { Session } from 'next-auth';
 import getCharDataForOcid from '@/app/_lib/getCharDataForOcid';
 import NormalLoading from '../layout/normalLoading';
+import getCharData from '@/app/_hook/getCharData';
 
 export default function ManagerSetting({
   session,

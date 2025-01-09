@@ -23,7 +23,16 @@ export default function TopContainer({
     gcTime: 2 * 60 * 60 * 1000,
   });
 
-  if (!data) return null;
+  if (isLoading || !data) {
+    return (
+      <div className={classes.container}>
+        <h3>{header}</h3>
+        <div className={classes.loadingWrapper}>
+          <Loading />
+        </div>
+      </div>
+    );
+  }
 
   const [a, b, c, d, e] = data.ranking.slice(0, 5);
 
@@ -58,32 +67,24 @@ export default function TopContainer({
     <div className={classes.container}>
       <h3>{header}</h3>
 
-      {isLoading ? (
-        <div className={classes.loadingWrapper}>
-          <Loading />
+      <div className={classes.firstContainer}>
+        <span>1.</span>
+        {renderGuildInfo(a, 16)}
+      </div>
+      <div className={classes.anotherRankingContainer}>
+        <div>
+          <span>2.</span> {renderGuildInfo(b)}
         </div>
-      ) : (
-        <>
-          <div className={classes.firstContainer}>
-            <span>1.</span>
-            {renderGuildInfo(a, 16)}
-          </div>
-          <div className={classes.anotherRankingContainer}>
-            <div>
-              <span>2.</span> {renderGuildInfo(b)}
-            </div>
-            <div>
-              <span>3.</span> {renderGuildInfo(c)}
-            </div>
-            <div>
-              <span>4.</span> {renderGuildInfo(d)}
-            </div>
-            <div>
-              <span>5.</span> {renderGuildInfo(e)}
-            </div>
-          </div>
-        </>
-      )}
+        <div>
+          <span>3.</span> {renderGuildInfo(c)}
+        </div>
+        <div>
+          <span>4.</span> {renderGuildInfo(d)}
+        </div>
+        <div>
+          <span>5.</span> {renderGuildInfo(e)}
+        </div>
+      </div>
     </div>
   );
 }

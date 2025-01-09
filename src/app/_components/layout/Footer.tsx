@@ -3,9 +3,7 @@ import classes from './styles/footer.module.css';
 export default function Footer() {
   return (
     <div className={classes.footerWrapper}>
-      <p>
-        CONTACT : <span>service@maplegremio.com</span>
-      </p>
+      <p>service@maplegremio.com</p>
       <p>
         Data based on <span style={{ fontFamily: 'SBAggroB' }}>NEXON OPEN API</span>
       </p>

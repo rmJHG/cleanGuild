@@ -3,50 +3,75 @@ import classes from './guildMember.module.css';
 
 import { Char } from '@/types/char';
 import Image from 'next/image';
-import getCharData from '@/app/_lib/getCharData';
+import getCharData from '@/app/_hook/getCharData';
+import Loading from '@/app/_components/layout/Loading';
+
+import { FaCrown } from 'react-icons/fa';
+
 type Props = {
   memberArr: string[];
   master: string;
 };
 export default function GuildMembers({ memberArr, master }: Props) {
-  const { data: masterData } = useQuery<Char, Error, Char>({
-    queryKey: ['char', master],
+  const { data: guildMaster, isLoading } = useQuery<Char[], Error, Char[]>({
+    queryKey: ['char', [master]],
     queryFn: getCharData,
     staleTime: 60 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
   });
 
-  console.log(masterData);
+  const { data: guildMembers, isLoading: memberLoading } = useQuery<Char[], Error, Char[]>({
+    queryKey: ['char', memberArr],
+    queryFn: getCharData,
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000,
+  });
+  if (isLoading || memberLoading)
+    return (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Loading />
+      </div>
+    );
+  const masterData = guildMaster![0];
+  const guildMembersData = guildMembers;
+  console.log(guildMembersData);
   return (
     <ul className={classes.container}>
       {masterData && (
         <li>
-          <div>
-            <Image
-              src={masterData.character_image}
-              alt="guildMaster"
-              width={100}
-              height={100}
-              priority
-            />
+          <div className={classes.masterCharHeader}>
+            <FaCrown color="#ffe600" size={20} />
           </div>
           <div>
-            <div>
-              <span>{masterData.character_name}</span>
-              <span>lv.{masterData.character_level}</span>
-            </div>
-            <div>
-              <span>{masterData.character_class}</span>
-            </div>
+            <Image src={masterData.character_image} alt="guildMaster" width={100} height={100} />
+          </div>
+          <div className={classes.charInfo}>
+            <span>{masterData.character_name}</span>
+            <span>lv.{masterData.character_level}</span>
+            <span>{masterData.character_class}</span>
           </div>
         </li>
       )}
-      {memberArr.map((e) => {
+
+      {guildMembers?.map((e: Char) => {
         return (
-          <li key={e}>
-            <div>추가 예정</div>
+          <li key={e!.character_name}>
+            <div className={classes.charHeader}></div>
             <div>
-              <span>{e}</span>
+              <Image src={e!.character_image} alt="guildMaster" width={100} height={100} />
+            </div>
+            <div className={classes.charInfo}>
+              <span>{e!.character_name}</span>
+              <span>lv.{e!.character_level}</span>
+              <span>{e!.character_class}</span>
             </div>
           </li>
         );

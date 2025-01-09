@@ -9,6 +9,8 @@
 }
 .container h3 {
   width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   padding: 10px 5px;
   display: flex;
   justify-content: center;

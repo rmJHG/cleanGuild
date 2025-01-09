@@ -24,6 +24,7 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
     currentNoblePoint,
     guild_level: guildLevel,
     guild_member_count: guildMemberCount,
+    guild_master_name: guildMasterName,
     guild_name: guildName,
   } = guildData;
 
@@ -62,6 +63,7 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
         discordLink,
         managerNameArr,
         guildLevel,
+        guildMasterName,
       },
       publisherData: {
         email: user.email,

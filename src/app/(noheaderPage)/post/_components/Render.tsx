@@ -10,8 +10,6 @@ type Step = 1 | 2 | 3 | 4;
 export default function Render({ guildData }: { guildData: GuildData }) {
   const [pageState, setPageState] = useState<Step>(1);
 
-  console.log(guildData, 'guildData');
-
   const currentNoblePoint: number = guildData!.guild_noblesse_skill.reduce((a, b) => {
     return a + b.skill_level;
   }, 0);

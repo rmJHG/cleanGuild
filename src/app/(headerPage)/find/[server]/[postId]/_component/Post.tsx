@@ -10,8 +10,6 @@ import Condition from './Condition';
 import GuildIntro from './GuildIntro';
 
 export default function Post({ data }: { data: GuildPostData }) {
-  console.log(data);
-
   const { publisherData, postData, _id } = data;
   const { email, handsData } = publisherData;
   const {
@@ -31,11 +29,10 @@ export default function Post({ data }: { data: GuildPostData }) {
     guildMemberCount,
     limitedFlagPoint,
     limitedSuroPoint,
+    guildMasterName,
   } = postData;
 
-  console.log(postData);
-
-  const ingameManager = [publisherData.handsData.character_name, 'test', ...managerNameArr];
+  const ingameManager = [guildMasterName, ...managerNameArr];
   const getDate = () => {
     const postedDate = new Date(postDate);
     const isoString = postedDate.toISOString();
@@ -53,7 +50,6 @@ export default function Post({ data }: { data: GuildPostData }) {
             <span>길드 이름</span>
             <Link href={`/guild/${handsData.world_name}/${guildName}`} target="_blank">
               {guildName}
-              <CiLink />
             </Link>
           </li>
           <li>

@@ -6,8 +6,9 @@ import Loading from '@/app/_components/layout/Loading';
 
 import GuildUserImage from './_components/GuildUserImage';
 import GuildMembers from './_components/GuildMembers';
-
+import { ServerName, totalServerList } from '@/app/serverList';
 import Image from 'next/image';
+
 type Props = {
   params: {
     guildName: string;
@@ -16,7 +17,7 @@ type Props = {
 };
 export default function Page({ params }: Props) {
   const { guildName, worldName } = params;
-  const decodedWorldName = decodeURIComponent(worldName);
+  const decodedWorldName = decodeURI(worldName);
   const { data } = useQuery<GuildData, Error, GuildData>({
     queryKey: ['guildData', worldName, guildName],
     queryFn: getGuildData,
@@ -30,7 +31,7 @@ export default function Page({ params }: Props) {
 
     const selectedMembers: string[] = [];
     const indices = new Set();
-    while (indices.size < 5) {
+    while (indices.size < 7) {
       const randomIndex = Math.floor(Math.random() * memberCount);
       indices.add(randomIndex);
     }
@@ -59,17 +60,27 @@ export default function Page({ params }: Props) {
   });
   const randomArr = getRandomMembers(memberArr);
 
+  const getServerImage = (worldName: ServerName) => {
+    return totalServerList[worldName]; // 기본 이미지 처리
+  };
+
+  const serverImage = getServerImage(decodedWorldName as ServerName);
   return (
     <div className={classes.container}>
       <div className={classes.guildHeaderContainer}>
         <div className={classes.guildNameWrapper}>
           <h2>{guild_name}</h2>
+          <span className={classes.serverImage}>
+            {serverImage && <Image src={serverImage} alt="serverIcon" />}
+            {decodedWorldName}
+          </span>
         </div>
         <div className={classes.charContainer}>
           <GuildUserImage guild_member_name={guild_master_name} transformScaleX="-1" />
-          {/* {randomArr.map((e) => {
-              return <GuildUserImage guild_member_name={e} transformScaleX="1" key={e} />;
-            })} */}
+
+          {randomArr.map((e) => {
+            return <GuildUserImage guild_member_name={e} transformScaleX="1" key={e} />;
+          })}
         </div>
       </div>
 

@@ -3,7 +3,6 @@ import credentials from 'next-auth/providers/credentials';
 import kakao from 'next-auth/providers/kakao';
 import { HandsData } from './types/userData';
 import { cookies } from 'next/headers';
-import { errorModal } from './app/_lib/errorModal';
 
 export const {
   handlers: { GET, POST },

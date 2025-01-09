@@ -137,10 +137,10 @@ export default function ProfileMenu({
             )}
             {/* <div>
               <CiViewList color="white" /> <p>내가 게시한 글 목록 test</p>
-            </div>
+            </div> */}
             <div onClick={openSettingManager}>
               <CiSettings color="white" /> <p>길드 관리자 설정 test</p>
-            </div> */}
+            </div>
           </div>
           <div className={classes.menuContainer}>
             <div onClick={logout}>

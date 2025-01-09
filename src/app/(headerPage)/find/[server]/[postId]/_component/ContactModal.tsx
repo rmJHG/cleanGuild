@@ -11,12 +11,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 export default function ContactModal({
   ingameManager,
-
   openKakaotalkLink,
   discordLink,
 }: {
   ingameManager: string[];
-
   openKakaotalkLink?: string;
   discordLink?: string;
 }) {
@@ -29,8 +27,6 @@ export default function ContactModal({
       errorModal('복사에 실패했습니다.');
     }
   };
-  console.log(!openKakaotalkLink, openKakaotalkLink);
-  console.log(!discordLink, discordLink);
 
   return (
     <div className={`${classes.container} ${isOpen ? classes.open : ''}`}>

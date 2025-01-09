@@ -2,16 +2,9 @@ import { Char } from '@/types/char';
 import Image from 'next/image';
 import classes from './styles/searchedChar.module.css';
 import { ServerName, totalServerList } from '@/app/serverList';
-import Loading from '@/app/_components/layout/Loading';
 
 export default function SearchedChar({ data }: { data: Char | null }) {
-  if (!data)
-    return (
-      <div className={classes.container}>
-        <Loading />
-      </div>
-    );
-  if (data.error)
+  if (!data || data.error)
     return (
       <div className={classes.error}>
         <p>유저 결과가 없습니다</p>

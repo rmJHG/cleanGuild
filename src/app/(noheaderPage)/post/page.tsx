@@ -57,7 +57,6 @@ export default function Page() {
   const guildData = queries[0].data;
   const guildManager = queries[1].data;
 
-  console.log(latestPostTime);
   if (
     guildData.guild_master_name !== handsData.character_name &&
     !guildManager.find((item: any) => item === session.user.ocid)
@@ -76,12 +75,10 @@ export default function Page() {
       </div>
     );
 
-  const postCooltime = latestPostTime;
+  if (!latestPostTime) return <Render guildData={guildData} />;
   const currentTimestamp = new Date().getTime();
-  if (!postCooltime) return <Loading />;
-
   const cooltimeDuration = 5 * 60 * 1000;
-  const timeLeft = postCooltime + cooltimeDuration - currentTimestamp;
+  const timeLeft = latestPostTime + cooltimeDuration - currentTimestamp;
   if (timeLeft > 0) {
     const remainingSeconds = Math.ceil(timeLeft / 1000); // 남은 초 계산
     const minutes = Math.floor(remainingSeconds / 60); // 남은 분 계산
