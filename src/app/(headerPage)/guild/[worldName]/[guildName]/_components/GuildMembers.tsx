@@ -13,7 +13,7 @@ type Props = {
   master: string;
 };
 export default function GuildMembers({ memberArr, master }: Props) {
-  const { data: guildMaster, isLoading } = useQuery<Char[], Error, Char[]>({
+  const { data: guildMaster, isLoading: guildLoading } = useQuery<Char[], Error, Char[]>({
     queryKey: ['char', [master]],
     queryFn: getCharData,
     staleTime: 60 * 60 * 1000,
@@ -23,10 +23,8 @@ export default function GuildMembers({ memberArr, master }: Props) {
   const { data: guildMembers, isLoading: memberLoading } = useQuery<Char[], Error, Char[]>({
     queryKey: ['char', memberArr],
     queryFn: getCharData,
-    staleTime: 60 * 60 * 1000,
-    gcTime: 60 * 60 * 1000,
   });
-  if (isLoading || memberLoading)
+  if (guildLoading || memberLoading)
     return (
       <div
         style={{
@@ -41,8 +39,9 @@ export default function GuildMembers({ memberArr, master }: Props) {
       </div>
     );
   const masterData = guildMaster![0];
-  const guildMembersData = guildMembers;
-  console.log(guildMembersData);
+
+  console.log('guildMembers', guildMembers);
+
   return (
     <ul className={classes.container}>
       {masterData && (
@@ -51,7 +50,13 @@ export default function GuildMembers({ memberArr, master }: Props) {
             <FaCrown color="#ffe600" size={20} />
           </div>
           <div>
-            <Image src={masterData.character_image} alt="guildMaster" width={100} height={100} />
+            <Image
+              src={masterData.character_image}
+              alt="guildMaster"
+              width={100}
+              height={100}
+              priority
+            />
           </div>
           <div className={classes.charInfo}>
             <span>{masterData.character_name}</span>
@@ -61,21 +66,22 @@ export default function GuildMembers({ memberArr, master }: Props) {
         </li>
       )}
 
-      {guildMembers?.map((e: Char) => {
-        return (
-          <li key={e!.character_name}>
-            <div className={classes.charHeader}></div>
-            <div>
-              <Image src={e!.character_image} alt="guildMaster" width={100} height={100} />
-            </div>
-            <div className={classes.charInfo}>
-              <span>{e!.character_name}</span>
-              <span>lv.{e!.character_level}</span>
-              <span>{e!.character_class}</span>
-            </div>
-          </li>
-        );
-      })}
+      {guildMembers &&
+        guildMembers.map((e: Char) => {
+          return (
+            <li key={e!.character_name}>
+              <div className={classes.charHeader}></div>
+              <div className={classes.charImage}>
+                <Image src={e!.character_image} alt="guildMaster" width={96} height={96} />
+              </div>
+              <div className={classes.charInfo}>
+                <span>{e!.character_name}</span>
+                <span>lv.{e!.character_level}</span>
+                <span>{e!.character_class}</span>
+              </div>
+            </li>
+          );
+        })}
     </ul>
   );
 }

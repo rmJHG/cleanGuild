@@ -18,7 +18,7 @@ type Props = {
 export default function Page({ params }: Props) {
   const { guildName, worldName } = params;
   const decodedWorldName = decodeURI(worldName);
-  const { data } = useQuery<GuildData, Error, GuildData>({
+  const { data, isLoading } = useQuery<GuildData, Error, GuildData>({
     queryKey: ['guildData', worldName, guildName],
     queryFn: getGuildData,
     staleTime: 60 * 60 * 1000,
@@ -41,7 +41,8 @@ export default function Page({ params }: Props) {
 
     return selectedMembers;
   }
-  if (!data) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (!isLoading && !data) return <div>데이터가 없습니다.</div>;
 
   const {
     guild_master_name,
@@ -50,7 +51,7 @@ export default function Page({ params }: Props) {
     guild_noblesse_skill,
     guild_point,
     guild_member,
-  } = data;
+  } = data!;
   const currentNoblePoint: number = guild_noblesse_skill.reduce((a, b) => {
     return a + b.skill_level;
   }, 0);
@@ -71,7 +72,7 @@ export default function Page({ params }: Props) {
         <div className={classes.guildNameWrapper}>
           <h2>{guild_name}</h2>
           <span className={classes.serverImage}>
-            {serverImage && <Image src={serverImage} alt="serverIcon" />}
+            {serverImage && <Image src={serverImage} alt="serverIcon" width={14} height={14} />}
             {decodedWorldName}
           </span>
         </div>

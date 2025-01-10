@@ -188,15 +188,14 @@ textarea :focus {
 }
 body {
   line-height: 1;
-  width: 100dvw;
+  width: 100%;
   height: 100dvh;
   display: flex;
   flex-direction: column;
   background-color: black;
 }
 main {
-  min-height: calc(100dvh - 100px);
-  height: 100%;
+  flex: 1;
   display: flex;
   justify-content: center;
 }

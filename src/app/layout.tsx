@@ -37,7 +37,15 @@ export default async function RootLayout({ children }: Props) {
       <body>
         <SessionProvider session={session}>
           <RQProvider>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', flex: '1' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                height: '100%',
+                flex: '1',
+              }}
+            >
               {children}
             </div>
           </RQProvider>
