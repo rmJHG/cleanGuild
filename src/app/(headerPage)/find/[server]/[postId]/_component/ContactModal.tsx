@@ -61,14 +61,14 @@ export default function ContactModal({
                   <div>
                     <Link href={openKakaotalkLink as string} target="_blank">
                       <RiKakaoTalkFill size={25} color={openKakaotalkLink ? '#FEE500' : 'gray'} />
-                      <span>오픈채팅</span>
+                      <span>카카오톡</span>
                       <CiLink size={25} />
                     </Link>
                   </div>
                 ) : (
                   <div className={classes.disabledLink}>
                     <RiKakaoTalkFill size={25} color="gray" />
-                    <span>오픈채팅</span>
+                    <span>카카오톡</span>
                     <CiLink size={25} />
                   </div>
                 )}

@@ -1,10 +1,13 @@
 import { postStore } from '@/store/postStore';
 import classes from './_styles/contactInfo.module.css';
 import { errorModal } from '@/app/_lib/errorModal';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { CiSquarePlus } from 'react-icons/ci';
 import { MdDelete } from 'react-icons/md';
+import { IoIosAdd } from 'react-icons/io';
+import { AiOutlineDelete } from 'react-icons/ai';
+
 export default function ContactInfo({
   onNext,
   onPrev,
@@ -17,6 +20,12 @@ export default function ContactInfo({
   guildMasterName: string;
 }) {
   const { openKakaotalkLink, discordLink, managerNameArr, setPostState } = postStore();
+  const [isFocused, setIsFocused] = useState<string>('');
+  const [managerName, setManagerName] = useState<string>('');
+  const managerNameRef = useRef<HTMLInputElement>(null);
+  const discordLinkRef = useRef<HTMLInputElement>(null);
+  const openKakaotalkLinkRef = useRef<HTMLInputElement>(null);
+
   function isValidKakaoURL(string: string) {
     const pattern = new RegExp('^https:\\/\\/open\\.kakao\\.com\\/o\\/.+', 'i');
     return !!pattern.test(string);
@@ -26,20 +35,18 @@ export default function ContactInfo({
     return !!pattern.test(string);
   }
 
-  const [managerName, setManagerName] = useState<string>('');
-  const changeManagerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setManagerName(e.target.value);
-  };
-  const handleAddManager = () => {
-    if (managerNameArr.length >= 5) {
-      return errorModal('인게임 문의는 최대 5명까지 추가할 수 있습니다.');
+  const handleAddManager = (name: string) => {
+    const managerName = name;
+
+    if (managerNameArr.length >= 4) {
+      return errorModal('인게임 문의는 최대 4명까지 추가할 수 있습니다.');
     }
     if (managerName === guildMasterName) {
       return errorModal('길드마스터는 추가할 수 없습니다.');
     }
 
     const newManagerName = managerName.trim();
-    setManagerName('');
+
     if (!newManagerName) {
       return errorModal('캐릭터명을 입력해주세요.');
     }
@@ -52,6 +59,7 @@ export default function ContactInfo({
     }
 
     setPostState({ managerNameArr: [...managerNameArr, newManagerName] });
+    managerNameRef.current!.value = '';
   };
 
   const handleNext = () => {
@@ -69,72 +77,88 @@ export default function ContactInfo({
         <p>문의 수단을 설정해주세요.</p>
       </header>
       <div className={classes.infoContainer}>
-        <section>
-          <p>오픈채팅 링크(선택)</p>
-          <input
-            type="text"
-            placeholder="초대링크"
-            defaultValue={openKakaotalkLink}
-            onChange={(e) => {
-              setPostState({ openKakaotalkLink: e.target.value });
-            }}
-          />
-          <p>디스코드 초대 링크(선택)</p>
-          <input
-            type="text"
-            placeholder="초대링크"
-            defaultValue={discordLink}
-            onChange={(e) => {
-              setPostState({ discordLink: e.target.value });
-            }}
-          />
-        </section>
-        <section>
-          <div className={classes.addCharNameHeaderContainer}>
+        <div className={classes.contactContainer}>
+          <div
+            className={`${classes.linkContainer} ${
+              isFocused === 'discordLink' ? classes.focused : ''
+            }`}
+            onClick={() => discordLinkRef.current?.focus()}
+          >
+            <span>디스코드 링크 (선택 사항)</span>
+            <input
+              type="text"
+              placeholder="디스코드 링크를 입력해주세요."
+              defaultValue={discordLink}
+              ref={discordLinkRef}
+              onChange={(e) => {
+                setPostState({ discordLink: e.target.value });
+              }}
+              onFocus={() => setIsFocused('discordLink')}
+              onBlur={() => setIsFocused('')}
+            />
+          </div>
+          <div
+            className={`${classes.linkContainer} ${
+              isFocused === 'openKakaotalkLink' ? classes.focused : ''
+            }`}
+            onClick={() => openKakaotalkLinkRef.current?.focus()}
+          >
+            <span>오픈 카카오톡 링크 (선택 사항)</span>
+            <input
+              type="text"
+              placeholder="오픈 카카오톡 링크를 입력해주세요."
+              defaultValue={openKakaotalkLink}
+              ref={openKakaotalkLinkRef}
+              onChange={(e) => {
+                setPostState({ openKakaotalkLink: e.target.value });
+              }}
+              onFocus={() => setIsFocused('openKakaotalkLink')}
+              onBlur={() => setIsFocused('')}
+            />
+          </div>
+          <div className={classes.guildManagerContainer}>
+            <div className={classes.managerHeader}>
+              <span>길드매니저</span>
+              <span>{managerNameArr.length} / 4</span>
+            </div>
             <div>
-              <p>인게임 문의</p>
-              <p>(길마를 제외한 최대 4명)</p>
-            </div>
-            <div className={classes.addCharBtnContainer}>
-              <input
-                type="text"
-                placeholder="캐릭터명"
-                value={managerName}
-                onChange={changeManagerName}
-                onKeyDown={(e) => {
-                  if (e.keyCode === 229) return;
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleAddManager();
-                  }
-                }}
-              />
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleAddManager();
-                }}
-              >
-                <CiSquarePlus size={18} />
-              </button>
-            </div>
-          </div>
-          <div className={classes.resultContainer}>
-            {managerNameArr.map((name, i) => (
-              <div key={i} className={classes.charNameContainer}>
-                <span>{name}</span>
-                <button
-                  style={{ display: 'flex' }}
-                  onClick={() =>
-                    setPostState({ managerNameArr: managerNameArr.filter((_, j) => i !== j) })
-                  }
-                >
-                  <MdDelete color="red" size={18} />
-                </button>
+              <div className={classes.addInputContainer}>
+                <input
+                  type="text"
+                  ref={managerNameRef}
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 229) return;
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleAddManager(e.currentTarget.value);
+                    }
+                  }}
+                />
+                <IoIosAdd
+                  size={20}
+                  onClick={() => {
+                    handleAddManager(managerNameRef.current!.value);
+                  }}
+                />
               </div>
-            ))}
+              <ul>
+                {managerNameArr.map((name, i) => (
+                  <li key={i} className={classes.managerName}>
+                    <span>{name}</span>
+                    <AiOutlineDelete
+                      size={20}
+                      onClick={() => {
+                        setPostState({
+                          managerNameArr: managerNameArr.filter((e) => e !== name),
+                        });
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
 
       <div className={classes.btnContainer}>

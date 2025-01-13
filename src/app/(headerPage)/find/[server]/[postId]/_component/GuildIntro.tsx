@@ -20,8 +20,6 @@ export default function GuildIntro({ description }: { description: string }) {
     },
     immediatelyRender: false,
   });
-
-  console.log('description', description);
   useEffect(() => {
     if (editor) {
       editor.commands.setContent(description);

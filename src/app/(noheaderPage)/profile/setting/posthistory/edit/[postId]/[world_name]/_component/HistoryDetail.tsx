@@ -68,6 +68,7 @@ export default function HistoryDetail({
     discordLink: currentDiscordLink,
     openKakaotalkLink: currentOpenKakaotalkLink,
     managerNameArr: currentManagerNameArr,
+    resetPostState,
     setPostState,
   } = postStore();
   const guildTypeOption = ['친목', '솔로', '랭킹', '자유', '유니온'];
@@ -210,8 +211,9 @@ export default function HistoryDetail({
           },
         }),
       });
-      if (res.message === '게시글 업데이트 완료') {
+      if (res.message === '업데이트 완료') {
         successModal('게시글이 수정되었습니다.', 2000);
+        resetPostState();
         route.push(`/find/${handsData?.world_name}/${data._id}`);
         route.refresh();
       }

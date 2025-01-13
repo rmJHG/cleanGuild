@@ -141,16 +141,16 @@
   background-color: gray;
 }
 
-@media (max-width: 600px) {
-  .infoContainer {
-    padding: 0 10px;
-  }
-}
-
 .image {
   max-width: 100%;
 
   pointer-events: none;
   overflow-clip-margin: content-box;
   overflow: clip;
+}
+
+@media (max-width: 600px) {
+  .infoContainer {
+    padding: 0 10px;
+  }
 }

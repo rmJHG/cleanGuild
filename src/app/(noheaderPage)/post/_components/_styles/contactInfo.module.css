@@ -8,6 +8,9 @@
   gap: 20px;
   flex: 1;
 }
+.container span {
+  align-self: flex-start;
+}
 .header {
   width: 100%;
   padding: 20px 0;
@@ -32,72 +35,89 @@
   gap: 25px;
   color: var(--font-color);
 }
-.infoContainer > section {
-  width: 100%;
-}
-.infoContainer > section:first-child {
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  gap: 5px;
-}
-.infoContainer > section:last-child {
-  display: grid;
-  grid-template-columns: repeat(1, 2fr);
-  gap: 20px;
-}
-.infoContainer > section input {
-  width: 100%;
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-size: 16px;
-  color: var(--font-color);
-  background: none;
-}
 
-.addCharNameHeaderContainer {
+.contactContainer {
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 20px;
-}
-.addCharBtnContainer {
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-.addCharBtnContainer input {
-  border: none !important;
-  border-radius: 0;
-}
-.addCharBtnContainer button {
-  padding: 10px 10px;
-  color: var(--font-color);
-  cursor: pointer;
-  display: flex;
-}
-.resultContainer {
-  min-height: 100px;
-  display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
 }
-.charNameContainer {
-  height: 30px;
+
+.linkContainer {
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.linkContainer:hover {
+  border: 1px solid var(--font-color);
+}
+.linkContainer input {
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.guildManagerContainer {
+  width: 100%;
+
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.addInputContainer {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 50rem;
   padding: 5px 10px;
+  background: none;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
-.charNameContainer span {
-  font-size: 16px;
+.managerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.managerHeader span:last-child {
+  font-size: 11px;
+  opacity: 0.7;
+}
+.guildManagerContainer > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.addInputContainer input {
+  width: 100%;
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.managerName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.managerName span {
+  width: 100%;
+  font-size: 15px;
   line-height: 20px;
 }
+.guildManagerContainer ul {
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .btnContainer {
   width: 100%;
   padding: 20px 0;
@@ -121,4 +141,13 @@
 }
 .btnContainer button:first-child {
   background-color: gray;
+}
+.focused {
+  border: 1px solid var(--font-color);
+}
+
+@media (max-width: 600px) {
+  .infoContainer {
+    padding: 0;
+  }
 }

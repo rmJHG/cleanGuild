@@ -3,13 +3,13 @@
 import { GuildPostData } from '@/types/guildPostData';
 import classes from './styles/post.module.css';
 import Link from 'next/link';
-import { CiLink } from 'react-icons/ci';
 import PostHeader from './PostHeader';
 import ContactModal from './ContactModal';
 import Condition from './Condition';
 import GuildIntro from './GuildIntro';
 
 export default function Post({ data }: { data: GuildPostData }) {
+  console.log(data);
   const { publisherData, postData, _id } = data;
   const { email, handsData } = publisherData;
   const {
