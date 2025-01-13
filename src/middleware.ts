@@ -13,7 +13,10 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.next();
   }
   const session = await auth();
-  console.log(session, 'session');
+
+  if (pathname.startsWith('/profile') && !session) {
+    return NextResponse.redirect(new URL('/signin', request.url));
+  }
   if (session) {
     if (pathname.startsWith('/signin') || pathname.startsWith('/signup')) {
       return NextResponse.redirect(new URL('/', request.url));

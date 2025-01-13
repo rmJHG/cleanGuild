@@ -14,8 +14,9 @@ type State = {
 };
 type Action = {
   setPostState: (newState: Partial<State>) => void;
+  resetPostState: () => void;
 };
-export const postStore = create<State & Action>((set) => ({
+const initialState: State = {
   title: '',
   description: '',
   guildType: '',
@@ -26,5 +27,9 @@ export const postStore = create<State & Action>((set) => ({
   openKakaotalkLink: '',
   discordLink: '',
   managerNameArr: [],
+};
+export const postStore = create<State & Action>((set) => ({
+  ...initialState,
   setPostState: (newState: Partial<State>) => set((state) => ({ ...state, ...newState })),
+  resetPostState: () => set(initialState),
 }));
