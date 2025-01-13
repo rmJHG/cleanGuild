@@ -16,10 +16,28 @@
   right: 0;
   bottom: 0;
 }
-.footerWrapper p {
+.footerWrapper p,
+.footerWrapper a {
   color: white;
 }
 .footerWrapper span {
   font-family: 'SBAggroB';
   color: white;
+}
+.footerWrapper > div {
+  display: flex;
+  gap: 10px;
+}
+
+.footerWrapper a:hover,
+.footerWrapper svg:hover {
+  opacity: 0.5;
+}
+.privacy {
+  font-weight: 800;
+}
+.gap {
+  width: 1px;
+  height: 100%;
+  background-color: white;
 }
