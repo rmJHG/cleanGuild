@@ -10,7 +10,7 @@ export default function layout({ children }: { children: ReactNode }) {
           <Menu iconName="MdHome" text="home" />
         </div>
         <div className={classes.mainMenuContainer}>
-          <Menu iconName="CiViewList" text="posthistory" />
+          <Menu iconName="CiUser" text="my" />
         </div>
         <div>
           <Menu iconName="IoLogOutOutline" text="signout" />

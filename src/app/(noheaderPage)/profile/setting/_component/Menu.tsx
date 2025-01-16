@@ -3,14 +3,13 @@ import { useState } from 'react';
 
 import { MdHome } from 'react-icons/md';
 import { CiUser } from 'react-icons/ci';
-import { CiViewList } from 'react-icons/ci';
 import { IoLogOutOutline } from 'react-icons/io5';
+
 import { usePathname, useRouter } from 'next/navigation';
 
 const icons = {
   MdHome,
   CiUser,
-  CiViewList,
   IoLogOutOutline,
 };
 type Props = {
@@ -29,11 +28,14 @@ export default function Menu({ iconName, text }: Props) {
         if (text === 'signout') {
           console.log('logout');
         }
+        if (text === 'profile') {
+          route.push('/profile/setting/my');
+        }
         if (text === 'home') {
           route.push('/');
         }
-        if (text === 'posthistory') {
-          route.push('/profile/setting/posthistory');
+        if (text === '비밀번호변경') {
+          route.push('/profile/setting/password');
         }
       }}
       onMouseEnter={() => setIsHover(true)}
@@ -63,7 +65,13 @@ export default function Menu({ iconName, text }: Props) {
             margin: 0, // 기본 p 태그의 여백 제거
           }}
         >
-          {text === 'home' ? '홈으로' : text === 'posthistory' ? '홍보 기록' : '로그아웃'}
+          {text === 'home'
+            ? '홈으로'
+            : text === 'my'
+            ? '내 프로필'
+            : text === 'signout'
+            ? '로그아웃'
+            : '비밀번호 변경'}
         </p>
       )}
     </div>

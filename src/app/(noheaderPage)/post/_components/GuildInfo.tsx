@@ -58,7 +58,9 @@ function GuildInfo({ guildData, onNext }: { guildData: GuildData; onNext: () => 
         </p>
       </div>
       <div className={classes.btnContainer}>
-        <button onClick={() => handleNext()}>다음으로</button>
+        <button onClick={() => handleNext()}>
+          <p>다음으로</p>
+        </button>
       </div>
     </div>
   );

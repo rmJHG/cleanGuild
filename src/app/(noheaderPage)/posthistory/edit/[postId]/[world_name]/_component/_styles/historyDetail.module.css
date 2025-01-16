@@ -3,8 +3,8 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 10px;
+  flex: 1;
 }
 .container span {
   align-self: flex-start;

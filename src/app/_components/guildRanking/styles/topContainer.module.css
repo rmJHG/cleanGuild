@@ -52,7 +52,7 @@
 .firstContainer span,
 .anotherRankingContainer span {
   padding: 0 10px;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--font-color);
 }
@@ -93,4 +93,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 650px) and (max-width: 750px) {
+  .firstContainer,
+  .anotherRankingContainer > div {
+    grid-template-columns: 1fr 2.5fr;
+  }
 }

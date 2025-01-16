@@ -162,8 +162,12 @@ export default function ContactInfo({
       </div>
 
       <div className={classes.btnContainer}>
-        <button onClick={onPrev}>이전으로</button>
-        <button onClick={handleNext}>다음으로</button>
+        <button onClick={onPrev}>
+          <p>이전으로</p>
+        </button>
+        <button onClick={handleNext}>
+          <p>다음으로</p>
+        </button>
       </div>
     </div>
   );

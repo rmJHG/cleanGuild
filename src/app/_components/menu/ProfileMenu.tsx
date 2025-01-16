@@ -16,6 +16,7 @@ import ManagerSetting from './ManagerSetting';
 import getGuildManager from '@/app/_lib/getGuildManager';
 
 import { useRouter } from 'next/navigation';
+import { RiFileEditLine } from 'react-icons/ri';
 
 export default function ProfileMenu({
   setIsOpen,
@@ -124,10 +125,10 @@ export default function ProfileMenu({
                 guildData.guild_master_name === handsData?.character_name) && (
                 <div
                   onClick={() => {
-                    route.push('/profile/setting/posthistory');
+                    route.push('/posthistory');
                   }}
                 >
-                  <CiSettings color="white" /> <p>내가 게시한 글 관리</p>
+                  <RiFileEditLine color="white" /> <p>내가 게시한 글 관리</p>
                 </div>
               )}
             {!managerDataLoading && handsData!.character_name === guildData?.guild_master_name && (
@@ -135,14 +136,19 @@ export default function ProfileMenu({
                 <CiSettings color="white" /> <p>길드 관리자 설정</p>
               </div>
             )}
-            {/* <div>
-              <CiViewList color="white" /> <p>내가 게시한 글 목록 test</p>
-            </div> */}
+
             <div onClick={openSettingManager}>
               <CiSettings color="white" /> <p>길드 관리자 설정 test</p>
             </div>
           </div>
           <div className={classes.menuContainer}>
+            <div
+              onClick={() => {
+                route.push('/profile/setting/my');
+              }}
+            >
+              <CiSettings color="white" /> <p>프로필 설정</p>
+            </div>
             <div onClick={logout}>
               <IoIosLogOut color="white" /> <p>로그아웃</p>
             </div>

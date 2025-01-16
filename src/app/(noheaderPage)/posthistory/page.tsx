@@ -11,8 +11,11 @@ import Image from 'next/image';
 
 import { useSession } from 'next-auth/react';
 import PostHistory from './_component/PostHistory';
+import { MdKeyboardBackspace } from 'react-icons/md';
+import { useRouter } from 'next/navigation';
 
 export default function HistoryList() {
+  const route = useRouter();
   const { data: session, update } = useSession();
 
   const [selectedServer, setSelectedServer] = useState<string>('');
@@ -39,6 +42,9 @@ export default function HistoryList() {
   console.log(data);
   return (
     <div className={classes.container}>
+      <div className={classes.backBtn} onClick={() => route.back()}>
+        <MdKeyboardBackspace size={30} />
+      </div>
       <div className={classes.historyHeader}>
         <p>홍보한 지 7일 이내의 글만 확인할 수 있습니다.</p>
       </div>

@@ -29,7 +29,8 @@ export default function GuildMembers({ memberArr, master }: Props) {
       <div
         style={{
           width: '100%',
-          height: '100%',
+
+          flex: '1',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

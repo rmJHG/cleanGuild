@@ -1,13 +1,15 @@
 .container {
+  flex: 1;
   max-width: 900px;
   width: 100%;
+  min-height: 100vh;
   padding: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+.container > div {
   flex: 1;
 }
-
 .container h2 {
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;

@@ -14,8 +14,14 @@ import { errorModal } from '@/app/_lib/errorModal';
 import { successModal } from '@/app/_lib/successModal';
 import { useRouter } from 'next/navigation';
 import customFetch from '@/app/_lib/customFetch';
+import { useEffect, useRef, useState } from 'react';
+import BtnLoading from '@/app/_components/layout/BtnLoading';
 
 function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: GuildData }) {
+  const [isPosting, setIsPosting] = useState(false);
+  const [isFocused, setIsFocused] = useState<string>('');
+  const titleRef = useRef<HTMLInputElement>(null);
+
   const { data: session, update } = useSession();
   const { user } = session!;
   const route = useRouter();
@@ -44,9 +50,17 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
   } = postStore();
 
   const onPost = async () => {
-    if (!title) return errorModal('제목을 입력해주세요.');
     if (!editor) return null;
-    if (editor.getHTML() === '<p></p>') return errorModal('내용을 입력해주세요.');
+    setIsPosting(true);
+    if (!title) {
+      setIsPosting(false);
+      if (!editor) return null;
+      return errorModal('제목을 입력해주세요.');
+    }
+    if (editor.getHTML() === '<p></p>') {
+      setIsPosting(false);
+      return errorModal('내용을 입력해주세요.');
+    }
 
     const inputData = {
       postData: {
@@ -95,6 +109,7 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
       }
     } catch (error) {
       console.log(error);
+      setIsPosting(false);
       return errorModal('서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
     }
   };
@@ -151,6 +166,12 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
     },
   });
 
+  useEffect(() => {
+    if (editor) {
+      editor.on('focus', () => setIsFocused('description'));
+      editor.on('blur', () => setIsFocused(''));
+    }
+  }, [editor]);
   return (
     <div className={classes.container}>
       <header className={classes.header}>
@@ -158,26 +179,50 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
         <p>길드를 소개해주세요.</p>
       </header>
       <div className={classes.infoContainer}>
-        <section className={classes.titleSection}>
-          <span>제목</span>
+        <div
+          className={`${classes.titleContainer} ${isFocused === 'title' ? classes.focused : ''}`}
+          onClick={() => titleRef.current?.focus()}
+        >
+          <span>제목 (필수 항목)</span>
           <input
-            maxLength={50}
+            type="text"
+            placeholder="길드를 홍보하는 제목을 입력해주세요."
+            ref={titleRef}
             defaultValue={title}
+            maxLength={50}
             onChange={(e) => {
               setPostState({ title: e.target.value });
             }}
+            onFocus={() => setIsFocused('title')}
+            onBlur={() => setIsFocused('')}
           />
-        </section>
-        <section className={classes.editorSection}>
+          <p className={classes.inputLengthText}>{titleRef.current?.value.length} / 50</p>
+        </div>
+        <div
+          className={`${classes.descriptionContainer} ${
+            isFocused === 'description' ? classes.focused : ''
+          }`}
+          onClick={() => editor?.commands.focus()}
+        >
+          <span>내용 (필수 항목)</span>
           <TipTapMenu editor={editor} />
-
           <EditorContent editor={editor} spellCheck={false} />
-        </section>
+        </div>
       </div>
 
       <div className={classes.btnContainer}>
-        <button onClick={onPrev}>이전으로</button>
-        <button onClick={onPost}>홍보하기</button>
+        <button onClick={onPrev}>
+          <p>이전으로</p>
+        </button>
+        {isPosting ? (
+          <button>
+            <BtnLoading />
+          </button>
+        ) : (
+          <button onClick={onPost}>
+            <p>홍보하기</p>
+          </button>
+        )}
       </div>
     </div>
   );

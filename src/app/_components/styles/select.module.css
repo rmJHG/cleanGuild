@@ -24,6 +24,7 @@
 .inputContainer input {
   width: 100%;
   border: none;
+  font-family: 'GmarketSansMedium';
 }
 
 .container ul {

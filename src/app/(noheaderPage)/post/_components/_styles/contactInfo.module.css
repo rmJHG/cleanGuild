@@ -1,12 +1,10 @@
 .container {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  flex: 1;
 }
 .container span {
   align-self: flex-start;
@@ -38,6 +36,7 @@
 
 .contactContainer {
   width: 100%;
+  min-height: 338px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -130,6 +129,7 @@
 .btnContainer button {
   max-width: 800px;
   width: 100%;
+  height: 38px;
   padding: 10px 20px;
   border-radius: 2525px;
   border: none;

@@ -43,6 +43,7 @@ export default function Page({ params }: { params: { name: string } }) {
 
           <div
             style={{
+              maxHeight: '200px',
               padding: '0',
               flex: '1',
               display: 'flex',

@@ -242,9 +242,17 @@ export default function DataTable({ params }: Props) {
       </div>
       <div className={classes.guildPostListContainer}>
         {!sortedData ? (
-          <Loading />
+          <div
+            style={{ flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          >
+            <Loading />
+          </div>
         ) : sortedData.length < 1 ? (
-          <p>홍보게시글이 없습니다.</p>
+          <div
+            style={{ flex: '1', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          >
+            <p>홍보게시글이 없습니다.</p>
+          </div>
         ) : (
           <>
             <ul className={classes.guildPostList}>

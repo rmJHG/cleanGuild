@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,91 +30,97 @@
   gap: 10px;
   padding: 0 30px;
 }
-
-.titleSection {
-  min-width: 300px;
+.infoContainer > div {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 5px;
 }
-.titleSection > span {
+.infoContainer > div span {
   align-self: flex-start;
-  font-size: 16px;
-  color: var(--font-color);
 }
-.titleSection > input {
-  width: 100%;
-  border: 1px solid gray;
-  padding: 10px 10px;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--font-color);
-  background: none;
-  font-family: 'GmarketSansMedium';
+.titleContainer:hover,
+.descriptionContainer:hover {
+  border: 1px solid var(--font-color);
 }
-.editorSection {
-  width: 100%;
+.titleContainer {
   border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  gap: 10px;
+}
+.titleContainer > input {
+  border: none;
+  background: none;
+  font-size: 15px;
+}
+.inputLengthText {
+  font-size: 11px;
+  opacity: 0.7;
+  align-self: flex-end;
+}
+.descriptionContainer {
+  height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
 }
 
-.editorSection > div:first-child {
+.descriptionContainer > span {
+  padding: 10px;
+}
+.descriptionContainer > div:nth-child(2) {
   width: 100%;
+  border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   padding: 5px;
 }
-.editorSection > div:last-child {
+.descriptionContainer > div:last-child {
   width: 100%;
+  min-height: 300px;
   height: 100%;
+  padding: 10px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-.editorSection > div:last-child :focus {
+.descriptionContainer > div:last-child :focus {
   outline: none;
   border: none;
 }
-.editorSection > div:last-child > div {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-}
-.editorSection > div:last-child p {
+.descriptionContainer > div:last-child p {
   margin-bottom: 5px;
   padding: 0;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--font-color);
 }
-.editorSection > div:last-child strong {
-  font-weight: bold !important;
+.descriptionContainer > div:last-child strong {
+  font-weight: 700 !important;
 }
 
-.editorSection > div:last-child em {
-  font-style: italic;
+.descriptionContainer > div:last-child em {
+  font-style: italic !important;
 }
 
-.editorSection > div:last-child u {
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
+.descriptionContainer > div:last-child u {
+  text-decoration: underline !important;
+  text-decoration-skip-ink: none !important;
 }
 
-.editorSection > div:last-child s {
-  text-decoration: line-through;
+.descriptionContainer > div:last-child s {
+  text-decoration: line-through !important;
 }
 
-.editorSection > div:last-child .align-left {
-  text-align: left;
+.descriptionContainer > div:last-child .align-left {
+  text-align: left !important;
 }
 
-.editorSection > div:last-child .align-center {
-  text-align: center;
+.descriptionContainer > div:last-child .align-center {
+  text-align: center !important;
 }
+
 .btnContainer {
   width: 100%;
   padding: 20px 0;
@@ -125,9 +130,11 @@
   align-items: center;
   gap: 10px;
 }
+
 .btnContainer button {
   max-width: 800px;
   width: 100%;
+  height: 38px;
   padding: 10px 20px;
   border-radius: 2525px;
   border: none;
@@ -147,6 +154,9 @@
   pointer-events: none;
   overflow-clip-margin: content-box;
   overflow: clip;
+}
+.focused {
+  border: 1px solid var(--font-color);
 }
 
 @media (max-width: 600px) {

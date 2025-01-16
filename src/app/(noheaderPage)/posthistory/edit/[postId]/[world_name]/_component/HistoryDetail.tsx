@@ -246,6 +246,10 @@ export default function HistoryDetail({
       limitedFlagPoint: data.postData.limitedFlagPoint,
       managerNameArr: data.postData.managerNameArr,
     });
+
+    return () => {
+      resetPostState();
+    };
   }, []);
   useEffect(() => {
     if (editor) {

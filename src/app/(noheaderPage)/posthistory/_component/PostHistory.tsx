@@ -86,7 +86,7 @@ export default function PostHistory({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              route.push(`/profile/setting/posthistory/edit/${history._id}/${selectedServer}`);
+              route.push(`/posthistory/edit/${history._id}/${selectedServer}`);
             }}
           >
             수정

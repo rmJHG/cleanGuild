@@ -125,7 +125,9 @@ export default function LimitedInfo({
       </div>
 
       <div className={classes.btnContainer}>
-        <button onClick={onPrev}>이전으로</button>
+        <button onClick={onPrev}>
+          <p>이전으로</p>
+        </button>
         <button
           onClick={() => {
             if (limitedFlagPoint && limitedFlagPoint > 1000) {
@@ -139,7 +141,7 @@ export default function LimitedInfo({
             onNext();
           }}
         >
-          다음으로
+          <p>다음으로</p>
         </button>
       </div>
     </div>

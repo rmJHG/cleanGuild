@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GuildInfo from './GuildInfo';
 import LimitedInfo from './LimitedInfo';
 import ContactInfo from './ContactInfo';
 import PostContent from './PostContent';
 import classes from './_styles/render.module.css';
+import { postStore } from '@/store/postStore';
 
 type Step = 1 | 2 | 3 | 4;
 
 export default function Render({ guildData }: { guildData: GuildData }) {
   const [pageState, setPageState] = useState<Step>(1);
+
+  const { resetPostState } = postStore();
 
   const currentNoblePoint: number = guildData!.guild_noblesse_skill.reduce((a, b) => {
     return a + b.skill_level;
@@ -47,5 +50,10 @@ export default function Render({ guildData }: { guildData: GuildData }) {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      resetPostState(); // 컴포넌트가 언마운트될 때 상태 초기화
+    };
+  }, []);
   return <div className={classes.container}>{renderStep()}</div>;
 }
