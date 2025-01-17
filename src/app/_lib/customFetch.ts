@@ -33,7 +33,9 @@ export default async function customFetch({
 
     const resJson = await res.json();
     console.log(resJson);
-
+    if (resJson.success === false) {
+      throw new Error(resJson.message);
+    }
     // 만약 토큰 만료 오류가 발생했다면
     if (resJson.message === '토큰이 만료되었습니다.') {
       // 리프레시 토큰으로 새로운 액세스 토큰을 요청

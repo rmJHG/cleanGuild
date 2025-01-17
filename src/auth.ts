@@ -93,6 +93,9 @@ export const {
       if (url.includes('signin?error')) {
         return url;
       }
+      if (url.includes('logoutRedirect')) {
+        return '/signin';
+      }
       console.log(url, baseUrl, 'redirect');
       return '/authLoading';
     },

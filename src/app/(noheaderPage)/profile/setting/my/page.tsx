@@ -3,11 +3,15 @@
 import Image from 'next/image';
 import classes from './page.module.css';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const { data: session } = useSession();
-
   const { handsData } = session!.user;
+
+  const route = useRouter();
+
+  console.log(session);
   console.log(handsData);
   return (
     <div className={classes.container}>
@@ -28,9 +32,13 @@ export default function Page() {
               <Image src={handsData.character_image} alt="character_image" width={97} height={97} />
             </div>
             <div className={classes.profileDetails}>
-              <p>닉네임 {handsData.character_name}</p>
-              <p>월드명 {handsData.world_name}</p>
-              <p>길드명 {handsData.character_guild_name}</p>
+              <p className={classes.charName}>{handsData.character_name}</p>
+              <p>
+                <span>월드명</span> {handsData.world_name}
+              </p>
+              <p>
+                <span>길드명</span> {handsData.character_guild_name}
+              </p>
             </div>
           </div>
         )}
@@ -40,7 +48,11 @@ export default function Page() {
           <button>
             <p>핸즈변경하기</p>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              route.push('/profile/setting/my/changepw');
+            }}
+          >
             <p>비밀번호 변경</p>
           </button>
         </div>
