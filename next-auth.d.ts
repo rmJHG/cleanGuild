@@ -1,8 +1,8 @@
-import { HandsData } from "@/types/userData";
-import NextAuth, { DefaultSession, DefaultUser, JWT } from "next-auth";
-import { DefaultJWT } from "next-auth/jwt";
+import { HandsData } from '@/types/userData';
+import NextAuth, { DefaultSession, DefaultUser, JWT } from 'next-auth';
+import { DefaultJWT } from 'next-auth/jwt';
 
-declare module "next-auth/jwt" {
+declare module 'next-auth/jwt' {
   interface JWT {
     user?: {
       id?: string;
@@ -17,7 +17,7 @@ declare module "next-auth/jwt" {
   }
 }
 
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session {
     user: {
       id: string;
@@ -25,11 +25,13 @@ declare module "next-auth" {
       handsData?: HandsData;
       dbId?: string;
       ocid?: string;
+      currentCharOcid?: string;
+      mainCharOcid?: string;
       isVerified: boolean;
       loginType: string;
       accessToken: string;
       refreshToken?: string;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 
   interface User extends DefaultUser {
@@ -37,6 +39,8 @@ declare module "next-auth" {
     handsData?: HandsData;
     dbId?: string;
     ocid?: string;
+    currentCharOcid?: string;
+    mainCharOcid?: string;
     accessToken: string;
     refreshToken?: string;
     loginType: string;

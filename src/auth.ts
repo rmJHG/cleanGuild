@@ -66,6 +66,7 @@ export const {
           }
 
           const user = res.profile;
+          console.log(res.profile, 'res.profile');
           return user;
         } catch (error) {
           throw error;
@@ -170,6 +171,8 @@ export const {
       }
       //최초 로그인 시
       if (account) {
+        console.log(account, 'account');
+        console.log(user, 'user');
         // Oauth 최초로그인
         if (account?.type === 'oauth' && user) {
           console.log(account, user, 'kakaoLogin');
@@ -177,7 +180,7 @@ export const {
           token.refreshToken = account.refresh_token;
           token.loginType = 'kakao';
 
-          token.ocid = user.ocid;
+          token.ocid = user.currentCharOcid;
           token.isVerified = user.isVerified;
         }
 
@@ -187,7 +190,7 @@ export const {
           token.refreshToken = user.refreshToken;
           token.loginType = 'local';
           token.email = user.email;
-          token.ocid = user.ocid;
+          token.ocid = user.currentCharOcid;
           token.isVerified = user.isVerified;
 
           // 사용자 데이터 가져오기
