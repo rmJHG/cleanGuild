@@ -1,4 +1,4 @@
 import classes from './styles/normalLoading.module.css';
-export default function NormalLoading() {
-  return <span className={classes.normalLoading}></span>;
+export default function NormalLoading({ color }: { color?: string }) {
+  return <span className={classes.normalLoading} style={{ color: color }}></span>;
 }

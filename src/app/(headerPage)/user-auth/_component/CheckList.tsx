@@ -13,7 +13,7 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
         <div>
           <h2>
             <FaQuestion size={25} />
-            핸즈 인증이 필요한 이유
+            핸즈 인증 전 확인사항
           </h2>
           <ul>
             <li>
@@ -23,6 +23,10 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
             <li>
               <FaRegCheckCircle color="var(--header-color)" />
               <p>중복가입을 방지하기 위해 사용됩니다.</p>
+            </li>
+            <li>
+              <FaRegCheckCircle color="var(--header-color)" />
+              <p>캐릭터는 하나만 등록이 가능합니다.</p>
             </li>
           </ul>
         </div>
@@ -34,7 +38,8 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
           </h2>
           <ul>
             <li>
-              <MdDoNotDisturbAlt color="#ce2323" /> 타인의 핸즈 이미지를 사용하지 마세요.
+              <MdDoNotDisturbAlt color="#ce2323" />
+              <p>타인의 핸즈 이미지를 사용하지 마세요.</p>
             </li>
 
             <li>
@@ -42,7 +47,7 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
               <p>흐리거나 모자이크가 된 이미지는 곤란해요.</p>
             </li>
             <li>
-              <MdDoNotDisturbAlt color="#ce2323" />
+              <IoIosWarning color="#dcbe00" />
               <p>전체 월드가 아닌 본인 월드를 캡쳐해서 사용해주세요.</p>
             </li>
             <li>

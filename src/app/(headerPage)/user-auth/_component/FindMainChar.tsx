@@ -7,15 +7,15 @@ export default function FindMainChar({
   onPrev,
   onNext,
   setImg,
-  setMainChar,
-  mainChar,
+  setFindResult,
+
   img,
 }: {
   onPrev: () => void;
   onNext: () => void;
   setImg: React.Dispatch<React.SetStateAction<File | null>>;
-  setMainChar: React.Dispatch<React.SetStateAction<Char[] | null>>;
-  mainChar: Char[] | null;
+  setFindResult: React.Dispatch<React.SetStateAction<Char[] | null>>;
+
   img: File | null;
 }) {
   const [dragging, setDragging] = useState(false);
@@ -69,7 +69,7 @@ export default function FindMainChar({
         const json = await res.json();
 
         if (res.ok && json.result.length > 0) {
-          setMainChar(json.result);
+          setFindResult(json.result);
           onNext();
           console.log(json);
         } else {
@@ -88,36 +88,32 @@ export default function FindMainChar({
 
   return (
     <div className={classes.container}>
-      {!mainChar && (
-        <>
-          <div className={classes.selectImgContainer}>
-            <label htmlFor="file" className={classes.customInput}>
-              <div
-                className={`${classes.fileContainer} ${dragging ? classes.dragging : ''}`}
-                onDragOver={handleDragOver}
-                onDragEnter={handleDragEnter}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-              >
-                {img ? '이미지 조회중입니다.' : '드래그 또는 클릭해서 이미지찾기'}
-                <input
-                  type="file"
-                  name="file"
-                  id="file"
-                  accept="image/*"
-                  onChange={changeHandler}
-                  rel="prefetch"
-                  style={{ display: 'none' }}
-                  disabled={!!img}
-                />
-              </div>
-            </label>
+      <div className={classes.selectImgContainer}>
+        <label htmlFor="file" className={classes.customInput}>
+          <div
+            className={`${classes.fileContainer} ${dragging ? classes.dragging : ''}`}
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          >
+            {img ? '이미지 조회중입니다.' : '드래그 또는 클릭해서 이미지찾기'}
+            <input
+              type="file"
+              name="file"
+              id="file"
+              accept="image/*"
+              onChange={changeHandler}
+              rel="prefetch"
+              style={{ display: 'none' }}
+              disabled={!!img}
+            />
           </div>
-          <div className={classes.btnContainer}>
-            <button onClick={onPrev}>뒤로가기</button>
-          </div>
-        </>
-      )}
+        </label>
+      </div>
+      <div className={classes.btnContainer}>
+        <button onClick={onPrev}>뒤로가기</button>
+      </div>
     </div>
   );
 }
