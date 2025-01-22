@@ -1,0 +1,68 @@
+.container {
+  width: 100%;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container input {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.container button {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: var(--header-color);
+  color: white;
+  font-weight: 600;
+}
+.titleContainer h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.innerContainer {
+  width: 100%;
+  max-width: 500px;
+
+  height: 100%;
+
+  background-color: var(--table-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.menuContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.menuContainer > div {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+.menuContainer > div:hover {
+  cursor: pointer;
+}
+.contentContainer {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentContainer > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

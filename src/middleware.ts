@@ -18,7 +18,11 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL('/signin', request.url));
   }
   if (session) {
-    if (pathname.startsWith('/signin') || pathname.startsWith('/signup')) {
+    if (
+      pathname.startsWith('/signin') ||
+      pathname.startsWith('/signup') ||
+      pathname.startsWith('/finduser')
+    ) {
       return NextResponse.redirect(new URL('/', request.url));
     }
 
@@ -48,6 +52,6 @@ export const middleware = async (request: NextRequest) => {
 
 export const config = {
   matcher: [
-    '/((?!find|test|guild|search).*)', // find, test, guild, search를 제외한 모든 경로
+    '/((?!find|test|guild|search|privacy).*)', // find, test, guild, search를 제외한 모든 경로
   ],
 };

@@ -1,0 +1,24 @@
+.container {
+  width: 100%;
+  border: 1px solid var(--border-color);
+}
+.container ul {
+  width: 100%;
+  min-width: 300px;
+  max-width: 500px;
+  max-height: 200px;
+  overflow-y: auto;
+  list-style: none;
+}
+.container ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container ul::-webkit-scrollbar-thumb {
+  background-color: var(--header-color);
+}
+
+.container ul li {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}

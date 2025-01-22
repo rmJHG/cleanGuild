@@ -33,6 +33,7 @@ export default function ProfileMenu({
   const { handsData } = session!.user;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const world_icon = totalServerList[handsData!.world_name as ServerName];
+
   const { data: guildData, isLoading: guildDataLoading } = useQuery({
     queryKey: ['guildData', handsData!.world_name, handsData!.character_guild_name],
     queryFn: getGuildData,
@@ -47,6 +48,7 @@ export default function ProfileMenu({
   });
   const [isManagerSettingOpen, setIsManagerSettingOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (btnRef.current?.contains(event.target as Node)) return null;
@@ -119,7 +121,20 @@ export default function ProfileMenu({
               <p className={classes.userEmail}>{user.email}</p>
             </div>
           </div>
-          <div className={classes.menuContainer}>
+
+          <div
+            className={`${classes.menuContainer} ${
+              !guildDataLoading &&
+              !(
+                managerData?.some((item: string) => item === user.ocid) ||
+                guildData.guild_master_name === handsData?.character_name
+              ) &&
+              !managerDataLoading &&
+              handsData!.character_name !== guildData?.guild_master_name
+                ? classes.noBorder
+                : ''
+            }`}
+          >
             {!guildDataLoading &&
               (managerData?.some((item: string) => item === user.ocid) ||
                 guildData.guild_master_name === handsData?.character_name) && (
@@ -136,11 +151,8 @@ export default function ProfileMenu({
                 <CiSettings color="white" /> <p>길드 관리자 설정</p>
               </div>
             )}
-
-            <div onClick={openSettingManager}>
-              <CiSettings color="white" /> <p>길드 관리자 설정 test</p>
-            </div>
           </div>
+
           <div className={classes.menuContainer}>
             <div
               onClick={() => {
@@ -165,4 +177,10 @@ export default function ProfileMenu({
       )}
     </div>
   );
+}
+
+{
+  /* <div onClick={openSettingManager}>
+              <CiSettings color="white" /> <p>길드 관리자 설정 test</p>
+            </div> */
 }

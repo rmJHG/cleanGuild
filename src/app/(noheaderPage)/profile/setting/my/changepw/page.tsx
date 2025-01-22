@@ -13,6 +13,11 @@ export default function Page() {
   const newPasswordRef = useRef<HTMLInputElement>(null);
   const newPasswordConfirmRef = useRef<HTMLInputElement>(null);
 
+  const handlePasswordChange = (password: string) => {
+    // 비밀번호 형식 확인 (8~16자, 영문과 숫자 포함)
+    return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password);
+  };
+
   const changeBtnHandler = async () => {
     if (
       !currentPasswordRef.current?.value ||
@@ -24,7 +29,9 @@ export default function Page() {
     if (newPasswordRef.current?.value !== newPasswordConfirmRef.current?.value) {
       return errorModal('새 비밀번호가 일치하지 않습니다.');
     }
-
+    if (!handlePasswordChange(newPasswordRef.current!.value)) {
+      return errorModal('비밀번호는 8~16자, 영문과 숫자가 최소 한개씩 필요합니다.');
+    }
     try {
       const res = await customFetch({
         url: `/api/v1/user/local/changePassword`,

@@ -9,6 +9,7 @@
   align-items: center;
   gap: 10px;
   color: var(--text-color);
+  flex: 1;
 }
 
 .container button {
@@ -18,4 +19,37 @@
 }
 .container button:hover {
   border: 1px solid black;
+}
+
+.innerContainer {
+  width: 300px;
+  height: 200px;
+
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--table-color);
+}
+
+.titleContainer {
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: whitesmoke;
+  background-color: var(--header-color);
+}
+
+.contentContainer {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
 }

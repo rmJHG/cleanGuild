@@ -18,7 +18,7 @@ export default async function getGuildManager(
     });
     console.log(response);
 
-    if (response.message === '길드 매니저를 찾을 수 없습니다.') {
+    if (response.message === '매니저 데이터를 가져오는데 실패했습니다.') {
       return null;
     }
     return response;

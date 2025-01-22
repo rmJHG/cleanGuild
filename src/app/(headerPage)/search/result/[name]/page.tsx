@@ -43,15 +43,28 @@ export default function Page({ params }: { params: { name: string } }) {
 
           <div
             style={{
-              maxHeight: '200px',
+              height: '200px',
               padding: '0',
-              flex: '1',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
             }}
           >
-            {!isLoading ? <SearchedChar data={charData[0] || null} /> : <Loading />}
+            {!isLoading ? (
+              <SearchedChar data={charData[0] || null} />
+            ) : (
+              <div
+                style={{
+                  flex: '1',
+                  padding: '0',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Loading />
+              </div>
+            )}
           </div>
         </section>
 

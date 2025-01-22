@@ -16,6 +16,7 @@ type LocalLoginState = {
 };
 
 export default function Page() {
+  const [checkedId, setCheckedId] = useState(false);
   const [email, setEmail] = useState('');
   const router = useRouter();
   const params = useSearchParams();
@@ -53,6 +54,13 @@ export default function Page() {
       window.history.replaceState({}, '', url.toString());
     }
   }, [params]);
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    if (email) {
+      setEmail(email);
+      setCheckedId(true);
+    }
+  }, []);
   return (
     <div className={classes.signInContainer}>
       <div className={classes.titleContainer}>
@@ -62,12 +70,11 @@ export default function Page() {
         {localLoginState.message && localLoginState.message === '이메일 인증을 완료해주세요.' && (
           <span>
             이메일 인증을 완료해주세요
-            <button
-              style={{ textDecoration: 'underline', textUnderlineOffset: '0.2rem' }}
+            <p
               onClick={async () => {
                 try {
                   const res = await fetch(
-                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/resentEmailVerificationCode`,
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/resendEmailVerificationCode`,
                     {
                       method: 'POST',
                       headers: {
@@ -86,8 +93,8 @@ export default function Page() {
                 }
               }}
             >
-              <p>인증메일 재전송</p>
-            </button>
+              인증메일 재전송
+            </p>
           </span>
         )}
         {localLoginState.message && localLoginState.message === 'fetch failed' && (
@@ -100,17 +107,43 @@ export default function Page() {
             <span>{localLoginState.message}</span>
           )}
 
-        <form action={localLoginFormAction}>
-          <input type="email" name="email" placeholder="이메일" autoComplete="off" />
+        <form
+          action={(formData) => {
+            if (!checkedId && formData.get('email')) {
+              localStorage.removeItem('email');
+            } else if (checkedId && formData.get('email')) {
+              localStorage.setItem('email', formData.get('email') as string);
+            }
+            localLoginFormAction(formData);
+          }}
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="이메일"
+            autoComplete="off"
+            defaultValue={email || ''}
+          />
           <input type="password" name="password" placeholder="비밀번호" />
+          <div className={classes.checkboxContainer}>
+            <input
+              type="checkbox"
+              id="saveIdCheckbox"
+              onChange={() => setCheckedId(!checkedId)}
+              checked={checkedId}
+            />
+            <label htmlFor="saveIdCheckbox">
+              <p>아이디 저장</p>
+            </label>
+          </div>
           <button type="submit">로그인</button>
         </form>
       </div>
+
       <div className={classes.accountLinksContainer}>
-        <p>아직 회원이 아니신가요?</p>
-        <Link href="/signup">
-          <p>회원가입</p>
-        </Link>
+        <Link href={'/finduser'}>비밀번호 찾기</Link>
+        <div className={classes.gap}></div>
+        <Link href="/signup">회원가입</Link>
       </div>
       <div className={classes.kakaoLoginContainer}>
         <form action={signInWithKaKao}>

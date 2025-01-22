@@ -19,6 +19,7 @@ type Props = {
 
 export default async function RootLayout({ children }: Props) {
   const session = (await auth()) as Session;
+  console.log(process.env.NODE_ENV);
 
   return (
     <html lang="ko">
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }: Props) {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
+                alignItems: 'center',
                 flex: '1',
               }}
             >
@@ -49,11 +51,13 @@ export default async function RootLayout({ children }: Props) {
           </RQProvider>
         </SessionProvider>
         <ToastContainer />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830932244446631"
-          crossOrigin="anonymous"
-        ></script>
+        {process.env.NODE_ENV !== 'development' && (
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4830932244446631"
+            crossOrigin="anonymous"
+          ></script>
+        )}
       </body>
     </html>
   );

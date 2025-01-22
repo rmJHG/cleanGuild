@@ -1,53 +1,15 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import Example from './Example';
-import CheckList from './CheckList';
-import FindMainChar from './FindMainChar';
-import { Char } from '@/types/char';
-import SaveImage from './SaveImage';
-import SelectMainChar from './SelectMainChar';
-import MainOrSubChar from './MainOrSubChar';
+import classes from './handsRender.module.css';
+import { useEffect, useState } from 'react';
 
-const charData = [
-  {
-    access_flag: 'true',
-    character_class: '히어로',
-    character_class_level: '6',
-    character_date_create: '2019-12-19T00:00+09:00',
-    character_exp: 9326973643221,
-    character_exp_rate: '61.593',
-    character_gender: '여',
-    character_guild_name: '꽁냥꽁냥',
-    character_image:
-      'https://open.api.nexon.com/static/maplestory/character/look/MMINCFPBOMABNCBNOGEMOKEGGPLABDHKFHBDHPAJFEFKOFHCGJPJAJHCPBIAFKPJOFGICKKMGLPHCFADMOMJKEAMJHBABJOPBCHHPOPNBGNKIHCJHLADBGEJBAFMGBAGKDFCKNHNOGPNFMMGNBNNKJGBLDAMCLHFCGFIAKHFHKGEINFKHCDFAGNKIFFKAABNCPLKOAIIHBGKAOBMFHPBKJALMGDIDJEEONILMDABFIFHJDCOHOPKIJLJGCCFNLPO',
-    character_level: 278,
-    character_name: '팔보채비벼줘',
-    date: null,
-    liberation_quest_clear_flag: 'false',
-    ocid: 'a5a09c28d7918653490aa203d2707631',
-    popularity: 4,
-    world_name: '루나',
-  },
-  {
-    access_flag: 'true',
-    character_class: '히어로',
-    character_class_level: '6',
-    character_date_create: '2019-12-19T00:00+09:00',
-    character_exp: 9326973643221,
-    character_exp_rate: '61.593',
-    character_gender: '여',
-    character_guild_name: '꽁냥꽁냥',
-    character_image:
-      'https://open.api.nexon.com/static/maplestory/character/look/MMINCFPBOMABNCBNOGEMOKEGGPLABDHKFHBDHPAJFEFKOFHCGJPJAJHCPBIAFKPJOFGICKKMGLPHCFADMOMJKEAMJHBABJOPBCHHPOPNBGNKIHCJHLADBGEJBAFMGBAGKDFCKNHNOGPNFMMGNBNNKJGBLDAMCLHFCGFIAKHFHKGEINFKHCDFAGNKIFFKAABNCPLKOAIIHBGKAOBMFHPBKJALMGDIDJEEONILMDABFIFHJDCOHOPKIJLJGCCFNLPO',
-    character_level: 278,
-    character_name: 'test2',
-    date: null,
-    liberation_quest_clear_flag: 'false',
-    ocid: 'a5a09c28d7918653490aa203d2707631',
-    popularity: 4,
-    world_name: '루나',
-  },
-];
+import { Char } from '@/types/char';
+import CheckList from './_components/CheckList';
+import Example from './_components/Example';
+import FindMainChar from './_components/FindMainChar';
+
+import MainOrSubChar from './_components/MainOrSubChar';
+import SaveImage from './_components/SaveImage';
+import SelectMainChar from './_components/SelectMainChar';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type ResetStateParams = {
@@ -57,7 +19,8 @@ export type ResetStateParams = {
   selectedChar?: boolean;
   searchedChar?: boolean;
 };
-export default function Render({ setSubTitle }: { setSubTitle: Dispatch<SetStateAction<string>> }) {
+export default function HandsRender({ accessToken }: { accessToken: string }) {
+  const [subTitle, setSubTitle] = useState<string>('서비스 이용을 위해 핸즈 인증이 필요합니다.');
   const [pageState, setPageState] = useState<Step>(1);
   const [img, setImg] = useState<File | null>(null);
   const [findResult, setFindResult] = useState<Char[] | null>(null);
@@ -156,9 +119,18 @@ export default function Render({ setSubTitle }: { setSubTitle: Dispatch<SetState
             img={img}
             mainChar={mainChar}
             selectedChar={selectedChar}
+            accessToken={accessToken}
           />
         );
     }
   };
-  return <>{renderStep()}</>;
+  return (
+    <div className={classes.container}>
+      <div className={classes.titleContainer}>
+        <h2>핸즈 인증</h2>
+        <p>{subTitle}</p>
+      </div>
+      <div className={classes.contentContainer}>{renderStep()}</div>
+    </div>
+  );
 }
