@@ -7,6 +7,7 @@ import Image from 'next/image';
 import classes from './guildUserImage.module.css';
 import { Char } from '@/types/char';
 import getCharData from '@/app/_hook/getCharData';
+import NormalLoading from '@/app/_components/layout/normalLoading';
 
 type Props = {
   guild_member_name: string;
@@ -34,6 +35,6 @@ export default function GuildUserImage({ guild_member_name, transformScaleX }: P
       </div>
     );
   } else {
-    return <Loading />;
+    return <NormalLoading color="black" />;
   }
 }

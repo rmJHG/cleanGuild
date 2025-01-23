@@ -48,9 +48,9 @@ export default function GuildMembers({ memberArr, master }: Props) {
       {masterData && (
         <li>
           <div className={classes.masterCharHeader}>
-            <FaCrown color="#ffe600" size={20} />
+            <FaCrown color="#ffe600" size={18} />
           </div>
-          <div>
+          <div className={classes.charImage}>
             <Image
               src={masterData.character_image}
               alt="guildMaster"
@@ -71,7 +71,6 @@ export default function GuildMembers({ memberArr, master }: Props) {
         guildMembers.map((e: Char) => {
           return (
             <li key={e!.character_name}>
-              <div className={classes.charHeader}></div>
               <div className={classes.charImage}>
                 <Image src={e!.character_image} alt="guildMaster" width={96} height={96} />
               </div>
