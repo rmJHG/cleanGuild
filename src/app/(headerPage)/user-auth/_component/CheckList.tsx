@@ -18,7 +18,7 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
           <ul>
             <li>
               <FaRegCheckCircle color="var(--header-color)" />
-              <p>원할한 서비스 이용을 위해 필요합니다.</p>
+              <p>원활한 서비스 이용을 위해 필요합니다.</p>
             </li>
             <li>
               <FaRegCheckCircle color="var(--header-color)" />
@@ -60,7 +60,7 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
             </li>
             <li>
               <IoIosWarning color="#dcbe00" />
-              <p>인증 중 발생한 문제는 아래 이메일로 연락주세요.</p>
+              <p>인증 중 발생한 문제는 화면 아래 이메일로 연락주세요.</p>
             </li>
           </ul>
         </div>
