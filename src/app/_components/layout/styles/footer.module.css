@@ -19,6 +19,7 @@
 .footerWrapper p,
 .footerWrapper a {
   color: white;
+  text-align: center;
 }
 .footerWrapper span {
   font-family: 'SBAggroB';
@@ -26,6 +27,7 @@
 }
 .footerWrapper > div {
   display: flex;
+
   gap: 10px;
 }
 
@@ -40,4 +42,8 @@
   width: 1px;
   height: 100%;
   background-color: white;
+}
+.email:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }

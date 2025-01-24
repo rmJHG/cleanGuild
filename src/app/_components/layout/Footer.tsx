@@ -26,8 +26,9 @@ export default function Footer() {
           개인정보 처리방침
         </Link>
         <div className={classes.gap}></div>
-        <p>문의 : </p>
-        <MdOutlineEmail size={16} color="white" onClick={handleEmail} />
+        <p className={classes.email} onClick={handleEmail}>
+          service@maplegremio.com
+        </p>
       </div>
       <p>
         Data based on <span style={{ fontFamily: 'SBAggroB' }}>NEXON OPEN API</span>
