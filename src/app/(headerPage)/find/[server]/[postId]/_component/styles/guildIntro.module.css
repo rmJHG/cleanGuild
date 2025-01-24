@@ -30,4 +30,6 @@
 .guildIntroImage {
   max-width: 100%;
   width: auto;
+  display: block;
+  margin: 0 auto;
 }
