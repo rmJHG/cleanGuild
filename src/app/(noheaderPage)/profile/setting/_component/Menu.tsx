@@ -6,6 +6,7 @@ import { CiUser } from 'react-icons/ci';
 import { IoLogOutOutline } from 'react-icons/io5';
 
 import { usePathname, useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
 
 const icons = {
   MdHome,
@@ -26,7 +27,7 @@ export default function Menu({ iconName, text }: Props) {
     <div
       onClick={() => {
         if (text === 'signout') {
-          console.log('logout');
+          signOut({ callbackUrl: '/signOut' });
         }
         if (text === 'profile') {
           route.push('/profile/setting/my');
