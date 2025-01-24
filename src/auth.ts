@@ -143,7 +143,7 @@ export const {
               sameSite: 'lax',
               secure: process.env.NODE_ENV === 'production',
             });
-            user.ocid = responseData.result.ocid;
+            user.currentCharOcid = responseData.result.currentCharOcid;
             user.isVerified = responseData.result.isVerified;
 
             return true;
