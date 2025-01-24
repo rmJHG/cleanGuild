@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import classes from './page.module.css';
 import { errorModal } from '@/app/_lib/errorModal';
 import Loading from '@/app/_components/layout/Loading';
+import { successModal } from '@/app/_lib/successModal';
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +38,32 @@ export default function Page() {
     }
   };
 
+  const resetPasswordHandler = async () => {
+    setIsLoading(true);
+    try {
+      const email = emailRef.current!.value;
+      const charName = charNameRef.current!.value;
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/resetUserPassword`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, charName }),
+        }
+      );
+      const data = await res.json();
+      if (res.ok) {
+        successModal(data, 1000);
+      }
+
+      setIsLoading(false);
+    } catch (error: any) {
+      errorModal(error.message);
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
     if (content === 'password') {
       setEmailResult('');
@@ -49,20 +76,20 @@ export default function Page() {
       </div>
       <div className={classes.innerContainer}>
         <div className={classes.menuContainer}>
-          {/* <div
+          <div
             onClick={() => setContent('email')}
             style={{
-              backgroundColor: content === 'email' ? 'var(--header-color)' : 'transparent',
-              color: content === 'email' ? 'white' : 'black',
+              backgroundColor: content === 'email' ? 'transparent' : 'var(--header-color)',
+              color: content === 'email' ? 'black' : 'white',
             }}
           >
             <p>이메일 찾기</p>
-          </div> */}
+          </div>
           <div
             onClick={() => setContent('password')}
             style={{
-              backgroundColor: content === 'password' ? 'var(--header-color)' : 'transparent',
-              color: content === 'password' ? 'white' : 'black',
+              backgroundColor: content === 'password' ? 'transparent' : 'var(--header-color)',
+              color: content === 'password' ? 'black' : 'white',
             }}
           >
             <p>비밀번호 찾기</p>
@@ -106,7 +133,7 @@ export default function Page() {
                 <p>메인 캐릭터 또는 부캐릭터의 닉네임을 입력해주세요.</p>
                 <input type="text" placeholder="이메일" ref={emailRef} />
                 <input type="text" placeholder="캐릭터 이름" ref={charNameRef} />
-                <button>비밀번호 찾기</button>
+                <button onClick={resetPasswordHandler}>비밀번호 찾기</button>
               </div>
             )
           )}
