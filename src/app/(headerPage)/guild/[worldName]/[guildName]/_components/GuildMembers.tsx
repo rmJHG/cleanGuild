@@ -72,7 +72,7 @@ export default function GuildMembers({ memberArr, master }: Props) {
           return (
             <li key={e!.character_name}>
               <div className={classes.charImage}>
-                <Image src={e!.character_image} alt="guildMaster" width={96} height={96} />
+                <Image src={e!.character_image} alt="guildMaster" width={96} height={96} priority />
               </div>
               <div className={classes.charInfo}>
                 <span>{e!.character_name}</span>

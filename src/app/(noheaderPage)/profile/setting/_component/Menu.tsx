@@ -6,7 +6,7 @@ import { CiUser } from 'react-icons/ci';
 import { IoLogOutOutline } from 'react-icons/io5';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const icons = {
   MdHome,
@@ -18,6 +18,7 @@ type Props = {
   text: string;
 };
 export default function Menu({ iconName, text }: Props) {
+  const { data: session } = useSession();
   const Icon = icons[iconName];
   const [isHover, setIsHover] = useState(false);
   const route = useRouter();
@@ -25,8 +26,18 @@ export default function Menu({ iconName, text }: Props) {
 
   return (
     <div
-      onClick={() => {
+      onClick={async () => {
         if (text === 'signout') {
+          if (session?.user.loginType === 'kakao') {
+            await fetch(
+              `https://kauth.kakao.com/oauth/logout?client_id=${process.env.NEXT_PUBLIC_AUTH_KAKAO_ID}&logout_redirect_uri=${process.env.NEXT_PUBLIC_AUTH_KAKAO_LOGOUT_REDIRECT_URI}&state=${process.env.NEXT_PUBLIC_AUTH_KAKAO_STATE}`
+            );
+            await fetch('https://kapi.kakao.com/v1/user/unlink', {
+              headers: {
+                Authorization: `Bearer ${session.user.accessToken}`,
+              },
+            });
+          }
           signOut({ callbackUrl: '/signOut' });
         }
         if (text === 'profile') {

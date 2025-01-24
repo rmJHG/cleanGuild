@@ -1,6 +1,6 @@
 'use server';
 
-import { signIn, signOut, auth } from '../../auth';
+import { signIn, auth } from '../../auth';
 
 export default async function signInWithCredential(
   prevState: {
@@ -40,9 +40,6 @@ export default async function signInWithCredential(
 }
 export const signInWithKaKao = async () => {
   await signIn('kakao', { redirect: true, redirectTo: '/' });
-};
-export const signOutWithForm = async () => {
-  await signOut();
 };
 
 export { auth as getSession };

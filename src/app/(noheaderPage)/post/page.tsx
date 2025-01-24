@@ -57,6 +57,7 @@ export default function Page() {
   const guildData = queries[0].data;
   const guildManager = queries[1].data;
 
+  console.log(guildManager, 'guildManager');
   if (
     guildData.guild_master_name !== handsData.character_name &&
     !guildManager.find((item: any) => item === session.user.ocid)

@@ -89,6 +89,7 @@ export const {
     redirect: async ({ url, baseUrl }) => {
       // 로그아웃 URL인 경우 홈페이지로 리다이렉트
       if (url.includes('signOut')) {
+        cookies().delete('_Loya');
         return '/';
       }
       if (url.includes('signin?error')) {
