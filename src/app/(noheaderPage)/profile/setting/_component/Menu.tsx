@@ -38,7 +38,7 @@ export default function Menu({ iconName, text }: Props) {
               },
             });
           }
-          signOut({ callbackUrl: '/signOut' });
+          signOut({ redirect: true, callbackUrl: '/signOut' });
         }
         if (text === 'profile') {
           route.push('/profile/setting/my');

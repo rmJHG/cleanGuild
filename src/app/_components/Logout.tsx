@@ -17,7 +17,7 @@ export default function Logout() {
             },
           });
         }
-        signOut({ redirect: true, redirectTo: '/signOut' });
+        signOut({ redirect: true, callbackUrl: '/signOut' });
       }}
     >
       <p>로그아웃</p>
