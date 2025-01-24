@@ -7,7 +7,7 @@ import { successModal } from '@/app/_lib/successModal';
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
-  const [content, setContent] = useState('password');
+  const [content, setContent] = useState('email');
   const [emailResult, setEmailResult] = useState('');
   const charNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);

@@ -17,6 +17,7 @@ export const middleware = async (request: NextRequest) => {
   if (pathname.startsWith('/profile') && !session) {
     return NextResponse.redirect(new URL('/signin', request.url));
   }
+
   if (session) {
     if (
       pathname.startsWith('/signin') ||
@@ -28,7 +29,6 @@ export const middleware = async (request: NextRequest) => {
 
     if (
       !session.user.handsData &&
-      pathname !== '/' &&
       !pathname.startsWith('/user-auth') &&
       !pathname.startsWith('/_next') &&
       !pathname.startsWith('/signout')

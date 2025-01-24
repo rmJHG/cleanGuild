@@ -141,7 +141,7 @@ export default function Page() {
       </div>
 
       <div className={classes.accountLinksContainer}>
-        <Link href={'/finduser'}>비밀번호 찾기</Link>
+        <Link href={'/finduser'}>아이디 또는 비밀번호 찾기</Link>
         <div className={classes.gap}></div>
         <Link href="/signup">회원가입</Link>
       </div>

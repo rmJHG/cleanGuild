@@ -18,6 +18,10 @@ export default function CheckList({ onNext }: { onNext: () => void }) {
           <ul>
             <li>
               <FaRegCheckCircle color="var(--header-color)" />
+              <p>원할한 서비스 이용을 위해 필요합니다.</p>
+            </li>
+            <li>
+              <FaRegCheckCircle color="var(--header-color)" />
               <p>메인 캐릭터 정보를 저장하기 위해 사용됩니다.</p>
             </li>
             <li>
