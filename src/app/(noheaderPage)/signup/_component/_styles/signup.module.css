@@ -26,6 +26,9 @@
   color: var(--font-color);
   font-family: 'NEXON Lv1 Gothic OTF';
 }
+.titleContainer > h1:hover {
+  cursor: pointer;
+}
 .credentialsContainer {
   flex: 1;
   display: flex;

@@ -45,7 +45,13 @@ export default function SignUp({ onPrev }: { onPrev: (n: number) => void }) {
   return (
     <div className={classes.signUpContainer}>
       <div className={classes.titleContainer}>
-        <h1>MAPLE GREMIO</h1>
+        <h1
+          onClick={() => {
+            route.push('/');
+          }}
+        >
+          MAPLE GREMIO
+        </h1>
       </div>
       <div className={classes.credentialsContainer}>
         <form

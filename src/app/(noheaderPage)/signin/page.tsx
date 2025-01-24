@@ -64,7 +64,13 @@ export default function Page() {
   return (
     <div className={classes.signInContainer}>
       <div className={classes.titleContainer}>
-        <h1>MAPLE GREMIO</h1>
+        <h1
+          onClick={() => {
+            router.push('/');
+          }}
+        >
+          MAPLE GREMIO
+        </h1>
       </div>
       <div className={classes.credentialsContainer}>
         {localLoginState.message && localLoginState.message === '이메일 인증을 완료해주세요.' && (

@@ -7,15 +7,23 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { useState } from 'react';
 import TermsOfService from './TermsOfService';
 import PrivacyPolicy from './PrivacyPolicy';
+import { useRouter } from 'next/navigation';
 
 export default function TermCondition({ onNext }: { onNext: (nextStep: number) => void }) {
+  const route = useRouter();
   const [checkedTermsOfService, setCheckedTermsOfService] = useState(false);
   const [checkedPrivacyPolicy, setCheckedPrivacyPolicy] = useState(false);
 
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
-        <h1>MAPLE GREMIO</h1>
+        <h1
+          onClick={() => {
+            route.push('/');
+          }}
+        >
+          MAPLE GREMIO
+        </h1>
       </div>
       <div className={classes.contentContainer}>
         <div className={classes.termsOfServiceContainer}>
