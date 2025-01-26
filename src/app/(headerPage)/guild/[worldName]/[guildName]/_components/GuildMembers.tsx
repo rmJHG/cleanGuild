@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import classes from './guildMember.module.css';
+import classes from './_styles/guildMembers.module.css';
 
 import { Char } from '@/types/char';
 import Image from 'next/image';

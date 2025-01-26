@@ -4,7 +4,7 @@ import Loading from '@/app/_components/layout/Loading';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
-import classes from './guildUserImage.module.css';
+import classes from './_styles/guildUserImage.module.css';
 import { Char } from '@/types/char';
 import getCharData from '@/app/_hook/getCharData';
 import NormalLoading from '@/app/_components/layout/normalLoading';

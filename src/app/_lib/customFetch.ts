@@ -51,9 +51,10 @@ export default async function customFetch({
           credentials: 'include',
         }
       );
-      console.log(refresh);
+
       const refreshJson = await refresh.json();
       console.log(refreshJson, 'refreshJson');
+
       if (refresh.status === 401) {
         signOut({
           callbackUrl: `/signin?error=${encodeURIComponent(

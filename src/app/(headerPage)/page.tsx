@@ -6,7 +6,7 @@ import { auth } from '@/auth';
 
 export default async function Page() {
   const session = await auth();
-  console.log(session);
+  console.log(session, 'session');
   return (
     <div className={classes.container} style={{ flex: '1' }}>
       <GuildSearchBar />

@@ -17,6 +17,7 @@ export default async function getCharData({ queryKey }: { queryKey: QueryKey }) 
       }
     );
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     return error;
