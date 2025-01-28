@@ -118,7 +118,7 @@ export default function ContactInfo({
           </div>
           <div className={classes.guildManagerContainer}>
             <div className={classes.managerHeader}>
-              <span>길드매니저</span>
+              <span>인게임 문의</span>
               <span>{managerNameArr.length} / 4</span>
             </div>
             <div>

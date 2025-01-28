@@ -49,6 +49,11 @@ export default function ChangeChar({ setModalState }: { setModalState: (state: b
       const data = await res.json();
       console.log(data);
 
+      if (data === '메인 캐릭터가 아닙니다.') {
+        errorModal('자신의 캐릭터만 검색할 수 있습니다.');
+        setIsLoading(false);
+        return;
+      }
       if (data === '메인 캐릭터 입니다.') {
         const fetchedData = await fetch(`/fetchData`, {
           method: 'POST',
@@ -124,7 +129,6 @@ export default function ChangeChar({ setModalState }: { setModalState: (state: b
     <div
       className={classes.container}
       onClick={() => {
-        console.log('hello');
         setModalState(false);
       }}
     >
@@ -143,7 +147,16 @@ export default function ChangeChar({ setModalState }: { setModalState: (state: b
               <p>캐릭터 변경을 하시면 7일이내에 다시 변경할 수 없습니다.</p>
             </div>
             <div className={classes.searchInputContainer}>
-              <input type="text" placeholder="캐릭터명" ref={inputRef} />
+              <input
+                type="text"
+                placeholder="캐릭터명"
+                ref={inputRef}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter') {
+                    searchCharHandler();
+                  }
+                }}
+              />
               <FaSearch onClick={searchCharHandler} size={20} />
             </div>
             {searchedChar && (

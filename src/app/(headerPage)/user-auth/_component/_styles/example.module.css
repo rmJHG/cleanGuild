@@ -28,6 +28,7 @@
   width: 100%;
   object-fit: cover;
   height: auto;
+
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -63,4 +64,10 @@
 }
 .btnContainer button:hover {
   opacity: 0.7;
+}
+
+@media (max-height: 700px) {
+  .infoContainer img {
+    max-height: 300px;
+  }
 }

@@ -9,6 +9,7 @@ import { useFormState } from 'react-dom';
 import KakaoSVG from '../../../../public/kakao.svg';
 import { errorModal } from '@/app/_lib/errorModal';
 import { successModal } from '@/app/_lib/successModal';
+import { FaC, FaCheck } from 'react-icons/fa6';
 
 type LocalLoginState = {
   message: string;
@@ -131,16 +132,18 @@ export default function Page() {
             defaultValue={email || ''}
           />
           <input type="password" name="password" placeholder="비밀번호" />
-          <div className={classes.checkboxContainer}>
+          <div className={classes.checkboxContainer} onClick={() => setCheckedId(!checkedId)}>
             <input
               type="checkbox"
               id="saveIdCheckbox"
               onChange={() => setCheckedId(!checkedId)}
               checked={checkedId}
             />
-            <label htmlFor="saveIdCheckbox">
-              <p>아이디 저장</p>
-            </label>
+            <div className={classes.checkbox}>
+              {checkedId ? <FaCheck color="black" size={10} /> : <></>}
+            </div>
+
+            <p>아이디 저장</p>
           </div>
           <button type="submit">로그인</button>
         </form>

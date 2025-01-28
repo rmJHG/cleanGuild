@@ -75,16 +75,18 @@
   align-items: center;
   gap: 5px;
 }
-.checkboxContainer > input[type='checkbox'] {
+.checkbox {
   width: 13px;
   height: 13px;
   margin: 0;
   border: 1px solid var(--border-color);
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: background-color 0.3s;
 }
-.checkboxContainer > input[type='checkbox']:checked {
-  background-color: var(--font-color);
+.checkboxContainer > input[type='checkbox'] {
+  display: none;
 }
 
 .credentialsContainer > form > button {

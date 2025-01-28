@@ -254,3 +254,19 @@ img {
   -o-user-drag: none;
   pointer-events: none;
 }
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #979797;
+}
