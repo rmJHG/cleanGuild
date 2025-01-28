@@ -96,6 +96,7 @@ export const {
         return url;
       }
       if (url.includes('logoutRedirect')) {
+        cookies().delete('_Loya');
         return '/signin';
       }
       console.log(url, baseUrl, 'redirect');

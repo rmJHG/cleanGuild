@@ -4,15 +4,18 @@ import Image from 'next/image';
 import classes from './page.module.css';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import ChangeChar from './_components/ChangeChar';
+import { useState } from 'react';
 
 export default function Page() {
+  const [modalState, setModalState] = useState(false);
+
   const { data: session } = useSession();
   const { handsData } = session!.user;
 
   const route = useRouter();
 
-  console.log(session);
-  console.log(handsData);
+  console.log(modalState);
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
@@ -20,10 +23,10 @@ export default function Page() {
         <p>{session?.user.email}(으)로 로그인 중</p>
       </div>
       <div className={classes.profileContainer}>
-        <h3>메인 캐릭터</h3>
+        <h3>현재 캐릭터</h3>
         {!handsData ? (
           <div>
-            <p>메인캐릭터 정보가 없습니다.</p>
+            <p>캐릭터 정보가 없습니다.</p>
             <p>핸즈 인증하기</p>
           </div>
         ) : (
@@ -45,7 +48,7 @@ export default function Page() {
       </div>
       <div className={classes.btnContainer}>
         <div>
-          <button>
+          <button onClick={() => setModalState(true)}>
             <p>핸즈변경하기</p>
           </button>
           <button
@@ -61,6 +64,7 @@ export default function Page() {
             <p>회원탈퇴</p>
           </button>
         </div>
+        {modalState && <ChangeChar setModalState={setModalState} />}
       </div>
     </div>
   );

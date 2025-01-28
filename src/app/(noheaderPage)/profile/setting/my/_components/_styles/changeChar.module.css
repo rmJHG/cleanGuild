@@ -1,0 +1,109 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.innerContainer {
+  min-width: 300px;
+  width: 100%;
+  max-width: 80vw;
+
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 101;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.searchInputContainer {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.searchInputContainer input {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: none;
+}
+.searchedCharContainer {
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profileContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 20px;
+}
+.profile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.profileDetails p {
+  align-self: flex-start;
+}
+.charName {
+  font-size: 18px;
+}
+
+.btnContainer {
+  height: 50px;
+  padding: 3px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnContainer button {
+  padding: 5px 10px;
+  border: 1px;
+  border-radius: 5px;
+  background-color: var(--header-color);
+  color: white;
+  cursor: pointer;
+}
+
+.loadingContainer > span {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+}
+
+.restrictedContainer {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}

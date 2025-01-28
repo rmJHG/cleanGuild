@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const { character_name } = await req.json();
-
+  console.log(character_name);
   try {
     const getOcidData = await fetch(
       `https://open.api.nexon.com/maplestory/v1/id?character_name=${character_name}`,
