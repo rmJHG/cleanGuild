@@ -46,8 +46,8 @@ export default function Menu({ iconName, text }: Props) {
         if (text === 'home') {
           route.push('/');
         }
-        if (text === '비밀번호변경') {
-          route.push('/profile/setting/password');
+        if (text === 'my') {
+          route.push('/profile/setting/my');
         }
       }}
       onMouseEnter={() => setIsHover(true)}
@@ -57,13 +57,14 @@ export default function Menu({ iconName, text }: Props) {
         padding: '5px 8px',
         display: 'flex',
         alignItems: 'center',
-        gap: '8px', // 아이콘과 텍스트 간 간격
+        gap: '8px',
         position: 'relative',
-        backgroundColor:
-          pathName === `/profile/setting/${text}` ? 'var(--background-color)' : 'transparent',
+        backgroundColor: pathName.startsWith(`/profile/setting/${text}`)
+          ? 'var(--background-color)'
+          : 'transparent',
       }}
     >
-      <Icon color={pathName === `/profile/setting/${text}` ? 'black' : 'white'} size={25} />
+      <Icon color={pathName.startsWith(`/profile/setting/${text}`) ? 'black' : 'white'} size={25} />
       {isHover && (
         <p
           style={{

@@ -51,16 +51,22 @@ export default function Page() {
           <button onClick={() => setModalState(true)}>
             <p>핸즈변경하기</p>
           </button>
-          <button
-            onClick={() => {
-              route.push('/profile/setting/my/changepw');
-            }}
-          >
-            <p>비밀번호 변경</p>
-          </button>
+          {session!.user.loginType === 'local' && (
+            <button
+              onClick={() => {
+                route.push('/profile/setting/my/changepw');
+              }}
+            >
+              <p>비밀번호 변경</p>
+            </button>
+          )}
         </div>
         <div>
-          <button>
+          <button
+            onClick={() => {
+              route.push('/profile/setting/my/da');
+            }}
+          >
             <p>회원탈퇴</p>
           </button>
         </div>

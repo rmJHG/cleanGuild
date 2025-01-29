@@ -114,11 +114,10 @@ export default function ChangeChar({ setModalState }: { setModalState: (state: b
           method: 'GET',
           loginType: session?.user.loginType as string,
           token: session!.user.accessToken,
+          update,
         });
 
-        if (!res) {
-          setIsRestricted(true);
-        }
+        setIsRestricted(res.hasChangedIn7Days);
       } catch (error) {
         console.log(error);
       }
@@ -149,6 +148,7 @@ export default function ChangeChar({ setModalState }: { setModalState: (state: b
             <div className={classes.searchInputContainer}>
               <input
                 type="text"
+                spellCheck="false"
                 placeholder="캐릭터명"
                 ref={inputRef}
                 onKeyUp={(e) => {

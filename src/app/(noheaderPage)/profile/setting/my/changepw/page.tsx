@@ -53,6 +53,7 @@ export default function Page() {
         successModal('비밀번호가 변경되었습니다. 다시 로그인 해주세요.', 1000);
         await signOut({ callbackUrl: '/logoutRedirect' });
       }
+      errorModal(res.message);
     } catch (error: any) {
       console.log(error, 'error');
       errorModal(error.message);
