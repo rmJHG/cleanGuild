@@ -13,6 +13,7 @@ declare module 'next-auth/jwt' {
       loginType: string;
       accessToken: string;
       refreshToken?: string;
+      deleteRequest?: boolean;
     };
   }
 }
@@ -31,6 +32,7 @@ declare module 'next-auth' {
       loginType: string;
       accessToken: string;
       refreshToken?: string;
+      deleteRequest?: boolean;
     } & DefaultSession['user'];
   }
 
@@ -45,5 +47,6 @@ declare module 'next-auth' {
     refreshToken?: string;
     loginType: string;
     isVerified: boolean;
+    deleteRequest?: boolean;
   }
 }

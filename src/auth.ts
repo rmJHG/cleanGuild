@@ -103,7 +103,6 @@ export const {
       return '/authLoading';
     },
     signIn: async ({ account, profile, user }) => {
-      console.log(account?.provider, 'account provider');
       if (account?.provider === 'credentials') {
         return true;
       }
@@ -121,10 +120,8 @@ export const {
             }
           );
 
-          console.log(fetchekakaoUserdData, 'fetchekakaoUserdData');
-
           const responseData = await fetchekakaoUserdData.json();
-          console.log(responseData, 'result');
+
           if (!fetchekakaoUserdData.ok) {
             await fetch('https://kapi.kakao.com/v1/user/unlink', {
               method: 'POST',
@@ -133,10 +130,8 @@ export const {
               },
             });
 
-            return `/signin?error=${encodeURIComponent(responseData.message)}`;
-          }
-
-          if (fetchekakaoUserdData.ok) {
+            return `/signin?error=${encodeURIComponent(responseData)}`;
+          } else {
             cookies().set({
               name: '_Loya',
               value: account.refresh_token as string,
@@ -145,19 +140,22 @@ export const {
               sameSite: 'lax',
               secure: process.env.NODE_ENV === 'production',
             });
+            console.log(responseData, 'responseData');
             user.currentCharOcid = responseData.result.currentCharOcid;
             user.isVerified = responseData.result.isVerified;
+            user.deleteRequest = responseData.result.deleteRequest;
 
             return true;
           }
         } catch (error: any) {
+          console.log(error, 'error');
           await fetch('https://kapi.kakao.com/v1/user/unlink', {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${account.access_token}`,
             },
           });
-          return `/signin?error=${encodeURIComponent(error.message)}`;
+          return `/signin?error=${encodeURIComponent(error)}`;
         }
       }
       return false;
@@ -173,7 +171,6 @@ export const {
       }
       //최초 로그인 시
       if (account) {
-        console.log(account, 'account');
         console.log(user, 'user');
         // Oauth 최초로그인
         if (account?.type === 'oauth' && user) {
@@ -184,6 +181,7 @@ export const {
 
           token.ocid = user.currentCharOcid;
           token.isVerified = user.isVerified;
+          token.deleteRequest = user.deleteRequest;
         }
 
         // 로컬 최초로그인
@@ -194,7 +192,7 @@ export const {
           token.email = user.email;
           token.ocid = user.currentCharOcid;
           token.isVerified = user.isVerified;
-
+          token.deleteRequest = user.deleteRequest;
           // 사용자 데이터 가져오기
         }
 
@@ -234,6 +232,7 @@ export const {
           ocid: token.ocid as string,
           handsData: token.handsData as HandsData,
           isVerified: token.isVerified as boolean,
+          deleteRequest: token.deleteRequest as boolean,
         };
         return session;
       } catch (error) {

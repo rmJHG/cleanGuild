@@ -12,4 +12,5 @@ export type UserData = {
   token: string;
   accessToken: string;
   isVerified: boolean;
+  deleteRequest?: boolean;
 };

@@ -9,7 +9,7 @@ import { useFormState } from 'react-dom';
 import KakaoSVG from '../../../../public/kakao.svg';
 import { errorModal } from '@/app/_lib/errorModal';
 import { successModal } from '@/app/_lib/successModal';
-import { FaC, FaCheck } from 'react-icons/fa6';
+import { FaCheck } from 'react-icons/fa6';
 
 type LocalLoginState = {
   message: string;
@@ -19,9 +19,10 @@ type LocalLoginState = {
 export default function Page() {
   const [checkedId, setCheckedId] = useState(false);
   const [email, setEmail] = useState('');
+
   const router = useRouter();
   const params = useSearchParams();
-  console.log(params.get('error'));
+
   const [localLoginState, localLoginFormAction] = useFormState<LocalLoginState, FormData>(
     signInWithCredential,
     {
@@ -50,9 +51,12 @@ export default function Page() {
   useEffect(() => {
     if (params.get('error')) {
       errorModal(params.get('error') as string);
+
       const url = new URL(window.location.href);
+
       url.searchParams.delete('error');
-      window.history.replaceState({}, '', url.toString());
+
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [params]);
   useEffect(() => {
@@ -110,7 +114,8 @@ export default function Page() {
         {localLoginState.message &&
           localLoginState.message !== '/authLoading' &&
           localLoginState.message !== 'fetch failed' &&
-          localLoginState.message !== '이메일 인증을 완료해주세요.' && (
+          localLoginState.message !== '이메일 인증을 완료해주세요.' &&
+          localLoginState.message !== '탈퇴 요청을 한 계정입니다.' && (
             <span>{localLoginState.message}</span>
           )}
 
