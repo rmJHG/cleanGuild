@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import classes from './_styles/guildMembers.module.css';
 
 import { Char } from '@/types/char';
@@ -7,52 +7,58 @@ import getCharData from '@/app/_hook/getCharData';
 import Loading from '@/app/_components/layout/Loading';
 
 import { FaCrown } from 'react-icons/fa';
+import { useState } from 'react';
 
 type Props = {
   memberArr: string[];
   master: string;
 };
+const chunk = (array: string[], size: number) => {
+  const chunkedArr = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunkedArr.push(array.slice(i, i + size));
+  }
+  return chunkedArr;
+};
 export default function GuildMembers({ memberArr, master }: Props) {
-  const { data: guildMaster, isLoading: guildLoading } = useQuery<Char[], Error, Char[]>({
+  const memberChunks = chunk(memberArr, 30);
+  const { data: guildMaster, isLoading: guildMasterLoading } = useQuery<Char[], Error, Char[]>({
     queryKey: ['char', [master]],
     queryFn: getCharData,
     staleTime: 60 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
   });
 
-  const { data: guildMembers, isLoading: memberLoading } = useQuery<Char[], Error, Char[]>({
-    queryKey: ['char', memberArr],
-    queryFn: getCharData,
+  const guildmaterData = guildMaster && guildMaster[0];
+
+  const queries = useQueries({
+    queries: memberChunks.map((e) => {
+      return {
+        queryKey: ['char', e],
+        queryFn: getCharData,
+      };
+    }),
   });
-  if (guildLoading || memberLoading)
-    return (
-      <div
-        style={{
-          width: '100%',
 
-          flex: '1',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Loading />
-      </div>
-    );
-  const masterData = guildMaster![0];
-
-  console.log('guildMembers', guildMembers);
+  const isLoading = queries.some((q) => q.isLoading || q.isFetching);
+  const allData = queries.flatMap((q) => q.data || []);
+  const sortedData = allData.sort((a, b) => b.character_level - a.character_level);
 
   return (
     <ul className={classes.container}>
-      {masterData && (
+      {guildMasterLoading && (
+        <li>
+          <Loading />
+        </li>
+      )}
+      {!guildMasterLoading && guildmaterData && (
         <li>
           <div className={classes.masterCharHeader}>
             <FaCrown color="#ffe600" size={18} />
           </div>
           <div className={classes.charImage}>
             <Image
-              src={masterData.character_image}
+              src={guildmaterData.character_image}
               alt="guildMaster"
               width={100}
               height={100}
@@ -60,15 +66,15 @@ export default function GuildMembers({ memberArr, master }: Props) {
             />
           </div>
           <div className={classes.charInfo}>
-            <span>{masterData.character_name}</span>
-            <span>lv.{masterData.character_level}</span>
-            <span>{masterData.character_class}</span>
+            <span>{guildmaterData.character_name}</span>
+            <span>lv.{guildmaterData.character_level}</span>
+            <span>{guildmaterData.character_class}</span>
           </div>
         </li>
       )}
 
-      {guildMembers &&
-        guildMembers.map((e: Char) => {
+      {sortedData &&
+        sortedData.map((e: Char) => {
           return (
             <li key={e!.character_name}>
               <div className={classes.charImage}>
@@ -82,6 +88,11 @@ export default function GuildMembers({ memberArr, master }: Props) {
             </li>
           );
         })}
+      {isLoading && (
+        <div className={classes.loadingText}>
+          <p>캐릭터 로딩중입니다</p>
+        </div>
+      )}
     </ul>
   );
 }

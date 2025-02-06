@@ -1,6 +1,5 @@
 'use client';
 
-import Loading from '@/app/_components/layout/Loading';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
@@ -14,14 +13,24 @@ type Props = {
   transformScaleX: string;
 };
 export default function GuildUserImage({ guild_member_name, transformScaleX }: Props) {
-  const { data: charData } = useQuery<Char[], Error, Char[], [_1: string, userName: string[]]>({
+  const { data: charData, isLoading } = useQuery<
+    Char[],
+    Error,
+    Char[],
+    [_1: string, userName: string[]]
+  >({
     queryKey: ['char', [guild_member_name]],
     queryFn: getCharData,
     staleTime: 1 * 60 * 1000,
     gcTime: 3 * 60 * 1000,
   });
 
+  if (isLoading) return <NormalLoading color="black" />;
+
+  if (!isLoading && !charData) return null;
+
   if (charData && charData[0]) {
+    console.log(charData, 'charData');
     return (
       <div className={classes.wrapper}>
         <Image
@@ -34,7 +43,5 @@ export default function GuildUserImage({ guild_member_name, transformScaleX }: P
         />
       </div>
     );
-  } else {
-    return <NormalLoading color="black" />;
   }
 }
