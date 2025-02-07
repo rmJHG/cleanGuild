@@ -42,12 +42,16 @@ export default function SignUp({ onPrev }: { onPrev: (n: number) => void }) {
     const value = e.target.value;
     setPasswordCheck(value);
   };
+  const checkEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
   return (
     <div className={classes.signUpContainer}>
       <div className={classes.titleContainer}>
         <h1
           onClick={() => {
-            route.push('/');
+            route.push('/signin');
           }}
         >
           MAPLE GREMIO
@@ -57,6 +61,8 @@ export default function SignUp({ onPrev }: { onPrev: (n: number) => void }) {
         <form
           action={(formData) => {
             if (!formData.get('email')) return errorModal('이메일을 입력해주세요.');
+            if (!checkEmail(formData.get('email') as string))
+              return errorModal('이메일 형식이 올바르지 않습니다.');
             if (!formData.get('password')) return errorModal('비밀번호를 입력해주세요.');
             if (!passwordValid) return errorModal('비밀번호 형식이 올바르지 않습니다.');
             if (password !== passwordCheck) return errorModal('비밀번호가 일치하지 않습니다.');

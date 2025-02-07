@@ -17,6 +17,8 @@
 }
 .titleContainer {
   padding-top: 100px;
+  display: flex;
+  justify-content: center;
 }
 .titleContainer > h1 {
   text-align: center;
@@ -24,6 +26,7 @@
   font-weight: 600;
   color: var(--font-color);
   font-family: 'NEXON Lv1 Gothic OTF';
+  display: inline-block;
 }
 .titleContainer > h1:hover {
   cursor: pointer;
@@ -59,7 +62,6 @@
 
 .credentialsContainer > form > input {
   height: 50px;
-
   width: 100%;
   border: 1px solid var(--border-color);
   padding: 0 10px;

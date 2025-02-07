@@ -19,7 +19,7 @@ export default function TermCondition({ onNext }: { onNext: (nextStep: number) =
       <div className={classes.titleContainer}>
         <h1
           onClick={() => {
-            route.push('/');
+            route.push('/signin');
           }}
         >
           MAPLE GREMIO

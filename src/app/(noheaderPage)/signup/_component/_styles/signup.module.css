@@ -25,6 +25,7 @@
   font-weight: 600;
   color: var(--font-color);
   font-family: 'NEXON Lv1 Gothic OTF';
+  display: inline-block;
 }
 .titleContainer > h1:hover {
   cursor: pointer;

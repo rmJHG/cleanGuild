@@ -30,7 +30,7 @@ function GuildInfo({ guildData, onNext }: { guildData: GuildData; onNext: () => 
   return (
     <div className={classes.container}>
       <header className={classes.header}>
-        <h2>길드 홍보 ( 1 / 3 )</h2>
+        <h2>길드 홍보 ( 1 / 4 )</h2>
         <p>홍보하려는 길드 정보를 확인해주세요.</p>
       </header>
       <div className={classes.infoContainer}>
