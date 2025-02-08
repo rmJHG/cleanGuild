@@ -256,15 +256,15 @@ img {
 }
 
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 15px;
 }
 
 body::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #e8e8e8;
 }
 
 body::-webkit-scrollbar-thumb {
-  background: #555;
+  background: #7e7e7e;
 }
 
 body::-webkit-scrollbar-thumb:hover {
