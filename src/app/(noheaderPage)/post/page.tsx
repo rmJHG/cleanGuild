@@ -84,18 +84,15 @@ export default function Page() {
     const remainingSeconds = Math.ceil(timeLeft / 1000); // 남은 초 계산
     const minutes = Math.floor(remainingSeconds / 60); // 남은 분 계산
     return (
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '900px',
-          minHeight: '100%',
-          display: 'flex',
-          alignContent: 'center',
-          justifyContent: 'center',
-          flex: '1',
-        }}
-      >
+      <div className={classes.cooltime}>
         <p>길드홍보 쿨타임이 약 {minutes} 분 남았습니다.</p>
+        <button
+          onClick={() => {
+            route.back();
+          }}
+        >
+          메인으로
+        </button>
       </div>
     );
   }

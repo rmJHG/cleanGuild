@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { postStore } from '@/store/postStore';
 import { error } from 'console';
 import { errorModal } from '@/app/_lib/errorModal';
+import Link from 'next/link';
 
 function GuildInfo({ guildData, onNext }: { guildData: GuildData; onNext: () => void }) {
   console.log(guildData);
@@ -17,7 +18,7 @@ function GuildInfo({ guildData, onNext }: { guildData: GuildData; onNext: () => 
     world_name,
   } = guildData;
 
-  const { guildType, setPostState } = postStore();
+  const { guildType, setPostState, resetPostState } = postStore();
   const guildTypeOption = ['친목', '솔로', '랭킹', '자유', '유니온'];
 
   const handleNext = () => {
@@ -58,6 +59,9 @@ function GuildInfo({ guildData, onNext }: { guildData: GuildData; onNext: () => 
         </p>
       </div>
       <div className={classes.btnContainer}>
+        <Link href="/" onClick={() => resetPostState()}>
+          <p>메인으로</p>
+        </Link>
         <button onClick={() => handleNext()}>
           <p>다음으로</p>
         </button>

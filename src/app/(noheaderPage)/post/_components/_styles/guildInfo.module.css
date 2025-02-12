@@ -95,10 +95,13 @@
   width: 100%;
   padding: 20px 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
-.btnContainer button {
+.btnContainer button,
+.btnContainer a {
   max-width: 800px;
   width: 100%;
   height: 38px;
@@ -111,6 +114,14 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.btnContainer a {
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

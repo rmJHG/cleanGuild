@@ -9,14 +9,18 @@
   gap: 20px;
   flex: 1;
 }
-.onlyGuildMaster button {
+.onlyGuildMaster button,
+.cooltime button,
+.noGuild a {
   padding: 10px 15px;
   background-color: white;
   color: var(--text-color);
   border: 1px solid var(--border-color);
 }
 
-.onlyGuildMaster button:hover {
+.onlyGuildMaster button:hover,
+.cooltime button:hover,
+.noGuild a:hover {
   border: 1px solid black;
 }
 
@@ -30,13 +34,15 @@
   gap: 20px;
   flex: 1;
 }
-.noGuild a {
-  padding: 10px 15px;
-  background-color: white;
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-}
 
-.noGuild a:hover {
-  border: 1px solid black;
+.cooltime {
+  width: 100%;
+  max-width: 900px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex: 1;
 }

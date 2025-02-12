@@ -151,6 +151,7 @@
 .image {
   max-width: 100%;
   width: auto;
+  display: block;
   margin: 0 auto;
   pointer-events: none;
   overflow-clip-margin: content-box;
@@ -158,6 +159,14 @@
 }
 .focused {
   border: 1px solid var(--font-color);
+}
+
+.emptyEditor::before {
+  color: #9e9e9e !important;
+  content: attr(data-placeholder) !important;
+  float: left !important;
+  height: 0 !important;
+  pointer-events: none !important;
 }
 
 @media (max-width: 600px) {

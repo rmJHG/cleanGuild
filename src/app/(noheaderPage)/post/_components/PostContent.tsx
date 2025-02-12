@@ -1,4 +1,5 @@
 'use client';
+
 import { useSession } from 'next-auth/react';
 import classes from './_styles/postContent.module.css';
 import { postStore } from '@/store/postStore';
@@ -119,12 +120,13 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
       StarterKit,
       PlaceHolder.configure({
         placeholder: '내용을 입력해주세요.',
+        emptyEditorClass: classes.emptyEditor,
+        emptyNodeClass: classes.emptyNode,
       }),
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
       Underline,
-
       Image.configure({
         inline: false,
         allowBase64: true,
@@ -142,10 +144,9 @@ function PostContent({ onPrev, guildData }: { onPrev: () => void; guildData: Gui
         },
       }),
     ],
-    content: description || '',
+    content: '',
     editable: true,
 
-    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       const decodedContent = editor
         .getHTML()
