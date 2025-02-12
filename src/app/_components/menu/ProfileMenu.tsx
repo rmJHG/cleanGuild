@@ -100,7 +100,7 @@ export default function ProfileMenu({
               !guildDataLoading &&
               !(
                 managerData?.some((item: string) => item === user.ocid) ||
-                guildData.guild_master_name === handsData?.character_name
+                guildData?.guild_master_name === handsData?.character_name
               ) &&
               !managerDataLoading &&
               handsData!.character_name !== guildData?.guild_master_name
@@ -110,7 +110,7 @@ export default function ProfileMenu({
           >
             {!guildDataLoading &&
               (managerData?.some((item: string) => item === user.ocid) ||
-                guildData.guild_master_name === handsData?.character_name) && (
+                guildData?.guild_master_name === handsData?.character_name) && (
                 <div
                   onClick={() => {
                     route.push('/posthistory');
