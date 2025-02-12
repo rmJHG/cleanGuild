@@ -150,7 +150,7 @@
 
 .image {
   max-width: 100%;
-
+  margin: 0 auto;
   pointer-events: none;
   overflow-clip-margin: content-box;
   overflow: clip;
