@@ -24,7 +24,7 @@ export default function SearchedGuild({ data }: Props) {
       <li className={classes.container}>
         <div className={classes.guildInfoContainer}>
           <div className={classes.worldInfo}>
-            <Image src={world_icon} alt={world_name} />
+            <Image src={world_icon} alt={world_name} width={15} height={15} />
             <span>{world_name}</span>
           </div>
 

@@ -1,13 +1,12 @@
 .container {
   width: 100%;
   border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 5px;
+  border-radius: 5px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 .container:hover {
   border: 1px solid var(--font-color);
@@ -17,11 +16,9 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
 }
 .worldInfo {
-  border-radius: 5px;
-
+  border-radius: 4px 0 0 4px;
   padding: 3px 0;
   display: flex;
   justify-content: center;
@@ -31,12 +28,12 @@
 }
 .worldInfo > span {
   line-height: 14px;
-
+  font-size: 12px !important;
   color: white;
 }
 .guildName {
-  font-weight: 800;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 14px;
   text-align: center;
   color: var(--font-color);
 }
