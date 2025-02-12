@@ -61,6 +61,7 @@ export const {
                 path: '/',
                 sameSite: 'lax',
                 secure: process.env.NODE_ENV === 'production',
+                maxAge: 60 * 60 * 24 * 7,
               });
             }
           }
@@ -139,6 +140,7 @@ export const {
               path: '/',
               sameSite: 'lax',
               secure: process.env.NODE_ENV === 'production',
+              maxAge: 60 * 60 * 24 * 7,
             });
             console.log(responseData, 'responseData');
             user.currentCharOcid = responseData.result.currentCharOcid;

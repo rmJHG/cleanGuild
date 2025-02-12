@@ -21,7 +21,7 @@ const chunk = (array: string[], size: number) => {
   return chunkedArr;
 };
 export default function GuildMembers({ memberArr, master }: Props) {
-  const memberChunks = chunk(memberArr, 30);
+  const memberChunks = chunk(memberArr, 50);
   const { data: guildMaster, isLoading: guildMasterLoading } = useQuery<Char[], Error, Char[]>({
     queryKey: ['char', [master]],
     queryFn: getCharData,
