@@ -7,12 +7,14 @@ export default function TipTapMenu({ editor }: { editor: Editor | null }) {
   if (!editor) return null;
 
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('start');
     const hasImage = editor.getHTML().includes('<img');
     if (hasImage) {
       errorModal('이미 이미지를 추가했습니다. 기존 이미지를 삭제하고 다시 시도해주세요.');
       return;
     }
     const file = event.target.files?.[0];
+
     if (file) {
       try {
         const formData = new FormData();
@@ -23,6 +25,15 @@ export default function TipTapMenu({ editor }: { editor: Editor | null }) {
         });
         const data = await res.json();
 
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}${data.url}`);
+          editor
+            .chain()
+            .focus()
+            .setImage({ src: `${process.env.NEXT_PUBLIC_BACKEND_URL}${data.url}` })
+            .run();
+        }
+
         if (data.url) {
           editor
             .chain()
@@ -30,6 +41,8 @@ export default function TipTapMenu({ editor }: { editor: Editor | null }) {
             .setImage({ src: `${process.env.NEXT_PUBLIC_STATIC_URL}${data.url}` })
             .run();
         }
+        console.log(data);
+        event.target.value = '';
       } catch (error) {
         errorModal('이미지 업로드에 실패했습니다.');
       }

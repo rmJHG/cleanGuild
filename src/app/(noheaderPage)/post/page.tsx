@@ -91,7 +91,7 @@ export default function Page() {
             route.back();
           }}
         >
-          메인으로
+          뒤로가기
         </button>
       </div>
     );
