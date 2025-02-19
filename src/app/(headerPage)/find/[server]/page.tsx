@@ -140,6 +140,22 @@ export default function DataTable({ params }: Props) {
       </div>
 
       <div className={classes.optionContainer}>
+        <div className={classes.btnContainer}>
+          <button
+            onClick={() => {
+              handleSortOrderClick(true);
+            }}
+          >
+            <p style={{ color: sortOrder ? 'black' : '#b4b4b4' }}> 최신 순</p>
+          </button>
+          <button
+            onClick={() => {
+              handleSortOrderClick(false);
+            }}
+          >
+            <p style={{ color: !sortOrder ? 'black' : '#b4b4b4' }}>오래된 순</p>
+          </button>
+        </div>
         <div className={classes.filterContainer}>
           <div ref={buttonRef}>
             <MdFilterAlt
@@ -221,23 +237,6 @@ export default function DataTable({ params }: Props) {
               </div>
             </div>
           )}
-        </div>
-
-        <div className={classes.btnContainer}>
-          <button
-            onClick={() => {
-              handleSortOrderClick(true);
-            }}
-          >
-            <p style={{ color: sortOrder ? 'black' : '#b4b4b4' }}> 최신 순</p>
-          </button>
-          <button
-            onClick={() => {
-              handleSortOrderClick(false);
-            }}
-          >
-            <p style={{ color: !sortOrder ? 'black' : '#b4b4b4' }}>오래된 순</p>
-          </button>
         </div>
       </div>
       <div className={classes.guildPostListContainer}>
