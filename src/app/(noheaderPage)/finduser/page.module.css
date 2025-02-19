@@ -24,6 +24,9 @@
   font-size: 20px;
   margin-bottom: 20px;
 }
+.titleContainer h2:hover {
+  cursor: pointer;
+}
 .innerContainer {
   width: 100%;
   max-width: 500px;

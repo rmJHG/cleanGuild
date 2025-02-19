@@ -72,7 +72,13 @@ export default function Page() {
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
-        <h2>MAPLEGREMIO</h2>
+        <h2
+          onClick={() => {
+            window.location.href = '/';
+          }}
+        >
+          MAPLEGREMIO
+        </h2>
       </div>
       <div className={classes.innerContainer}>
         <div className={classes.menuContainer}>
