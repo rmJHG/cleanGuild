@@ -104,7 +104,7 @@ export default function ContactModal({
             setIsOpen(!isOpen);
           }}
         >
-          <span style={{ lineHeight: '20px' }}>지원하기</span>
+          <span style={{ lineHeight: '20px' }}>지원방법</span>
           {isOpen ? <FaChevronDown size={20} /> : <FaChevronUp size={20} />}
         </button>
       </div>

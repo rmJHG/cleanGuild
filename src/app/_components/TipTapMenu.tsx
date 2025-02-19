@@ -25,20 +25,17 @@ export default function TipTapMenu({ editor }: { editor: Editor | null }) {
         });
         const data = await res.json();
 
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}${data.url}`);
-          editor
-            .chain()
-            .focus()
-            .setImage({ src: `${process.env.NEXT_PUBLIC_BACKEND_URL}${data.url}` })
-            .run();
-        }
-
         if (data.url) {
           editor
             .chain()
             .focus()
-            .setImage({ src: `${process.env.NEXT_PUBLIC_STATIC_URL}${data.url}` })
+            .setImage({
+              src: `${
+                process.env.NODE_ENV === 'development'
+                  ? `${process.env.NEXT_PUBLIC_BACKEND_URL}`
+                  : `${process.env.NEXT_PUBLIC_STATIC_URL}`
+              }${data.url}`,
+            })
             .run();
         }
         console.log(data);

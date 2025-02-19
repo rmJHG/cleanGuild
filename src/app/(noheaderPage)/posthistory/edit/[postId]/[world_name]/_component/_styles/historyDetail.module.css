@@ -292,9 +292,19 @@
 .focused {
   border: 1px solid var(--font-color);
 }
-.image {
+/* .image {
   max-width: 100%;
 
+  pointer-events: none;
+  overflow-clip-margin: content-box;
+  overflow: clip;
+} */
+
+.image {
+  max-width: 100%;
+  width: auto;
+  display: block;
+  margin: 0 auto;
   pointer-events: none;
   overflow-clip-margin: content-box;
   overflow: clip;
