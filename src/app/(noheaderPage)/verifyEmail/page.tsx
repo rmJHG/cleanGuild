@@ -18,7 +18,7 @@ export default function page({ searchParams }: { searchParams: { welcome: string
   const [accessToken, setAccessToken] = useState<string>('');
 
   useEffect(() => {
-    // if (!welcome) route.push('/');
+    if (!welcome) route.push('/');
     async function verifyEmail() {
       try {
         const response = await fetch(

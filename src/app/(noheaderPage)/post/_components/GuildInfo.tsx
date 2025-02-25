@@ -39,7 +39,7 @@ function GuildInfo({ guildData, onNext }: { guildData: GuildData; onNext: () => 
           <span>{world_name}</span> 월드의 <span>{guild_name}</span>길드이고
         </p>
         <p>
-          길드가 추구하는 <span>방향</span>은
+          길드가 추구하는<span>방향</span>은
         </p>
         <div className={classes.guildConditionsInfo}>
           <Select

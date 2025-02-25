@@ -39,9 +39,11 @@
 }
 .infoContainer span {
   margin: 0 5px;
+  line-height: clamp(1.6rem, 4.1vw, 2.1rem);
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 600;
   color: var(--header-color);
+  display: flex;
 }
 .infoContainer p > div {
   width: 100px;
