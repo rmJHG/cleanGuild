@@ -1,6 +1,7 @@
 import { UserData } from './userData';
 
 export type GuildPostData = {
+  message?: string;
   _id: string;
   postData: {
     title: string;
@@ -24,6 +25,19 @@ export type GuildPostData = {
   publisherData: UserData;
 };
 
+export type GuildPostDataError = {
+  message: string;
+  error: {
+    stringValue: string;
+    kind: string;
+    value: string;
+    valueType: string;
+    path: string;
+    reason: {};
+    name: string;
+    message: string;
+  };
+};
 export type GuildPostDataList = {
   recruitments: GuildPostData[];
   totalPages: number;
