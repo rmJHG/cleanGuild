@@ -12,6 +12,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { MdFilterAlt } from 'react-icons/md';
 import Pagination from '../_component/Pagenation';
+import { totalServerList } from '@/app/serverList';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   params: {
@@ -31,6 +33,11 @@ const limitedSuroPointList = [
 ];
 export default function DataTable({ params }: Props) {
   const decodedServer = decodeURIComponent(params.server);
+  const router = useRouter();
+  if (!Object.keys(totalServerList).includes(decodedServer)) {
+    router.push('/');
+  }
+
   const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [guildType, setGuildType] = useState('전체');
