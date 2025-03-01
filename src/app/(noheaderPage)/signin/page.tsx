@@ -17,6 +17,7 @@ type LocalLoginState = {
 };
 
 export default function Page() {
+  const [isSending, setIsSending] = useState(false);
   const [checkedId, setCheckedId] = useState(false);
   const [email, setEmail] = useState('');
 
@@ -66,6 +67,7 @@ export default function Page() {
       setCheckedId(true);
     }
   }, []);
+
   return (
     <div className={classes.signInContainer}>
       <div className={classes.titleContainer}>
@@ -83,7 +85,9 @@ export default function Page() {
             이메일 인증을 완료해주세요
             <p
               onClick={async () => {
+                if (isSending) return;
                 try {
+                  setIsSending(true);
                   const res = await fetch(
                     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/local/resendEmailVerificationCode`,
                     {
@@ -98,9 +102,14 @@ export default function Page() {
                   );
                   const json = await res.json();
                   successModal('인증메일을 재전송했습니다.', 1000);
-                  console.log(json);
+                  setTimeout(() => {
+                    router.push('/');
+                  }, 1000);
+
+                  setIsSending(false);
                 } catch (error) {
                   console.error(error);
+                  setIsSending(false);
                 }
               }}
             >
